@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen Elevate — The Academic Gym for Future-Ready Students</title>
+    <meta name="description" content="The academic gym that gets you uni- and work-ready. Courses, live webinars, and guided challenges from Year 6 to A-Level. Built with schools for results.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gen Elevate — The Academic Gym for Future-Ready Students">
+    <meta property="og:description" content="The academic gym that gets you uni- and work-ready. Courses, live webinars, and guided challenges from Year 6 to A-Level. Built with schools for results.">
+    <meta property="og:image" content="/og.jpg">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+        }
+        
+        .gradient-section {
+            background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold text-slate-800">Gen Elevate</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#ages" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Ages</a>
+                        <a href="#features" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="#ai" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">AI</a>
+                        <a href="#debate" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Debate</a>
+                        <a href="#dna" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">DNA</a>
+                        <a href="#faqs" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">FAQs</a>
+                        <a href="#join" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">Join</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#about" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#ages" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Ages</a>
+                <a href="#features" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="#ai" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">AI</a>
+                <a href="#debate" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Debate</a>
+                <a href="#dna" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">DNA</a>
+                <a href="#faqs" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">FAQs</a>
+                <a href="#join" class="bg-blue-600 text-white hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    The academic gym that gets you uni- and work-ready.
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-4xl mx-auto leading-relaxed">
+                    Courses, live webinars, and guided challenges from Year 6 to A-Level.<br>
+                    Built with schools. Designed for results.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                    <a href="#join" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg text-lg transition-colors focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        Join the Waitlist
+                    </a>
+                    <a href="#features" class="text-white hover:text-gray-200 font-medium py-4 px-8 rounded-lg text-lg border border-white/30 hover:border-white/50 transition-colors focus:outline-none focus:ring-4 focus:ring-white/30">
+                        For Schools
+                    </a>
+                </div>
+                <p class="text-gray-300 text-sm">
+                    Launching soon • Backed by real classrooms
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Who It's For</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 text-center">
+                    <div class="text-4xl mb-4">🎓</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Students</h3>
+                    <p class="text-gray-600">Build academic confidence and real-world skills for university and career success.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 text-center">
+                    <div class="text-4xl mb-4">🏫</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Schools</h3>
+                    <p class="text-gray-600">Enhance your curriculum with structured programmes and detailed progress tracking.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 text-center">
+                    <div class="text-4xl mb-4">👨‍👩‍👧‍👦</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Parents</h3>
+                    <p class="text-gray-600">Support your child's academic journey with transparent progress and life skills development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ages Section -->
+    <section id="ages" class="py-20 gradient-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ages We Cover</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Year 6</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• 11+ grammar preparation</li>
+                        <li>• Private school readiness</li>
+                        <li>• Foundation skills building</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Years 9–11</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• GCSE mastery programmes</li>
+                        <li>• Study technique development</li>
+                        <li>• Career exploration</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Years 12–13</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• A-Level excellence</li>
+                        <li>• Oxbridge preparation track</li>
+                        <li>• University application support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Core Features</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="text-3xl mb-4">📺</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-900">Live Webinars</h3>
+                    <p class="text-gray-600">Expert-led sessions with attendance tracking and interactive Q&A.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="text-3xl mb-4">💰</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-900">Life Skills</h3>
+                    <p class="text-gray-600">Money management, mortgages, loans, taxes, and practical adulting.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="text-3xl mb-4">💼</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-900">Careers & News</h3>
+                    <p class="text-gray-600">Explore roles, employers, and stay updated with sector developments.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="text-3xl mb-4">🎯</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-900">Degree Apprenticeships</h3>
+                    <p class="text-gray-600">Alternative pathways with live updates and application guidance.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="text-3xl mb-4">🤝</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-900">Community & Events</h3>
+                    <p class="text-gray-600">In-person activities, sports, and networking opportunities.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="text-3xl mb-4">🧠</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-900">Wellbeing Hub</h3>
+                    <p class="text-gray-600">Ethics, etiquette, and mental health signposting for balanced growth.</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <p class="text-gray-600 font-medium">Progress is tracked; complete modules in sequence.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Section -->
+    <section id="ai" class="py-20 gradient-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Gen Elevate AI</h2>
+                <p class="text-xl text-gray-700 leading-relaxed">
+                    Your on-platform study coach (powered by ChatGPT under the hood) with school-safe guardrails. No medical or legal advice; privacy-first.
+                </p>
+                <div class="mt-8 bg-white rounded-xl p-8 shadow-sm">
+                    <div class="text-6xl mb-4">🤖</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Personalised Learning Support</h3>
+                    <p class="text-gray-600">Get instant help with homework, study techniques, and academic planning—all within safe, monitored boundaries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Debate Section -->
+    <section id="debate" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Debate, persuade, grow.</h2>
+                <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                    Weekly 60-second arguments on curated topics. AI scores clarity, structure, reasoning, evidence, and delivery. Earn points and climb your school leaderboard.
+                </p>
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <div class="text-6xl mb-4">🎤</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">AI-Moderated Debate Room</h3>
+                    <p class="text-gray-600">Develop critical thinking and communication skills through structured debates with real-time AI feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DNA Section -->
+    <section id="dna" class="py-20 gradient-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Your Academic DNA™</h2>
+                <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                    A personal learning fingerprint—cognitive strengths, best study hours, and subject affinities—updated from your activity. Opt-in share card available.
+                </p>
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <div class="text-6xl mb-4">🧬</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Personalised Learning Profile</h3>
+                    <p class="text-gray-600">Discover your unique learning patterns and optimise your study approach based on data-driven insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What's Coming</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900">School Dashboards & Leaderboards</h3>
+                    <p class="text-gray-600">Comprehensive analytics and friendly competition</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">👨‍🏫</div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900">Mentor Marketplace</h3>
+                    <p class="text-gray-600">Premium add-ons with expert tutors and mentors</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900">Degree Apprenticeship Feeds</h3>
+                    <p class="text-gray-600">Real-time opportunities and application tracking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="py-16 gradient-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div class="bg-gray-300 h-16 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-600 font-medium">School Logo</span>
+                </div>
+                <div class="bg-gray-300 h-16 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-600 font-medium">School Logo</span>
+                </div>
+                <div class="bg-gray-300 h-16 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-600 font-medium">School Logo</span>
+                </div>
+                <div class="bg-gray-300 h-16 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-600 font-medium">School Logo</span>
+                </div>
+            </div>
+            <p class="text-gray-600">Built with educators and students from across the UK.</p>
+        </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section id="faqs" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="faq-button w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" data-target="faq-1">
+                        <div class="flex justify-between items-center">
+                            <span>When are you launching?</span>
+                            <svg class="faq-icon w-5 h-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq-1" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">Private beta soon; join the waitlist for early access and updates.</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="faq-button w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" data-target="faq-2">
+                        <div class="flex justify-between items-center">
+                            <span>Is this for my school?</span>
+                            <svg class="faq-icon w-5 h-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq-2" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">Yes—schools get an institutional account with referral links and comprehensive dashboards.</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="faq-button w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" data-target="faq-3">
+                        <div class="flex justify-between items-center">
+                            <span>What ages do you cover?</span>
+                            <svg class="faq-icon w-5 h-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq-3" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">Year 6, Years 9–11 (GCSE), Years 12–13 (A-Level + Oxbridge preparation).</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="faq-button w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" data-target="faq-4">
+                        <div class="flex justify-between items-center">
+                            <span>Is there a free plan?</span>
+                            <svg class="faq-icon w-5 h-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq-4" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">Founding schools get early access pricing; student pricing will be announced soon.</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="faq-button w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" data-target="faq-5">
+                        <div class="flex justify-between items-center">
+                            <span>Is my data safe?</span>
+                            <svg class="faq-icon w-5 h-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq-5" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">We follow UK GDPR with tenant-scoped access and parental read-only permissions for transparency.</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="faq-button w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" data-target="faq-6">
+                        <div class="flex justify-between items-center">
+                            <span>How do I get updates?</span>
+                            <svg class="faq-icon w-5 h-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq-6" class="faq-content hidden px-6 pb-4">
+                        <p class="text-gray-600">Join the waitlist below for launch updates and early access opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Waitlist Section -->
+    <section id="join" class="py-20 gradient-bg text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Join the Waitlist</h2>
+            <p class="text-xl mb-8 text-gray-200">Be the first to know when Gen Elevate launches.</p>
+            
+            <form id="waitlist-form" class="max-w-md mx-auto">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex-1">
+                        <label for="email" class="sr-only">Email address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required 
+                            class="w-full px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300" 
+                            placeholder="Enter your email"
+                            aria-describedby="email-description"
+                        >
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors focus:outline-none focus:ring-4 focus:ring-blue-300 whitespace-nowrap"
+                    >
+                        Join Waitlist
+                    </button>
+                </div>
+                <p id="email-description" class="text-gray-300 text-sm mt-4">No spam. We'll only email launch updates.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">&copy; Gen Elevate 2025</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="mailto:hello@genelevate.app?subject=Privacy%20Policy" class="text-gray-400 hover:text-white transition-colors">Privacy</a>
+                    <a href="mailto:hello@genelevate.app?subject=Terms%20of%20Service" class="text-gray-400 hover:text-white transition-colors">Terms</a>
+                    <a href="mailto:hello@genelevate.app?subject=Contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const content = document.getElementById(targetId);
+                const icon = this.querySelector('.faq-icon');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-content').forEach(faq => {
+                    if (faq.id !== targetId) {
+                        faq.classList.add('hidden');
+                        const otherIcon = document.querySelector(`[data-target="${faq.id}"] .faq-icon`);
+                        if (otherIcon) {
+                            otherIcon.classList.remove('rotate-180');
+                        }
+                    }
+                });
+                
+                // Toggle current FAQ
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Waitlist form submission
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            
+            if (email) {
+                // Basic email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailRegex.test(email)) {
+                    // Create mailto link
+                    const subject = encodeURIComponent('Waitlist');
+                    const body = encodeURIComponent(`Email: ${email}`);
+                    const mailtoLink = `mailto:hello@genelevate.app?subject=${subject}&body=${body}`;
+                    
+                    // Open mailto link
+                    window.location.href = mailtoLink;
+                    
+                    // Show success message
+                    alert('Thank you! Your email client should open now. If not, please email us directly at hello@genelevate.app');
+                    
+                    // Clear form
+                    document.getElementById('email').value = '';
+                } else {
+                    alert('Please enter a valid email address.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
