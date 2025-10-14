@@ -4,36 +4,45 @@ import { WebinarGrid } from '@/components/webinars/webinar-grid';
 import { WebinarFilters } from '@/components/webinars/webinar-filters';
 import { WebinarSearch } from '@/components/webinars/webinar-search';
 import { UpcomingWebinars } from '@/components/webinars/upcoming-webinars';
+import { LiveWebinars } from '@/components/webinars/live-webinars';
+import { WebinarStats } from '@/components/webinars/webinar-stats';
+import { WebinarBanner } from '@/components/webinars/webinar-banner';
 import { Suspense } from 'react';
 import { WebinarGridSkeleton } from '@/components/webinars/webinar-grid-skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const metadata: Metadata = {
-  title: 'Webinars',
-  description: 'Join live webinars and watch recorded sessions from expert educators',
+  title: 'Live Webinars - Gen Elevate',
+  description: 'Join live interactive sessions with expert instructors. Real-time learning with chat, Q&A, and attendance tracking.',
 };
 
 interface WebinarsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     search?: string;
     subject?: string;
     yearGroup?: string;
     type?: string;
     status?: string;
     page?: string;
-  };
+  }>;
 }
 
-export default function WebinarsPage({ searchParams }: WebinarsPageProps) {
+export default async function WebinarsPage({ searchParams }: WebinarsPageProps) {
+  const resolvedSearchParams = await searchParams;
+
   return (
     <DashboardLayout>
       <div className="space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Webinars</h1>
-          <p className="text-muted-foreground">
-            Join live sessions and access recorded content from expert educators
-          </p>
-        </div>
+        {/* Webinar Banner */}
+        <WebinarBanner />
+
+        {/* Live Webinars Alert */}
+        <Suspense fallback={<div className="h-20 bg-gray-100 animate-pulse rounded-lg" />}>
+          <LiveWebinars />
+        </Suspense>
+
+        {/* Webinar Stats */}
+        <WebinarStats />
         
         <Tabs defaultValue="all" className="space-y-6">
           <TabsList>
@@ -57,7 +66,7 @@ export default function WebinarsPage({ searchParams }: WebinarsPageProps) {
                 <WebinarSearch />
                 
                 <Suspense fallback={<WebinarGridSkeleton />}>
-                  <WebinarGrid searchParams={searchParams} />
+                  <WebinarGrid searchParams={resolvedSearchParams} />
                 </Suspense>
               </main>
             </div>
@@ -65,13 +74,13 @@ export default function WebinarsPage({ searchParams }: WebinarsPageProps) {
           
           <TabsContent value="live" className="space-y-6">
             <Suspense fallback={<WebinarGridSkeleton />}>
-              <WebinarGrid searchParams={{ ...searchParams, status: 'live' }} />
+              <WebinarGrid searchParams={{ ...resolvedSearchParams, status: 'live' }} />
             </Suspense>
           </TabsContent>
           
           <TabsContent value="recorded" className="space-y-6">
             <Suspense fallback={<WebinarGridSkeleton />}>
-              <WebinarGrid searchParams={{ ...searchParams, status: 'ended' }} />
+              <WebinarGrid searchParams={{ ...resolvedSearchParams, status: 'ended' }} />
             </Suspense>
           </TabsContent>
         </Tabs>
