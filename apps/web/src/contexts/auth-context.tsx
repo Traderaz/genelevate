@@ -22,7 +22,7 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { auth, db } from '@/lib/firebase';
+import { auth, db } from '../lib/firebase';
 
 // User profile interface
 export interface UserProfile {
