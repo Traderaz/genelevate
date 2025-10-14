@@ -188,3 +188,130 @@ export interface CourseReview extends BaseEntity {
   isPublic: boolean;
   isVerified: boolean;
 }
+
+export interface LessonProgress extends BaseEntity {
+  // Multi-tenant scoping
+  institutionId?: string;
+  
+  userId: string;
+  courseId: string;
+  lessonId: string;
+  moduleId: string;
+  
+  // Progress tracking
+  status: 'not_started' | 'in_progress' | 'completed';
+  progress: number; // 0-100 percentage
+  timeSpent: number; // seconds
+  
+  // Interaction tracking
+  interactions: LessonInteraction[];
+  
+  // Quiz/Assignment results
+  quizAttempts: QuizAttempt[];
+  bestQuizScore?: number;
+  assignmentSubmission?: AssignmentSubmission;
+  
+  // Points & Rewards
+  pointsEarned: number;
+  badgesEarned: string[];
+  
+  // Timestamps
+  startedAt?: Date;
+  completedAt?: Date;
+  lastAccessedAt: Date;
+}
+
+export interface LessonInteraction {
+  type: 'video_play' | 'video_pause' | 'video_seek' | 'text_scroll' | 'quiz_start' | 'quiz_submit' | 'resource_download';
+  timestamp: Date;
+  data?: Record<string, any>; // Additional context data
+}
+
+export interface QuizAttempt extends BaseEntity {
+  userId: string;
+  quizId: string;
+  lessonId: string;
+  courseId: string;
+  
+  // Attempt data
+  answers: QuizAnswer[];
+  score: number; // percentage
+  pointsEarned: number;
+  timeSpent: number; // seconds
+  
+  // Status
+  status: 'in_progress' | 'completed' | 'abandoned';
+  
+  // Timestamps
+  startedAt: Date;
+  completedAt?: Date;
+}
+
+export interface QuizAnswer {
+  questionId: string;
+  answer: string | string[]; // Support multiple answers
+  isCorrect: boolean;
+  pointsEarned: number;
+  timeSpent?: number; // seconds on this question
+}
+
+export interface AssignmentSubmission extends BaseEntity {
+  userId: string;
+  assignmentId: string;
+  lessonId: string;
+  courseId: string;
+  
+  // Submission data
+  submissionType: 'text' | 'file' | 'url';
+  content?: string; // For text submissions
+  fileUrl?: string; // For file submissions
+  submissionUrl?: string; // For URL submissions
+  
+  // Grading
+  status: 'submitted' | 'graded' | 'returned';
+  score?: number;
+  maxScore: number;
+  feedback?: string;
+  rubricScores?: Record<string, number>;
+  
+  // Timestamps
+  submittedAt: Date;
+  gradedAt?: Date;
+  dueDate?: Date;
+}
+
+export interface CourseProgress extends BaseEntity {
+  // Multi-tenant scoping
+  institutionId?: string;
+  
+  userId: string;
+  courseId: string;
+  
+  // Overall progress
+  overallProgress: number; // 0-100 percentage
+  completedModules: string[];
+  completedLessons: string[];
+  currentModuleId?: string;
+  currentLessonId?: string;
+  
+  // Performance metrics
+  totalPointsEarned: number;
+  totalPointsAvailable: number;
+  averageQuizScore: number;
+  totalTimeSpent: number; // seconds
+  
+  // Streaks & Engagement
+  currentStreak: number; // consecutive days
+  longestStreak: number;
+  lastActivityDate: Date;
+  
+  // Completion tracking
+  estimatedCompletionDate?: Date;
+  actualCompletionDate?: Date;
+  
+  // Certificates & Achievements
+  certificateEarned?: boolean;
+  certificateUrl?: string;
+  badgesEarned: string[];
+  milestonesReached: string[];
+}
