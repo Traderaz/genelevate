@@ -1,0 +1,294 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function hasRole(role) {
+      return request.auth.token.role == role;
+    }
+    
+    function isGlobalAdmin() {
+      return hasRole('admin');
+    }
+    
+    function isInstitutionAdmin() {
+      return hasRole('institution');
+    }
+    
+    function belongsToSameInstitution(institutionId) {
+      return request.auth.token.institutionId == institutionId;
+    }
+    
+    function isLinkedParent(userId) {
+      return hasRole('parent') && 
+             request.auth.token.studentIds != null &&
+             userId in request.auth.token.studentIds;
+    }
+    
+    function isInAllowedCohort(allowedCohortIds) {
+      return request.auth.token.cohortIds != null &&
+             allowedCohortIds.hasAny(request.auth.token.cohortIds);
+    }
+    
+    function canAccessInstitutionData(institutionId) {
+      return isGlobalAdmin() || 
+             (institutionId != null && belongsToSameInstitution(institutionId));
+    }
+
+    // Users collection - Multi-tenant with role-based access
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (
+        isOwner(userId) || 
+        isGlobalAdmin() || 
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        isLinkedParent(userId)
+      );
+      
+      allow create: if isAuthenticated() && (
+        isOwner(userId) ||
+        isGlobalAdmin() ||
+        isInstitutionAdmin()
+      );
+      
+      allow update: if isAuthenticated() && (
+        isOwner(userId) || 
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+      
+      allow delete: if isGlobalAdmin();
+    }
+
+    // Institutions collection
+    match /institutions/{institutionId} {
+      allow read: if isAuthenticated() && (
+        belongsToSameInstitution(institutionId) || 
+        isGlobalAdmin()
+      );
+      
+      allow create: if isGlobalAdmin();
+      
+      allow update: if isAuthenticated() && (
+        (isInstitutionAdmin() && belongsToSameInstitution(institutionId)) ||
+        isGlobalAdmin()
+      );
+      
+      allow delete: if isGlobalAdmin();
+    }
+
+    // Cohorts collection - Institution scoped
+    match /cohorts/{cohortId} {
+      allow read: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId) ||
+        (hasRole('student') && request.auth.uid in resource.data.studentIds) ||
+        (hasRole('parent') && resource.data.studentIds.hasAny(request.auth.token.studentIds))
+      );
+      
+      allow create, update: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow delete: if isGlobalAdmin() || 
+                     (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
+    }
+
+    // Courses collection - Public + Institution scoped
+    match /courses/{courseId} {
+      allow read: if isAuthenticated() && (
+        resource.data.accessLevel == 'public' ||
+        canAccessInstitutionData(resource.data.institutionId) ||
+        (resource.data.accessLevel == 'cohort' && isInAllowedCohort(resource.data.allowedCohortIds))
+      );
+      
+      allow create, update, delete: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+    }
+
+    // Progress tracking - User + Institution scoped
+    match /progress/{progressId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId) ||
+        isLinkedParent(resource.data.userId)
+      );
+      
+      allow create, update: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow delete: if isGlobalAdmin() ||
+                     (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
+    }
+
+    // Webinars collection - Public + Institution scoped
+    match /webinars/{webinarId} {
+      allow read: if isAuthenticated() && (
+        resource.data.accessLevel == 'public' ||
+        canAccessInstitutionData(resource.data.institutionId) ||
+        (resource.data.accessLevel == 'cohort' && isInAllowedCohort(resource.data.allowedCohortIds))
+      );
+      
+      allow create, update, delete: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+    }
+
+    // Attendance tracking
+    match /attendance/{attendanceId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId) ||
+        isLinkedParent(resource.data.userId)
+      );
+      
+      allow create, update: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow delete: if isGlobalAdmin() ||
+                     (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
+    }
+
+    // Careers - Public read access
+    match /careers/{careerId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isGlobalAdmin();
+    }
+
+    // Industry news - Public read access
+    match /industryNews/{newsId} {
+      allow read: if isAuthenticated() && resource.data.isPublished;
+      allow create, update, delete: if isGlobalAdmin();
+    }
+
+    // Events - Institution scoped
+    match /events/{eventId} {
+      allow read: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId) ||
+        (hasRole('student') && resource.data.cohortIds.hasAny(request.auth.token.cohortIds))
+      );
+      
+      allow create, update, delete: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+    }
+
+    // Addons - Institution scoped
+    match /addons/{addonId} {
+      allow read: if isAuthenticated() && (
+        resource.data.isActive &&
+        (canAccessInstitutionData(resource.data.institutionId) || resource.data.institutionId == null)
+      );
+      
+      allow create, update, delete: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+    }
+
+    // Purchases - User + Institution admin access
+    match /purchases/{purchaseId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create, update: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow delete: if isGlobalAdmin();
+    }
+
+    // Rewards - User + Institution scoped
+    match /rewards/{rewardId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId) ||
+        isLinkedParent(resource.data.userId)
+      );
+      
+      allow create, update: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow delete: if isGlobalAdmin() ||
+                     (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
+    }
+
+    // Leaderboards - Institution scoped with public visibility
+    match /leaderboards/{leaderboardId} {
+      allow read: if isAuthenticated() && (
+        resource.data.isPublic ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create, update, delete: if isAuthenticated() && (
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+    }
+
+    // Payments and subscriptions (admin only)
+    match /subscriptions/{subscriptionId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create, update, delete: if isGlobalAdmin() ||
+                                      (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
+    }
+
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create, update, delete: if isGlobalAdmin() ||
+                                      (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
+    }
+
+    // Chat messages (webinar participants only)
+    match /webinar_chats/{chatId} {
+      allow read: if isAuthenticated();
+      
+      allow create: if isAuthenticated() && isOwner(resource.data.userId);
+      
+      allow update, delete: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+    }
+
+    // Questions (webinar participants only)
+    match /webinar_questions/{questionId} {
+      allow read: if isAuthenticated();
+      
+      allow create: if isAuthenticated() && isOwner(resource.data.userId);
+      
+      allow update: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow delete: if isOwner(resource.data.userId) || 
+                     canAccessInstitutionData(resource.data.institutionId);
+    }
+
+    // Default deny all other documents
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

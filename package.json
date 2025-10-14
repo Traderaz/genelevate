@@ -1,0 +1,17 @@
+{
+  "name": "gen-elevate-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gen Elevate - Global learning and personal development platform",
+  "scripts": {
+    "dev": "cd apps/web && npm run dev",
+    "build": "cd apps/web && npm run build",
+    "install-all": "npm install && cd apps/web && npm install && cd ../functions && npm install && cd ../../packages/shared && npm install && cd ../ui && npm install && cd ../config && npm install"
+  },
+  "devDependencies": {},
+  "packageManager": "npm@10.2.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

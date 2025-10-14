@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/store/*": ["./src/store/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@gen-elevate/shared": ["../../packages/shared/src"],
+      "@gen-elevate/shared/*": ["../../packages/shared/src/*"],
+      "@gen-elevate/ui": ["../../packages/ui/src"],
+      "@gen-elevate/ui/*": ["../../packages/ui/src/*"],
+      "@gen-elevate/config": ["../../packages/config/src"],
+      "@gen-elevate/config/*": ["../../packages/config/src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
