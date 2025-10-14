@@ -1,5 +1,5 @@
 {
-  "installCommand": "cd ../.. && npm run install-all",
+  "installCommand": "node install-deps.js",
   "buildCommand": "npm run build",
   "framework": "nextjs"
 }
