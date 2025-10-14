@@ -12,16 +12,18 @@ export const metadata: Metadata = {
 };
 
 interface CoursesPageProps {
-  searchParams: {
+  searchParams: Promise<{
     search?: string;
     subject?: string;
     yearGroup?: string;
     difficulty?: string;
     page?: string;
-  };
+  }>;
 }
 
-export default function CoursesPage({ searchParams }: CoursesPageProps) {
+export default async function CoursesPage({ searchParams }: CoursesPageProps) {
+  const resolvedSearchParams = await searchParams;
+  
   return (
     <DashboardLayout>
       <div className="space-y-8">
@@ -41,7 +43,7 @@ export default function CoursesPage({ searchParams }: CoursesPageProps) {
             <CourseSearch />
             
             <Suspense fallback={<CourseGridSkeleton />}>
-              <CourseGrid searchParams={searchParams} />
+              <CourseGrid searchParams={resolvedSearchParams} />
             </Suspense>
           </main>
         </div>

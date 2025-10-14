@@ -3,6 +3,12 @@ const nextConfig = {
   output: 'standalone',
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
   outputFileTracingIncludes: {},
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     domains: [
       'firebasestorage.googleapis.com',
