@@ -14,7 +14,7 @@ export default function TestFirebasePage() {
       setTestResults(results);
     } catch (error) {
       console.error('Test error:', error);
-      setTestResults({ error: error.message });
+      setTestResults({ error: error instanceof Error ? error.message : 'Unknown error' });
     } finally {
       setIsLoading(false);
     }
