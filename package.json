@@ -8,6 +8,11 @@
     "build": "npm run install-all && cd apps/web && npm run build",
     "install-all": "npm install && cd packages/config && npm install && cd ../ui && npm install && cd ../shared && npm install && cd ../../apps/web && npm install && cd ../functions && npm install"
   },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {},
   "packageManager": "npm@10.2.0",
   "engines": {

@@ -1,5 +1,5 @@
 {
-  "installCommand": "node install-deps.js",
   "buildCommand": "npm run build",
+  "outputDirectory": "apps/web/.next",
   "framework": "nextjs"
 }
