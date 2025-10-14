@@ -12,14 +12,15 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
+    "clsx": "^2.0.0",
+    "firebase": "^12.4.0",
     "next": "^15.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "clsx": "^2.0.0",
-    "tailwind-merge": "^2.1.0",
     "react-hook-form": "^7.48.2",
+    "tailwind-merge": "^2.1.0",
     "zod": "^3.22.4",
-    "@hookform/resolvers": "^3.3.2",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
