@@ -1,0 +1,340 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions for authentication and authorization
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function hasRole(role) {
+      return request.auth.token.role == role;
+    }
+    
+    function hasPermission(permission) {
+      return request.auth.token.permissions != null && 
+             permission in request.auth.token.permissions;
+    }
+    
+    function isGlobalAdmin() {
+      return hasRole('admin');
+    }
+    
+    function isInstitutionAdmin() {
+      return hasRole('institution');
+    }
+    
+    function belongsToSameInstitution(institutionId) {
+      return request.auth.token.institutionId == institutionId;
+    }
+    
+    function isLinkedParent(studentId) {
+      return hasRole('parent') && 
+             request.auth.token.studentIds != null &&
+             studentId in request.auth.token.studentIds;
+    }
+    
+    function isLinkedStudent(parentId) {
+      return hasRole('student') && 
+             request.auth.token.parentIds != null &&
+             parentId in request.auth.token.parentIds;
+    }
+    
+    function isInAllowedCohort(cohortIds) {
+      return hasRole('student') && 
+             request.auth.token.cohortIds != null &&
+             request.auth.token.cohortIds.hasAny(cohortIds);
+    }
+    
+    function canAccessInstitutionData(institutionId) {
+      return isGlobalAdmin() || 
+             (isInstitutionAdmin() && belongsToSameInstitution(institutionId));
+    }
+    
+    function isVerifiedUser() {
+      return request.auth.token.isVerified == true;
+    }
+
+    // GDPR and Privacy Rules
+    function hasDataProcessingConsent(userId) {
+      // Check if user has given consent for data processing
+      return get(/databases/$(database)/documents/users/$(userId)).data.gdprConsent == true;
+    }
+    
+    function isDataRetentionValid(timestamp) {
+      // Check if data is within retention period (7 years for educational data)
+      let retentionPeriod = duration.value(7 * 365 * 24 * 60 * 60); // 7 years in seconds
+      return timestamp.toMillis() > (request.time.toMillis() - retentionPeriod.toMillis());
+    }
+
+    function isValidAge(dateOfBirth) {
+      // Check if user is at least 13 years old (COPPA compliance)
+      let thirteenYearsAgo = timestamp.date(request.time.year() - 13, 1, 1);
+      return timestamp.date(dateOfBirth) < thirteenYearsAgo;
+    }
+
+    // Users collection - Enhanced with GDPR compliance
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (
+        isOwner(userId) ||
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (hasRole('parent') && isLinkedParent(userId)) ||
+        (hasRole('student') && isLinkedStudent(userId))
+      ) && hasDataProcessingConsent(userId);
+      
+      allow write: if isAuthenticated() && (
+        (isOwner(userId) && hasPermission('profile:write:own')) ||
+        (isGlobalAdmin() && hasPermission('users:write')) ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId) && hasPermission('users:write:own_institution'))
+      ) && isVerifiedUser();
+      
+      allow delete: if isAuthenticated() && (
+        (isOwner(userId) && hasPermission('profile:delete:own')) ||
+        isGlobalAdmin()
+      );
+    }
+
+    // Institutions collection
+    match /institutions/{institutionId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        belongsToSameInstitution(institutionId)
+      );
+      
+      allow write: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(institutionId) && hasPermission('institutions:write:own'))
+      ) && isVerifiedUser();
+    }
+
+    // Referral Links collection
+    match /referralLinks/{referralCode} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+      
+      allow write: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId) && hasPermission('referrals:create'))
+      );
+    }
+
+    // Referral Usage collection (audit trail)
+    match /referralUsage/{usageId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+      
+      allow write: if false; // Only Cloud Functions can write usage logs
+    }
+
+    // Audit Logs collection (GDPR compliance)
+    match /auditLogs/{logId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isOwner(resource.data.userId) && hasPermission('audit:read:own'))
+      );
+      
+      allow write: if false; // Only Cloud Functions can write audit logs
+    }
+
+    // Security Audit Logs
+    match /securityLogs/{logId} {
+      allow read: if isAuthenticated() && isGlobalAdmin();
+      allow write: if false; // Only Cloud Functions can write security logs
+    }
+
+    // GDPR Data Requests
+    match /gdprRequests/{requestId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin()
+      );
+      
+      allow write: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin()
+      );
+    }
+
+    // Cohorts collection
+    match /cohorts/{cohortId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (hasRole('student') && cohortId in request.auth.token.cohortIds) ||
+        (hasRole('parent') && request.auth.token.studentIds.hasAny(resource.data.studentIds))
+      );
+      
+      allow write: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId) && hasPermission('cohorts:manage'))
+      );
+    }
+
+    // Courses collection
+    match /courses/{courseId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (hasRole('student') && (
+          resource.data.accessLevel == 'public' ||
+          isInAllowedCohort(resource.data.cohortIds) ||
+          request.auth.uid in resource.data.enrolledStudents
+        )) ||
+        (hasRole('parent') && request.auth.token.studentIds.hasAny(resource.data.enrolledStudents))
+      );
+      
+      allow write: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId) && hasPermission('courses:write:own_institution'))
+      );
+    }
+
+    // Progress collection - Enhanced with privacy controls
+    match /progress/{progressId} {
+      allow read: if isAuthenticated() && (
+        (isOwner(resource.data.userId) && hasPermission('progress:read:own')) ||
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (isLinkedParent(resource.data.userId) && hasPermission('progress:read:linked_students'))
+      ) && hasDataProcessingConsent(resource.data.userId);
+      
+      allow write: if isAuthenticated() && (
+        (isOwner(resource.data.userId) && hasPermission('progress:write:own')) ||
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+    }
+
+    // Webinars collection
+    match /webinars/{webinarId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (hasRole('student') && (
+          resource.data.accessLevel == 'public' ||
+          isInAllowedCohort(resource.data.cohortIds) ||
+          request.auth.uid in resource.data.registeredStudents
+        )) ||
+        (hasRole('parent') && request.auth.token.studentIds.hasAny(resource.data.registeredStudents))
+      );
+      
+      allow write: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId) && hasPermission('webinars:write:own_institution'))
+      );
+    }
+
+    // Attendance collection
+    match /attendance/{attendanceId} {
+      allow read: if isAuthenticated() && (
+        (isOwner(resource.data.userId) && hasPermission('attendance:read:own')) ||
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (isLinkedParent(resource.data.userId) && hasPermission('attendance:read:linked_students'))
+      );
+      
+      allow write: if isAuthenticated() && (
+        (isOwner(resource.data.userId) && hasPermission('attendance:write:own')) ||
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+    }
+
+    // Careers collection
+    match /careers/{careerId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (hasRole('student') && (
+          resource.data.accessLevel == 'public' ||
+          resource.data.yearGroups.hasAny(request.auth.token.cohortIds)
+        ))
+      );
+      
+      allow write: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+    }
+
+    // Industry News collection
+    match /industryNews/{newsId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (hasRole('student') && resource.data.isPublished)
+      );
+      
+      allow write: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+    }
+
+    // Events collection
+    match /events/{eventId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (hasRole('student') && (
+          resource.data.accessLevel == 'public' ||
+          isInAllowedCohort(resource.data.cohortIds)
+        ))
+      );
+      
+      allow write: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+    }
+
+    // Purchases collection
+    match /purchases/{purchaseId} {
+      allow read: if isAuthenticated() && (
+        (isOwner(resource.data.userId) && hasPermission('purchases:read:own')) ||
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (isLinkedParent(resource.data.userId) && hasPermission('purchases:read:linked_students'))
+      );
+      
+      allow write: if isAuthenticated() && (
+        (isOwner(resource.data.userId) && hasPermission('purchases:write:own')) ||
+        isGlobalAdmin()
+      );
+    }
+
+    // Payments collection (transaction records)
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() && (
+        (isOwner(resource.data.userId) && hasPermission('payments:read:own')) ||
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+      
+      allow write: if isGlobalAdmin();
+    }
+
+    // Webinar chat messages
+    match /webinar_chats/{chatId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId)) ||
+        (hasRole('student') && request.auth.uid in resource.data.participants)
+      );
+      
+      allow write: if isAuthenticated() && (
+        (isOwner(resource.data.userId) && hasPermission('chat:write')) ||
+        isGlobalAdmin() ||
+        (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId))
+      );
+    }
+  }
+}
