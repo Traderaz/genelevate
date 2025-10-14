@@ -2,6 +2,9 @@
 const nextConfig = {
   output: 'standalone',
   outputFileTracingRoot: require('path').join(__dirname, '../../'),
+  experimental: {
+    outputFileTracingIncludes: {},
+  },
   images: {
     domains: [
       'firebasestorage.googleapis.com',
