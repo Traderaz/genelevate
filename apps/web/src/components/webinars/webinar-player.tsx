@@ -16,7 +16,7 @@ import {
   Maximize,
   Minimize
 } from 'lucide-react';
-import { WebinarHeartbeatManager } from '@gen-elevate/shared/lib/webinar-heartbeat';
+// import { WebinarHeartbeatManager } from '@gen-elevate/shared/lib/webinar-heartbeat';
 
 interface WebinarPlayerProps {
   webinarId: string;
@@ -48,7 +48,7 @@ export function WebinarPlayer({ webinarId }: WebinarPlayerProps) {
   const [connectionQuality, setConnectionQuality] = useState<'excellent' | 'good' | 'fair' | 'poor'>('good');
   
   const playerRef = useRef<HTMLDivElement>(null);
-  const heartbeatManager = useRef<WebinarHeartbeatManager | null>(null);
+  // const heartbeatManager = useRef<WebinarHeartbeatManager | null>(null);
 
   useEffect(() => {
     // TODO: Fetch webinar data from API
@@ -76,6 +76,8 @@ export function WebinarPlayer({ webinarId }: WebinarPlayerProps) {
     // Initialize heartbeat manager for attendance tracking
     const userId = 'current-user-id'; // TODO: Get from auth context
     
+    // TODO: Implement heartbeat manager when shared package is available
+    /*
     heartbeatManager.current = new WebinarHeartbeatManager(
       userId,
       webinarId,
@@ -101,6 +103,7 @@ export function WebinarPlayer({ webinarId }: WebinarPlayerProps) {
     return () => {
       heartbeatManager.current?.stop();
     };
+    */
   }, [webinar, webinarId]);
 
   const handleJoinWebinar = async () => {
