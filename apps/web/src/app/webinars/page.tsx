@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
-import { DashboardLayout } from '@/components/layout/dashboard-layout';
+import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
 import { WebinarGrid } from '@/components/webinars/webinar-grid';
 import { WebinarFilters } from '@/components/webinars/webinar-filters';
 import { WebinarSearch } from '@/components/webinars/webinar-search';
 import { UpcomingWebinars } from '@/components/webinars/upcoming-webinars';
 import { LiveWebinars } from '@/components/webinars/live-webinars';
 import { WebinarStats } from '@/components/webinars/webinar-stats';
-import { WebinarBanner } from '@/components/webinars/webinar-banner';
+import { NetflixWebinarBanner } from '@/components/webinars/netflix-webinar-banner';
 import { Suspense } from 'react';
 import { WebinarGridSkeleton } from '@/components/webinars/webinar-grid-skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -31,10 +31,10 @@ export default async function WebinarsPage({ searchParams }: WebinarsPageProps) 
   const resolvedSearchParams = await searchParams;
 
   return (
-    <DashboardLayout>
+    <NetflixDashboardLayout>
       <div className="space-y-8">
         {/* Webinar Banner */}
-        <WebinarBanner />
+        <NetflixWebinarBanner />
 
         {/* Live Webinars Alert */}
         <Suspense fallback={<div className="h-20 bg-gray-100 animate-pulse rounded-lg" />}>
@@ -85,6 +85,6 @@ export default async function WebinarsPage({ searchParams }: WebinarsPageProps) 
           </TabsContent>
         </Tabs>
       </div>
-    </DashboardLayout>
+    </NetflixDashboardLayout>
   );
 }

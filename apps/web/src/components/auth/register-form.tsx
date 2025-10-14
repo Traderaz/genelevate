@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { httpsCallable, getFunctions } from 'firebase/functions';
+import { doc, setDoc, getFirestore } from 'firebase/firestore';
 
 // Firebase config (same as login form)
 const firebaseConfig = {
@@ -21,11 +22,13 @@ const firebaseConfig = {
 let app: any = null;
 let auth: any = null;
 let functions: any = null;
+let db: any = null;
 
 if (typeof window !== 'undefined' && firebaseConfig.apiKey) {
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   functions = getFunctions(app);
+  db = getFirestore(app);
 }
 
 interface RegistrationData {
@@ -168,9 +171,9 @@ export function RegisterForm() {
         formData.password
       );
 
-      // Create user profile with custom claims
+      // Create user profile directly in Firestore
       const profileData = {
-        uid: userCredential.user.uid,
+        id: userCredential.user.uid,
         email: formData.email,
         displayName: formData.displayName,
         role: formData.role,
@@ -183,10 +186,54 @@ export function RegisterForm() {
         gdprConsent: formData.gdprConsent,
         marketingConsent: formData.marketingConsent,
         parentalConsent: formData.parentalConsent || null,
-        createdAt: new Date().toISOString(),
+        
+        // Additional profile fields
+        firstName: formData.displayName.split(' ')[0] || '',
+        lastName: formData.displayName.split(' ').slice(1).join(' ') || '',
+        isActive: true,
+        emailVerified: false,
+        subscriptionTier: 'free',
+        totalPoints: 0,
+        level: 1,
+        badges: [],
+        cohortIds: [],
+        parentIds: [],
+        studentIds: [],
+        
+        // Preferences
+        preferences: {
+          notifications: {
+            email: true,
+            push: true,
+            webinar: true,
+            course: true,
+          },
+          privacy: {
+            profileVisible: true,
+            progressVisible: true,
+            leaderboardVisible: true,
+          },
+          learning: {
+            preferredStudyTime: 'afternoon',
+            difficultyLevel: 'beginner',
+            learningStyle: 'visual',
+          },
+        },
+        
+        // Timestamps
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
 
-      await createUserProfile(profileData);
+      // Save to Firestore directly
+      if (db) {
+        await setDoc(doc(db, 'users', userCredential.user.uid), profileData);
+      } else {
+        // Fallback to Cloud Function if available
+        if (createUserProfile) {
+          await createUserProfile(profileData);
+        }
+      }
 
       // Send email verification
       // await sendEmailVerification(userCredential.user);

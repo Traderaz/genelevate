@@ -1,51 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    /* Light theme - Netflix-inspired */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
+
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
+
+    --primary: 0 84% 45%; /* Netflix red */
+    --primary-foreground: 0 0% 100%;
+
     --secondary: 210 40% 96%;
     --secondary-foreground: 222.2 84% 4.9%;
+
     --muted: 210 40% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+
+    --accent: 0 84% 45%;
+    --accent-foreground: 0 0% 100%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --ring: 0 84% 45%;
+
     --radius: 0.5rem;
+
+    /* Netflix custom properties */
+    --netflix-red: 229 84% 45%;
+    --netflix-black: 0 0% 6%;
+    --netflix-gray-dark: 0 0% 10%;
+    --netflix-gray-medium: 0 0% 16%;
+    --netflix-gray-light: 0 0% 25%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Dark theme - Netflix style */
+    --background: 0 0% 6%; /* Netflix black */
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 10%; /* Netflix gray-dark */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 0 84% 45%; /* Netflix red */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 16%; /* Netflix gray-medium */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 70%; /* Netflix text-secondary */
+
+    --accent: 0 84% 45%;
+    --accent-foreground: 0 0% 100%;
+
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 25%; /* Netflix gray-light */
+    --input: 0 0% 16%;
+    --ring: 0 84% 45%;
   }
 }
 
@@ -53,88 +81,84 @@
   * {
     @apply border-border;
   }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Netflix-style scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+
+  /* Dark theme scrollbar */
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-white/20;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/30;
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-muted;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground/30 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted-foreground/50;
-}
-
-/* Loading animations */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
+@layer components {
+  /* Netflix-style button variants */
+  .btn-netflix {
+    @apply bg-netflix-red hover:bg-netflix-red-dark text-white font-semibold px-6 py-3 rounded-md netflix-button;
   }
-  50% {
-    opacity: 0.5;
+
+  .btn-netflix-outline {
+    @apply border-2 border-netflix-red text-netflix-red hover:bg-netflix-red hover:text-white font-semibold px-6 py-3 rounded-md netflix-button;
   }
-}
 
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Focus styles */
-.focus-visible {
-  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
-}
-
-/* Gradient backgrounds */
-.gradient-bg {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
-}
-
-.gradient-section {
-  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
-}
-
-/* Typography */
-.text-balance {
-  text-wrap: balance;
-}
-
-/* Animations for page transitions */
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
+  .btn-netflix-ghost {
+    @apply text-netflix-red hover:bg-netflix-red/10 font-semibold px-6 py-3 rounded-md netflix-button;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
+  /* Netflix-style card */
+  .card-netflix {
+    @apply bg-card border border-border rounded-lg shadow-netflix netflix-card;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+
+  /* Netflix-style input */
+  .input-netflix {
+    @apply bg-input border border-border rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
   }
-}
 
-.slide-in-right {
-  animation: slideInFromRight 0.3s ease-out;
-}
+  /* Netflix-style hero gradient */
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--background)) 50%,
+      hsl(var(--primary) / 0.1) 100%
+    );
+  }
 
-.slide-in-left {
-  animation: slideInFromLeft 0.3s ease-out;
+  .dark .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--background)) 30%,
+      hsl(var(--primary) / 0.2) 100%
+    );
+  }
 }

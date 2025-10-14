@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import { DashboardLayout } from '@/components/layout/dashboard-layout';
+import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
 import { CourseGrid } from '@/components/courses/course-grid';
 import { CourseFilters } from '@/components/courses/course-filters';
 import { CourseSearch } from '@/components/courses/course-search';
-import { CourseBanner } from '@/components/courses/course-banner';
+import { NetflixCourseBanner } from '@/components/courses/netflix-course-banner';
 import { FeaturedCourses } from '@/components/courses/featured-courses';
 import { CourseStats } from '@/components/courses/course-stats';
 import { Suspense } from 'react';
@@ -29,10 +29,10 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
   const resolvedSearchParams = await searchParams;
 
   return (
-    <DashboardLayout>
+    <NetflixDashboardLayout>
       <div className="space-y-8">
         {/* Hero Banner */}
-        <CourseBanner />
+        <NetflixCourseBanner />
 
         {/* Course Stats */}
         <CourseStats />
@@ -61,6 +61,6 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </NetflixDashboardLayout>
   );
 }

@@ -1,0 +1,209 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { 
+  Home, 
+  BookOpen, 
+  Video, 
+  Trophy, 
+  User, 
+  Settings, 
+  Search,
+  Bell,
+  Menu,
+  X,
+  Play,
+  TrendingUp,
+  Calendar,
+  Star
+} from 'lucide-react';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+
+interface NetflixDashboardLayoutProps {
+  children: React.ReactNode;
+}
+
+export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navigation = [
+    { name: 'Dashboard', href: '/dashboard', icon: Home },
+    { name: 'My Courses', href: '/courses', icon: BookOpen },
+    { name: 'Live Webinars', href: '/webinars', icon: Video },
+    { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
+    { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar },
+    { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
+  ];
+
+  const quickActions = [
+    { name: 'Continue Learning', icon: Play, color: 'bg-primary', href: '/courses' },
+    { name: 'Browse Courses', icon: BookOpen, color: 'bg-blue-500', href: '/courses' },
+    { name: 'Join Webinar', icon: Video, color: 'bg-green-500', href: '/webinars' },
+    { name: 'View Progress', icon: TrendingUp, color: 'bg-purple-500', href: '/dashboard/progress' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Top Navigation Bar */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-background/95 backdrop-blur-md border-b border-border' 
+          : 'bg-background/80 backdrop-blur-sm'
+      }`}>
+        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+          {/* Left Side */}
+          <div className="flex items-center gap-4">
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="lg:hidden p-2 text-foreground/80 hover:text-foreground transition-colors"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">G</span>
+              </div>
+              <span className="text-xl font-bold netflix-text-gradient hidden sm:block">
+                Gen Elevate
+              </span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-6 ml-8">
+              {navigation.slice(0, 4).map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    pathname === item.href
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                  }`}
+                >
+                  <item.icon className="w-4 h-4" />
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Right Side */}
+          <div className="flex items-center gap-3">
+            {/* Search */}
+            <button className="p-2 text-foreground/80 hover:text-foreground transition-colors">
+              <Search className="w-5 h-5" />
+            </button>
+
+            {/* Notifications */}
+            <button className="p-2 text-foreground/80 hover:text-foreground transition-colors relative">
+              <Bell className="w-5 h-5" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+            </button>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* Profile */}
+            <Link
+              href="/dashboard/profile"
+              className="flex items-center gap-2 p-2 text-foreground/80 hover:text-foreground transition-colors"
+            >
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 text-primary-foreground" />
+              </div>
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile Sidebar */}
+      <aside className={`fixed top-0 left-0 z-50 h-full w-80 bg-card border-r border-border transform transition-transform duration-300 lg:hidden ${
+        isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        <div className="flex items-center justify-between p-4 border-b border-border">
+          <Link href="/" className="flex items-center space-x-2" onClick={() => setIsSidebarOpen(false)}>
+            <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-lg">G</span>
+            </div>
+            <span className="text-xl font-bold netflix-text-gradient">Gen Elevate</span>
+          </Link>
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="p-2 text-foreground/80 hover:text-foreground transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <nav className="p-4 space-y-2">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                pathname === item.href
+                  ? 'text-primary bg-primary/10'
+                  : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+              }`}
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              <item.icon className="w-5 h-5" />
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Quick Actions */}
+        <div className="p-4 border-t border-border">
+          <h3 className="text-sm font-semibold text-foreground mb-3">Quick Actions</h3>
+          <div className="grid grid-cols-2 gap-2">
+            {quickActions.map((action) => (
+              <Link
+                key={action.name}
+                href={action.href}
+                className="flex flex-col items-center gap-2 p-3 rounded-lg bg-accent/50 hover:bg-accent transition-colors"
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                <div className={`w-8 h-8 ${action.color} rounded-full flex items-center justify-center`}>
+                  <action.icon className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-xs font-medium text-center">{action.name}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="pt-16 min-h-screen">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {children}
+        </div>
+      </main>
+    </div>
+  );
+}
