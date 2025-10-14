@@ -363,26 +363,7 @@ export function WebinarPlayer({ webinarId }: WebinarPlayerProps) {
         </div>
       </div>
 
-      {/* Idle Warning Overlay */}
-      {heartbeatManager.current?.isCurrentlyIdle && (
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 max-w-md text-center">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Are you still there?</h3>
-            <p className="text-gray-600 mb-4">
-              You appear to be inactive. Click anywhere to continue attending.
-            </p>
-            <button
-              onClick={() => {
-                // Reset idle state
-                document.dispatchEvent(new Event('mousemove'));
-              }}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
-            >
-              I'm here
-            </button>
-          </div>
-        </div>
-      )}
+      {/* Idle Warning Overlay - TODO: Implement when heartbeat manager is available */}
     </div>
   );
 }
