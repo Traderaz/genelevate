@@ -17,9 +17,16 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const functions = getFunctions(app);
+// Initialize Firebase only on client side
+let app: any = null;
+let auth: any = null;
+let functions: any = null;
+
+if (typeof window !== 'undefined' && firebaseConfig.apiKey) {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  functions = getFunctions(app);
+}
 
 interface RegistrationData {
   email: string;
@@ -53,8 +60,8 @@ export function RegisterForm() {
   const [referralInfo, setReferralInfo] = useState<any>(null);
   const router = useRouter();
 
-  const validateReferralCode = httpsCallable(functions, 'validateReferralCode');
-  const createUserProfile = httpsCallable(functions, 'createUserProfile');
+  const validateReferralCode = functions ? httpsCallable(functions, 'validateReferralCode') : null;
+  const createUserProfile = functions ? httpsCallable(functions, 'createUserProfile') : null;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -67,6 +74,11 @@ export function RegisterForm() {
   const handleReferralValidation = async () => {
     if (!formData.referralCode) {
       setStep(2);
+      return;
+    }
+
+    if (!validateReferralCode) {
+      setError('Firebase not initialized');
       return;
     }
 
@@ -140,6 +152,12 @@ export function RegisterForm() {
         setIsLoading(false);
         return;
       }
+    }
+
+    if (!auth || !createUserProfile) {
+      setError('Firebase not initialized');
+      setIsLoading(false);
+      return;
     }
 
     try {

@@ -16,9 +16,14 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+// Initialize Firebase only on client side
+let app: any = null;
+let auth: any = null;
+
+if (typeof window !== 'undefined' && firebaseConfig.apiKey) {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+}
 
 export function LoginForm() {
   const [email, setEmail] = useState('');
@@ -31,6 +36,12 @@ export function LoginForm() {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+    
+    if (!auth) {
+      setError('Authentication not initialized');
+      setIsLoading(false);
+      return;
+    }
     
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -45,6 +56,12 @@ export function LoginForm() {
   const handleGoogleLogin = async () => {
     setIsLoading(true);
     setError('');
+    
+    if (!auth) {
+      setError('Authentication not initialized');
+      setIsLoading(false);
+      return;
+    }
     
     try {
       const provider = new GoogleAuthProvider();
