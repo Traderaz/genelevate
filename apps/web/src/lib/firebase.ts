@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
-import { getStorage, connectStorageEmulator } from 'firebase/storage';
+import { getAuth, connectAuthEmulator, Auth } from 'firebase/auth';
+import { getFirestore, connectFirestoreEmulator, Firestore } from 'firebase/firestore';
+import { getStorage, connectStorageEmulator, FirebaseStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'demo-key',
@@ -27,8 +27,11 @@ try {
   }) : getApps()[0];
 }
 
-// Initialize Firebase services
-let auth, db, storage;
+// Initialize Firebase services with explicit types
+let auth: Auth;
+let db: Firestore;
+let storage: FirebaseStorage;
+
 try {
   auth = getAuth(app);
   db = getFirestore(app);

@@ -286,6 +286,214 @@ service cloud.firestore {
                      canAccessInstitutionData(resource.data.institutionId);
     }
 
+    // Careers collection - Read-only for all authenticated users
+    match /careers/{careerId} {
+      allow read: if isAuthenticated();
+      allow write: if isGlobalAdmin();
+    }
+
+    // Industry News collection - Read-only for all authenticated users
+    match /industryNews/{newsId} {
+      allow read: if isAuthenticated();
+      allow write: if isGlobalAdmin(); // Only Cloud Functions (with admin privileges) can write
+    }
+
+    // Life Skills Modules collection - Read-only for all authenticated users
+    match /lifeSkillsModules/{moduleId} {
+      allow read: if isAuthenticated();
+      allow write: if isGlobalAdmin();
+    }
+
+    // Wellbeing Progress collection - User can read/write their own progress
+    match /wellbeingProgress/{progressId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin() ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      
+      allow update: if isAuthenticated() && isOwner(resource.data.userId);
+      
+      allow delete: if isOwner(resource.data.userId) || isGlobalAdmin();
+    }
+
+    // Wellbeing Check-ins collection - User can read/write their own check-ins
+    match /wellbeingCheckins/{checkinId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin() ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      
+      allow update: if isAuthenticated() && isOwner(resource.data.userId);
+      
+      allow delete: if isOwner(resource.data.userId) || isGlobalAdmin();
+    }
+
+    // Point Transactions collection - Users can read their own, admins can write
+    match /pointTransactions/{transactionId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin() ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create: if isGlobalAdmin(); // Only system/admin can create
+      
+      allow update, delete: if isGlobalAdmin();
+    }
+
+    // Leaderboards collection - Read-only for authenticated users
+    match /leaderboards/{leaderboardId} {
+      allow read: if isAuthenticated();
+      allow write: if isGlobalAdmin(); // Only Cloud Functions can write
+    }
+
+    // Rewards collection - Read-only for authenticated users
+    match /rewards/{rewardId} {
+      allow read: if isAuthenticated();
+      allow write: if isGlobalAdmin() || isInstitutionAdmin();
+    }
+
+    // Redemptions collection - Users can read their own
+    match /redemptions/{redemptionId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin() ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      
+      allow update: if isGlobalAdmin(); // Only system can update status
+      
+      allow delete: if isGlobalAdmin();
+    }
+
+    // Add-Ons collection - Read-only for authenticated users
+    match /addons/{addonId} {
+      allow read: if isAuthenticated();
+      allow write: if isGlobalAdmin() || isInstitutionAdmin();
+    }
+
+    // Purchases collection - Users can read their own purchases
+    match /purchases/{purchaseId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin() ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create: if isAuthenticated(); // Stripe webhook creates purchases
+      
+      allow update: if isGlobalAdmin(); // Only system can update status
+      
+      allow delete: if isGlobalAdmin();
+    }
+
+    // Cohorts collection - Institution admins can manage their cohorts
+    match /cohorts/{cohortId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        canAccessInstitutionData(resource.data.institutionId) ||
+        isLinkedParent(resource.data.studentIds)
+      );
+      
+      allow create, update: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        canAccessInstitutionData(request.resource.data.institutionId)
+      );
+      
+      allow delete: if isGlobalAdmin() || canAccessInstitutionData(resource.data.institutionId);
+    }
+
+    // Referral Links collection - Institution admins can manage their links
+    match /referralLinks/{linkId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow create, update: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        canAccessInstitutionData(request.resource.data.institutionId)
+      );
+      
+      allow delete: if isGlobalAdmin() || canAccessInstitutionData(resource.data.institutionId);
+    }
+
+    // Parent-Student Links collection - Parents and students can read their own links
+    match /parentStudentLinks/{linkId} {
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.parentId) ||
+        isOwner(resource.data.studentId) ||
+        isGlobalAdmin()
+      );
+      
+      allow create: if isAuthenticated();
+      
+      allow update, delete: if isAuthenticated() && (
+        isOwner(resource.data.parentId) ||
+        isOwner(resource.data.studentId) ||
+        isGlobalAdmin()
+      );
+    }
+
+    // Institution Analytics collection - Institution admins can read their analytics
+    match /institutionAnalytics/{analyticsId} {
+      allow read: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+      
+      allow write: if isGlobalAdmin(); // Only system can write analytics
+    }
+
+    // AI Sessions
+    match /aiSessions/{sessionId} {
+      // Users can read and create their own sessions
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow update: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
+    // AI Messages
+    match /aiMessages/{messageId} {
+      // Users can read their own messages
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      // No updates or deletes allowed for message history integrity
+    }
+
+    // AI Usage
+    match /aiUsage/{usageId} {
+      // Users can read their own usage stats
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+      // Only system/admin can write usage stats
+      allow write: if request.auth != null && request.auth.token.role == 'admin';
+    }
+
+    // AI FAQs
+    match /faqs/{faqId} {
+      // Everyone can read FAQs
+      allow read: if request.auth != null;
+      // Only admins can create/update FAQs
+      allow write: if request.auth != null && request.auth.token.role == 'admin';
+    }
+
+    // AI Audit Logs
+    match /aiAuditLogs/{logId} {
+      // Only admins can read audit logs
+      allow read: if request.auth != null && request.auth.token.role == 'admin';
+      // Only system can write audit logs
+      allow create: if request.auth != null;
+    }
+
     // Default deny all other documents
     match /{document=**} {
       allow read, write: if false;

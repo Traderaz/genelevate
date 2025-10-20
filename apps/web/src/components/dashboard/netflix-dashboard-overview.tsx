@@ -16,100 +16,51 @@ import {
   Target,
   Zap
 } from 'lucide-react';
+import { WellbeingWidget } from './wellbeing-widget';
+import { RewardsWidget } from './rewards-widget';
+import { AddOnsWidget } from './addons-widget';
+import { useAuth } from '@/contexts/auth-context';
+import { useDashboardData } from '@/hooks/useDashboardData';
 
 export function NetflixDashboardOverview() {
+  const { user, userProfile } = useAuth();
+  const { continueWatching, upcomingWebinars, achievements, isLoading, error } = useDashboardData();
   const [activeTab, setActiveTab] = useState('continue');
 
-  // Mock data - replace with real data from your store/API
+  // Real user stats from profile
   const stats = [
     {
       label: 'Courses Completed',
-      value: '12',
-      change: '+3 this month',
+      value: userProfile?.stats?.coursesCompleted?.toString() || '0',
+      change: (userProfile?.stats?.coursesCompleted || 0) > 0 ? `${userProfile?.stats?.coursesCompleted || 0} completed` : 'Start your first course',
       icon: Trophy,
       color: 'text-yellow-500',
       bgColor: 'bg-yellow-500/10'
     },
     {
       label: 'Hours Learned',
-      value: '47.5',
-      change: '+12.3 this week',
+      value: userProfile?.stats?.totalHours?.toString() || '0',
+      change: (userProfile?.stats?.totalHours || 0) > 0 ? `${userProfile?.stats?.totalHours || 0} hours` : 'Begin learning today',
       icon: Clock,
       color: 'text-blue-500',
       bgColor: 'bg-blue-500/10'
     },
     {
       label: 'Current Streak',
-      value: '15 days',
-      change: 'Personal best!',
+      value: `${userProfile?.stats?.currentStreak || 0} days`,
+      change: (userProfile?.stats?.currentStreak || 0) > 0 ? 'Keep it going!' : 'Start your streak',
       icon: Zap,
       color: 'text-orange-500',
       bgColor: 'bg-orange-500/10'
     },
     {
-      label: 'Average Score',
-      value: '94%',
-      change: '+5% improvement',
+      label: 'Total Points',
+      value: userProfile?.stats?.totalPoints?.toString() || '0',
+      change: (userProfile?.stats?.totalPoints || 0) > 0 ? 'Earning rewards' : 'Earn your first points',
       icon: Target,
       color: 'text-green-500',
       bgColor: 'bg-green-500/10'
     }
-  ];
-
-  const continueWatching = [
-    {
-      id: 1,
-      title: 'Advanced Mathematics',
-      subtitle: 'Calculus Fundamentals',
-      progress: 68,
-      thumbnail: '/api/placeholder/300/200',
-      duration: '45 min remaining',
-      type: 'course'
-    },
-    {
-      id: 2,
-      title: 'Physics Masterclass',
-      subtitle: 'Quantum Mechanics Intro',
-      progress: 23,
-      thumbnail: '/api/placeholder/300/200',
-      duration: '2h 15min remaining',
-      type: 'course'
-    },
-    {
-      id: 3,
-      title: 'Live Chemistry Session',
-      subtitle: 'Organic Compounds',
-      progress: 0,
-      thumbnail: '/api/placeholder/300/200',
-      duration: 'Starts in 2 hours',
-      type: 'webinar'
-    }
-  ];
-
-  const upcomingWebinars = [
-    {
-      id: 1,
-      title: 'A-Level Biology Revision',
-      instructor: 'Dr. Sarah Johnson',
-      time: 'Today, 3:00 PM',
-      participants: 156,
-      thumbnail: '/api/placeholder/300/200'
-    },
-    {
-      id: 2,
-      title: 'GCSE Maths Problem Solving',
-      instructor: 'Prof. Michael Chen',
-      time: 'Tomorrow, 10:00 AM',
-      participants: 203,
-      thumbnail: '/api/placeholder/300/200'
-    }
-  ];
-
-  const achievements = [
-    { name: 'First Course Complete', icon: '🎓', unlocked: true },
-    { name: '7-Day Streak', icon: '🔥', unlocked: true },
-    { name: 'Perfect Score', icon: '⭐', unlocked: true },
-    { name: 'Early Bird', icon: '🌅', unlocked: false },
   ];
 
   return (
@@ -118,7 +69,7 @@ export function NetflixDashboardOverview() {
       <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-primary/20 via-primary/10 to-transparent p-8 border border-border">
         <div className="relative z-10">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Welcome back, Alex! 👋
+            Welcome back, {userProfile?.displayName || userProfile?.firstName || 'Student'}! 👋
           </h1>
           <p className="text-lg text-muted-foreground mb-6">
             Ready to continue your learning journey? You're doing amazing!
@@ -165,6 +116,13 @@ export function NetflixDashboardOverview() {
         ))}
       </div>
 
+      {/* Quick Access Widgets */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <WellbeingWidget />
+        <RewardsWidget />
+        <AddOnsWidget />
+      </div>
+
       {/* Content Tabs */}
       <div className="space-y-6">
         <div className="flex items-center gap-6 border-b border-border">
@@ -201,8 +159,35 @@ export function NetflixDashboardOverview() {
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {continueWatching.map((item) => (
+            
+            {isLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-card border border-border rounded-xl overflow-hidden animate-pulse">
+                    <div className="aspect-video bg-muted" />
+                    <div className="p-4 space-y-2">
+                      <div className="h-4 bg-muted rounded" />
+                      <div className="h-3 bg-muted rounded w-2/3" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : continueWatching.length === 0 ? (
+              <div className="bg-card border border-border rounded-xl p-12 text-center">
+                <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                <h4 className="text-lg font-semibold text-foreground mb-2">No courses in progress</h4>
+                <p className="text-muted-foreground mb-6">Start learning today and track your progress here</p>
+                <Link
+                  href="/courses"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold netflix-button"
+                >
+                  <BookOpen className="w-5 h-5" />
+                  Browse Courses
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {continueWatching.map((item) => (
                 <div
                   key={item.id}
                   className="group bg-card border border-border rounded-xl overflow-hidden netflix-card cursor-pointer"
@@ -238,7 +223,8 @@ export function NetflixDashboardOverview() {
                   </div>
                 </div>
               ))}
-            </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -255,8 +241,35 @@ export function NetflixDashboardOverview() {
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="space-y-4">
-              {upcomingWebinars.map((webinar) => (
+            
+            {isLoading ? (
+              <div className="space-y-4">
+                {[1, 2].map((i) => (
+                  <div key={i} className="flex items-center gap-4 p-4 bg-card border border-border rounded-xl animate-pulse">
+                    <div className="w-20 h-14 bg-muted rounded-lg" />
+                    <div className="flex-1 space-y-2">
+                      <div className="h-4 bg-muted rounded" />
+                      <div className="h-3 bg-muted rounded w-1/2" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : upcomingWebinars.length === 0 ? (
+              <div className="bg-card border border-border rounded-xl p-12 text-center">
+                <Video className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                <h4 className="text-lg font-semibold text-foreground mb-2">No upcoming webinars</h4>
+                <p className="text-muted-foreground mb-6">Check back later for live sessions with expert instructors</p>
+                <Link
+                  href="/webinars"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold netflix-button"
+                >
+                  <Video className="w-5 h-5" />
+                  View All Webinars
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {upcomingWebinars.map((webinar) => (
                 <div
                   key={webinar.id}
                   className="flex items-center gap-4 p-4 bg-card border border-border rounded-xl netflix-card"
@@ -283,7 +296,8 @@ export function NetflixDashboardOverview() {
                   </button>
                 </div>
               ))}
-            </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -300,24 +314,49 @@ export function NetflixDashboardOverview() {
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {achievements.map((achievement, index) => (
-                <div
-                  key={achievement.name}
-                  className={`p-4 rounded-xl border text-center netflix-card ${
-                    achievement.unlocked
-                      ? 'bg-card border-border'
-                      : 'bg-muted/50 border-border opacity-50'
-                  }`}
+            
+            {isLoading ? (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="bg-card border border-border rounded-xl p-6 text-center animate-pulse">
+                    <div className="w-12 h-12 bg-muted rounded-full mx-auto mb-2" />
+                    <div className="h-4 bg-muted rounded" />
+                  </div>
+                ))}
+              </div>
+            ) : achievements.length === 0 ? (
+              <div className="bg-card border border-border rounded-xl p-12 text-center">
+                <Trophy className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                <h4 className="text-lg font-semibold text-foreground mb-2">No achievements yet</h4>
+                <p className="text-muted-foreground mb-6">Complete courses and activities to unlock achievements</p>
+                <Link
+                  href="/courses"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold netflix-button"
                 >
-                  <div className="text-3xl mb-2">{achievement.icon}</div>
-                  <p className="text-sm font-medium text-foreground">{achievement.name}</p>
-                  {achievement.unlocked && (
-                    <p className="text-xs text-green-500 mt-1">Unlocked!</p>
-                  )}
-                </div>
-              ))}
-            </div>
+                  <Play className="w-5 h-5" />
+                  Start Learning
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {achievements.map((achievement, index) => (
+                  <div
+                    key={achievement.id}
+                    className={`p-4 rounded-xl border text-center netflix-card ${
+                      achievement.unlocked
+                        ? 'bg-card border-border'
+                        : 'bg-muted/50 border-border opacity-50'
+                    }`}
+                  >
+                    <div className="text-3xl mb-2">{achievement.icon}</div>
+                    <p className="text-sm font-medium text-foreground">{achievement.name}</p>
+                    {achievement.unlocked && (
+                      <p className="text-xs text-green-500 mt-1">Unlocked!</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

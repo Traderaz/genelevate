@@ -25,20 +25,30 @@ import {
 import { auth, db } from '../lib/firebase';
 
 // User profile interface
+import { YearGroup } from '@/types/year-groups';
+
 export interface UserProfile {
   uid: string;
   email: string;
   displayName: string;
   firstName: string;
   lastName: string;
-  yearGroup: string;
+  photoURL?: string;
+  yearGroup: YearGroup | null;
   subjects: string[];
   institutionId?: string;
   role: 'student' | 'parent' | 'institution' | 'admin';
   subscription: {
-    plan: 'free' | 'premium' | 'institution';
+    plan: 'free' | 'student' | 'premium' | 'institution';
     status: 'active' | 'inactive' | 'cancelled';
     expiresAt?: Date;
+    stripeCustomerId?: string;
+    stripeSubscriptionId?: string;
+    pendingPlanChange?: {
+      newPlan: 'free' | 'student' | 'premium' | 'institution';
+      effectiveDate: Date;
+      type: 'upgrade' | 'downgrade' | 'cancel';
+    };
   };
   preferences: {
     theme: 'light' | 'dark' | 'system';
@@ -170,6 +180,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           subscription: {
             ...data.subscription,
             expiresAt: data.subscription?.expiresAt?.toDate(),
+            pendingPlanChange: data.subscription?.pendingPlanChange ? {
+              ...data.subscription.pendingPlanChange,
+              effectiveDate: data.subscription.pendingPlanChange.effectiveDate?.toDate(),
+            } : undefined,
           },
         } as UserProfile;
       }

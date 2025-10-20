@@ -18,3 +18,6 @@ export { webinarFunctions } from './webinars';
 export { paymentFunctions } from './payments';
 export { notificationFunctions } from './notifications';
 export { utilityFunctions } from './utilities';
+export { careerFunctions } from './careers';
+export { rewardsFunctions } from './rewards';
+export { subscriptionFunctions } from './subscriptions';

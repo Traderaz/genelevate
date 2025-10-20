@@ -27,8 +27,9 @@ export function NetflixHeader() {
     { name: 'Home', href: '/' },
     { name: 'Courses', href: '/courses' },
     { name: 'Webinars', href: '/webinars' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Add-Ons', href: '/addons', highlight: true },
     { name: 'Pricing', href: '#pricing' },
-    { name: 'About', href: '#about' },
   ];
 
   return (
@@ -59,7 +60,11 @@ export function NetflixHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium"
+                className={`transition-colors duration-200 font-medium ${
+                  item.highlight
+                    ? 'text-primary hover:text-primary/80 font-bold'
+                    : 'text-foreground/80 hover:text-foreground'
+                }`}
               >
                 {item.name}
               </Link>
@@ -258,7 +263,11 @@ export function NetflixHeader() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200"
+                  className={`block px-4 py-2 hover:bg-accent/50 rounded-md transition-colors duration-200 ${
+                    item.highlight
+                      ? 'text-primary hover:text-primary/80 font-bold'
+                      : 'text-foreground/80 hover:text-foreground'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}

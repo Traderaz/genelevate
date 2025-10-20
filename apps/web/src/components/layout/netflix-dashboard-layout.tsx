@@ -17,9 +17,18 @@ import {
   Play,
   TrendingUp,
   Calendar,
-  Star
+  Star,
+  Briefcase,
+  Heart,
+  Award,
+  ShoppingBag,
+  Building2,
+  Users,
+  Sparkles
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { useAuth } from '@/contexts/auth-context';
+import { AIFloatingDock } from '@/components/ai/ai-floating-dock';
 
 interface NetflixDashboardLayoutProps {
   children: React.ReactNode;
@@ -29,6 +38,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const { userProfile } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,14 +49,32 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navigation = [
+  // Base navigation for all users
+  const baseNavigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Home },
     { name: 'My Courses', href: '/courses', icon: BookOpen },
     { name: 'Live Webinars', href: '/webinars', icon: Video },
+    { name: 'Careers', href: '/careers', icon: Briefcase },
+    { name: 'Gen Elevate AI', href: '/ai', icon: Sparkles, highlight: true }, // NEW: AI Assistant
+    { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
+    { name: 'Life Skills', href: '/life-skills', icon: BookOpen },
+    { name: 'Wellbeing', href: '/wellbeing', icon: Heart },
+    { name: 'Rewards', href: '/rewards', icon: Award },
     { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
     { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar },
     { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
   ];
+
+  // Add role-specific navigation items
+  const roleNavigation = [];
+  if (userProfile?.role === 'institution' || userProfile?.role === 'admin') {
+    roleNavigation.push({ name: 'Institution Portal', href: '/institution', icon: Building2 });
+  }
+  if (userProfile?.role === 'parent' || userProfile?.role === 'admin') {
+    roleNavigation.push({ name: 'Parent Portal', href: '/parent', icon: Users });
+  }
+
+  const navigation = [...baseNavigation, ...roleNavigation];
 
   const quickActions = [
     { name: 'Continue Learning', icon: Play, color: 'bg-primary', href: '/courses' },
@@ -85,14 +113,16 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-6 ml-8">
-              {navigation.slice(0, 4).map((item) => (
+            <nav className="hidden lg:flex items-center space-x-4 ml-8">
+              {navigation.slice(0, 6).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-2 px-2 py-2 rounded-md text-sm font-medium transition-colors ${
                     pathname === item.href
                       ? 'text-primary bg-primary/10'
+                      : item.highlight
+                      ? 'text-primary hover:text-primary/80 bg-primary/5'
                       : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
                   }`}
                 >
@@ -204,6 +234,9 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
           {children}
         </div>
       </main>
+
+      {/* AI Floating Dock */}
+      <AIFloatingDock />
     </div>
   );
 }

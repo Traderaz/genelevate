@@ -1,0 +1,61 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Profile Pictures
+    match /profile-pictures/{userId}/{fileName} {
+      // Allow users to read their own profile pictures
+      allow read: if true; // Public read access for profile pictures
+      
+      // Allow users to upload/update/delete their own profile pictures
+      allow write: if request.auth != null 
+                   && request.auth.uid == userId
+                   && request.resource.size < 5 * 1024 * 1024 // Max 5MB
+                   && request.resource.contentType.matches('image/.*'); // Only images
+    }
+
+    // Course Materials (institution/admin only)
+    match /course-materials/{courseId}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null 
+                   && (request.auth.token.role == 'admin' || request.auth.token.role == 'institution');
+    }
+
+    // Webinar Recordings (institution/admin only)
+    match /webinar-recordings/{webinarId}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null 
+                   && (request.auth.token.role == 'admin' || request.auth.token.role == 'institution');
+    }
+
+    // Assignment Submissions
+    match /submissions/{userId}/{courseId}/{fileName} {
+      // Users can read their own submissions
+      allow read: if request.auth != null 
+                  && (request.auth.uid == userId 
+                      || request.auth.token.role == 'admin' 
+                      || request.auth.token.role == 'institution');
+      
+      // Users can upload their own submissions
+      allow write: if request.auth != null 
+                   && request.auth.uid == userId
+                   && request.resource.size < 10 * 1024 * 1024; // Max 10MB
+    }
+
+    // Certificates
+    match /certificates/{userId}/{certificateId} {
+      // Users can read their own certificates
+      allow read: if request.auth != null 
+                  && (request.auth.uid == userId || request.auth.token.role == 'admin');
+      
+      // Only system/admin can create certificates
+      allow write: if request.auth != null && request.auth.token.role == 'admin';
+    }
+
+    // Default deny all other paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
+

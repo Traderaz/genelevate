@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useAuth } from '@/contexts/auth-context';
+import { getYearGroupInfo } from '@/types/year-groups';
 import { 
   User, 
   Mail, 
@@ -21,25 +23,29 @@ import {
   Target,
   Zap
 } from 'lucide-react';
+import { EditableProfile } from './editable-profile';
+import { SubscriptionManager } from './subscription-manager';
+import { ProfilePictureUpload } from './profile-picture-upload';
 
 export function NetflixUserProfile() {
+  const { user, userProfile } = useAuth();
   const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
+  const [showSubscriptionManager, setShowSubscriptionManager] = useState(false);
+  const [showProfilePictureUpload, setShowProfilePictureUpload] = useState(false);
 
-  // Mock user data - replace with real data from your store/API
-  const user = {
-    id: '1',
-    name: 'Alex Johnson',
-    email: 'alex.johnson@email.com',
-    phone: '+44 7700 900123',
-    location: 'London, UK',
-    joinDate: 'September 2023',
-    avatar: '/api/placeholder/150/150',
-    subscription: 'Premium',
-    yearGroup: 'Year 12',
-    subjects: ['Mathematics', 'Physics', 'Chemistry'],
-    bio: 'Passionate A-Level student focused on STEM subjects. Aiming for top universities in engineering.',
-  };
+  if (!user || !userProfile) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-foreground/60">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const yearGroupInfo = getYearGroupInfo(userProfile.yearGroup);
 
   const stats = [
     {
@@ -96,8 +102,22 @@ export function NetflixUserProfile() {
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
+  // Show editable form when editing
+  if (isEditing) {
+    return <EditableProfile onCancel={() => setIsEditing(false)} />;
+  }
+
   return (
-    <div className="space-y-8">
+    <>
+      {showSubscriptionManager && (
+        <SubscriptionManager onClose={() => setShowSubscriptionManager(false)} />
+      )}
+
+      {showProfilePictureUpload && (
+        <ProfilePictureUpload onClose={() => setShowProfilePictureUpload(false)} />
+      )}
+      
+      <div className="space-y-8">
       {/* Profile Header */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-card via-card/95 to-card/80 border border-border">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5"></div>
@@ -107,10 +127,23 @@ export function NetflixUserProfile() {
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
             {/* Avatar */}
             <div className="relative group">
-              <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-4xl font-bold text-primary-foreground">
-                {user.name.split(' ').map(n => n[0]).join('')}
+              <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-4xl font-bold text-primary-foreground overflow-hidden">
+                {userProfile.photoURL ? (
+                  <img
+                    src={userProfile.photoURL}
+                    alt={userProfile.displayName || 'Profile'}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span>
+                    {userProfile.displayName ? userProfile.displayName.split(' ').map(n => n[0]).join('') : userProfile.firstName[0] + userProfile.lastName[0]}
+                  </span>
+                )}
               </div>
-              <button className="absolute inset-0 bg-background/80 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <button 
+                onClick={() => setShowProfilePictureUpload(true)}
+                className="absolute inset-0 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+              >
                 <Camera className="w-6 h-6 text-foreground" />
               </button>
             </div>
@@ -119,13 +152,16 @@ export function NetflixUserProfile() {
             <div className="flex-1 space-y-4">
               <div className="flex items-start justify-between">
                 <div>
-                  <h1 className="text-3xl font-bold text-foreground">{user.name}</h1>
-                  <p className="text-lg text-primary font-semibold">{user.yearGroup} Student</p>
-                  <p className="text-muted-foreground">{user.bio}</p>
+                  <h1 className="text-3xl font-bold text-foreground">
+                    {userProfile.displayName || `${userProfile.firstName} ${userProfile.lastName}`}
+                  </h1>
+                  <p className="text-lg text-primary font-semibold">
+                    {yearGroupInfo ? `${yearGroupInfo.emoji} ${yearGroupInfo.name}` : 'Student'}
+                  </p>
                 </div>
                 <button
-                  onClick={() => setIsEditing(!isEditing)}
-                  className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg netflix-button"
+                  onClick={() => setIsEditing(true)}
+                  className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
                 >
                   <Edit3 className="w-4 h-4" />
                   Edit Profile
@@ -135,27 +171,27 @@ export function NetflixUserProfile() {
               <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  {user.email}
-                </span>
-                <span className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  {user.location}
+                  {userProfile.email}
                 </span>
                 <span className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  Joined {user.joinDate}
+                  Joined {userProfile.createdAt ? new Date(userProfile.createdAt).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) : 'Recently'}
                 </span>
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {user.subjects.map((subject) => (
-                  <span
-                    key={subject}
-                    className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-sm font-medium"
-                  >
-                    {subject}
-                  </span>
-                ))}
+                {userProfile.subjects && userProfile.subjects.length > 0 ? (
+                  userProfile.subjects.map((subject) => (
+                    <span
+                      key={subject}
+                      className="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-medium"
+                    >
+                      {subject}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-sm text-foreground/50 italic">No subjects added yet</span>
+                )}
               </div>
             </div>
           </div>
@@ -212,21 +248,29 @@ export function NetflixUserProfile() {
                     <User className="w-5 h-5 text-muted-foreground" />
                     <div>
                       <p className="text-sm text-muted-foreground">Full Name</p>
-                      <p className="font-medium text-foreground">{user.name}</p>
+                      <p className="font-medium text-foreground">
+                        {userProfile.displayName || `${userProfile.firstName} ${userProfile.lastName}`}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5 text-muted-foreground" />
                     <div>
                       <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="font-medium text-foreground">{user.email}</p>
+                      <p className="font-medium text-foreground">{userProfile.email}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-muted-foreground" />
+                    <Calendar className="w-5 h-5 text-muted-foreground" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Phone</p>
-                      <p className="font-medium text-foreground">{user.phone}</p>
+                      <p className="text-sm text-muted-foreground">Member Since</p>
+                      <p className="font-medium text-foreground">
+                        {userProfile.createdAt ? new Date(userProfile.createdAt).toLocaleDateString('en-GB', { 
+                          day: 'numeric',
+                          month: 'long', 
+                          year: 'numeric' 
+                        }) : 'Recently'}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -237,19 +281,25 @@ export function NetflixUserProfile() {
                 <div className="space-y-4">
                   <div>
                     <p className="text-sm text-muted-foreground">Year Group</p>
-                    <p className="font-medium text-foreground">{user.yearGroup}</p>
+                    <p className="font-medium text-foreground">
+                      {yearGroupInfo ? `${yearGroupInfo.emoji} ${yearGroupInfo.displayName}` : 'Not set'}
+                    </p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Subjects</p>
                     <div className="flex flex-wrap gap-2 mt-1">
-                      {user.subjects.map((subject) => (
-                        <span
-                          key={subject}
-                          className="px-2 py-1 bg-primary/20 text-primary rounded text-sm"
-                        >
-                          {subject}
-                        </span>
-                      ))}
+                      {userProfile.subjects && userProfile.subjects.length > 0 ? (
+                        userProfile.subjects.map((subject) => (
+                          <span
+                            key={subject}
+                            className="px-2 py-1 bg-primary/20 text-primary rounded text-sm"
+                          >
+                            {subject}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="text-sm text-foreground/50 italic">No subjects added</span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -262,16 +312,34 @@ export function NetflixUserProfile() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-foreground">{user.subscription} Plan</p>
-                      <p className="text-sm text-muted-foreground">Full access to all features</p>
+                      <p className="font-medium text-foreground capitalize">{userProfile.subscription.plan} Plan</p>
+                      <p className="text-sm text-muted-foreground">
+                        {userProfile.subscription.plan === 'free' ? 'Limited access' : 'Full access to all features'}
+                      </p>
                     </div>
-                    <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">
-                      Active
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      userProfile.subscription.status === 'active' 
+                        ? 'bg-green-500/20 text-green-400' 
+                        : 'bg-red-500/20 text-red-400'
+                    }`}>
+                      {userProfile.subscription.status === 'active' ? 'Active' : 'Inactive'}
                     </span>
                   </div>
-                  <button className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg netflix-button">
-                    Manage Subscription
-                  </button>
+                  {userProfile.subscription.plan === 'free' ? (
+                    <button 
+                      onClick={() => setShowSubscriptionManager(true)}
+                      className="w-full px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+                    >
+                      Upgrade to Premium
+                    </button>
+                  ) : (
+                    <button 
+                      onClick={() => setShowSubscriptionManager(true)}
+                      className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                    >
+                      {userProfile.subscription.status === 'inactive' ? 'Renew Subscription' : 'Manage Subscription'}
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -355,5 +423,6 @@ export function NetflixUserProfile() {
         )}
       </div>
     </div>
+    </>
   );
 }
