@@ -113,13 +113,13 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-3 ml-8">
-              {navigation.slice(0, 7).map((item) => (
+            {/* Desktop Navigation - Scrollable to fit all items */}
+            <nav className="hidden lg:flex items-center space-x-2 ml-4 overflow-x-auto scrollbar-none max-w-[60vw] xl:max-w-none">
+              {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center gap-2 px-2 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-1.5 px-2.5 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
                     pathname === item.href
                       ? 'text-primary bg-primary/10'
                       : item.highlight

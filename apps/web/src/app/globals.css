@@ -225,4 +225,14 @@
   .safe-area-right {
     padding-right: env(safe-area-inset-right);
   }
+
+  /* Hide scrollbar for navigation */
+  .scrollbar-none {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
 }
