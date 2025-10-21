@@ -123,6 +123,75 @@ export function NetflixDashboardOverview() {
         <AddOnsWidget />
       </div>
 
+      {/* Quick Links to Other Pages */}
+      <div className="bg-card border border-border rounded-xl p-6">
+        <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+          <Zap className="w-5 h-5 text-primary" />
+          Quick Access
+        </h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <Link
+            href="/dashboard/progress"
+            className="group p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center mb-3 group-hover:bg-purple-500/20 transition-colors">
+                <TrendingUp className="w-6 h-6 text-purple-500" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">My Progress</span>
+            </div>
+          </Link>
+          
+          <Link
+            href="/dashboard/schedule"
+            className="group p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-3 group-hover:bg-blue-500/20 transition-colors">
+                <Calendar className="w-6 h-6 text-blue-500" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Schedule</span>
+            </div>
+          </Link>
+          
+          <Link
+            href="/dashboard/achievements"
+            className="group p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-3 group-hover:bg-orange-500/20 transition-colors">
+                <Star className="w-6 h-6 text-orange-500" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Achievements</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/wellbeing"
+            className="group p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mb-3 group-hover:bg-green-500/20 transition-colors">
+                <Target className="w-6 h-6 text-green-500" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Life Modules</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/rewards"
+            className="group p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-yellow-500/10 flex items-center justify-center mb-3 group-hover:bg-yellow-500/20 transition-colors">
+                <Trophy className="w-6 h-6 text-yellow-500" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Leaderboard</span>
+            </div>
+          </Link>
+        </div>
+      </div>
+
       {/* Content Tabs */}
       <div className="space-y-6">
         <div className="flex items-center gap-6 border-b border-border">
