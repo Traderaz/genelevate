@@ -1,4 +1,5 @@
-import { Metadata } from 'next';
+'use client';
+
 import dynamic from 'next/dynamic';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
 
@@ -29,11 +30,6 @@ const NetflixDashboardOverview = dynamic(
     ssr: false,
   }
 );
-
-export const metadata: Metadata = {
-  title: 'Dashboard - Gen Elevate',
-  description: 'Your personalized learning dashboard - track progress, continue courses, and join live sessions',
-};
 
 export default function DashboardPage() {
   return (

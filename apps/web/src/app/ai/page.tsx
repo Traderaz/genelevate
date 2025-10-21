@@ -1,4 +1,5 @@
-import { Metadata } from 'next';
+'use client';
+
 import dynamic from 'next/dynamic';
 import { Loader2 } from 'lucide-react';
 
@@ -14,11 +15,6 @@ const AIChat = dynamic(() => import('@/components/ai/ai-chat-premium'), {
   ),
   ssr: false, // Don't render on server (Firebase needs browser)
 });
-
-export const metadata: Metadata = {
-  title: 'Gen Elevate AI | Gen Elevate',
-  description: 'Your personal AI assistant for study help, career guidance, and motivation',
-};
 
 export default function AIPage() {
   return <AIChat />;
