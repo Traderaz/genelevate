@@ -49,15 +49,20 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Base navigation for all users
-  const baseNavigation = [
+  // Top navigation - Main features only (shown in header)
+  const topNavigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Home },
     { name: 'My Courses', href: '/courses', icon: BookOpen },
     { name: 'Live Webinars', href: '/webinars', icon: Video },
     { name: 'Life Skills', href: '/life-skills', icon: Heart },
     { name: 'Careers', href: '/careers', icon: Briefcase },
-    { name: 'Gen Elevate AI', href: '/ai', icon: Sparkles, highlight: true }, // NEW: AI Assistant
+    { name: 'Gen Elevate AI', href: '/ai', icon: Sparkles, highlight: true },
     { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
+  ];
+
+  // All navigation items (shown in sidebar)
+  const baseNavigation = [
+    ...topNavigation,
     { name: 'Wellbeing', href: '/wellbeing', icon: Heart },
     { name: 'Rewards', href: '/rewards', icon: Award },
     { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
@@ -113,13 +118,13 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
               </span>
             </Link>
 
-            {/* Desktop Navigation - Scrollable to fit all items */}
-            <nav className="hidden lg:flex items-center space-x-2 ml-4 overflow-x-auto scrollbar-none max-w-[60vw] xl:max-w-none">
-              {navigation.map((item) => (
+            {/* Desktop Navigation - Main features only */}
+            <nav className="hidden lg:flex items-center space-x-2 ml-4">
+              {topNavigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center gap-1.5 px-2.5 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
+                  className={`flex items-center gap-1.5 px-2.5 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
                     pathname === item.href
                       ? 'text-primary bg-primary/10'
                       : item.highlight
