@@ -54,10 +54,10 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
     { name: 'Dashboard', href: '/dashboard', icon: Home },
     { name: 'My Courses', href: '/courses', icon: BookOpen },
     { name: 'Live Webinars', href: '/webinars', icon: Video },
+    { name: 'Life Skills', href: '/life-skills', icon: Heart },
     { name: 'Careers', href: '/careers', icon: Briefcase },
     { name: 'Gen Elevate AI', href: '/ai', icon: Sparkles, highlight: true }, // NEW: AI Assistant
     { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
-    { name: 'Life Skills', href: '/life-skills', icon: BookOpen },
     { name: 'Wellbeing', href: '/wellbeing', icon: Heart },
     { name: 'Rewards', href: '/rewards', icon: Award },
     { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
@@ -114,8 +114,8 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-4 ml-8">
-              {navigation.slice(0, 6).map((item) => (
+            <nav className="hidden lg:flex items-center space-x-3 ml-8">
+              {navigation.slice(0, 7).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}

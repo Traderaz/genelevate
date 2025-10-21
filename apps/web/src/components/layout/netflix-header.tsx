@@ -27,6 +27,7 @@ export function NetflixHeader() {
     { name: 'Home', href: '/' },
     { name: 'Courses', href: '/courses' },
     { name: 'Webinars', href: '/webinars' },
+    { name: 'Life Skills', href: '/life-skills' },
     { name: 'Careers', href: '/careers' },
     { name: 'Add-Ons', href: '/addons', highlight: true },
     { name: 'Pricing', href: '#pricing' },
