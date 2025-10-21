@@ -189,6 +189,18 @@ export function NetflixDashboardOverview() {
               <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Leaderboard</span>
             </div>
           </Link>
+
+          <Link
+            href="/debates"
+            className="group p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center mb-3 group-hover:bg-red-500/20 transition-colors">
+                <Users className="w-6 h-6 text-red-500" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Debate Room</span>
+            </div>
+          </Link>
         </div>
       </div>
 
