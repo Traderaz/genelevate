@@ -10,12 +10,21 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1.5rem',
+        lg: '2rem',
+      },
       screens: {
         '2xl': '1400px',
       },
     },
     extend: {
+      screens: {
+        'xs': '475px',
+        'touch': {'raw': '(hover: none) and (pointer: coarse)'},
+        'mouse': {'raw': '(hover: hover) and (pointer: fine)'},
+      },
       colors: {
         // Netflix-inspired color system
         netflix: {
@@ -117,6 +126,19 @@ module.exports = {
       transitionTimingFunction: {
         'netflix': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       },
+      spacing: {
+        'safe-top': 'env(safe-area-inset-top)',
+        'safe-bottom': 'env(safe-area-inset-bottom)',
+        'safe-left': 'env(safe-area-inset-left)',
+        'safe-right': 'env(safe-area-inset-right)',
+      },
+      minHeight: {
+        'touch': '44px',
+        'screen-safe': 'calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
+      },
+      minWidth: {
+        'touch': '44px',
+      },
     },
   },
   plugins: [
@@ -137,6 +159,30 @@ module.exports = {
           '-webkit-background-clip': 'text',
           '-webkit-text-fill-color': 'transparent',
           'background-clip': 'text',
+        },
+        // Mobile-first utilities
+        '.touch-action-none': {
+          'touch-action': 'none',
+        },
+        '.touch-action-pan-y': {
+          'touch-action': 'pan-y',
+        },
+        '.touch-action-pan-x': {
+          'touch-action': 'pan-x',
+        },
+        '.tap-highlight-transparent': {
+          '-webkit-tap-highlight-color': 'transparent',
+        },
+        // Smooth scrolling for mobile
+        '.scroll-smooth-mobile': {
+          '-webkit-overflow-scrolling': 'touch',
+          'scroll-behavior': 'smooth',
+        },
+        // Prevent text size adjust on mobile
+        '.text-size-adjust-none': {
+          '-webkit-text-size-adjust': '100%',
+          '-moz-text-size-adjust': '100%',
+          'text-size-adjust': '100%',
         },
       }
       addUtilities(newUtilities)

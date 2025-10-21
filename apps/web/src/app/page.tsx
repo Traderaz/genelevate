@@ -1,11 +1,14 @@
+import dynamic from 'next/dynamic';
 import { NetflixHero } from '@/components/sections/netflix-hero';
-import { NetflixFeatures } from '@/components/sections/netflix-features';
-import { NetflixPricing } from '@/components/sections/netflix-pricing';
-import { NetflixTestimonials } from '@/components/sections/netflix-testimonials';
-import { NetflixFAQ } from '@/components/sections/netflix-faq';
-import { NetflixCTA } from '@/components/sections/netflix-cta';
 import { NetflixHeader } from '@/components/layout/netflix-header';
 import { NetflixFooter } from '@/components/layout/netflix-footer';
+
+// Dynamically import below-the-fold components
+const NetflixFeatures = dynamic(() => import('@/components/sections/netflix-features').then(mod => ({ default: mod.NetflixFeatures })));
+const NetflixPricing = dynamic(() => import('@/components/sections/netflix-pricing').then(mod => ({ default: mod.NetflixPricing })));
+const NetflixTestimonials = dynamic(() => import('@/components/sections/netflix-testimonials').then(mod => ({ default: mod.NetflixTestimonials })));
+const NetflixFAQ = dynamic(() => import('@/components/sections/netflix-faq').then(mod => ({ default: mod.NetflixFAQ })));
+const NetflixCTA = dynamic(() => import('@/components/sections/netflix-cta').then(mod => ({ default: mod.NetflixCTA })));
 
 export default function HomePage() {
   return (

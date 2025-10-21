@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import {
   User,
   signInWithEmailAndPassword,
@@ -353,7 +353,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return unsubscribe;
   }, []);
 
-  const value: AuthContextType = {
+  // Memoize the context value to prevent unnecessary re-renders
+  const value: AuthContextType = useMemo(() => ({
     user,
     userProfile,
     loading,
@@ -365,7 +366,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     updateUserProfile,
     updateUserPassword,
     refreshUserProfile,
-  };
+  }), [user, userProfile, loading]);
 
   return (
     <AuthContext.Provider value={value}>

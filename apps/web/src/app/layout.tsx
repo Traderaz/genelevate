@@ -86,7 +86,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Gen Elevate" />
+        <meta name="theme-color" content="#e50914" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)" />
+      </head>
+      <body className={`${inter.className} tap-highlight-transparent text-size-adjust-none`}>
         <Providers>
           {children}
           <Toaster />

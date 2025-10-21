@@ -78,6 +78,24 @@ export default function AIChat() {
     setError(null);
     setIsLoading(true);
 
+    // Check if localhost
+    const isLocalhost = typeof window !== 'undefined' && 
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+    // Add user message immediately (for localhost only)
+    if (isLocalhost) {
+      const userMsg: AIMessage = {
+        id: `user_${Date.now()}`,
+        sessionId: currentSessionId || '',
+        userId: user.uid,
+        role: 'user',
+        content: messageText,
+        timestamp: new Date(),
+        flagged: false,
+      };
+      setMessages(prev => [...prev, userMsg]);
+    }
+
     try {
       const requestBody: AIMessageRequest = {
         sessionId: currentSessionId || undefined,
@@ -89,7 +107,12 @@ export default function AIChat() {
         },
       };
 
-      const response = await fetch('/api/ai/chat', {
+      // Use simple API for local development, full API for production
+      const apiEndpoint = isLocalhost ? '/api/ai/chat-simple' : '/api/ai/chat';
+      
+      console.log('Using API endpoint:', apiEndpoint, 'isLocalhost:', isLocalhost);
+      
+      const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,20 +122,46 @@ export default function AIChat() {
       });
 
       if (!response.ok) {
+        console.error('❌ API response not OK:', response.status);
         const errorData = await response.json();
+        console.error('Error data:', errorData);
         throw new Error(errorData.error || 'Failed to send message');
       }
 
+      console.log('✅ API response OK, parsing JSON...');
       const data: AIMessageResponse = await response.json();
+      console.log('✅ Received AI response:', data);
       
       if (!currentSessionId) {
+        console.log('Setting session ID:', data.sessionId);
         setCurrentSessionId(data.sessionId);
       }
 
-      // Rate limits would be returned from the API if implemented
-      // For now, we'll keep the default values
+      // Add assistant message immediately (for localhost only)
+      if (isLocalhost) {
+        const assistantMsg: AIMessage = {
+          id: data.message.id,
+          sessionId: data.sessionId,
+          userId: user.uid,
+          role: 'assistant',
+          content: data.message.content,
+          timestamp: new Date(data.message.timestamp),
+          flagged: false,
+        };
+        setMessages(prev => [...prev, assistantMsg]);
+      }
+
+      // Update rate limits
+      if (data.usage) {
+        setRateLimits({
+          remainingDaily: data.usage.remainingDaily,
+          remainingMonthly: data.usage.remainingMonthly,
+        });
+      }
+
+      console.log('✅ Message handled successfully');
     } catch (error: any) {
-      console.error('Error sending message:', error);
+      console.error('❌ Error sending message:', error);
       setError(error.message || 'Failed to process message. Please try again.');
     } finally {
       setIsLoading(false);

@@ -41,7 +41,7 @@ export function NetflixHeader() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
@@ -72,26 +72,28 @@ export function NetflixHeader() {
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Search */}
-            <button className="p-2 text-foreground/80 hover:text-foreground transition-colors duration-200">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* Search - Hidden on mobile */}
+            <button className="hidden sm:flex p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 tap-highlight-transparent min-h-touch min-w-touch items-center justify-center">
               <Search className="w-5 h-5" />
             </button>
 
             {/* Theme Toggle */}
-            <ThemeToggle />
+            <div className="tap-highlight-transparent">
+              <ThemeToggle />
+            </div>
 
-            {/* Notifications */}
-            <button className="p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 relative">
+            {/* Notifications - Optimized for mobile */}
+            <button className="hidden sm:flex p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 relative tap-highlight-transparent min-h-touch min-w-touch items-center justify-center">
               <Bell className="w-5 h-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-netflix-red rounded-full"></span>
             </button>
 
             {/* Profile Menu */}
-            <div className="relative">
+            <div className="relative hidden md:block">
               <button
                 onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                className="flex items-center space-x-2 p-2 text-foreground/80 hover:text-foreground transition-colors duration-200"
+                className="flex items-center space-x-2 p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 tap-highlight-transparent min-h-touch"
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
                   {user && userProfile ? (
@@ -234,7 +236,8 @@ export function NetflixHeader() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-foreground/80 hover:text-foreground transition-colors duration-200"
+              className="md:hidden p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 tap-highlight-transparent min-h-touch min-w-touch flex items-center justify-center"
+              aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -247,8 +250,8 @@ export function NetflixHeader() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-border animate-slide-in-from-top">
-            <nav className="py-4 space-y-2">
+          <div className="md:hidden border-t border-border animate-slide-in-from-top safe-area-bottom">
+            <nav className="py-3 space-y-1">
               {user && userProfile && (
                 <div className="px-4 py-3 border-b border-border mb-2">
                   <p className="font-semibold text-foreground">{userProfile.displayName}</p>
@@ -263,7 +266,7 @@ export function NetflixHeader() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`block px-4 py-2 hover:bg-accent/50 rounded-md transition-colors duration-200 ${
+                  className={`block px-4 py-3 hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent ${
                     item.highlight
                       ? 'text-primary hover:text-primary/80 font-bold'
                       : 'text-foreground/80 hover:text-foreground'
@@ -281,21 +284,21 @@ export function NetflixHeader() {
                 <>
                   <Link
                     href="/dashboard"
-                    className="block px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200"
+                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/dashboard/profile"
-                    className="block px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200"
+                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     My Profile
                   </Link>
                   <Link
                     href="/dashboard/progress"
-                    className="block px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200"
+                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Progress
@@ -310,7 +313,7 @@ export function NetflixHeader() {
                         console.error('Logout error:', error);
                       }
                     }}
-                    className="w-full text-left px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 flex items-center gap-2"
+                    className="w-full text-left px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 flex items-center gap-2 min-h-touch tap-highlight-transparent"
                   >
                     <LogOut className="w-4 h-4" />
                     Sign Out
@@ -321,14 +324,14 @@ export function NetflixHeader() {
                 <>
                   <Link
                     href="/login"
-                    className="block px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200"
+                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/register"
-                    className="block px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200"
+                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Sign Up

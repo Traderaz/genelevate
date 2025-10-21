@@ -85,7 +85,7 @@ export function NetflixLoginForm() {
               autoComplete="email"
               required
               disabled={isLoading}
-              className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50"
+              className="w-full pl-10 pr-4 py-3 sm:py-3 py-4 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50 text-base sm:text-sm min-h-touch"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -107,7 +107,7 @@ export function NetflixLoginForm() {
               autoComplete="current-password"
               required
               disabled={isLoading}
-              className="w-full pl-10 pr-12 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50"
+              className="w-full pl-10 pr-12 py-3 sm:py-3 py-4 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50 text-base sm:text-sm min-h-touch"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -115,7 +115,8 @@ export function NetflixLoginForm() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-2 tap-highlight-transparent"
+              aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
             </button>
@@ -145,7 +146,7 @@ export function NetflixLoginForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg netflix-button disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+          className="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg netflix-button disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 min-h-touch tap-highlight-transparent"
         >
           {isLoading ? (
             <div className="flex items-center justify-center gap-2">
@@ -173,7 +174,7 @@ export function NetflixLoginForm() {
         type="button"
         onClick={handleGoogleLogin}
         disabled={isLoading}
-        className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-background border border-border text-foreground font-semibold rounded-lg netflix-button hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+        className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-background border border-border text-foreground font-semibold rounded-lg netflix-button hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 min-h-touch tap-highlight-transparent"
       >
         <svg className="w-5 h-5" viewBox="0 0 24 24">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
