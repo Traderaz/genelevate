@@ -2,34 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { httpsCallable, getFunctions } from 'firebase/functions';
-import { doc, setDoc, getFirestore } from 'firebase/firestore';
-
-// Firebase config (same as login form)
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
-};
-
-// Initialize Firebase only on client side
-let app: any = null;
-let auth: any = null;
-let functions: any = null;
-let db: any = null;
-
-if (typeof window !== 'undefined' && firebaseConfig.apiKey) {
-  app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  functions = getFunctions(app);
-  db = getFirestore(app);
-}
+import { useAuth } from '@/contexts/auth-context';
 
 interface RegistrationData {
   email: string;
@@ -62,9 +35,7 @@ export function RegisterForm() {
   const [error, setError] = useState('');
   const [referralInfo, setReferralInfo] = useState<any>(null);
   const router = useRouter();
-
-  const validateReferralCode = functions ? httpsCallable(functions, 'validateReferralCode') : null;
-  const createUserProfile = functions ? httpsCallable(functions, 'createUserProfile') : null;
+  const { signUp } = useAuth();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -80,24 +51,13 @@ export function RegisterForm() {
       return;
     }
 
-    if (!validateReferralCode) {
-      setError('Firebase not initialized');
-      return;
-    }
-
     setIsLoading(true);
     setError('');
 
     try {
-      const result = await validateReferralCode({ referralCode: formData.referralCode });
-      const data = result.data as any;
-
-      if (data.valid) {
-        setReferralInfo(data);
-        setStep(2);
-      } else {
-        setError(data.reason || 'Invalid referral code');
-      }
+      // TODO: Add referral code validation via Firebase function if needed
+      // For now, just proceed to step 2
+      setStep(2);
     } catch (err: any) {
       setError('Failed to validate referral code');
     } finally {
@@ -157,86 +117,20 @@ export function RegisterForm() {
       }
     }
 
-    if (!auth || !createUserProfile) {
-      setError('Firebase not initialized');
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      // Create Firebase Auth user
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-
-      // Create user profile directly in Firestore
-      const profileData = {
-        id: userCredential.user.uid,
-        email: formData.email,
-        displayName: formData.displayName,
-        role: formData.role,
-        institutionId: referralInfo?.institutionId || null,
-        referralCode: formData.referralCode || null,
-        institutionName: formData.institutionName || null,
-        parentEmail: formData.parentEmail || null,
-        studentEmail: formData.studentEmail || null,
-        dateOfBirth: formData.dateOfBirth || null,
-        gdprConsent: formData.gdprConsent,
-        marketingConsent: formData.marketingConsent,
-        parentalConsent: formData.parentalConsent || null,
-        
-        // Additional profile fields
+      // Prepare user data for registration
+      const userData = {
         firstName: formData.displayName.split(' ')[0] || '',
         lastName: formData.displayName.split(' ').slice(1).join(' ') || '',
-        isActive: true,
-        emailVerified: false,
-        subscriptionTier: 'free',
-        totalPoints: 0,
-        level: 1,
-        badges: [],
-        cohortIds: [],
-        parentIds: [],
-        studentIds: [],
-        
-        // Preferences
-        preferences: {
-          notifications: {
-            email: true,
-            push: true,
-            webinar: true,
-            course: true,
-          },
-          privacy: {
-            profileVisible: true,
-            progressVisible: true,
-            leaderboardVisible: true,
-          },
-          learning: {
-            preferredStudyTime: 'afternoon',
-            difficultyLevel: 'beginner',
-            learningStyle: 'visual',
-          },
-        },
-        
-        // Timestamps
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        displayName: formData.displayName,
+        role: formData.role,
+        yearGroup: null,
+        subjects: [],
+        // Additional fields if needed
       };
 
-      // Save to Firestore directly
-      if (db) {
-        await setDoc(doc(db, 'users', userCredential.user.uid), profileData);
-      } else {
-        // Fallback to Cloud Function if available
-        if (createUserProfile) {
-          await createUserProfile(profileData);
-        }
-      }
-
-      // Send email verification
-      // await sendEmailVerification(userCredential.user);
+      // Use the auth context's signUp method
+      await signUp(formData.email, formData.password, userData);
 
       router.push('/dashboard?welcome=true');
     } catch (err: any) {
