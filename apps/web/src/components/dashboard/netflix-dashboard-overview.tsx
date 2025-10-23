@@ -14,7 +14,8 @@ import {
   Calendar,
   Users,
   Target,
-  Zap
+  Zap,
+  Sparkles
 } from 'lucide-react';
 import { WellbeingWidget } from './wellbeing-widget';
 import { RewardsWidget } from './rewards-widget';
@@ -187,6 +188,18 @@ export function NetflixDashboardOverview() {
                 <Trophy className="w-6 h-6 text-yellow-500" />
               </div>
               <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">Leaderboard</span>
+            </div>
+          </Link>
+
+          <Link
+            href="/dna"
+            className="group p-4 rounded-xl border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-200"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-indigo-500/10 flex items-center justify-center mb-3 group-hover:bg-indigo-500/20 transition-colors">
+                <Sparkles className="w-6 h-6 text-indigo-500" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">My DNA</span>
             </div>
           </Link>
 

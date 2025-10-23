@@ -182,7 +182,7 @@
   }
 
   .mobile-heading-xl {
-    @apply text-3xl sm:text-4xl lg:text-5xl xl:text-6xl;
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl;
   }
 
   .mobile-heading-lg {

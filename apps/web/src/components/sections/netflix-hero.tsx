@@ -49,7 +49,7 @@ export function NetflixHero() {
             <span className="block mobile-heading-xl text-foreground mb-3 sm:mb-4 tracking-tight pb-2">
               Elevate Your
             </span>
-            <span className="block text-3xl xs:text-4xl sm:text-6xl lg:text-7xl xl:text-8xl netflix-text-gradient tracking-tight pb-4">
+            <span className="block text-4xl xs:text-5xl sm:text-7xl lg:text-8xl xl:text-9xl netflix-text-gradient tracking-tight pb-4">
               Learning Journey
             </span>
           </h1>

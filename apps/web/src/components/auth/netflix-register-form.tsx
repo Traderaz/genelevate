@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
-import { Eye, EyeOff, Mail, Lock, User, AlertCircle, CheckCircle } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, AlertCircle, CheckCircle, School, Calendar, Building } from 'lucide-react';
+import { searchSchools, getSchoolById, UK_YEAR_GROUPS, HOMESCHOOL_OPTION, type School as SchoolType } from '@/data/uk-schools';
 
 interface RegistrationData {
   email: string;
@@ -12,8 +13,15 @@ interface RegistrationData {
   displayName: string;
   yearGroup: string;
   role: 'student' | 'parent' | 'institution';
+  dateOfBirth?: string;
+  schoolId?: string;
+  schoolName?: string;
+  studentEmail?: string;
+  institutionName?: string;
+  referralCode?: string;
   gdprConsent: boolean;
   marketingConsent: boolean;
+  parentalConsent?: boolean;
 }
 
 export function NetflixRegisterForm() {
@@ -32,8 +40,25 @@ export function NetflixRegisterForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [schoolSearchQuery, setSchoolSearchQuery] = useState('');
+  const [schoolSearchResults, setSchoolSearchResults] = useState<SchoolType[]>([]);
+  const [showSchoolDropdown, setShowSchoolDropdown] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState<SchoolType | null>(null);
+  const [manualSchoolEntry, setManualSchoolEntry] = useState(false);
   const router = useRouter();
   const { signUp, signInWithGoogle } = useAuth();
+
+  // School search effect
+  useEffect(() => {
+    if (schoolSearchQuery.length >= 2) {
+      const results = searchSchools(schoolSearchQuery);
+      setSchoolSearchResults(results);
+      setShowSchoolDropdown(true);
+    } else {
+      setSchoolSearchResults([]);
+      setShowSchoolDropdown(false);
+    }
+  }, [schoolSearchQuery]);
 
   // Pre-fill email from URL parameters
   useEffect(() => {
@@ -92,7 +117,12 @@ export function NetflixRegisterForm() {
         lastName: formData.displayName.split(' ').slice(1).join(' ') || '',
         displayName: formData.displayName,
         role: formData.role as 'student' | 'parent' | 'institution' | 'admin',
-        yearGroup: formData.yearGroup,
+        yearGroup: (formData.yearGroup || null) as any,
+        schoolId: formData.schoolId || null,
+        schoolName: formData.schoolName || null,
+        dateOfBirth: formData.dateOfBirth || null,
+        institutionName: formData.institutionName || null,
+        linkedStudents: formData.studentEmail ? [formData.studentEmail] : [],
         subjects: [],
         preferences: {
           theme: 'dark' as const,
@@ -215,7 +245,7 @@ export function NetflixRegisterForm() {
         {/* Role Selection */}
         <div className="space-y-2">
           <label htmlFor="role" className="block text-sm font-medium text-foreground">
-            I am a:
+            I am registering as:
           </label>
           <select
             id="role"
@@ -226,11 +256,251 @@ export function NetflixRegisterForm() {
             value={formData.role}
             onChange={handleInputChange}
           >
-            <option value="student">Student</option>
-            <option value="parent">Parent/Guardian</option>
-            <option value="institution">Institution Admin</option>
+            <option value="student">🎓 Student (Year 6-13)</option>
+            <option value="parent">👨‍👩‍👧‍👦 Parent/Guardian</option>
+            <option value="institution">🏫 School/Institution</option>
           </select>
         </div>
+
+        {/* Student-Specific Fields */}
+        {formData.role === 'student' && (
+          <div className="space-y-4 p-4 border border-primary/20 rounded-lg bg-primary/5">
+            <p className="text-sm font-medium text-foreground">Student Information</p>
+            
+            {/* Date of Birth */}
+            <div className="space-y-2">
+              <label htmlFor="dateOfBirth" className="block text-sm font-medium text-foreground">
+                Date of Birth *
+              </label>
+              <div className="relative">
+                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <input
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  type="date"
+                  required
+                  disabled={isLoading}
+                  className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50"
+                  value={formData.dateOfBirth || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+
+            {/* Year Group */}
+            <div className="space-y-2">
+              <label htmlFor="yearGroup" className="block text-sm font-medium text-foreground">
+                Year Group *
+              </label>
+              <select
+                id="yearGroup"
+                name="yearGroup"
+                required
+                disabled={isLoading}
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50"
+                value={formData.yearGroup}
+                onChange={handleInputChange}
+              >
+                <option value="">Select your year group</option>
+                {UK_YEAR_GROUPS.map(year => (
+                  <option key={year.value} value={year.value}>
+                    {year.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* School Search */}
+            <div className="space-y-2 relative">
+              <label htmlFor="schoolSearch" className="block text-sm font-medium text-foreground">
+                School/Institution *
+              </label>
+              
+              {!manualSchoolEntry ? (
+                <>
+                  <div className="relative">
+                    <School className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
+                    <input
+                      id="schoolSearch"
+                      type="text"
+                      value={schoolSearchQuery}
+                      onChange={(e) => setSchoolSearchQuery(e.target.value)}
+                      onFocus={() => schoolSearchQuery.length >= 2 && setShowSchoolDropdown(true)}
+                      placeholder="Search for your school or type 'Homeschool'"
+                      required={!selectedSchool && !manualSchoolEntry}
+                      disabled={isLoading}
+                      className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50"
+                    />
+                  </div>
+                  {showSchoolDropdown && schoolSearchResults.length > 0 && (
+                    <div className="absolute z-20 w-full mt-1 bg-card border border-border rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                      {schoolSearchResults.map((school) => (
+                        <button
+                          key={school.id}
+                          type="button"
+                          onClick={() => {
+                            setSelectedSchool(school);
+                            setSchoolSearchQuery(school.name);
+                            setFormData(prev => ({
+                              ...prev,
+                              schoolId: school.id,
+                              schoolName: school.name,
+                            }));
+                            setShowSchoolDropdown(false);
+                          }}
+                          className="w-full text-left px-4 py-3 hover:bg-accent border-b border-border last:border-b-0 transition-colors"
+                        >
+                          <div className="font-medium text-foreground">{school.name}</div>
+                          {school.id !== 'homeschool' && (
+                            <div className="text-sm text-muted-foreground">{school.city} • {school.postcode}</div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {selectedSchool && (
+                    <div className="mt-2 flex items-center justify-between bg-primary/10 border border-primary/30 px-3 py-2 rounded-lg">
+                      <div>
+                        <div className="text-sm font-medium text-foreground">✓ {selectedSchool.name}</div>
+                        {selectedSchool.id !== 'homeschool' && (
+                          <div className="text-xs text-muted-foreground">{selectedSchool.city}</div>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedSchool(null);
+                          setSchoolSearchQuery('');
+                          setFormData(prev => ({ ...prev, schoolId: undefined, schoolName: undefined }));
+                        }}
+                        className="text-primary hover:text-primary/80 text-sm font-medium"
+                      >
+                        Change
+                      </button>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="text-xs text-muted-foreground">
+                      Start typing your school name or select "Homeschool"
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setManualSchoolEntry(true);
+                        setSchoolSearchQuery('');
+                        setSelectedSchool(null);
+                        setShowSchoolDropdown(false);
+                      }}
+                      className="text-xs text-primary hover:text-primary/80 font-medium underline"
+                    >
+                      Can't find your school?
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="relative">
+                    <School className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <input
+                      id="manualSchoolName"
+                      name="schoolName"
+                      type="text"
+                      value={formData.schoolName || ''}
+                      onChange={(e) => {
+                        setFormData(prev => ({
+                          ...prev,
+                          schoolName: e.target.value,
+                          schoolId: `custom-${Date.now()}`, // Generate unique ID for custom schools
+                        }));
+                      }}
+                      placeholder="Enter your school name"
+                      required
+                      disabled={isLoading}
+                      className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="text-xs text-muted-foreground">
+                      ✍️ Manually entering school name
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setManualSchoolEntry(false);
+                        setFormData(prev => ({ ...prev, schoolId: undefined, schoolName: undefined }));
+                      }}
+                      className="text-xs text-primary hover:text-primary/80 font-medium underline"
+                    >
+                      Search database instead
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Parent-Specific Fields */}
+        {formData.role === 'parent' && (
+          <div className="space-y-4 p-4 border border-green-500/20 rounded-lg bg-green-500/5">
+            <p className="text-sm font-medium text-foreground">Link to Student Account</p>
+            <p className="text-xs text-muted-foreground">
+              Enter your child's email to link their account. They'll need to approve this connection.
+            </p>
+            
+            <div className="space-y-2">
+              <label htmlFor="studentEmail" className="block text-sm font-medium text-foreground">
+                Student's Email Address
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <input
+                  id="studentEmail"
+                  name="studentEmail"
+                  type="email"
+                  disabled={isLoading}
+                  className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50"
+                  placeholder="student@example.com"
+                  value={formData.studentEmail || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <p className="text-xs text-muted-foreground">
+                💡 Your child must be registered first. You can link more children later.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Institution-Specific Fields */}
+        {formData.role === 'institution' && (
+          <div className="space-y-4 p-4 border border-orange-500/20 rounded-lg bg-orange-500/5">
+            <p className="text-sm font-medium text-foreground">Institution Details</p>
+            
+            <div className="space-y-2">
+              <label htmlFor="institutionName" className="block text-sm font-medium text-foreground">
+                School/Institution Name *
+              </label>
+              <div className="relative">
+                <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <input
+                  id="institutionName"
+                  name="institutionName"
+                  type="text"
+                  required
+                  disabled={isLoading}
+                  className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 disabled:opacity-50"
+                  placeholder="e.g., Springfield Academy"
+                  value={formData.institutionName || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <p className="text-xs text-muted-foreground">
+                📋 You'll be able to create cohorts, generate referral links, and manage students after registration.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Password */}
         <div className="space-y-2">

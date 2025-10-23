@@ -63,6 +63,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
   // All navigation items (shown in sidebar)
   const baseNavigation = [
     ...topNavigation,
+    { name: 'My DNA', href: '/dna', icon: Sparkles },
     { name: 'Debate Room', href: '/debates', icon: Users },
     { name: 'Wellbeing', href: '/wellbeing', icon: Heart },
     { name: 'Rewards', href: '/rewards', icon: Award },

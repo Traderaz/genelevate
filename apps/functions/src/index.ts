@@ -21,3 +21,4 @@ export { utilityFunctions } from './utilities';
 export { careerFunctions } from './careers';
 export { rewardsFunctions } from './rewards';
 export { subscriptionFunctions } from './subscriptions';
+export * as dnaFunctions from './dna';
