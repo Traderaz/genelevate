@@ -46,7 +46,7 @@ export type Subject =
 
 export type SubscriptionTier = 'free' | 'basic' | 'premium' | 'school';
 
-export type UserRole = 'admin' | 'institution' | 'student' | 'parent';
+export type UserRole = 'admin' | 'institution' | 'student' | 'parent' | 'content-creator';
 
 export interface PaginationParams {
   page: number;

@@ -11,7 +11,7 @@ import { createContext, useContext, useEffect, useRef, ReactNode } from 'react';
 import { useAuth } from './auth-context';
 import { usePathname } from 'next/navigation';
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import { app } from '@/lib/firebase';
+import app from '@/lib/firebase';
 
 interface DNATrackingContextType {
   trackSignal: (data: Partial<LearningSignalData>) => Promise<void>;

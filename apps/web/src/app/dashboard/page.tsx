@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
+import { RoleGuard } from '@/components/auth/role-guard';
 
 // Dynamic import for dashboard overview
 const NetflixDashboardOverview = dynamic(
@@ -33,8 +34,10 @@ const NetflixDashboardOverview = dynamic(
 
 export default function DashboardPage() {
   return (
-    <NetflixDashboardLayout>
-      <NetflixDashboardOverview />
-    </NetflixDashboardLayout>
+    <RoleGuard allowedRoles={['student', 'parent', 'institution', 'admin']}>
+      <NetflixDashboardLayout>
+        <NetflixDashboardOverview />
+      </NetflixDashboardLayout>
+    </RoleGuard>
   );
 }

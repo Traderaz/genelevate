@@ -80,6 +80,10 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
   if (userProfile?.role === 'parent' || userProfile?.role === 'admin') {
     roleNavigation.push({ name: 'Parent Portal', href: '/parent', icon: Users });
   }
+  if (userProfile?.role === 'content-creator') {
+    // Content creators get their own navigation - redirect to creator dashboard
+    return <div>Redirecting to creator dashboard...</div>;
+  }
 
   const navigation = [...baseNavigation, ...roleNavigation];
 

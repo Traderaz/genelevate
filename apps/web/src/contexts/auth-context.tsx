@@ -37,7 +37,7 @@ export interface UserProfile {
   yearGroup: YearGroup | null;
   subjects: string[];
   institutionId?: string;
-  role: 'student' | 'parent' | 'institution' | 'admin';
+  role: 'student' | 'parent' | 'institution' | 'admin' | 'content-creator';
   subscription: {
     plan: 'free' | 'student' | 'premium' | 'institution';
     status: 'active' | 'inactive' | 'cancelled';
