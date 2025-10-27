@@ -24,11 +24,24 @@ import {
   ShoppingBag,
   Building2,
   Users,
-  Sparkles
+  Sparkles,
+  LogOut,
+  UserCircle,
+  ChevronDown,
+  ChevronRight,
+  Zap,
+  Brain,
+  Globe
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { EnhancedThemeToggle } from '@/components/ui/enhanced-theme-toggle';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useAuth } from '@/contexts/auth-context';
 import { AIFloatingDock } from '@/components/ai/ai-floating-dock';
+import { useNotifications } from '@/contexts/notification-context';
+import { NotificationDropdown } from '@/components/ui/notification-dropdown';
 
 interface NetflixDashboardLayoutProps {
   children: React.ReactNode;
@@ -37,8 +50,12 @@ interface NetflixDashboardLayoutProps {
 export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [openDropdowns, setOpenDropdowns] = useState<string[]>([]);
   const pathname = usePathname();
-  const { userProfile } = useAuth();
+  const { userProfile, logout } = useAuth();
+  const { unreadCount } = useNotifications();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,43 +66,103 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Top navigation - Main features only (shown in header)
-  const topNavigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: Home },
-    { name: 'My Courses', href: '/courses', icon: BookOpen },
-    { name: 'Live Webinars', href: '/webinars', icon: Video },
-    { name: 'Life Skills', href: '/life-skills', icon: Heart },
-    { name: 'Careers', href: '/careers', icon: Briefcase },
-    { name: 'Gen Elevate AI', href: '/ai', icon: Sparkles, highlight: true },
-    { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
+  const toggleDropdown = (dropdownId: string) => {
+    setOpenDropdowns(prev => 
+      prev.includes(dropdownId) 
+        ? prev.filter(id => id !== dropdownId)
+        : [...prev, dropdownId]
+    );
+  };
+
+  // Organized navigation with categories and dropdowns
+  const navigationCategories = [
+    {
+      id: 'main',
+      name: 'Dashboard',
+      icon: Home,
+      href: '/dashboard',
+      type: 'single' as const
+    },
+    {
+      id: 'learning',
+      name: 'Learning',
+      icon: BookOpen,
+      type: 'dropdown' as const,
+      items: [
+        { name: 'My Courses', href: '/courses', icon: BookOpen },
+        { name: 'Live Webinars', href: '/webinars', icon: Video },
+        { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
+        { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
+        { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar },
+      ]
+    },
+    {
+      id: 'skills',
+      name: 'Life & Career',
+      icon: Heart,
+      type: 'dropdown' as const,
+      items: [
+        { name: 'Life Skills', href: '/life-skills', icon: Heart },
+        { name: 'Career Explorer', href: '/careers', icon: Briefcase },
+        { name: 'Wellbeing', href: '/wellbeing', icon: Heart },
+        { name: 'Debate Room', href: '/debates', icon: Users },
+      ]
+    },
+    {
+      id: 'tools',
+      name: 'AI & Tools',
+      icon: Sparkles,
+      type: 'dropdown' as const,
+      items: [
+        { name: 'Gen Elevate AI', href: '/ai', icon: Sparkles },
+        { name: 'My DNA', href: '/dna', icon: Zap },
+        { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
+      ]
+    },
+    {
+      id: 'rewards',
+      name: 'Rewards',
+      icon: Award,
+      href: '/rewards',
+      type: 'single' as const
+    }
   ];
 
-  // All navigation items (shown in sidebar)
-  const baseNavigation = [
-    ...topNavigation,
-    { name: 'My DNA', href: '/dna', icon: Sparkles },
-    { name: 'Debate Room', href: '/debates', icon: Users },
-    { name: 'Wellbeing', href: '/wellbeing', icon: Heart },
-    { name: 'Rewards', href: '/rewards', icon: Award },
-    { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
-    { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar },
-    { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
-  ];
-
-  // Add role-specific navigation items
-  const roleNavigation = [];
+  // Add role-specific categories
+  const roleCategories = [];
   if (userProfile?.role === 'institution' || userProfile?.role === 'admin') {
-    roleNavigation.push({ name: 'Institution Portal', href: '/institution', icon: Building2 });
+    roleCategories.push({
+      id: 'institution',
+      name: 'Institution',
+      icon: Building2,
+      href: '/institution',
+      type: 'single' as const
+    });
   }
   if (userProfile?.role === 'parent' || userProfile?.role === 'admin') {
-    roleNavigation.push({ name: 'Parent Portal', href: '/parent', icon: Users });
+    roleCategories.push({
+      id: 'parent',
+      name: 'Parent Portal',
+      icon: Users,
+      href: '/parent',
+      type: 'single' as const
+    });
   }
   if (userProfile?.role === 'content-creator') {
     // Content creators get their own navigation - redirect to creator dashboard
     return <div>Redirecting to creator dashboard...</div>;
   }
 
-  const navigation = [...baseNavigation, ...roleNavigation];
+  const allCategories = [...navigationCategories, ...roleCategories];
+
+  // Top navigation for header (main items only)
+  const topNavigation = [
+    { name: 'Dashboard', href: '/dashboard', icon: Home },
+    { name: 'Learning', href: '/courses', icon: BookOpen },
+    { name: 'Life & Career', href: '/life-skills', icon: Heart },
+    { name: 'AI & Tools', href: '/ai', icon: Sparkles, highlight: true },
+    { name: 'Rewards', href: '/rewards', icon: Award },
+  ];
 
   const quickActions = [
     { name: 'Continue Learning', icon: Play, color: 'bg-primary', href: '/courses' },
@@ -95,8 +172,9 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Top Navigation Bar - Mobile Optimized */}
+    <TooltipProvider>
+      <div className="min-h-screen bg-background">
+        {/* Top Navigation Bar - Mobile Optimized */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-area-top ${
         isScrolled 
           ? 'bg-background/95 backdrop-blur-md border-b border-border' 
@@ -148,30 +226,162 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
           {/* Right Side - Mobile Optimized */}
           <div className="flex items-center gap-1 sm:gap-3">
             {/* Search - Hidden on mobile */}
-            <button className="hidden sm:flex p-2 text-foreground/80 hover:text-foreground transition-colors tap-highlight-transparent min-h-touch min-w-touch items-center justify-center">
-              <Search className="w-5 h-5" />
-            </button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon" className="hidden sm:flex">
+                    <Search className="w-5 h-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Search courses and content</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
             {/* Notifications */}
-            <button className="p-2 text-foreground/80 hover:text-foreground transition-colors relative tap-highlight-transparent min-h-touch min-w-touch flex items-center justify-center">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
-            </button>
-
-            {/* Theme Toggle - Hidden on small mobile */}
-            <div className="hidden xs:block tap-highlight-transparent">
-              <ThemeToggle />
+            <div className="relative">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+                    className="relative"
+                  >
+                    <Bell className="w-5 h-5" />
+                    {unreadCount > 0 && (
+                      <Badge 
+                        variant="destructive" 
+                        className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center text-xs p-0"
+                      >
+                        {unreadCount > 9 ? '9+' : unreadCount}
+                      </Badge>
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Notifications {unreadCount > 0 && `(${unreadCount} unread)`}</p>
+                </TooltipContent>
+              </Tooltip>
+              
+              <NotificationDropdown 
+                isOpen={isNotificationOpen} 
+                onClose={() => setIsNotificationOpen(false)} 
+              />
             </div>
 
-            {/* Profile */}
-            <Link
-              href="/dashboard/profile"
-              className="flex items-center gap-2 p-2 text-foreground/80 hover:text-foreground transition-colors tap-highlight-transparent min-h-touch"
-            >
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-primary-foreground" />
-              </div>
-            </Link>
+            {/* Enhanced Theme Toggle - Hidden on small mobile */}
+            <div className="hidden xs:block tap-highlight-transparent">
+              <EnhancedThemeToggle />
+            </div>
+
+            {/* User Menu */}
+            <div className="relative">
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center gap-2 p-2 text-foreground/80 hover:text-foreground transition-colors tap-highlight-transparent min-h-touch rounded-lg hover:bg-accent/50"
+              >
+                <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                  {userProfile?.photoURL ? (
+                    <img 
+                      src={userProfile.photoURL} 
+                      alt="Profile" 
+                      className="w-8 h-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <User className="w-4 h-4 text-primary-foreground" />
+                  )}
+                </div>
+                <span className="hidden sm:block text-sm font-medium">
+                  {userProfile?.firstName || userProfile?.displayName || 'User'}
+                </span>
+              </button>
+
+              {/* User Dropdown Menu */}
+              {isUserMenuOpen && (
+                <>
+                  {/* Backdrop */}
+                  <div 
+                    className="fixed inset-0 z-40" 
+                    onClick={() => setIsUserMenuOpen(false)}
+                  />
+                  
+                  {/* Dropdown */}
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-card/95 backdrop-blur-xl border border-border rounded-xl shadow-lg z-50 py-2">
+                    {/* User Info */}
+                    <div className="px-4 py-3 border-b border-border">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                          {userProfile?.photoURL ? (
+                            <img 
+                              src={userProfile.photoURL} 
+                              alt="Profile" 
+                              className="w-10 h-10 rounded-full object-cover"
+                            />
+                          ) : (
+                            <User className="w-5 h-5 text-primary-foreground" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-foreground truncate">
+                            {userProfile?.displayName || 'User'}
+                          </p>
+                          <p className="text-xs text-muted-foreground truncate">
+                            {userProfile?.email}
+                          </p>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <Badge variant="secondary" className="text-xs capitalize">
+                              {userProfile?.role}
+                            </Badge>
+                            <Badge variant={userProfile?.subscription?.plan === 'free' ? 'outline' : 'netflix'} className="text-xs">
+                              {userProfile?.subscription?.plan || 'Free'}
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Menu Items */}
+                    <div className="py-1">
+                      <Link
+                        href="/dashboard/profile"
+                        className="flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:bg-accent/50 transition-colors"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      >
+                        <UserCircle className="w-4 h-4" />
+                        View Profile
+                      </Link>
+                      
+                      <Link
+                        href="/dashboard/settings"
+                        className="flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:bg-accent/50 transition-colors"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      >
+                        <Settings className="w-4 h-4" />
+                        Settings
+                      </Link>
+                      
+                      {/* Logout Button */}
+                      <button
+                        onClick={async () => {
+                          try {
+                            await logout();
+                            setIsUserMenuOpen(false);
+                          } catch (error) {
+                            console.error('Logout failed:', error);
+                          }
+                        }}
+                        className="flex items-center gap-3 px-4 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors w-full text-left"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Sign Out
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </header>
@@ -204,28 +414,146 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
           </button>
         </div>
 
-        <nav className="p-4 space-y-1 overflow-y-auto max-h-[calc(100vh-73px)]">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors min-h-touch tap-highlight-transparent ${
-                pathname === item.href
-                  ? 'text-primary bg-primary/10'
-                  : item.highlight
-                  ? 'text-primary bg-primary/5 hover:bg-primary/10'
-                  : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
-              }`}
-              onClick={() => setIsSidebarOpen(false)}
-            >
-              <item.icon className="w-5 h-5 flex-shrink-0" />
-              {item.name}
-            </Link>
-          ))}
+        <nav className="p-4 space-y-2 overflow-y-auto max-h-[calc(100vh-73px)]">
+          {allCategories.map((category) => {
+            const isOpen = openDropdowns.includes(category.id);
+            const CategoryIcon = category.icon;
+            
+            if (category.type === 'single') {
+              return (
+                <Link
+                  key={category.id}
+                  href={category.href!}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors min-h-touch tap-highlight-transparent ${
+                    pathname === category.href
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                  }`}
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  <CategoryIcon className="w-5 h-5 flex-shrink-0" />
+                  {category.name}
+                </Link>
+              );
+            }
+
+            return (
+              <div key={category.id} className="space-y-1">
+                {/* Category Header */}
+                <button
+                  onClick={() => toggleDropdown(category.id)}
+                  className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors min-h-touch tap-highlight-transparent ${
+                    category.items?.some(item => pathname === item.href)
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <CategoryIcon className="w-5 h-5 flex-shrink-0" />
+                    {category.name}
+                  </div>
+                  <ChevronRight className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-90' : ''}`} />
+                </button>
+
+                {/* Dropdown Items */}
+                {isOpen && category.items && (
+                  <div className="ml-4 space-y-1 border-l border-border/50 pl-4">
+                    {category.items.map((item) => {
+                      const ItemIcon = item.icon;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors min-h-touch tap-highlight-transparent ${
+                            pathname === item.href
+                              ? 'text-primary bg-primary/10 font-medium'
+                              : 'text-foreground/70 hover:text-foreground hover:bg-accent/30'
+                          }`}
+                          onClick={() => setIsSidebarOpen(false)}
+                        >
+                          <ItemIcon className="w-4 h-4 flex-shrink-0" />
+                          {item.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
 
-        {/* Quick Actions */}
+        {/* User Info & Actions */}
         <div className="p-4 border-t border-border">
+          {/* User Info */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+              {userProfile?.photoURL ? (
+                <img 
+                  src={userProfile.photoURL} 
+                  alt="Profile" 
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+              ) : (
+                <User className="w-5 h-5 text-primary-foreground" />
+              )}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-foreground truncate">
+                {userProfile?.displayName || 'User'}
+              </p>
+              <p className="text-xs text-muted-foreground truncate">
+                {userProfile?.email}
+              </p>
+              <div className="flex items-center space-x-2 mt-1">
+                <Badge variant="secondary" className="text-xs capitalize">
+                  {userProfile?.role}
+                </Badge>
+                <Badge variant={userProfile?.subscription?.plan === 'free' ? 'outline' : 'netflix'} className="text-xs">
+                  {userProfile?.subscription?.plan || 'Free'}
+                </Badge>
+              </div>
+            </div>
+          </div>
+
+          {/* User Actions */}
+          <div className="space-y-2 mb-4">
+            <Link
+              href="/dashboard/profile"
+              className="flex items-center gap-3 px-3 py-2 text-sm text-foreground hover:bg-accent/50 transition-colors rounded-lg tap-highlight-transparent min-h-touch"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              <UserCircle className="w-4 h-4" />
+              View Profile
+            </Link>
+            
+            <Link
+              href="/dashboard/settings"
+              className="flex items-center gap-3 px-3 py-2 text-sm text-foreground hover:bg-accent/50 transition-colors rounded-lg tap-highlight-transparent min-h-touch"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              <Settings className="w-4 h-4" />
+              Settings
+            </Link>
+            
+            {/* Mobile Logout Button */}
+            <button
+              onClick={async () => {
+                try {
+                  await logout();
+                  setIsSidebarOpen(false);
+                } catch (error) {
+                  console.error('Logout failed:', error);
+                }
+              }}
+              className="flex items-center gap-3 px-3 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors rounded-lg w-full text-left tap-highlight-transparent min-h-touch"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
+          </div>
+
+          {/* Quick Actions */}
           <h3 className="text-sm font-semibold text-foreground mb-3">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-2">
             {quickActions.map((action) => (
@@ -252,8 +580,9 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
         </div>
       </main>
 
-      {/* AI Floating Dock */}
-      <AIFloatingDock />
-    </div>
+        {/* AI Floating Dock */}
+        <AIFloatingDock />
+      </div>
+    </TooltipProvider>
   );
 }

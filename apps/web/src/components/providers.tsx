@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { AuthProvider } from '@/contexts/auth-context';
 import { DNATrackingProvider } from '@/contexts/dna-tracking-context';
+import { NotificationProvider } from '@/contexts/notification-context';
 import { Toaster } from '@/components/ui/toaster';
 
 interface ProvidersProps {
@@ -17,10 +18,12 @@ export function Providers({ children }: ProvidersProps) {
       storageKey="gen-elevate-theme"
     >
       <AuthProvider>
-        <DNATrackingProvider>
-          {children}
-          <Toaster />
-        </DNATrackingProvider>
+        <NotificationProvider>
+          <DNATrackingProvider>
+            {children}
+            <Toaster />
+          </DNATrackingProvider>
+        </NotificationProvider>
       </AuthProvider>
     </ThemeProvider>
   );

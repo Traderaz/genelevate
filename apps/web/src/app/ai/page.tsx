@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { Loader2 } from 'lucide-react';
 import { StudentOnlyGuard } from '@/components/auth/role-guard';
+import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
 
 // Dynamically import AI Chat component (not loaded until needed)
 const AIChat = dynamic(() => import('@/components/ai/ai-chat-premium'), {
@@ -20,7 +21,9 @@ const AIChat = dynamic(() => import('@/components/ai/ai-chat-premium'), {
 export default function AIPage() {
   return (
     <StudentOnlyGuard>
-      <AIChat />
+      <NetflixDashboardLayout>
+        <AIChat />
+      </NetflixDashboardLayout>
     </StudentOnlyGuard>
   );
 }

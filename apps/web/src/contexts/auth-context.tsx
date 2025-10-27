@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   User,
   signInWithEmailAndPassword,
@@ -23,6 +24,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
+import { getDocumentWithCache } from '@/lib/firebase-performance';
 
 // User profile interface
 import { YearGroup } from '@/types/year-groups';
@@ -99,6 +101,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   // Create or update user profile in Firestore
   const createUserProfile = async (user: User, additionalData: Partial<UserProfile> = {}) => {
@@ -164,25 +167,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  // Fetch user profile from Firestore
+  // Fetch user profile from Firestore with caching
   const fetchUserProfile = async (uid: string): Promise<UserProfile | null> => {
     try {
-      const userRef = doc(db, 'users', uid);
-      const userSnap = await getDoc(userRef);
+      // Use cached fetch for better performance
+      const profile = await getDocumentWithCache<any>(
+        'users',
+        uid
+      );
 
-      if (userSnap.exists()) {
-        const data = userSnap.data();
+      if (profile) {
         return {
-          ...data,
-          createdAt: data.createdAt?.toDate() || new Date(),
-          updatedAt: data.updatedAt?.toDate() || new Date(),
-          lastLoginAt: data.lastLoginAt?.toDate() || new Date(),
+          ...profile,
+          createdAt: profile.createdAt?.toDate?.() || new Date(),
+          updatedAt: profile.updatedAt?.toDate?.() || new Date(),
+          lastLoginAt: profile.lastLoginAt?.toDate?.() || new Date(),
           subscription: {
-            ...data.subscription,
-            expiresAt: data.subscription?.expiresAt?.toDate(),
-            pendingPlanChange: data.subscription?.pendingPlanChange ? {
-              ...data.subscription.pendingPlanChange,
-              effectiveDate: data.subscription.pendingPlanChange.effectiveDate?.toDate(),
+            ...profile.subscription,
+            expiresAt: profile.subscription?.expiresAt?.toDate?.(),
+            pendingPlanChange: profile.subscription?.pendingPlanChange ? {
+              ...profile.subscription.pendingPlanChange,
+              effectiveDate: profile.subscription.pendingPlanChange.effectiveDate?.toDate?.(),
             } : undefined,
           },
         } as UserProfile;
@@ -257,6 +262,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       await signOut(auth);
       setUserProfile(null);
+      // Redirect to home page after logout
+      router.push('/');
     } catch (error) {
       console.error('Error signing out:', error);
       throw error;

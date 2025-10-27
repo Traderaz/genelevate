@@ -6,13 +6,17 @@ import { useRouter } from 'next/navigation';
 import { Menu, X, Search, Bell, User, ChevronDown, LogOut } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { useAuth } from '@/contexts/auth-context';
+import { useNotifications } from '@/contexts/notification-context';
+import { NotificationDropdown } from '@/components/ui/notification-dropdown';
 
 export function NetflixHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const router = useRouter();
   const { user, userProfile, logout } = useAuth();
+  const { unreadCount } = useNotifications();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,11 +88,27 @@ export function NetflixHeader() {
               <ThemeToggle />
             </div>
 
-            {/* Notifications - Optimized for mobile */}
-            <button className="hidden sm:flex p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 relative tap-highlight-transparent min-h-touch min-w-touch items-center justify-center">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-netflix-red rounded-full"></span>
-            </button>
+            {/* Notifications - Only show for authenticated users */}
+            {user && (
+              <div className="relative hidden sm:block">
+                <button 
+                  onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+                  className="flex p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 relative tap-highlight-transparent min-h-touch min-w-touch items-center justify-center"
+                >
+                  <Bell className="w-5 h-5" />
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-netflix-red text-white text-xs rounded-full flex items-center justify-center font-medium">
+                      {unreadCount > 9 ? '9+' : unreadCount}
+                    </span>
+                  )}
+                </button>
+                
+                <NotificationDropdown 
+                  isOpen={isNotificationOpen} 
+                  onClose={() => setIsNotificationOpen(false)} 
+                />
+              </div>
+            )}
 
             {/* Profile Menu */}
             <div className="relative hidden md:block">
@@ -209,25 +229,6 @@ export function NetflixHeader() {
                       >
                         Sign Up
                       </button>
-                      <div className="border-t border-border my-2"></div>
-                      <button
-                        onClick={() => {
-                          setIsProfileMenuOpen(false);
-                          router.push('/courses');
-                        }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-                      >
-                        Browse Courses
-                      </button>
-                      <button
-                        onClick={() => {
-                          setIsProfileMenuOpen(false);
-                          router.push('/webinars');
-                        }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-                      >
-                        Live Webinars
-                      </button>
                     </div>
                   )}
                 </div>
@@ -251,13 +252,13 @@ export function NetflixHeader() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-border animate-slide-in-from-top safe-area-bottom">
+          <div className="md:hidden border-t border-white/10 animate-slide-in-from-top safe-area-bottom bg-black/95 backdrop-blur-md">
             <nav className="py-3 space-y-1">
               {user && userProfile && (
-                <div className="px-4 py-3 border-b border-border mb-2">
-                  <p className="font-semibold text-foreground">{userProfile.displayName}</p>
-                  <p className="text-sm text-muted-foreground">{user.email}</p>
-                  <span className="inline-block mt-1 px-2 py-1 bg-primary/20 text-primary text-xs rounded-full">
+                <div className="px-4 py-3 border-b border-white/10 mb-2">
+                  <p className="font-semibold text-white">{userProfile.displayName}</p>
+                  <p className="text-sm text-gray-300">{user.email}</p>
+                  <span className="inline-block mt-1 px-2 py-1 bg-red-600/20 text-red-400 text-xs rounded-full">
                     {userProfile.subscription?.plan || 'Free'} Plan
                   </span>
                 </div>
@@ -267,10 +268,10 @@ export function NetflixHeader() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`block px-4 py-3 hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent ${
+                  className={`block px-4 py-3 hover:bg-white/10 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent ${
                     item.highlight
-                      ? 'text-primary hover:text-primary/80 font-bold'
-                      : 'text-foreground/80 hover:text-foreground'
+                      ? 'text-red-400 hover:text-red-300 font-bold'
+                      : 'text-gray-200 hover:text-white'
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -278,28 +279,28 @@ export function NetflixHeader() {
                 </Link>
               ))}
               
-              <div className="border-t border-border my-2"></div>
+              <div className="border-t border-white/10 my-2"></div>
               
               {user && userProfile ? (
                 // Authenticated user options
                 <>
                   <Link
                     href="/dashboard"
-                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
+                    className="block px-4 py-3 text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/dashboard/profile"
-                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
+                    className="block px-4 py-3 text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     My Profile
                   </Link>
                   <Link
                     href="/dashboard/progress"
-                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
+                    className="block px-4 py-3 text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Progress
@@ -314,7 +315,7 @@ export function NetflixHeader() {
                         console.error('Logout error:', error);
                       }
                     }}
-                    className="w-full text-left px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 flex items-center gap-2 min-h-touch tap-highlight-transparent"
+                    className="w-full text-left px-4 py-3 text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 flex items-center gap-2 min-h-touch tap-highlight-transparent"
                   >
                     <LogOut className="w-4 h-4" />
                     Sign Out
@@ -325,14 +326,14 @@ export function NetflixHeader() {
                 <>
                   <Link
                     href="/login"
-                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
+                    className="block px-4 py-3 text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/register"
-                    className="block px-4 py-3 text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
+                    className="block px-4 py-3 text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 min-h-touch tap-highlight-transparent"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Sign Up

@@ -14,7 +14,8 @@ import {
   Clock,
   CheckCircle,
   XCircle,
-  AlertCircle
+  AlertCircle,
+  LogOut
 } from 'lucide-react';
 // Badge component replaced with Tailwind classes
 import Link from 'next/link';
@@ -31,7 +32,7 @@ interface ContentItem {
 }
 
 export default function CreatorDashboard() {
-  const { user, userProfile, loading } = useAuth();
+  const { user, userProfile, loading, logout } = useAuth();
   const router = useRouter();
   const [content, setContent] = useState<ContentItem[]>([]);
   const [stats, setStats] = useState({
@@ -152,6 +153,19 @@ export default function CreatorDashboard() {
                 <BookOpen className="w-4 h-4 mr-2" />
                 Create Course
               </Link>
+              <button
+                onClick={async () => {
+                  try {
+                    await logout();
+                  } catch (error) {
+                    console.error('Logout failed:', error);
+                  }
+                }}
+                className="inline-flex items-center px-4 py-2 border border-destructive/20 text-destructive rounded-lg hover:bg-destructive/10 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 transition-colors"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Sign Out
+              </button>
             </div>
           </div>
         </div>

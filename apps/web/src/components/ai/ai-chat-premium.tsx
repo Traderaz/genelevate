@@ -46,6 +46,17 @@ export default function AIChat() {
   useEffect(() => {
     if (!currentSessionId || !user) return;
 
+    // Check if localhost - don't load from Firestore in development
+    const isLocalhost = typeof window !== 'undefined' && 
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+    if (isLocalhost) {
+      // For localhost, messages are managed in memory by the API
+      // Don't override local messages with Firestore data
+      return;
+    }
+
+    // For production, load from Firestore
     const messagesQuery = query(
       collection(db as any, 'aiMessages'),
       where('sessionId', '==', currentSessionId),
@@ -70,10 +81,10 @@ export default function AIChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSendMessage = async () => {
-    if (!inputMessage.trim() || !user || isLoading) return;
+  const handleSendMessageWithText = async (messageText: string) => {
+    if (!messageText.trim() || !user || isLoading) return;
 
-    const messageText = inputMessage.trim();
+    console.log('🚀 Sending message:', messageText, 'Current session:', currentSessionId);
     setInputMessage('');
     setError(null);
     setIsLoading(true);
@@ -84,12 +95,13 @@ export default function AIChat() {
 
     // Add user message immediately (for localhost only)
     if (isLocalhost) {
+      const tempSessionId = currentSessionId || `temp_${Date.now()}`;
       const userMsg: AIMessage = {
         id: `user_${Date.now()}`,
-        sessionId: currentSessionId || '',
+        sessionId: tempSessionId,
         userId: user.uid,
         role: 'user',
-        content: messageText,
+        content: messageText.trim(),
         timestamp: new Date(),
         flagged: false,
       };
@@ -99,7 +111,7 @@ export default function AIChat() {
     try {
       const requestBody: AIMessageRequest = {
         sessionId: currentSessionId || undefined,
-        message: messageText,
+        message: messageText.trim(),
         type: sessionType,
         context: {
           yearGroup: userProfile?.yearGroup || undefined,
@@ -132,9 +144,12 @@ export default function AIChat() {
       const data: AIMessageResponse = await response.json();
       console.log('✅ Received AI response:', data);
       
-      if (!currentSessionId) {
-        console.log('Setting session ID:', data.sessionId);
+      // Update session ID if this is a new session
+      if (!currentSessionId && data.sessionId) {
+        console.log('🆔 Setting session ID:', data.sessionId);
         setCurrentSessionId(data.sessionId);
+      } else {
+        console.log('🆔 Using existing session:', currentSessionId);
       }
 
       // Add assistant message immediately (for localhost only)
@@ -148,7 +163,22 @@ export default function AIChat() {
           timestamp: new Date(data.message.timestamp),
           flagged: false,
         };
-        setMessages(prev => [...prev, assistantMsg]);
+        setMessages(prev => {
+          console.log('💬 Adding assistant message. Previous count:', prev.length);
+          return [...prev, assistantMsg];
+        });
+        
+        // Update any temporary session IDs in existing messages
+        if (!currentSessionId) {
+          console.log('🔄 Updating temporary session IDs to:', data.sessionId);
+          setMessages(prevMessages => 
+            prevMessages.map(msg => 
+              msg.sessionId.startsWith('temp_') 
+                ? { ...msg, sessionId: data.sessionId }
+                : msg
+            )
+          );
+        }
       }
 
       // Update rate limits
@@ -168,6 +198,11 @@ export default function AIChat() {
     }
   };
 
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim() || !user || isLoading) return;
+    await handleSendMessageWithText(inputMessage.trim());
+  };
+
   const handleNewChat = () => {
     setCurrentSessionId(null);
     setMessages([]);
@@ -179,32 +214,32 @@ export default function AIChat() {
   const TypeIcon = selectedType?.icon || MessageCircle;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-black">
+    <div className="min-h-[calc(100vh-120px)] bg-gradient-to-br from-background via-background/95 to-background">
       {/* Premium Animated Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
       <div className="relative z-10">
         {/* Premium Header */}
-        <div className="border-b border-primary/20 bg-black/60 backdrop-blur-2xl sticky top-0 z-20 shadow-2xl shadow-primary/5">
-          <div className="max-w-6xl mx-auto px-6 py-6">
+        <div className="border-b border-border bg-card/60 backdrop-blur-2xl sticky top-0 z-20 shadow-lg">
+          <div className="max-w-6xl mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-4">
                 {/* Animated Logo */}
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-purple-500 to-pink-500 rounded-2xl blur-xl opacity-70 group-hover:opacity-100 transition-opacity animate-pulse"></div>
-                  <div className="relative w-16 h-16 bg-gradient-to-br from-primary via-primary/90 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-primary/40 border border-primary/40 transform group-hover:scale-105 transition-transform">
-                    <Sparkles className="w-8 h-8 text-white animate-pulse" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-purple-500 to-pink-500 rounded-xl blur-lg opacity-50 group-hover:opacity-70 transition-opacity animate-pulse"></div>
+                  <div className="relative w-12 h-12 bg-gradient-to-br from-primary via-primary/90 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 border border-primary/40 transform group-hover:scale-105 transition-transform">
+                    <Sparkles className="w-6 h-6 text-white animate-pulse" />
                   </div>
                 </div>
 
                 <div>
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-white via-primary/90 to-purple-400 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground via-primary to-purple-400 bg-clip-text text-transparent">
                     Gen Elevate AI
                   </h1>
-                  <p className="text-sm text-zinc-400">
+                  <p className="text-sm text-muted-foreground">
                     Your premium AI assistant powered by advanced intelligence
                   </p>
                 </div>
@@ -212,12 +247,12 @@ export default function AIChat() {
               
               <div className="flex items-center gap-4">
                 {/* Rate Limits Card */}
-                <div className="hidden md:flex flex-col gap-1 px-5 py-3 rounded-xl bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 border border-primary/30 backdrop-blur-sm shadow-lg">
-                  <div className="flex items-center gap-2 text-xs text-zinc-400">
+                <div className="hidden md:flex flex-col gap-1 px-4 py-2 rounded-lg bg-card/80 border border-border backdrop-blur-sm shadow-sm">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                     Daily: <span className="text-primary font-bold text-sm">{rateLimits.remainingDaily}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-zinc-400">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
                     Monthly: <span className="text-purple-400 font-bold text-sm">{rateLimits.remainingMonthly}</span>
                   </div>
@@ -225,7 +260,7 @@ export default function AIChat() {
 
                 <button
                   onClick={handleNewChat}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-primary via-primary/90 to-purple-600 hover:from-primary/90 hover:to-purple-500 shadow-xl shadow-primary/30 border border-primary/40 rounded-lg transform hover:scale-105 transition-all text-white"
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-500 shadow-lg shadow-primary/20 border border-primary/40 rounded-lg transform hover:scale-105 transition-all text-white"
                 >
                   <Plus className="w-4 h-4" />
                   <span className="hidden sm:inline">New Chat</span>
@@ -279,7 +314,7 @@ export default function AIChat() {
           </div>
 
           {/* Chat Container */}
-          <div className="bg-gradient-to-br from-zinc-900/90 to-black/90 border border-zinc-800/50 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl" style={{ height: 'calc(100vh - 400px)', minHeight: '500px' }}>
+          <div className="bg-gradient-to-br from-card/90 to-card/95 border border-border rounded-2xl overflow-hidden shadow-xl backdrop-blur-xl" style={{ height: 'calc(100vh - 500px)', minHeight: '400px' }}>
             {/* Messages */}
             <div className="h-full overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
               {messages.length === 0 ? (
@@ -289,10 +324,10 @@ export default function AIChat() {
                       <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-500 rounded-full blur-2xl opacity-50 animate-pulse"></div>
                       <Sparkles className="relative w-20 h-20 text-primary mx-auto animate-pulse" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-3 bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+                    <h3 className="text-2xl font-bold text-foreground mb-3 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                       Welcome to Gen Elevate AI!
                     </h3>
-                    <p className="text-zinc-400 mb-8">
+                    <p className="text-muted-foreground mb-8">
                       Your premium AI assistant is ready. Ask me anything about your studies, career, courses, or motivation!
                     </p>
                     <div className="grid grid-cols-2 gap-3">
@@ -304,10 +339,18 @@ export default function AIChat() {
                       ].map((suggestion, i) => (
                         <button
                           key={i}
-                          onClick={() => setInputMessage(suggestion.text)}
-                          className={`p-4 text-sm bg-gradient-to-br ${suggestion.gradient} hover:scale-105 rounded-xl transition-all text-left border border-zinc-700 hover:border-primary/50 backdrop-blur-sm group`}
+                          onClick={() => {
+                            // Send the suggestion directly instead of setting input first
+                            if (!isLoading) {
+                              setInputMessage(suggestion.text);
+                              // Trigger send with the suggestion text directly
+                              handleSendMessageWithText(suggestion.text);
+                            }
+                          }}
+                          disabled={isLoading}
+                          className={`p-4 text-sm bg-gradient-to-br ${suggestion.gradient} hover:scale-105 rounded-xl transition-all text-left border border-border hover:border-primary/50 backdrop-blur-sm group disabled:opacity-50 disabled:cursor-not-allowed`}
                         >
-                          <span className="text-zinc-300 group-hover:text-white transition-colors">{suggestion.text}</span>
+                          <span className="text-muted-foreground group-hover:text-foreground transition-colors">{suggestion.text}</span>
                         </button>
                       ))}
                     </div>
@@ -328,8 +371,8 @@ export default function AIChat() {
                       <div
                         className={`max-w-[75%] rounded-2xl p-5 ${
                           msg.role === 'user'
-                            ? 'bg-gradient-to-br from-primary to-primary/80 text-white shadow-xl shadow-primary/20'
-                            : 'bg-zinc-800/80 text-zinc-100 border border-zinc-700/50 backdrop-blur-sm'
+                            ? 'bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-xl shadow-primary/20'
+                            : 'bg-card/80 text-card-foreground border border-border backdrop-blur-sm'
                         }`}
                       >
                         <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
@@ -387,7 +430,7 @@ export default function AIChat() {
                   }
                 }}
                 placeholder="Ask me anything..."
-                className="w-full min-h-[100px] pr-14 p-4 bg-zinc-900/80 border border-zinc-700 focus:border-primary/50 focus:outline-none rounded-xl resize-none backdrop-blur-sm text-zinc-100 placeholder:text-zinc-500"
+                className="w-full min-h-[100px] pr-14 p-4 bg-background/80 border border-border focus:border-primary/50 focus:outline-none rounded-xl resize-none backdrop-blur-sm text-foreground placeholder:text-muted-foreground"
                 disabled={isLoading}
               />
               <button

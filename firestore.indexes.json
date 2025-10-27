@@ -1,73 +1,11 @@
 {
   "indexes": [
     {
-      "collectionGroup": "users",
+      "collectionGroup": "courseProgress",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "role",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "users",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "cohortIds",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "role",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "cohorts",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "yearGroup",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "courses",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
+          "fieldPath": "userId",
           "order": "ASCENDING"
         },
         {
@@ -75,11 +13,81 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "accessLevel",
+          "fieldPath": "lastAccessed",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courseProgress",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "createdAt",
+          "fieldPath": "progress",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "webinars",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "startDate",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "webinars",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "startDate",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userAchievements",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "unlockedAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userAchievements",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "unlocked",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "unlockedAt",
           "order": "DESCENDING"
         }
       ]
@@ -89,19 +97,15 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "yearGroups",
-          "arrayConfig": "CONTAINS"
+          "fieldPath": "published",
+          "order": "ASCENDING"
         },
         {
           "fieldPath": "subject",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isFeatured",
+          "fieldPath": "createdAt",
           "order": "DESCENDING"
         }
       ]
@@ -111,119 +115,39 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "allowedCohortIds",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "accessLevel",
+          "fieldPath": "published",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "progress",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
+          "fieldPath": "difficulty",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "contentType",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "lastAccessedAt",
+          "fieldPath": "rating",
           "order": "DESCENDING"
         }
       ]
     },
     {
-      "collectionGroup": "progress",
+      "collectionGroup": "courses",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "cohortId",
+          "fieldPath": "published",
           "order": "ASCENDING"
         },
-        {
-          "fieldPath": "contentType",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "completedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "webinars",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "scheduledAt",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "webinars",
-      "queryScope": "COLLECTION",
-      "fields": [
         {
           "fieldPath": "yearGroups",
           "arrayConfig": "CONTAINS"
         },
         {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "scheduledAt",
-          "order": "ASCENDING"
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
         }
       ]
     },
     {
-      "collectionGroup": "webinars",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "allowedCohortIds",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "accessLevel",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "attendance",
+      "collectionGroup": "notifications",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -231,11 +155,7 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "eventType",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
+          "fieldPath": "read",
           "order": "ASCENDING"
         },
         {
@@ -245,269 +165,11 @@
       ]
     },
     {
-      "collectionGroup": "attendance",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "cohortId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "eventType",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "careers",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "category",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "level",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isFeatured",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "careers",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "requiredSubjects",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "level",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "careers",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "sector",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "location",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "demandLevel",
-          "order": "DESCENDING"
-        },
-        {
-          "fieldPath": "trending",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "careers",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "sector",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "trending",
-          "order": "DESCENDING"
-        },
-        {
-          "fieldPath": "lastUpdated",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "industryNews",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "category",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isPublished",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "publishedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "industryNews",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "relatedSubjects",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "isPublished",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "publishedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "industryNews",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "sector",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "trending",
-          "order": "DESCENDING"
-        },
-        {
-          "fieldPath": "publishedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "industryNews",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "category",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "location",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "publishedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "events",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "startDate",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "events",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "cohortIds",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "startDate",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "addons",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "type",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "averageRating",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "purchases",
+      "collectionGroup": "notifications",
       "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "paymentStatus",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "rewards",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "institutionId",
           "order": "ASCENDING"
         },
         {
@@ -521,19 +183,15 @@
       ]
     },
     {
-      "collectionGroup": "rewards",
+      "collectionGroup": "courseReviews",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "cohortId",
+          "fieldPath": "courseId",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "type",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isVisible",
+          "fieldPath": "approved",
           "order": "ASCENDING"
         },
         {
@@ -543,165 +201,21 @@
       ]
     },
     {
-      "collectionGroup": "leaderboards",
+      "collectionGroup": "courseReviews",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "institutionId",
+          "fieldPath": "courseId",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "scope",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "period",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "lifeSkillsModules",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "category",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "order",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "wellbeingProgress",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "moduleId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "lastAccessedAt",
+          "fieldPath": "rating",
           "order": "DESCENDING"
         }
       ]
     },
     {
-      "collectionGroup": "wellbeingProgress",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "completed",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "updatedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "wellbeingCheckins",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "wellbeingCheckins",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "mood",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "pointTransactions",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "pointTransactions",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "source",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "rewards",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "type",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "available",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "pointsCost",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "redemptions",
+      "collectionGroup": "userEnrollments",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -713,49 +227,13 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "createdAt",
+          "fieldPath": "enrolledAt",
           "order": "DESCENDING"
         }
       ]
     },
     {
-      "collectionGroup": "addons",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "type",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "price",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "addons",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "isActive",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "purchases",
+      "collectionGroup": "aiChatSessions",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -763,211 +241,13 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "purchasedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "purchases",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "paymentStatus",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "purchasedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "purchases",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "purchasedAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "cohorts",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
           "fieldPath": "createdAt",
           "order": "DESCENDING"
         }
       ]
     },
     {
-      "collectionGroup": "cohorts",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "yearGroup",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "name",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "referralLinks",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "referralLinks",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "clicks",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "parentStudentLinks",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "parentId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "parentStudentLinks",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "studentId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "institutionAnalytics",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "institutionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "period",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "aiSessions",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "lastMessageAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "aiMessages",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "sessionId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "timestamp",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "aiMessages",
+      "collectionGroup": "aiChatMessages",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -981,37 +261,68 @@
       ]
     },
     {
-      "collectionGroup": "aiUsage",
+      "collectionGroup": "contentSubmissions",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "userId",
+          "fieldPath": "creatorId",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "date",
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "submittedAt",
           "order": "DESCENDING"
         }
       ]
     },
     {
-      "collectionGroup": "aiAuditLogs",
+      "collectionGroup": "contentSubmissions",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "userId",
+          "fieldPath": "status",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "action",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "timestamp",
+          "fieldPath": "submittedAt",
           "order": "DESCENDING"
         }
       ]
     }
   ],
-  "fieldOverrides": []
+  "fieldOverrides": [
+    {
+      "collectionGroup": "users",
+      "fieldPath": "email",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "courses",
+      "fieldPath": "tags",
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "webinars",
+      "fieldPath": "tags",
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    }
+  ]
 }
