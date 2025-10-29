@@ -54,6 +54,9 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState<string[]>([]);
+  const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const pathname = usePathname();
   const { userProfile, logout } = useAuth();
   const { unreadCount } = useNotifications();
@@ -67,6 +70,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
   const toggleDropdown = (dropdownId: string) => {
     setOpenDropdowns(prev => 
       prev.includes(dropdownId) 
@@ -74,6 +78,58 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
         : [...prev, dropdownId]
     );
   };
+
+  // Smooth hover handlers with proper debouncing
+  const handleDropdownEnter = (dropdownId: string) => {
+    // Clear any existing timeout immediately
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    
+    // Prevent rapid state changes during transitions
+    if (isTransitioning) return;
+    
+    // If already showing this dropdown, do nothing
+    if (hoveredDropdown === dropdownId) return;
+    
+    // Set transitioning state to prevent conflicts
+    setIsTransitioning(true);
+    
+    // Show dropdown immediately
+    setHoveredDropdown(dropdownId);
+    
+    // Clear transitioning state after a brief moment
+    setTimeout(() => setIsTransitioning(false), 50);
+  };
+
+  const handleDropdownLeave = () => {
+    // Clear any existing timeout
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+    
+    // Don't close if we're transitioning
+    if (isTransitioning) return;
+    
+    // Add delay before hiding to allow mouse movement to dropdown
+    const timeout = setTimeout(() => {
+      setHoveredDropdown(null);
+      setIsTransitioning(false);
+    }, 200); // Increased to 200ms for more forgiving interaction
+    
+    setHoverTimeout(timeout);
+  };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+      }
+    };
+  }, [hoverTimeout]);
+
 
   // Organized navigation with categories and dropdowns
   const navigationCategories = [
@@ -157,13 +213,58 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
 
   const allCategories = [...navigationCategories, ...roleCategories];
 
-  // Top navigation for header (main items only)
-  const topNavigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: Home },
-    { name: 'Learning', href: '/courses', icon: BookOpen },
-    { name: 'Life & Career', href: '/life-skills', icon: Heart },
-    { name: 'AI & Tools', href: '/ai', icon: Sparkles, highlight: true },
-    { name: 'Rewards', href: '/rewards', icon: Award },
+  // Desktop navigation with dropdowns
+  const desktopNavigation = [
+    {
+      id: 'dashboard',
+      name: 'Dashboard',
+      href: '/dashboard',
+      icon: Home,
+      type: 'single' as const
+    },
+    {
+      id: 'learning',
+      name: 'Learning',
+      icon: BookOpen,
+      type: 'dropdown' as const,
+      items: [
+        { name: 'My Courses', href: '/courses', icon: BookOpen },
+        { name: 'Live Webinars', href: '/webinars', icon: Video },
+        { name: 'Weekly Tasks', href: '/todo', icon: CheckSquare },
+        { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
+        { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
+      ]
+    },
+    {
+      id: 'skills',
+      name: 'Life & Career',
+      icon: Heart,
+      type: 'dropdown' as const,
+      items: [
+        { name: 'Life Skills', href: '/life-skills', icon: Heart },
+        { name: 'Career Explorer', href: '/careers', icon: Briefcase },
+        { name: 'Debates', href: '/debates', icon: Users },
+      ]
+    },
+    {
+      id: 'tools',
+      name: 'AI & Tools',
+      icon: Sparkles,
+      type: 'dropdown' as const,
+      highlight: true,
+      items: [
+        { name: 'AI Assistant', href: '/ai', icon: Sparkles },
+        { name: 'DNA Tracking', href: '/dna', icon: Zap },
+        { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
+      ]
+    },
+    {
+      id: 'rewards',
+      name: 'Rewards',
+      href: '/rewards',
+      icon: Award,
+      type: 'single' as const
+    },
   ];
 
   const quickActions = [
@@ -204,23 +305,83 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
               </span>
             </Link>
 
-            {/* Desktop Navigation - Main features only */}
-            <nav className="hidden lg:flex items-center space-x-2 ml-4">
-              {topNavigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center gap-1.5 px-2.5 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-                    pathname === item.href
-                      ? 'text-primary bg-primary/10'
-                      : item.highlight
-                      ? 'text-primary hover:text-primary/80 bg-primary/5'
-                      : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
-                  }`}
+            {/* Desktop Navigation with Hover Dropdowns */}
+            <nav className="hidden lg:flex items-center space-x-1 ml-4">
+              {desktopNavigation.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="relative"
+                  onMouseEnter={() => item.type === 'dropdown' && handleDropdownEnter(item.id)}
+                  onMouseLeave={() => item.type === 'dropdown' && handleDropdownLeave()}
                 >
-                  <item.icon className="w-4 h-4" />
-                  {item.name}
-                </Link>
+                  {item.type === 'single' ? (
+                    <Link
+                      href={item.href!}
+                      className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
+                        pathname === item.href
+                          ? 'text-primary bg-primary/10'
+                          : item.highlight
+                          ? 'text-primary hover:text-primary/80 bg-primary/5'
+                          : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                      }`}
+                    >
+                      <item.icon className="w-4 h-4" />
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <>
+                      <div
+                        className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap cursor-pointer ${
+                          hoveredDropdown === item.id || item.items?.some(subItem => pathname === subItem.href)
+                            ? 'text-primary bg-primary/10'
+                            : item.highlight
+                            ? 'text-primary hover:text-primary/80 bg-primary/5'
+                            : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                        }`}
+                      >
+                        <item.icon className="w-4 h-4" />
+                        {item.name}
+                        <ChevronDown className={`w-3 h-3 transition-transform ${
+                          hoveredDropdown === item.id ? 'rotate-180' : ''
+                        }`} />
+                      </div>
+                      
+                      {/* Hover Dropdown Menu */}
+                      {hoveredDropdown === item.id && (
+                        <div 
+                          className="absolute top-full left-0 mt-0 w-56 bg-card border border-border rounded-lg shadow-lg z-50 animate-in fade-in-0 slide-in-from-top-2 duration-200"
+                          onMouseEnter={() => handleDropdownEnter(item.id)}
+                          onMouseLeave={handleDropdownLeave}
+                        >
+                          {/* Invisible bridge to prevent gap - larger for better UX */}
+                          <div className="absolute -top-3 -left-2 -right-2 h-3 bg-transparent" />
+                          <div className="py-2">
+                            {item.items?.map((subItem) => (
+                              <Link
+                                key={subItem.href}
+                                href={subItem.href}
+                                onClick={() => {
+                                  // Immediately close dropdown when clicking a link
+                                  if (hoverTimeout) clearTimeout(hoverTimeout);
+                                  setHoveredDropdown(null);
+                                  setIsTransitioning(false);
+                                }}
+                                className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-accent/50 ${
+                                  pathname === subItem.href
+                                    ? 'text-primary bg-primary/10'
+                                    : 'text-foreground/80 hover:text-foreground'
+                                }`}
+                              >
+                                <subItem.icon className="w-4 h-4" />
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
               ))}
             </nav>
           </div>
