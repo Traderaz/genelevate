@@ -18,6 +18,7 @@ import {
   TrendingUp,
   Calendar,
   Star,
+  CheckSquare,
   Briefcase,
   Heart,
   Award,
@@ -91,6 +92,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       items: [
         { name: 'My Courses', href: '/courses', icon: BookOpen },
         { name: 'Live Webinars', href: '/webinars', icon: Video },
+        { name: 'Weekly To Do', href: '/todo', icon: CheckSquare },
         { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
         { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
         { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar },

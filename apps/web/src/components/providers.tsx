@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider';
 import { AuthProvider } from '@/contexts/auth-context';
 import { DNATrackingProvider } from '@/contexts/dna-tracking-context';
 import { NotificationProvider } from '@/contexts/notification-context';
+import { SimpleTodoProvider } from '@/contexts/simple-firebase-todo';
 import { Toaster } from '@/components/ui/toaster';
 
 interface ProvidersProps {
@@ -19,10 +20,12 @@ export function Providers({ children }: ProvidersProps) {
     >
       <AuthProvider>
         <NotificationProvider>
-          <DNATrackingProvider>
-            {children}
-            <Toaster />
-          </DNATrackingProvider>
+          <SimpleTodoProvider>
+            <DNATrackingProvider>
+              {children}
+              <Toaster />
+            </DNATrackingProvider>
+          </SimpleTodoProvider>
         </NotificationProvider>
       </AuthProvider>
     </ThemeProvider>
