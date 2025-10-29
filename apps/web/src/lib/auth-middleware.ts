@@ -4,13 +4,30 @@ import { initializeApp, getApps, cert } from 'firebase-admin/app';
 
 // Initialize Firebase Admin SDK
 if (!getApps().length) {
-  initializeApp({
-    credential: cert({
-      project_id: process.env.FIREBASE_PROJECT_ID,
-      client_email: process.env.FIREBASE_CLIENT_EMAIL,
-      private_key: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    } as any),
-  });
+  try {
+    const projectId = process.env.FIREBASE_PROJECT_ID;
+    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+    const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+
+    if (!projectId || !clientEmail || !privateKey) {
+      console.warn('Firebase Admin SDK: Missing environment variables for auth middleware. Using minimal config for build compatibility.');
+      // Initialize with minimal config for build-time compatibility
+      initializeApp({
+        projectId: projectId || 'gen-elevate-default',
+      });
+    } else {
+      initializeApp({
+        credential: cert({
+          project_id: projectId,
+          client_email: clientEmail,
+          private_key: privateKey,
+        } as any),
+        projectId: projectId,
+      });
+    }
+  } catch (error) {
+    console.error('Firebase Admin initialization error in auth middleware:', error);
+  }
 }
 
 const auth = getAuth();

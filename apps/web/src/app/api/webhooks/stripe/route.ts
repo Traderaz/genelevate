@@ -11,13 +11,26 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 // Initialize Firebase Admin
 if (!getApps().length) {
   try {
-    initializeApp({
-      credential: cert({
-        project_id: process.env.FIREBASE_PROJECT_ID || 'dummy-project-id',
-        client_email: process.env.FIREBASE_CLIENT_EMAIL || 'dummy@example.com',
-        private_key: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n') || 'dummy-key',
-      } as any),
-    });
+    const projectId = process.env.FIREBASE_PROJECT_ID;
+    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+    const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+
+    if (!projectId || !clientEmail || !privateKey) {
+      console.warn('Firebase Admin SDK: Missing environment variables for Stripe webhook. Using minimal config for build compatibility.');
+      // Initialize with minimal config for build-time compatibility
+      initializeApp({
+        projectId: projectId || 'gen-elevate-default',
+      });
+    } else {
+      initializeApp({
+        credential: cert({
+          project_id: projectId,
+          client_email: clientEmail,
+          private_key: privateKey,
+        } as any),
+        projectId: projectId,
+      });
+    }
   } catch (error) {
     console.warn('Firebase Admin initialization failed during build:', error);
     // This is expected during build time when env vars aren't available

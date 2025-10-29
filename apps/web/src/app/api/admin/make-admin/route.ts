@@ -6,13 +6,27 @@ import { initializeApp, getApps, cert } from 'firebase-admin/app';
 // Initialize Firebase Admin if not already initialized
 if (!getApps().length) {
   try {
-    initializeApp({
-      credential: cert({
-        project_id: process.env.FIREBASE_PROJECT_ID,
-        client_email: process.env.FIREBASE_CLIENT_EMAIL,
-        private_key: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-      } as any),
-    });
+    // Check if all required environment variables are present
+    const projectId = process.env.FIREBASE_PROJECT_ID;
+    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+    const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+
+    if (!projectId || !clientEmail || !privateKey) {
+      console.warn('Firebase Admin SDK: Missing required environment variables. API routes may not work in production.');
+      // Initialize with minimal config for build-time compatibility
+      initializeApp({
+        projectId: projectId || 'gen-elevate-default',
+      });
+    } else {
+      initializeApp({
+        credential: cert({
+          project_id: projectId,
+          client_email: clientEmail,
+          private_key: privateKey,
+        } as any),
+        projectId: projectId,
+      });
+    }
   } catch (error) {
     console.error('Firebase admin initialization error:', error);
   }
@@ -20,6 +34,17 @@ if (!getApps().length) {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if Firebase Admin is properly configured
+    if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
+      return NextResponse.json(
+        { 
+          error: 'Firebase Admin SDK not properly configured', 
+          details: 'Missing required environment variables' 
+        },
+        { status: 500 }
+      );
+    }
+
     const { userEmail, userId } = await request.json();
 
     if (!userEmail && !userId) {
