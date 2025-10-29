@@ -32,7 +32,11 @@ import {
   ChevronRight,
   Zap,
   Brain,
-  Globe
+  Globe,
+  MessageCircle,
+  Shield,
+  Activity,
+  CreditCard
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { EnhancedThemeToggle } from '@/components/ui/enhanced-theme-toggle';
@@ -203,6 +207,23 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       icon: Users,
       href: '/parent',
       type: 'single' as const
+    });
+  }
+  if (userProfile?.role === 'admin') {
+    roleCategories.push({
+      id: 'admin',
+      name: 'Administration',
+      icon: Shield,
+      type: 'dropdown' as const,
+      items: [
+        { name: 'Admin Dashboard', href: '/admin', icon: Shield },
+        { name: 'User Management', href: '/admin/users', icon: Users },
+        { name: 'Content Management', href: '/admin/content', icon: BookOpen },
+        { name: 'System Monitoring', href: '/admin/monitoring', icon: Activity },
+        { name: 'Support Tickets', href: '/admin/support', icon: MessageCircle },
+        { name: 'Financial Management', href: '/admin/finance', icon: CreditCard },
+        { name: 'System Settings', href: '/admin/settings', icon: Settings },
+      ]
     });
   }
   if (userProfile?.role === 'content-creator') {
