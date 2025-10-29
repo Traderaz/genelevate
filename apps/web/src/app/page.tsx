@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { NetflixHero } from '@/components/sections/netflix-hero';
-import { NetflixHeader } from '@/components/layout/netflix-header';
+import { SimpleHomeHeader } from '@/components/layout/simple-home-header';
 import { NetflixFooter } from '@/components/layout/netflix-footer';
 
 // Dynamically import below-the-fold components
@@ -13,7 +13,7 @@ const NetflixCTA = dynamic(() => import('@/components/sections/netflix-cta').the
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
-      <NetflixHeader />
+      <SimpleHomeHeader />
       <main className="relative">
         <NetflixHero />
         <NetflixFeatures />

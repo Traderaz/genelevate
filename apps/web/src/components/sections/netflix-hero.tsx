@@ -25,7 +25,7 @@ export function NetflixHero() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-14 sm:pt-16">
+    <section className="relative min-h-screen flex items-start justify-center overflow-hidden bg-background pt-14 sm:pt-16">
       {/* Dynamic Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background"></div>
       
@@ -35,17 +35,17 @@ export function NetflixHero() {
       {/* Netflix Red Accent Glow - Smaller on mobile */}
       <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-primary/20 rounded-full blur-3xl"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-12 sm:pt-20 pb-16 sm:pb-32 safe-area-bottom">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-6 sm:pt-8 pb-8 sm:pb-12 safe-area-bottom">
         <div className="max-w-5xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium mb-6 sm:mb-8 animate-fade-in">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium mb-8 sm:mb-6 animate-fade-in">
             <Star className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
             <span className="hidden xs:inline">Trusted by 50,000+ students worldwide</span>
             <span className="xs:hidden">50K+ students trust us</span>
           </div>
 
           {/* Main Heading - Netflix Style - Mobile Optimized */}
-          <h1 className="font-display font-extrabold mb-8 sm:mb-12 animate-fade-in leading-tight">
+          <h1 className="font-display font-extrabold mb-8 sm:mb-6 animate-fade-in leading-tight">
             <span className="block mobile-heading-xl text-foreground mb-3 sm:mb-4 tracking-tight pb-2">
               Elevate Your
             </span>
@@ -55,13 +55,13 @@ export function NetflixHero() {
           </h1>
 
           {/* Subtitle - Netflix Style - Mobile Optimized */}
-          <p className="mobile-text-lg text-muted-foreground mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in font-light">
+          <p className="mobile-text-lg text-muted-foreground mb-10 sm:mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in font-light">
             Join the global learning revolution. Access premium courses, live webinars, 
             and AI-powered personalized learning for students from Year 6 to A-Level.
           </p>
 
           {/* Netflix-style Email Signup - Mobile Optimized */}
-          <form onSubmit={handleGetStarted} className="max-w-2xl mx-auto mb-12 sm:mb-16 animate-fade-in">
+          <form onSubmit={handleGetStarted} className="max-w-2xl mx-auto mb-12 sm:mb-10 animate-fade-in">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <input
                 type="email"
@@ -85,7 +85,7 @@ export function NetflixHero() {
           </form>
 
           {/* Netflix-style Action Buttons - Mobile Optimized */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-20 animate-fade-in">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-12 animate-fade-in">
             <Link
               href="/courses"
               className="group flex items-center justify-center gap-3 sm:gap-4 px-8 sm:px-12 py-4 bg-secondary text-secondary-foreground font-bold text-base sm:text-lg rounded-md netflix-button hover:bg-secondary/90 transition-all duration-300 shadow-netflix min-h-touch tap-highlight-transparent"
@@ -103,7 +103,7 @@ export function NetflixHero() {
           </div>
 
           {/* Netflix-style Stats - Mobile Optimized */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 animate-fade-in">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 animate-fade-in mt-20 sm:mt-12">
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
