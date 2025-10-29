@@ -19,60 +19,112 @@ import {
   Clock,
   CheckCircle,
   XCircle,
-  Eye
+  Eye,
+  RefreshCw
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useAdminStats, useAdminUsers } from '@/hooks/useAdminData';
+import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 export const dynamic = 'force-dynamic';
 
+interface ActivityLog {
+  id: string;
+  type: 'user_signup' | 'content_issue' | 'payment_issue' | 'system_alert' | 'user_action';
+  message: string;
+  timestamp: string;
+  severity: 'info' | 'warning' | 'error';
+  userId?: string;
+  details?: any;
+}
+
 export default function AdminDashboard() {
-  const [stats, setStats] = useState({
-    totalUsers: 0,
-    activeUsers: 0,
-    totalCourses: 0,
-    totalWebinars: 0,
-    pendingIssues: 0,
-    systemHealth: 'healthy'
-  });
+  const { stats, loading: statsLoading, error: statsError } = useAdminStats();
+  const { users } = useAdminUsers();
+  const [recentActivity, setRecentActivity] = useState<ActivityLog[]>([]);
+  const [activityLoading, setActivityLoading] = useState(true);
 
-  const [recentActivity, setRecentActivity] = useState([
-    {
-      id: 1,
-      type: 'user_signup',
-      message: 'New user registration: john.doe@email.com',
-      timestamp: new Date().toISOString(),
-      severity: 'info'
-    },
-    {
-      id: 2,
-      type: 'content_issue',
-      message: 'Course "Advanced Mathematics" reported as not loading',
-      timestamp: new Date(Date.now() - 3600000).toISOString(),
-      severity: 'warning'
-    },
-    {
-      id: 3,
-      type: 'payment_issue',
-      message: 'Payment failed for user: jane.smith@email.com',
-      timestamp: new Date(Date.now() - 7200000).toISOString(),
-      severity: 'error'
-    }
-  ]);
-
+  // Listen to real activity from Firebase
   useEffect(() => {
-    // Load admin stats - replace with real API calls
-    setStats({
-      totalUsers: 1247,
-      activeUsers: 892,
-      totalCourses: 156,
-      totalWebinars: 23,
-      pendingIssues: 7,
-      systemHealth: 'healthy'
-    });
-  }, []);
+    const fetchRealActivity = async () => {
+      try {
+        const activities: ActivityLog[] = [];
+        
+        // Real recent user signups (last 7 days)
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        
+        const recentUsers = users
+          .filter(user => {
+            const createdAt = new Date(user.createdAt);
+            return createdAt > sevenDaysAgo;
+          })
+          .slice(0, 5);
+
+        recentUsers.forEach((user) => {
+          activities.push({
+            id: `signup_${user.id}`,
+            type: 'user_signup',
+            message: `New user registration: ${user.email}`,
+            timestamp: user.createdAt,
+            severity: 'info',
+            userId: user.id
+          });
+        });
+
+        // Real users with issues
+        const usersWithIssues = users.filter(user => user.hasIssues).slice(0, 3);
+        usersWithIssues.forEach(user => {
+          activities.push({
+            id: `issue_${user.id}`,
+            type: 'user_action',
+            message: `User account requires attention: ${user.email}`,
+            timestamp: new Date().toISOString(),
+            severity: 'warning',
+            userId: user.id
+          });
+        });
+
+        // Real system events
+        if (statsError) {
+          activities.push({
+            id: 'system_error',
+            type: 'system_alert',
+            message: 'System monitoring detected an error in data fetching',
+            timestamp: new Date().toISOString(),
+            severity: 'error'
+          });
+        }
+
+        if (stats.pendingIssues > 0) {
+          activities.push({
+            id: 'pending_issues',
+            type: 'system_alert',
+            message: `${stats.pendingIssues} user issues require admin attention`,
+            timestamp: new Date().toISOString(),
+            severity: stats.pendingIssues > 5 ? 'error' : 'warning'
+          });
+        }
+
+        // Sort by timestamp (most recent first)
+        activities.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+        
+        setRecentActivity(activities.slice(0, 8));
+        setActivityLoading(false);
+      } catch (error) {
+        console.error('Error fetching real activity:', error);
+        setActivityLoading(false);
+      }
+    };
+
+    if (users.length >= 0) { // Run even with 0 users to show system status
+      fetchRealActivity();
+    }
+  }, [users, stats, statsError]);
 
   const adminSections = [
     {
@@ -188,8 +240,17 @@ export default function AdminDashboard() {
                     <Users className="w-5 h-5 text-blue-500" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-foreground">{stats.totalUsers}</p>
-                    <p className="text-sm text-muted-foreground">Total Users</p>
+                    {statsLoading ? (
+                      <div className="animate-pulse">
+                        <div className="h-6 bg-muted rounded w-16 mb-1"></div>
+                        <div className="h-4 bg-muted rounded w-20"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-2xl font-bold text-foreground">{stats.totalUsers}</p>
+                        <p className="text-sm text-muted-foreground">Total Users</p>
+                      </>
+                    )}
                   </div>
                 </div>
               </CardContent>
@@ -202,8 +263,17 @@ export default function AdminDashboard() {
                     <TrendingUp className="w-5 h-5 text-green-500" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-foreground">{stats.activeUsers}</p>
-                    <p className="text-sm text-muted-foreground">Active Users</p>
+                    {statsLoading ? (
+                      <div className="animate-pulse">
+                        <div className="h-6 bg-muted rounded w-16 mb-1"></div>
+                        <div className="h-4 bg-muted rounded w-20"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-2xl font-bold text-foreground">{stats.activeUsers}</p>
+                        <p className="text-sm text-muted-foreground">Active Users</p>
+                      </>
+                    )}
                   </div>
                 </div>
               </CardContent>
@@ -216,8 +286,17 @@ export default function AdminDashboard() {
                     <BookOpen className="w-5 h-5 text-purple-500" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-foreground">{stats.totalCourses}</p>
-                    <p className="text-sm text-muted-foreground">Courses</p>
+                    {statsLoading ? (
+                      <div className="animate-pulse">
+                        <div className="h-6 bg-muted rounded w-16 mb-1"></div>
+                        <div className="h-4 bg-muted rounded w-20"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-2xl font-bold text-foreground">{stats.totalCourses}</p>
+                        <p className="text-sm text-muted-foreground">Courses</p>
+                      </>
+                    )}
                   </div>
                 </div>
               </CardContent>
@@ -230,8 +309,17 @@ export default function AdminDashboard() {
                     <AlertTriangle className="w-5 h-5 text-red-500" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-foreground">{stats.pendingIssues}</p>
-                    <p className="text-sm text-muted-foreground">Pending Issues</p>
+                    {statsLoading ? (
+                      <div className="animate-pulse">
+                        <div className="h-6 bg-muted rounded w-16 mb-1"></div>
+                        <div className="h-4 bg-muted rounded w-20"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-2xl font-bold text-foreground">{stats.pendingIssues}</p>
+                        <p className="text-sm text-muted-foreground">Pending Issues</p>
+                      </>
+                    )}
                   </div>
                 </div>
               </CardContent>

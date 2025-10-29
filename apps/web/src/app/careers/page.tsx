@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
+import { BasicPlanGuard } from '@/components/auth/subscription-guard';
 import { CareerExplorer } from '@/components/careers/career-explorer';
 import { IndustryNewsFeed } from '@/components/careers/industry-news-feed';
 import { CareerBanner } from '@/components/careers/career-banner';
@@ -24,7 +25,8 @@ export default async function CareersPage({ searchParams }: CareersPageProps) {
   const resolvedSearchParams = await searchParams;
 
   return (
-    <NetflixDashboardLayout>
+    <BasicPlanGuard redirectTo="/careers">
+      <NetflixDashboardLayout>
       <div className="space-y-8">
         {/* Career Banner */}
         <CareerBanner />
@@ -49,6 +51,7 @@ export default async function CareersPage({ searchParams }: CareersPageProps) {
           </div>
         </div>
       </div>
-    </NetflixDashboardLayout>
+      </NetflixDashboardLayout>
+    </BasicPlanGuard>
   );
 }

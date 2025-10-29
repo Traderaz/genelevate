@@ -25,110 +25,26 @@ import {
   XCircle,
   MoreHorizontal,
   Calendar,
-  Tag
+  Tag,
+  RefreshCw,
+  Copy,
+  Archive
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useAdminContent, AdminContent } from '@/hooks/useAdminData';
 
 export const dynamic = 'force-dynamic';
 
-interface Content {
-  id: string;
-  title: string;
-  type: 'course' | 'webinar' | 'article' | 'video';
-  status: 'published' | 'draft' | 'archived' | 'pending_review';
-  author: string;
-  createdAt: string;
-  updatedAt: string;
-  views: number;
-  rating: number;
-  duration?: string;
-  category: string;
-  tags: string[];
-  hasIssues: boolean;
-  enrollments?: number;
-}
-
 export default function AdminContentPage() {
-  const [content, setContent] = useState<Content[]>([]);
-  const [filteredContent, setFilteredContent] = useState<Content[]>([]);
+  const { content, loading, error, updateContent, deleteContent, approveContent } = useAdminContent();
+  const [filteredContent, setFilteredContent] = useState<AdminContent[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [loading, setLoading] = useState(true);
-
-  // Mock data - replace with real API calls
-  useEffect(() => {
-    const mockContent: Content[] = [
-      {
-        id: '1',
-        title: 'Advanced Mathematics: Calculus Fundamentals',
-        type: 'course',
-        status: 'published',
-        author: 'Dr. Sarah Johnson',
-        createdAt: '2024-01-15',
-        updatedAt: '2024-10-20',
-        views: 1247,
-        rating: 4.8,
-        duration: '12 hours',
-        category: 'Mathematics',
-        tags: ['calculus', 'advanced', 'mathematics'],
-        hasIssues: false,
-        enrollments: 234
-      },
-      {
-        id: '2',
-        title: 'Physics Workshop: Quantum Mechanics',
-        type: 'webinar',
-        status: 'published',
-        author: 'Prof. Michael Chen',
-        createdAt: '2024-02-10',
-        updatedAt: '2024-10-25',
-        views: 892,
-        rating: 4.6,
-        duration: '2 hours',
-        category: 'Physics',
-        tags: ['quantum', 'physics', 'workshop'],
-        hasIssues: true,
-        enrollments: 156
-      },
-      {
-        id: '3',
-        title: 'Study Tips for A-Level Success',
-        type: 'article',
-        status: 'draft',
-        author: 'Emma Wilson',
-        createdAt: '2024-10-15',
-        updatedAt: '2024-10-28',
-        views: 0,
-        rating: 0,
-        category: 'Study Skills',
-        tags: ['study-tips', 'a-level', 'success'],
-        hasIssues: false
-      },
-      {
-        id: '4',
-        title: 'Chemistry Lab Safety Procedures',
-        type: 'video',
-        status: 'pending_review',
-        author: 'Dr. James Brown',
-        createdAt: '2024-10-20',
-        updatedAt: '2024-10-28',
-        views: 45,
-        rating: 0,
-        duration: '25 minutes',
-        category: 'Chemistry',
-        tags: ['safety', 'lab', 'procedures'],
-        hasIssues: false
-      }
-    ];
-
-    setContent(mockContent);
-    setFilteredContent(mockContent);
-    setLoading(false);
-  }, []);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
 
   // Filter content based on search and filters
   useEffect(() => {
@@ -202,9 +118,47 @@ export default function AdminContentPage() {
     }
   };
 
-  const handleContentAction = (action: string, contentId: string) => {
-    console.log(`${action} content:`, contentId);
-    // Implement content actions (edit, delete, etc.)
+  const handleContentAction = async (action: string, contentId: string) => {
+    try {
+      setActionLoading(contentId);
+      
+      switch (action) {
+        case 'approve':
+          await approveContent(contentId);
+          break;
+        case 'archive':
+          await updateContent(contentId, { status: 'archived' });
+          break;
+        case 'publish':
+          await updateContent(contentId, { status: 'published' });
+          break;
+        case 'draft':
+          await updateContent(contentId, { status: 'draft' });
+          break;
+        case 'delete':
+          if (confirm('Are you sure you want to delete this content? This action cannot be undone.')) {
+            await deleteContent(contentId);
+          }
+          break;
+        case 'flag_issue':
+          await updateContent(contentId, { hasIssues: true });
+          break;
+        case 'resolve_issue':
+          await updateContent(contentId, { hasIssues: false });
+          break;
+        case 'view':
+          // Navigate to content details page (implement later)
+          console.log('View content:', contentId);
+          break;
+        default:
+          console.log(`${action} content:`, contentId);
+      }
+    } catch (error) {
+      console.error(`Error performing ${action}:`, error);
+      alert(`Failed to ${action} content. Please try again.`);
+    } finally {
+      setActionLoading(null);
+    }
   };
 
   const contentStats = {
@@ -433,28 +387,152 @@ export default function AdminContentPage() {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleContentAction('view', item.id)}
-                          >
-                            <Eye className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleContentAction('edit', item.id)}
-                          >
-                            <Edit className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleContentAction('more', item.id)}
-                          >
-                            <MoreHorizontal className="w-4 h-4" />
-                          </Button>
+                        <div className="flex flex-col gap-2 min-w-[200px]">
+                          {/* Primary Actions */}
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleContentAction('view', item.id)}
+                              disabled={actionLoading === item.id}
+                              className="text-xs"
+                            >
+                              <Eye className="w-3 h-3 mr-1" />
+                              View Content
+                            </Button>
+                            
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleContentAction('edit', item.id)}
+                              disabled={actionLoading === item.id}
+                              className="text-xs"
+                            >
+                              <Edit className="w-3 h-3 mr-1" />
+                              Edit
+                            </Button>
+                          </div>
+
+                          {/* Status Actions */}
+                          <div className="flex items-center gap-2">
+                            {item.status === 'pending_review' && (
+                              <>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleContentAction('approve', item.id)}
+                                  disabled={actionLoading === item.id}
+                                  className="text-xs text-green-600 hover:text-green-700 border-green-200"
+                                >
+                                  <CheckCircle className="w-3 h-3 mr-1" />
+                                  Approve
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleContentAction('reject', item.id)}
+                                  disabled={actionLoading === item.id}
+                                  className="text-xs text-red-600 hover:text-red-700 border-red-200"
+                                >
+                                  <XCircle className="w-3 h-3 mr-1" />
+                                  Reject
+                                </Button>
+                              </>
+                            )}
+                            
+                            {item.status === 'draft' && (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleContentAction('publish', item.id)}
+                                disabled={actionLoading === item.id}
+                                className="text-xs text-blue-600 hover:text-blue-700 border-blue-200"
+                              >
+                                <Play className="w-3 h-3 mr-1" />
+                                Publish
+                              </Button>
+                            )}
+                            
+                            {item.status === 'published' && (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleContentAction('unpublish', item.id)}
+                                disabled={actionLoading === item.id}
+                                className="text-xs text-yellow-600 hover:text-yellow-700 border-yellow-200"
+                              >
+                                <Pause className="w-3 h-3 mr-1" />
+                                Unpublish
+                              </Button>
+                            )}
+                          </div>
+
+                          {/* Issue Management */}
+                          <div className="flex items-center gap-2">
+                            {item.hasIssues ? (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleContentAction('resolve_issue', item.id)}
+                                disabled={actionLoading === item.id}
+                                className="text-xs text-green-600 hover:text-green-700 border-green-200"
+                              >
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                Resolve Issue
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleContentAction('flag_issue', item.id)}
+                                disabled={actionLoading === item.id}
+                                className="text-xs text-yellow-600 hover:text-yellow-700 border-yellow-200"
+                              >
+                                <AlertTriangle className="w-3 h-3 mr-1" />
+                                Report Issue
+                              </Button>
+                            )}
+
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleContentAction('duplicate', item.id)}
+                              disabled={actionLoading === item.id}
+                              className="text-xs text-purple-600 hover:text-purple-700 border-purple-200"
+                            >
+                              <Copy className="w-3 h-3 mr-1" />
+                              Duplicate
+                            </Button>
+                          </div>
+
+                          {/* Dangerous Actions */}
+                          <div className="flex items-center gap-2 pt-1 border-t border-red-100">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleContentAction('archive', item.id)}
+                              disabled={actionLoading === item.id}
+                              className="text-xs text-orange-600 hover:text-orange-700 border-orange-200"
+                            >
+                              <Archive className="w-3 h-3 mr-1" />
+                              Archive
+                            </Button>
+
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleContentAction('delete', item.id)}
+                              disabled={actionLoading === item.id}
+                              className="text-xs text-red-700 hover:text-red-800 border-red-300 bg-red-50 hover:bg-red-100"
+                            >
+                              {actionLoading === item.id ? (
+                                <RefreshCw className="w-3 h-3 mr-1 animate-spin" />
+                              ) : (
+                                <Trash2 className="w-3 h-3 mr-1" />
+                              )}
+                              Delete
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     );

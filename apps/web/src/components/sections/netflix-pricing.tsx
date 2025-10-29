@@ -8,71 +8,68 @@ export function NetflixPricing() {
 
   const plans = [
     {
-      name: 'Student',
-      icon: Users,
-      description: 'Perfect for individual learners',
+      name: 'Basic',
+      icon: Zap,
+      description: 'Perfect for dedicated learners',
       monthlyPrice: 9.99,
       yearlyPrice: 99.99,
       yearlyDiscount: '17% off',
       features: [
-        'Access to 200+ courses',
-        '5 live webinars per month',
-        'Basic AI tutoring',
+        'Access to ALL courses',
+        'ALL webinars and live sessions',
+        'Download all resources',
         'Progress tracking',
         'Mobile app access',
-        'Community forums',
+        'Community access',
+        'Email support',
+        'Certificates of completion',
       ],
       limitations: [
-        'No offline downloads',
-        'Standard video quality',
+        'No AI assistant or tools',
+        'No premium content access',
       ],
       popular: false,
-      cta: 'Start Free Trial',
+      cta: 'Get Started',
     },
     {
       name: 'Premium',
       icon: Star,
-      description: 'Most popular for serious students',
+      description: 'Most popular - includes AI tools',
       monthlyPrice: 19.99,
       yearlyPrice: 199.99,
       yearlyDiscount: '17% off',
       features: [
-        'Access to all 500+ courses',
-        'Unlimited live webinars',
-        'Advanced AI tutoring',
-        'Personalized learning paths',
-        'Offline downloads',
-        'HD video quality',
+        'Everything in Basic',
+        'AI Assistant & Tools',
+        'Unlimited AI questions',
+        'Premium content access',
+        'Advanced analytics',
         'Priority support',
-        'Certificates of completion',
-        '1-on-1 mentoring sessions',
+        'Mentorship program access',
       ],
       limitations: [],
       popular: true,
-      cta: 'Start Free Trial',
+      cta: 'Get Started',
     },
     {
-      name: 'Institution',
+      name: 'Pro',
       icon: Crown,
-      description: 'For schools and organizations',
-      monthlyPrice: 49.99,
-      yearlyPrice: 499.99,
+      description: 'Ultimate plan with personal tutoring',
+      monthlyPrice: 39.99,
+      yearlyPrice: 399.99,
       yearlyDiscount: '17% off',
       features: [
         'Everything in Premium',
-        'Up to 100 student accounts',
-        'Admin dashboard',
-        'Custom branding',
-        'Advanced analytics',
-        'Bulk enrollment',
-        'API access',
-        'Dedicated support',
+        '1 paid addon per month included',
+        '1-on-1 personal tutoring',
         'Custom content creation',
-        'White-label solution',
+        'Dedicated support manager',
+        'API access',
+        'White-label features',
       ],
       limitations: [],
       popular: false,
-      cta: 'Contact Sales',
+      cta: 'Get Started',
     },
   ];
 
@@ -99,7 +96,7 @@ export function NetflixPricing() {
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             Unlock your potential with our flexible subscription plans. 
-            Start with a free trial and upgrade anytime.
+            Choose the perfect plan for your learning journey.
           </p>
 
           {/* Billing Toggle */}
@@ -206,12 +203,10 @@ export function NetflixPricing() {
                 {plan.cta}
               </button>
 
-              {/* Free Trial Note */}
-              {plan.name !== 'Institution' && (
-                <p className="text-center text-sm text-muted-foreground mt-4">
-                  14-day free trial • No credit card required
-                </p>
-              )}
+              {/* Plan Note */}
+              <p className="text-center text-sm text-muted-foreground mt-4">
+                Cancel anytime • Instant access
+              </p>
             </div>
           ))}
         </div>

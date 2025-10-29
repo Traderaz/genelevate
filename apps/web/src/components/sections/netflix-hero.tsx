@@ -80,7 +80,7 @@ export function NetflixHero() {
               </button>
             </div>
             <p className="text-muted-foreground mt-3 sm:mt-4 text-center text-sm sm:text-base">
-              Ready to watch? Enter your email to create or restart your membership.
+              Ready to learn? Enter your email to get started with your subscription.
             </p>
           </form>
 

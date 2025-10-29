@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
-import { StudentOnlyGuard } from '@/components/auth/role-guard';
+import { BasicPlanGuard } from '@/components/auth/subscription-guard';
 import { CourseGrid } from '@/components/courses/course-grid';
 import { CourseFilters } from '@/components/courses/course-filters';
 import { CourseSearch } from '@/components/courses/course-search';
@@ -30,7 +30,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
   const resolvedSearchParams = await searchParams;
 
   return (
-    <StudentOnlyGuard>
+    <BasicPlanGuard redirectTo="/courses">
       <NetflixDashboardLayout>
         <div className="space-y-8">
           {/* Hero Banner */}
@@ -64,6 +64,6 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
           </div>
         </div>
       </NetflixDashboardLayout>
-    </StudentOnlyGuard>
+    </BasicPlanGuard>
   );
 }

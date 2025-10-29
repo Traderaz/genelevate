@@ -1,6 +1,16 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // SUPER ADMIN OVERRIDE - Admins can access everything
+    match /{document=**} {
+      allow read, write: if request.auth != null && (
+        request.auth.token.role == 'admin' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin') ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isSuperAdmin == true)
+      );
+    }
     // Helper functions
     function isAuthenticated() {
       return request.auth != null;
@@ -16,6 +26,21 @@ service cloud.firestore {
     
     function isGlobalAdmin() {
       return hasRole('admin');
+    }
+    
+    // Super Admin functions - can override all permissions
+    function isSuperAdmin() {
+      return isAuthenticated() && (
+        hasRole('admin') ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin') ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isSuperAdmin == true)
+      );
+    }
+    
+    function canAdminAccess() {
+      return isSuperAdmin();
     }
     
     function isInstitutionAdmin() {
@@ -42,8 +67,12 @@ service cloud.firestore {
              (institutionId != null && belongsToSameInstitution(institutionId));
     }
 
-    // Users collection - Multi-tenant with role-based access
+    // Users collection - Multi-tenant with role-based access + Super Admin override
     match /users/{userId} {
+      // Super admins can do anything
+      allow read, write: if canAdminAccess();
+      
+      // Regular permissions
       allow read: if isAuthenticated() && (
         isOwner(userId) || 
         isGlobalAdmin() || 
@@ -68,6 +97,9 @@ service cloud.firestore {
 
     // Institutions collection
     match /institutions/{institutionId} {
+      // Super admins can do anything
+      allow read, write: if canAdminAccess();
+      
       allow read: if isAuthenticated() && (
         belongsToSameInstitution(institutionId) || 
         isGlobalAdmin()

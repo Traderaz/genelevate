@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
+import { BasicPlanGuard } from '@/components/auth/subscription-guard';
 import { WebinarGrid } from '@/components/webinars/webinar-grid';
 import { WebinarFilters } from '@/components/webinars/webinar-filters';
 import { WebinarSearch } from '@/components/webinars/webinar-search';
@@ -31,7 +32,8 @@ export default async function WebinarsPage({ searchParams }: WebinarsPageProps) 
   const resolvedSearchParams = await searchParams;
 
   return (
-    <NetflixDashboardLayout>
+    <BasicPlanGuard redirectTo="/webinars">
+      <NetflixDashboardLayout>
       <div className="space-y-8">
         {/* Webinar Banner */}
         <NetflixWebinarBanner />
@@ -85,6 +87,7 @@ export default async function WebinarsPage({ searchParams }: WebinarsPageProps) 
           </TabsContent>
         </Tabs>
       </div>
-    </NetflixDashboardLayout>
+      </NetflixDashboardLayout>
+    </BasicPlanGuard>
   );
 }

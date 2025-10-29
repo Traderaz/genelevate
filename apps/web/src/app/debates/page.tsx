@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Trophy, Calendar, Users, Play, TrendingUp } from 'lucide-react';
 import { DebateCard } from '@/components/debates/debate-card';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
+import { BasicPlanGuard } from '@/components/auth/subscription-guard';
 
 // Mock data for now - will connect to Firestore later
 const mockDebates = [
@@ -53,7 +54,7 @@ const mockDebates = [
   },
 ];
 
-export default function DebatesPage() {
+function DebatesPageContent() {
   const [activeFilter, setActiveFilter] = useState<'all' | 'active' | 'upcoming' | 'completed'>('all');
 
   const filteredDebates = mockDebates.filter(debate => {
@@ -223,6 +224,14 @@ export default function DebatesPage() {
         </div>
       </div>
     </NetflixDashboardLayout>
+  );
+}
+
+export default function DebatesPage() {
+  return (
+    <BasicPlanGuard redirectTo="/debates">
+      <DebatesPageContent />
+    </BasicPlanGuard>
   );
 }
 

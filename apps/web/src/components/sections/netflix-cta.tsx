@@ -29,7 +29,7 @@ export function NetflixCTA() {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-            Start your free 14-day trial today. No credit card required. 
+            Choose your plan and start learning today. 
             Cancel anytime. Join the learning revolution.
           </p>
 
@@ -48,12 +48,12 @@ export function NetflixCTA() {
                 type="submit"
                 className="px-8 py-4 bg-netflix-red hover:bg-netflix-red-dark text-white font-semibold rounded-lg netflix-button flex items-center justify-center gap-2"
               >
-                Start Free Trial
+                Get Started
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
             <p className="text-sm text-muted-foreground mt-3">
-              14-day free trial • No credit card required • Cancel anytime
+              Instant access • Cancel anytime • Secure payment
             </p>
           </form>
 
@@ -78,8 +78,8 @@ export function NetflixCTA() {
                 </svg>
               </div>
               <div>
-                <div className="font-semibold text-foreground">No Risk</div>
-                <div className="text-sm text-muted-foreground">14-day free trial</div>
+                <div className="font-semibold text-foreground">Flexible</div>
+                <div className="text-sm text-muted-foreground">Cancel anytime</div>
               </div>
             </div>
 

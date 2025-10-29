@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
+import { BasicPlanGuard } from '@/components/auth/subscription-guard';
 import { CareerDetail } from '@/components/careers/career-detail';
 import { Suspense } from 'react';
 
@@ -18,10 +19,12 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
   const resolvedParams = await params;
 
   return (
-    <NetflixDashboardLayout>
-      <Suspense fallback={<div className="h-screen bg-card animate-pulse rounded-xl" />}>
-        <CareerDetail careerId={resolvedParams.id} />
-      </Suspense>
-    </NetflixDashboardLayout>
+    <BasicPlanGuard redirectTo={`/careers/${resolvedParams.id}`}>
+      <NetflixDashboardLayout>
+        <Suspense fallback={<div className="h-screen bg-card animate-pulse rounded-xl" />}>
+          <CareerDetail careerId={resolvedParams.id} />
+        </Suspense>
+      </NetflixDashboardLayout>
+    </BasicPlanGuard>
   );
 }

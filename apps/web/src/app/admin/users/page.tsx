@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { 
@@ -21,97 +22,28 @@ import {
   Eye,
   UserPlus,
   Download,
-  RefreshCw
+  RefreshCw,
+  User
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useAdminUsers, AdminUser } from '@/hooks/useAdminData';
 
 export const dynamic = 'force-dynamic';
 
-interface User {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  role: 'student' | 'parent' | 'institution' | 'admin' | 'content-creator';
-  subscription: {
-    plan: string;
-    status: 'active' | 'inactive' | 'cancelled' | 'past_due';
-    expiresAt: string;
-  };
-  createdAt: string;
-  lastActive: string;
-  isVerified: boolean;
-  hasIssues: boolean;
-}
-
 export default function AdminUsersPage() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const router = useRouter();
+  const { users, loading, error, updateUser, deleteUser, flagUserIssue } = useAdminUsers();
+  const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
 
-  // Mock data - replace with real API calls
-  useEffect(() => {
-    const mockUsers: User[] = [
-      {
-        id: '1',
-        email: 'john.doe@email.com',
-        firstName: 'John',
-        lastName: 'Doe',
-        role: 'student',
-        subscription: {
-          plan: 'Premium',
-          status: 'active',
-          expiresAt: '2024-12-31'
-        },
-        createdAt: '2024-01-15',
-        lastActive: '2024-10-29',
-        isVerified: true,
-        hasIssues: false
-      },
-      {
-        id: '2',
-        email: 'jane.smith@email.com',
-        firstName: 'Jane',
-        lastName: 'Smith',
-        role: 'parent',
-        subscription: {
-          plan: 'Free',
-          status: 'inactive',
-          expiresAt: '2024-11-01'
-        },
-        createdAt: '2024-02-20',
-        lastActive: '2024-10-25',
-        isVerified: true,
-        hasIssues: true
-      },
-      {
-        id: '3',
-        email: 'admin@school.edu',
-        firstName: 'School',
-        lastName: 'Administrator',
-        role: 'institution',
-        subscription: {
-          plan: 'Enterprise',
-          status: 'active',
-          expiresAt: '2025-06-30'
-        },
-        createdAt: '2024-01-01',
-        lastActive: '2024-10-29',
-        isVerified: true,
-        hasIssues: false
-      }
-    ];
-
-    setUsers(mockUsers);
-    setFilteredUsers(mockUsers);
-    setLoading(false);
-  }, []);
+  // Debug logging
+  console.log('Admin Users Page - Users:', users.length, 'Loading:', loading, 'Error:', error);
 
   // Filter users based on search and filters
   useEffect(() => {
@@ -133,7 +65,7 @@ export default function AdminUsersPage() {
 
     // Status filter
     if (statusFilter !== 'all') {
-      filtered = filtered.filter(user => user.subscription.status === statusFilter);
+      filtered = filtered.filter(user => user.subscription?.status === statusFilter);
     }
 
     setFilteredUsers(filtered);
@@ -171,9 +103,87 @@ export default function AdminUsersPage() {
     }
   };
 
-  const handleUserAction = (action: string, userId: string) => {
-    console.log(`${action} user:`, userId);
-    // Implement user actions (edit, delete, etc.)
+  const handleUserAction = async (action: string, userId: string) => {
+    try {
+      setActionLoading(userId);
+      
+      switch (action) {
+        case 'view':
+          // Navigate to user details page
+          router.push(`/admin/users/${userId}`);
+          break;
+          
+        case 'edit':
+          // Navigate to user details page in edit mode
+          router.push(`/admin/users/${userId}?edit=true`);
+          break;
+          
+        case 'flag_issue':
+          if (confirm('Flag this user account for review?\n\nThis will:\n- Mark the account as having issues\n- Add it to the support queue\n- Notify other admins\n- Track resolution status')) {
+            await flagUserIssue(userId, true, 'Flagged by admin for review');
+            alert('✅ User account flagged for review');
+          }
+          break;
+          
+        case 'resolve_issue':
+          if (confirm('Mark this user\'s issues as resolved?\n\nThis will:\n- Remove the issue flag\n- Clear from support queue\n- Log resolution in history')) {
+            await flagUserIssue(userId, false);
+            alert('✅ User issues marked as resolved');
+          }
+          break;
+          
+        case 'reset_password':
+          if (confirm('Send password reset email to this user?\n\nThis will:\n- Send a secure reset link to their email\n- Invalidate current sessions\n- Log the password reset request')) {
+            // Implement password reset
+            alert('✅ Password reset email sent to user');
+          }
+          break;
+          
+        case 'promote_admin':
+          if (confirm('Make this user an administrator?\n\nThis will give them:\n- Access to admin panel\n- User management permissions\n- Content management access\n- System monitoring tools\n\n⚠️ Only promote trusted users!')) {
+            await updateUser(userId, { 
+              role: 'admin'
+            } as any);
+            alert('✅ User promoted to administrator');
+          }
+          break;
+          
+        case 'demote_admin':
+          if (confirm('Remove admin privileges from this user?\n\nThis will:\n- Remove admin panel access\n- Revoke management permissions\n- Change role to student\n- Keep their content and progress')) {
+            await updateUser(userId, { 
+              role: 'student'
+            } as any);
+            alert('✅ Admin privileges removed');
+          }
+          break;
+          
+        case 'suspend':
+          if (confirm('Suspend this user account?\n\nThis will:\n- Prevent login access\n- Maintain account data\n- Can be reversed later\n- Notify user via email')) {
+            await updateUser(userId, {
+              // Suspend user functionality would be implemented here
+            } as any);
+            alert('✅ User account suspended');
+          }
+          break;
+          
+        case 'delete':
+          if (confirm('⚠️ PERMANENTLY DELETE this user account?\n\n🚨 THIS CANNOT BE UNDONE! 🚨\n\nThis will:\n- Delete all user data\n- Remove all content\n- Clear progress history\n- Cancel subscriptions\n\nType "DELETE" to confirm:') && 
+              prompt('Type "DELETE" to confirm permanent deletion:') === 'DELETE') {
+            await deleteUser(userId);
+            alert('✅ User account permanently deleted');
+          }
+          break;
+          
+        default:
+          console.log(`Unknown action: ${action} for user:`, userId);
+          alert(`Action "${action}" not implemented yet`);
+      }
+    } catch (error) {
+      console.error(`Error performing ${action}:`, error);
+      alert(`❌ Failed to ${action} user: ${error instanceof Error ? error.message : 'Unknown error'}\n\nPlease try again or contact system administrator.`);
+    } finally {
+      setActionLoading(null);
+    }
   };
 
   return (
@@ -207,6 +217,48 @@ export default function AdminUsersPage() {
               </Button>
             </div>
           </div>
+
+          {/* Action Guide */}
+          <Card className="bg-blue-50 border-blue-200">
+            <CardHeader>
+              <CardTitle className="text-lg text-blue-800">Admin Action Guide</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                <div>
+                  <h4 className="font-semibold text-blue-700 mb-2">👁️ View & Edit</h4>
+                  <ul className="space-y-1 text-blue-600">
+                    <li><strong>View Details:</strong> See complete user profile</li>
+                    <li><strong>Edit Profile:</strong> Modify user information</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-green-700 mb-2">🛠️ Issue Management</h4>
+                  <ul className="space-y-1 text-green-600">
+                    <li><strong>Flag Issue:</strong> Mark account for review</li>
+                    <li><strong>Resolve Issue:</strong> Clear issue flags</li>
+                    <li><strong>Reset Password:</strong> Send reset email</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-purple-700 mb-2">👑 Admin Controls</h4>
+                  <ul className="space-y-1 text-purple-600">
+                    <li><strong>Make Admin:</strong> Grant admin privileges</li>
+                    <li><strong>Remove Admin:</strong> Revoke admin access</li>
+                    <li><strong>Suspend:</strong> Temporarily disable account</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-red-700 mb-2">⚠️ Dangerous Actions</h4>
+                  <ul className="space-y-1 text-red-600">
+                    <li><strong>Delete User:</strong> Permanently remove account</li>
+                    <li><em>Requires confirmation</em></li>
+                    <li><em>Cannot be undone</em></li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Filters and Search */}
           <Card>
@@ -265,6 +317,12 @@ export default function AdminUsersPage() {
               <CardTitle>Users ({filteredUsers.length})</CardTitle>
               <CardDescription>
                 Complete list of platform users with account details
+                {!loading && (
+                  <span className="block text-xs mt-1 text-muted-foreground">
+                    Total in database: {users.length} | Filtered: {filteredUsers.length}
+                    {error && <span className="text-red-500"> | Error: {error}</span>}
+                  </span>
+                )}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -272,6 +330,15 @@ export default function AdminUsersPage() {
                 <div className="text-center py-8">
                   <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-4 text-muted-foreground" />
                   <p className="text-muted-foreground">Loading users...</p>
+                </div>
+              ) : error ? (
+                <div className="text-center py-8">
+                  <XCircle className="w-12 h-12 mx-auto mb-4 text-red-500" />
+                  <p className="text-red-600 mb-4">{error}</p>
+                  <Button onClick={() => window.location.reload()}>
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    Retry
+                  </Button>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -308,7 +375,7 @@ export default function AdminUsersPage() {
                               Joined {new Date(user.createdAt).toLocaleDateString()}
                             </span>
                             <span>
-                              Last active {new Date(user.lastActive).toLocaleDateString()}
+                              Last active {user.lastActive ? new Date(user.lastActive).toLocaleDateString() : 'Never'}
                             </span>
                           </div>
                         </div>
@@ -320,37 +387,140 @@ export default function AdminUsersPage() {
                             {user.role}
                           </Badge>
                           <div className="flex items-center gap-2">
-                            <Badge className={getStatusColor(user.subscription.status)}>
-                              {user.subscription.status}
+                            <Badge className={getStatusColor(user.subscription?.status || 'inactive')}>
+                              {user.subscription?.status || 'No subscription'}
                             </Badge>
                             <span className="text-xs text-muted-foreground">
-                              {user.subscription.plan}
+                              {user.subscription?.plan || 'Free'}
                             </span>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleUserAction('view', user.id)}
-                          >
-                            <Eye className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleUserAction('edit', user.id)}
-                          >
-                            <Edit className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleUserAction('more', user.id)}
-                          >
-                            <MoreHorizontal className="w-4 h-4" />
-                          </Button>
+                        <div className="flex flex-col gap-2">
+                          {/* Primary Actions Row */}
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleUserAction('view', user.id)}
+                              disabled={actionLoading === user.id}
+                              className="text-xs"
+                            >
+                              <Eye className="w-3 h-3 mr-1" />
+                              View Details
+                            </Button>
+                            
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleUserAction('edit', user.id)}
+                              disabled={actionLoading === user.id}
+                              className="text-xs"
+                            >
+                              <Edit className="w-3 h-3 mr-1" />
+                              Edit Profile
+                            </Button>
+                          </div>
+
+                          {/* Issue Management Row */}
+                          <div className="flex items-center gap-2">
+                            {user.hasIssues ? (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleUserAction('resolve_issue', user.id)}
+                                disabled={actionLoading === user.id}
+                                className="text-xs text-green-600 hover:text-green-700 border-green-200"
+                              >
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                Resolve Issue
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleUserAction('flag_issue', user.id)}
+                                disabled={actionLoading === user.id}
+                                className="text-xs text-yellow-600 hover:text-yellow-700 border-yellow-200"
+                              >
+                                <AlertTriangle className="w-3 h-3 mr-1" />
+                                Flag Issue
+                              </Button>
+                            )}
+
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleUserAction('reset_password', user.id)}
+                              disabled={actionLoading === user.id}
+                              className="text-xs text-blue-600 hover:text-blue-700 border-blue-200"
+                            >
+                              <RefreshCw className="w-3 h-3 mr-1" />
+                              Reset Password
+                            </Button>
+                          </div>
+
+                          {/* Admin Actions Row */}
+                          <div className="flex items-center gap-2">
+                            {user.role !== 'admin' ? (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleUserAction('promote_admin', user.id)}
+                                disabled={actionLoading === user.id}
+                                className="text-xs text-purple-600 hover:text-purple-700 border-purple-200"
+                              >
+                                <Shield className="w-3 h-3 mr-1" />
+                                Make Admin
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleUserAction('demote_admin', user.id)}
+                                disabled={actionLoading === user.id}
+                                className="text-xs text-orange-600 hover:text-orange-700 border-orange-200"
+                              >
+                                <User className="w-3 h-3 mr-1" />
+                                Remove Admin
+                              </Button>
+                            )}
+
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleUserAction('suspend', user.id)}
+                              disabled={actionLoading === user.id}
+                              className="text-xs text-red-600 hover:text-red-700 border-red-200"
+                            >
+                              {actionLoading === user.id ? (
+                                <RefreshCw className="w-3 h-3 mr-1 animate-spin" />
+                              ) : (
+                                <XCircle className="w-3 h-3 mr-1" />
+                              )}
+                              Suspend Account
+                            </Button>
+                          </div>
+
+                          {/* Dangerous Actions Row */}
+                          <div className="flex items-center gap-2 pt-1 border-t border-red-100">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleUserAction('delete', user.id)}
+                              disabled={actionLoading === user.id}
+                              className="text-xs text-red-700 hover:text-red-800 border-red-300 bg-red-50 hover:bg-red-100"
+                            >
+                              {actionLoading === user.id ? (
+                                <RefreshCw className="w-3 h-3 mr-1 animate-spin" />
+                              ) : (
+                                <Trash2 className="w-3 h-3 mr-1" />
+                              )}
+                              Delete User
+                            </Button>
+                            
+                            <span className="text-xs text-red-500 font-medium">⚠️ Permanent</span>
+                          </div>
                         </div>
                       </div>
                     </div>

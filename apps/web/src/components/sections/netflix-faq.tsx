@@ -8,8 +8,8 @@ export function NetflixFAQ() {
 
   const faqs = [
     {
-      question: "What's included in the free trial?",
-      answer: "Your 14-day free trial includes full access to our Premium plan features: all 500+ courses, unlimited live webinars, AI tutoring, offline downloads, and HD video quality. No credit card required to start."
+      question: "What's included in each subscription plan?",
+      answer: "Basic (£9.99/month) includes all courses and webinars. Premium (£19.99/month) adds AI tools and premium content. Pro (£39.99/month) includes everything plus 1 paid addon monthly and personal tutoring."
     },
     {
       question: "Can I cancel my subscription anytime?",
@@ -21,15 +21,15 @@ export function NetflixFAQ() {
     },
     {
       question: "Do you offer certificates upon completion?",
-      answer: "Yes! Premium and Institution subscribers receive verified certificates of completion for all courses. These certificates are recognized by educational institutions and can be shared on LinkedIn and other professional platforms."
+      answer: "Yes! All subscribers receive verified certificates of completion for all courses. These certificates are recognized by educational institutions and can be shared on LinkedIn and other professional platforms."
     },
     {
       question: "How does the AI tutoring work?",
-      answer: "Our AI tutor analyzes your learning patterns, identifies knowledge gaps, and provides personalized recommendations. It's available 24/7 to answer questions, explain concepts, and suggest practice exercises tailored to your needs."
+      answer: "Our AI tutor (available with Premium and Pro plans) analyzes your learning patterns, identifies knowledge gaps, and provides personalized recommendations. It's available 24/7 to answer questions, explain concepts, and suggest practice exercises tailored to your needs."
     },
     {
       question: "Can I access content offline?",
-      answer: "Premium and Institution subscribers can download course videos and materials for offline access through our mobile app. This is perfect for studying during commutes or in areas with limited internet connectivity."
+      answer: "All subscribers can download course videos and materials for offline access through our mobile app. This is perfect for studying during commutes or in areas with limited internet connectivity."
     },
     {
       question: "What subjects do you cover?",
