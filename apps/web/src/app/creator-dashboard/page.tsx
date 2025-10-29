@@ -3,7 +3,6 @@
 import { useAuth } from '@/contexts/auth-context';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-// Using native HTML elements with Tailwind CSS instead of separate UI components
 import { 
   Video, 
   BookOpen, 
@@ -15,10 +14,23 @@ import {
   CheckCircle,
   XCircle,
   AlertCircle,
-  LogOut
+  LogOut,
+  TrendingUp,
+  DollarSign,
+  Calendar,
+  BarChart3,
+  Edit,
+  Trash2,
+  Play,
+  FileText,
+  Award,
+  Target,
+  Zap
 } from 'lucide-react';
-// Badge component replaced with Tailwind classes
 import Link from 'next/link';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 interface ContentItem {
   id: string;
@@ -27,19 +39,50 @@ interface ContentItem {
   status: 'draft' | 'pending' | 'approved' | 'rejected';
   views: number;
   rating: number;
+  enrollments: number;
+  completionRate: number;
+  revenue: number;
+  duration: string;
+  thumbnail?: string;
   createdAt: Date;
   updatedAt: Date;
+  publishedAt?: Date;
+  lastViewedAt?: Date;
+}
+
+interface AnalyticsData {
+  totalContent: number;
+  totalViews: number;
+  totalEnrollments: number;
+  averageRating: number;
+  pendingApproval: number;
+  totalRevenue: number;
+  averageCompletionRate: number;
+  monthlyGrowth: number;
+  topPerformingContent: ContentItem[];
+  recentActivity: {
+    type: 'view' | 'enrollment' | 'completion' | 'rating';
+    contentTitle: string;
+    timestamp: Date;
+    value?: number;
+  }[];
 }
 
 export default function CreatorDashboard() {
   const { user, userProfile, loading, logout } = useAuth();
   const router = useRouter();
   const [content, setContent] = useState<ContentItem[]>([]);
-  const [stats, setStats] = useState({
+  const [analytics, setAnalytics] = useState<AnalyticsData>({
     totalContent: 0,
     totalViews: 0,
+    totalEnrollments: 0,
     averageRating: 0,
-    pendingApproval: 0
+    pendingApproval: 0,
+    totalRevenue: 0,
+    averageCompletionRate: 0,
+    monthlyGrowth: 0,
+    topPerformingContent: [],
+    recentActivity: []
   });
 
   useEffect(() => {
@@ -48,59 +91,59 @@ export default function CreatorDashboard() {
       return;
     }
 
-    if (userProfile && userProfile.role !== 'content-creator') {
+    // Allow content creators and admins (for testing/management)
+    if (userProfile && userProfile.role !== 'content-creator' && userProfile.role !== 'admin') {
       router.push('/dashboard');
       return;
     }
 
-    // TODO: Fetch content creator's content from Firestore
-    // For now, using mock data
-    const mockContent: ContentItem[] = [
-      {
-        id: '1',
-        title: 'Advanced Calculus Techniques',
-        type: 'webinar',
-        status: 'approved',
-        views: 245,
-        rating: 4.8,
-        createdAt: new Date('2024-01-15'),
-        updatedAt: new Date('2024-01-15')
-      },
-      {
-        id: '2',
-        title: 'Complete Physics Course - Mechanics',
-        type: 'course',
-        status: 'pending',
-        views: 0,
-        rating: 0,
-        createdAt: new Date('2024-01-20'),
-        updatedAt: new Date('2024-01-20')
-      }
-    ];
+    // Fetch creator's content from Firestore
+    const fetchCreatorContent = async () => {
+      if (!user) return;
 
-    setContent(mockContent);
-    setStats({
-      totalContent: mockContent.length,
-      totalViews: mockContent.reduce((sum, item) => sum + item.views, 0),
-      averageRating: mockContent.filter(item => item.rating > 0).reduce((sum, item) => sum + item.rating, 0) / mockContent.filter(item => item.rating > 0).length || 0,
-      pendingApproval: mockContent.filter(item => item.status === 'pending').length
-    });
+      try {
+        // TODO: Implement Firestore queries to fetch:
+        // 1. Creator's courses and webinars
+        // 2. Analytics data (views, enrollments, revenue)
+        // 3. Recent activity logs
+        
+        // For now, set empty state until content is created
+        setContent([]);
+        setAnalytics({
+          totalContent: 0,
+          totalViews: 0,
+          totalEnrollments: 0,
+          averageRating: 0,
+          pendingApproval: 0,
+          totalRevenue: 0,
+          averageCompletionRate: 0,
+          monthlyGrowth: 0,
+          topPerformingContent: [],
+          recentActivity: []
+        });
+      } catch (error) {
+        console.error('Error fetching creator content:', error);
+      }
+    };
+
+    fetchCreatorContent();
   }, [user, userProfile, loading, router]);
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
       </div>
     );
   }
 
-  if (!user || !userProfile || userProfile.role !== 'content-creator') {
+  // Allow content creators and admins
+  if (!user || !userProfile || (userProfile.role !== 'content-creator' && userProfile.role !== 'admin')) {
     return null;
   }
 
   // Check if creator is approved
-  const isApproved = userProfile.isApproved !== false; // Assuming this field exists
+  const isApproved = (userProfile as any)?.isApproved !== false;
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -115,45 +158,38 @@ export default function CreatorDashboard() {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'approved':
-        return 'bg-green-100 text-green-800';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'rejected':
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="bg-card/80 backdrop-blur-xl border-b border-border shadow-sm">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      {/* Enhanced Header */}
+      <div className="bg-card/95 backdrop-blur-xl border-b border-border shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div>
-              <h1 className="text-3xl font-bold text-foreground">Content Creator Dashboard</h1>
-              <p className="text-muted-foreground">Welcome back, {userProfile.displayName}</p>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center">
+                <Award className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                  Creator Studio
+                </h1>
+                <p className="text-muted-foreground">Welcome back, {userProfile.displayName}</p>
+              </div>
             </div>
             <div className="flex gap-3">
-              <Link 
-                href="/creator-dashboard/create-webinar"
-                className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
-              >
-                <Video className="w-4 h-4 mr-2" />
-                Create Webinar
-              </Link>
-              <Link 
-                href="/creator-dashboard/create-course"
-                className="inline-flex items-center px-4 py-2 border border-border text-foreground rounded-lg hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
-              >
-                <BookOpen className="w-4 h-4 mr-2" />
-                Create Course
-              </Link>
-              <button
+              <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+                <Link href="/creator-dashboard/create-course">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Course
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/creator-dashboard/create-webinar">
+                  <Video className="w-4 h-4 mr-2" />
+                  Create Webinar
+                </Link>
+              </Button>
+              <Button
+                variant="ghost"
                 onClick={async () => {
                   try {
                     await logout();
@@ -161,206 +197,315 @@ export default function CreatorDashboard() {
                     console.error('Logout failed:', error);
                   }
                 }}
-                className="inline-flex items-center px-4 py-2 border border-destructive/20 text-destructive rounded-lg hover:bg-destructive/10 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 transition-colors"
+                className="text-muted-foreground hover:text-destructive"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 Sign Out
-              </button>
+              </Button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Approval Status Alert */}
         {!isApproved && (
-          <div className="mb-6 bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 dark:text-yellow-400 px-4 py-4 rounded-lg">
-            <div className="flex items-center">
-              <AlertCircle className="h-4 w-4 mr-3 flex-shrink-0" />
-              <p className="text-sm">
-                Your content creator account is pending approval. You can create content, but it won't be visible to students until your account is approved by an administrator.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-card/80 backdrop-blur-sm border border-border p-6 rounded-xl shadow-sm">
-            <div className="flex items-center justify-between pb-2">
-              <h3 className="text-sm font-medium text-muted-foreground">Total Content</h3>
-              <BookOpen className="h-4 w-4 text-muted-foreground" />
-            </div>
-            <div className="text-2xl font-bold text-foreground">{stats.totalContent}</div>
-          </div>
-
-          <div className="bg-card/80 backdrop-blur-sm border border-border p-6 rounded-xl shadow-sm">
-            <div className="flex items-center justify-between pb-2">
-              <h3 className="text-sm font-medium text-muted-foreground">Total Views</h3>
-              <Eye className="h-4 w-4 text-muted-foreground" />
-            </div>
-            <div className="text-2xl font-bold text-foreground">{stats.totalViews.toLocaleString()}</div>
-          </div>
-
-          <div className="bg-card/80 backdrop-blur-sm border border-border p-6 rounded-xl shadow-sm">
-            <div className="flex items-center justify-between pb-2">
-              <h3 className="text-sm font-medium text-muted-foreground">Average Rating</h3>
-              <Star className="h-4 w-4 text-muted-foreground" />
-            </div>
-            <div className="text-2xl font-bold text-foreground">
-              {stats.averageRating > 0 ? stats.averageRating.toFixed(1) : 'N/A'}
-            </div>
-          </div>
-
-          <div className="bg-card/80 backdrop-blur-sm border border-border p-6 rounded-xl shadow-sm">
-            <div className="flex items-center justify-between pb-2">
-              <h3 className="text-sm font-medium text-muted-foreground">Pending Approval</h3>
-              <Clock className="h-4 w-4 text-muted-foreground" />
-            </div>
-            <div className="text-2xl font-bold text-foreground">{stats.pendingApproval}</div>
-          </div>
-        </div>
-
-        {/* Content List */}
-        <div className="bg-card/80 backdrop-blur-sm border border-border rounded-xl shadow-sm">
-          <div className="p-6 border-b border-border">
-            <h2 className="text-xl font-semibold text-foreground">Your Content</h2>
-            <p className="text-muted-foreground mt-1">
-              Manage your webinars and courses
-            </p>
-          </div>
-          <div className="p-6">
-            {content.length === 0 ? (
-              <div className="text-center py-12">
-                <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-foreground mb-2">No content yet</h3>
-                <p className="text-muted-foreground mb-6">Start creating webinars and courses to engage with students.</p>
-                <div className="flex justify-center gap-3">
-                  <Link 
-                    href="/creator-dashboard/create-webinar"
-                    className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
-                  >
-                    <Video className="w-4 h-4 mr-2" />
-                    Create Your First Webinar
-                  </Link>
-                  <Link 
-                    href="/creator-dashboard/create-course"
-                    className="inline-flex items-center px-4 py-2 border border-border text-foreground rounded-lg hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
-                  >
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    Create Your First Course
-                  </Link>
+          <Card className="border-yellow-200 bg-yellow-50/50 dark:bg-yellow-900/20 dark:border-yellow-800">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+                    Account Pending Approval
+                  </p>
+                  <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
+                    You can create content, but it won't be visible to students until approved by an administrator.
+                  </p>
                 </div>
               </div>
-            ) : (
-              <div className="space-y-4">
-                {content.map((item) => (
-                  <div key={item.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
-                    <div className="flex items-center space-x-4">
-                      <div className="p-2 bg-blue-100 rounded-lg">
-                        {item.type === 'webinar' ? (
-                          <Video className="w-5 h-5 text-blue-600" />
-                        ) : (
-                          <BookOpen className="w-5 h-5 text-blue-600" />
-                        )}
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-gray-900">{item.title}</h3>
-                        <div className="flex items-center space-x-4 text-sm text-gray-600">
-                          <span className="capitalize">{item.type}</span>
-                          <span>•</span>
-                          <div className="flex items-center space-x-1">
-                            <Eye className="w-3 h-3" />
-                            <span>{item.views} views</span>
-                          </div>
-                          {item.rating > 0 && (
-                            <>
-                              <span>•</span>
-                              <div className="flex items-center space-x-1">
-                                <Star className="w-3 h-3" />
-                                <span>{item.rating.toFixed(1)}</span>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
+            </CardContent>
+          </Card>
+        )}
+
+            {/* Enhanced Analytics Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card className="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950/50 dark:to-green-900/30 border-green-200 dark:border-green-800">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-green-700 dark:text-green-300">Total Enrollments</p>
+                      <p className="text-3xl font-bold text-green-900 dark:text-green-100">
+                        {analytics.totalEnrollments.toLocaleString()}
+                      </p>
+                      <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+                        Across {analytics.totalContent} courses
+                      </p>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
-                        <div className="flex items-center space-x-1">
-                          {getStatusIcon(item.status)}
-                          <span className="capitalize">{item.status}</span>
-                        </div>
-                      </span>
-                      <button className="px-3 py-1 text-sm border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                        Edit
-                      </button>
+                    <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+                      <Users className="w-6 h-6 text-green-600" />
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+                </CardContent>
+              </Card>
 
-        {/* Quick Actions */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900">Quick Actions</h2>
+              <Card className="bg-gradient-to-br from-purple-50 to-purple-100/50 dark:from-purple-950/50 dark:to-purple-900/30 border-purple-200 dark:border-purple-800">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-purple-700 dark:text-purple-300">Avg. Completion</p>
+                      <p className="text-3xl font-bold text-purple-900 dark:text-purple-100">
+                        {analytics.averageCompletionRate.toFixed(0)}%
+                      </p>
+                      <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">
+                        Student engagement
+                      </p>
+                    </div>
+                    <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                      <Target className="w-6 h-6 text-purple-600" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-orange-50 to-orange-100/50 dark:from-orange-950/50 dark:to-orange-900/30 border-orange-200 dark:border-orange-800">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-orange-700 dark:text-orange-300">Avg. Rating</p>
+                      <p className="text-3xl font-bold text-orange-900 dark:text-orange-100">
+                        {analytics.averageRating > 0 ? analytics.averageRating.toFixed(1) : 'N/A'}
+                      </p>
+                      <p className="text-sm text-orange-600 dark:text-orange-400 mt-1">
+                        {analytics.totalViews.toLocaleString()} total views
+                      </p>
+                    </div>
+                    <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                      <Star className="w-6 h-6 text-orange-600" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-            <div className="p-6 space-y-3">
-              <Link 
-                href="/creator-dashboard/create-webinar"
-                className="flex items-center w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Create New Webinar
-              </Link>
-              <Link 
-                href="/creator-dashboard/create-course"
-                className="flex items-center w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Create New Course
-              </Link>
-              <Link 
-                href="/creator-dashboard/analytics"
-                className="flex items-center w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              >
-                <Eye className="w-4 h-4 mr-2" />
-                View Analytics
-              </Link>
-            </div>
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content List */}
+          <div className="lg:col-span-2">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BookOpen className="w-5 h-5" />
+                  Your Content
+                </CardTitle>
+                <CardDescription>
+                  Manage your courses and webinars
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {content.length === 0 ? (
+                  <div className="text-center py-12">
+                    <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+                      <BookOpen className="w-8 h-8 text-muted-foreground" />
+                    </div>
+                    <h3 className="text-lg font-medium mb-2">No content yet</h3>
+                    <p className="text-muted-foreground mb-6">Start creating courses and webinars to engage with students.</p>
+                    <div className="flex justify-center gap-3">
+                      <Button asChild>
+                        <Link href="/creator-dashboard/create-course">
+                          <Plus className="w-4 h-4 mr-2" />
+                          Create Course
+                        </Link>
+                      </Button>
+                      <Button asChild variant="outline">
+                        <Link href="/creator-dashboard/create-webinar">
+                          <Video className="w-4 h-4 mr-2" />
+                          Create Webinar
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {content.map((item) => (
+                      <Card key={item.id} className="hover:shadow-md transition-shadow">
+                        <CardContent className="p-6">
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-start gap-4 flex-1">
+                              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                                item.type === 'course' ? 'bg-blue-100 dark:bg-blue-900/30' : 'bg-purple-100 dark:bg-purple-900/30'
+                              }`}>
+                                {item.type === 'webinar' ? (
+                                  <Video className="w-6 h-6 text-purple-600" />
+                                ) : (
+                                  <BookOpen className="w-6 h-6 text-blue-600" />
+                                )}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                                  <Badge variant="secondary" className="capitalize">
+                                    {item.type}
+                                  </Badge>
+                                  <span className="flex items-center gap-1">
+                                    <Clock className="w-3 h-3" />
+                                    {item.duration}
+                                  </span>
+                                  <span className="flex items-center gap-1">
+                                    <Eye className="w-3 h-3" />
+                                    {item.views.toLocaleString()}
+                                  </span>
+                                  {item.rating > 0 && (
+                                    <span className="flex items-center gap-1">
+                                      <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                                      {item.rating.toFixed(1)}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="grid grid-cols-3 gap-4 text-sm">
+                                  <div>
+                                    <p className="text-muted-foreground">Enrollments</p>
+                                    <p className="font-semibold">{item.enrollments.toLocaleString()}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-muted-foreground">Completion</p>
+                                    <p className="font-semibold">{item.completionRate}%</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-muted-foreground">Revenue</p>
+                                    <p className="font-semibold">£{item.revenue.toLocaleString()}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 ml-4">
+                              <Badge 
+                                variant={item.status === 'approved' ? 'default' : 
+                                        item.status === 'pending' ? 'secondary' : 
+                                        item.status === 'rejected' ? 'destructive' : 'outline'}
+                                className="flex items-center gap-1"
+                              >
+                                {getStatusIcon(item.status)}
+                                {item.status}
+                              </Badge>
+                              <Button size="sm" variant="outline">
+                                <Edit className="w-4 h-4 mr-1" />
+                                Edit
+                              </Button>
+                              <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-destructive">
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </div>
 
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900">Resources</h2>
-            </div>
-            <div className="p-6 space-y-3">
-              <Link 
-                href="/creator-dashboard/guidelines"
-                className="flex items-center w-full px-4 py-2 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              >
-                <BookOpen className="w-4 h-4 mr-2" />
-                Content Guidelines
-              </Link>
-              <Link 
-                href="/creator-dashboard/help"
-                className="flex items-center w-full px-4 py-2 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              >
-                <Users className="w-4 h-4 mr-2" />
-                Creator Support
-              </Link>
-              <Link 
-                href="/creator-dashboard/profile"
-                className="flex items-center w-full px-4 py-2 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              >
-                <Users className="w-4 h-4 mr-2" />
-                Edit Profile
-              </Link>
-            </div>
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Recent Activity */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5" />
+                  Recent Activity
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {analytics.recentActivity.map((activity, index) => (
+                    <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        activity.type === 'enrollment' ? 'bg-green-100 dark:bg-green-900/30' :
+                        activity.type === 'completion' ? 'bg-blue-100 dark:bg-blue-900/30' :
+                        activity.type === 'rating' ? 'bg-yellow-100 dark:bg-yellow-900/30' :
+                        'bg-purple-100 dark:bg-purple-900/30'
+                      }`}>
+                        {activity.type === 'enrollment' && <Users className="w-4 h-4 text-green-600" />}
+                        {activity.type === 'completion' && <CheckCircle className="w-4 h-4 text-blue-600" />}
+                        {activity.type === 'rating' && <Star className="w-4 h-4 text-yellow-600" />}
+                        {activity.type === 'view' && <Eye className="w-4 h-4 text-purple-600" />}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{activity.contentTitle}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {activity.type === 'enrollment' && `${activity.value} new enrollments`}
+                          {activity.type === 'completion' && `${activity.value} completions`}
+                          {activity.type === 'rating' && `${activity.value}-star rating`}
+                          {activity.type === 'view' && `${activity.value} new views`}
+                        </p>
+                      </div>
+                      <span className="text-xs text-muted-foreground">
+                        {activity.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Top Performing Content */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5" />
+                  Top Performers
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {analytics.topPerformingContent.map((item, index) => (
+                    <div key={item.id} className="flex items-center gap-3">
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        index === 0 ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
+                        index === 1 ? 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400' :
+                        'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400'
+                      }`}>
+                        {index + 1}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{item.title}</p>
+                        <p className="text-xs text-muted-foreground">£{item.revenue.toLocaleString()} revenue</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Actions */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Zap className="w-5 h-5" />
+                  Quick Actions
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button asChild className="w-full justify-start">
+                  <Link href="/creator-dashboard/analytics">
+                    <BarChart3 className="w-4 h-4 mr-2" />
+                    View Analytics
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full justify-start">
+                  <Link href="/creator-dashboard/guidelines">
+                    <FileText className="w-4 h-4 mr-2" />
+                    Content Guidelines
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full justify-start">
+                  <Link href="/creator-dashboard/help">
+                    <Users className="w-4 h-4 mr-2" />
+                    Get Support
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
