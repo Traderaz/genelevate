@@ -3,14 +3,18 @@
 import { useState } from 'react';
 import { useSimpleTodo } from '@/contexts/simple-firebase-todo';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
-import { Plus, Trash2, Check, Clock } from 'lucide-react';
+import { Plus, Trash2, Check, Clock, CheckCircle, Calendar, Target, ChevronDown, ChevronUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const dynamic = 'force-dynamic';
 
 export default function TodoPage() {
   const { todos, loading, currentWeekInfo, addTodo, toggleTodo, deleteTodo } = useSimpleTodo();
   const [newTodoText, setNewTodoText] = useState('');
+  const [newTodoDescription, setNewTodoDescription] = useState('');
   const [isAdding, setIsAdding] = useState(false);
+  const [expandedTodos, setExpandedTodos] = useState<Set<string>>(new Set());
 
   const handleAddTodo = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,8 +22,9 @@ export default function TodoPage() {
 
     setIsAdding(true);
     try {
-      await addTodo(newTodoText);
+      await addTodo(newTodoText, newTodoDescription);
       setNewTodoText('');
+      setNewTodoDescription('');
     } catch (error) {
       console.error('Error adding todo:', error);
     } finally {
@@ -27,176 +32,241 @@ export default function TodoPage() {
     }
   };
 
-  const handleToggleTodo = async (id: string) => {
-    try {
-      await toggleTodo(id);
-    } catch (error) {
-      console.error('Error toggling todo:', error);
+  const toggleExpanded = (todoId: string) => {
+    const newExpanded = new Set(expandedTodos);
+    if (newExpanded.has(todoId)) {
+      newExpanded.delete(todoId);
+    } else {
+      newExpanded.add(todoId);
     }
+    setExpandedTodos(newExpanded);
   };
 
-  const handleDeleteTodo = async (id: string) => {
-    try {
-      await deleteTodo(id);
-    } catch (error) {
-      console.error('Error deleting todo:', error);
-    }
-  };
-
-  const completedTodos = todos.filter(todo => todo.completed);
-  const pendingTodos = todos.filter(todo => !todo.completed);
+  const completedCount = todos.filter(todo => todo.completed).length;
+  const totalCount = todos.length;
 
   return (
     <NetflixDashboardLayout>
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-white mb-2">Weekly Tasks</h1>
-            <div className="flex items-center gap-2 text-gray-300">
-              <Clock className="w-5 h-5" />
-              <span className="text-lg">
-                Week of {currentWeekInfo.displayText} (ID: {currentWeekInfo.weekId})
-              </span>
-            </div>
-            <p className="text-gray-400 mt-2">
-              Tasks automatically refresh each Monday. Stay organized and productive!
+      <div className="space-y-8">
+        {/* Header with Progress Info */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Weekly Tasks</h1>
+            <p className="text-muted-foreground">
+              Plan your week, track your progress, achieve your goals
             </p>
           </div>
+          
+          <div className="flex items-center gap-4">
+            <div className="px-4 py-2 bg-card border border-border rounded-lg text-foreground">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium">Week of {currentWeekInfo.displayText}</span>
+              </div>
+            </div>
+            {totalCount > 0 && (
+              <div className="px-4 py-2 bg-card border border-border rounded-lg text-foreground">
+                <div className="flex items-center gap-2">
+                  <Target className="w-4 h-4 text-green-500" />
+                  <span className="text-sm font-medium">{completedCount}/{totalCount} completed</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
 
-          {/* Add Todo Form */}
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 mb-8 border border-gray-700">
-            <form onSubmit={handleAddTodo} className="flex gap-4">
+        {/* Add New Task Card */}
+        <div className="bg-card border border-border rounded-lg p-6">
+          <div className="flex items-center gap-3 mb-6">
+            <Plus className="w-5 h-5 text-primary" />
+            <h2 className="text-xl font-semibold text-foreground">Add New Task</h2>
+          </div>
+          <form onSubmit={handleAddTodo} className="space-y-4">
+            <div>
               <input
                 type="text"
                 value={newTodoText}
                 onChange={(e) => setNewTodoText(e.target.value)}
-                placeholder="Add a new task for this week..."
-                className="flex-1 bg-gray-700/50 text-white placeholder-gray-400 rounded-lg px-4 py-3 border border-gray-600 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                placeholder="What do you want to accomplish this week?"
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 disabled={isAdding}
               />
+            </div>
+            <div>
+              <textarea
+                value={newTodoDescription}
+                onChange={(e) => setNewTodoDescription(e.target.value)}
+                placeholder="Add more details about this task (optional)..."
+                className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none h-20"
+                disabled={isAdding}
+              />
+            </div>
+            <div className="flex justify-end">
               <button
                 type="submit"
                 disabled={isAdding || !newTodoText.trim()}
-                className="bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2"
+                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
               >
-                <Plus className="w-5 h-5" />
+                <Plus className="w-4 h-4" />
                 {isAdding ? 'Adding...' : 'Add Task'}
               </button>
-            </form>
-          </div>
-
-          {/* Loading State */}
-          {loading && (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
-              <p className="text-gray-400">Loading your tasks...</p>
             </div>
-          )}
-
-          {/* Todo Lists */}
-          {!loading && (
-            <div className="grid gap-8 lg:grid-cols-2">
-              {/* Pending Tasks */}
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <Clock className="w-6 h-6 text-yellow-500" />
-                  Pending ({pendingTodos.length})
-                </h2>
-                
-                {pendingTodos.length === 0 ? (
-                  <div className="text-center py-8">
-                    <Clock className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-                    <p className="text-gray-400">No pending tasks</p>
-                    <p className="text-gray-500 text-sm">Add a task above to get started!</p>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {pendingTodos.map((todo) => (
-                      <div
-                        key={todo.id}
-                        className="bg-gray-700/30 rounded-lg p-4 border border-gray-600 hover:border-gray-500 transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <button
-                            onClick={() => handleToggleTodo(todo.id)}
-                            className="w-6 h-6 rounded-full border-2 border-gray-400 hover:border-green-500 transition-colors flex items-center justify-center"
-                          >
-                            {todo.completed && <Check className="w-4 h-4 text-green-500" />}
-                          </button>
-                          <span className="flex-1 text-white">{todo.text}</span>
-                          <button
-                            onClick={() => handleDeleteTodo(todo.id)}
-                            className="text-gray-400 hover:text-red-500 transition-colors p-1"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Completed Tasks */}
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <Check className="w-6 h-6 text-green-500" />
-                  Completed ({completedTodos.length})
-                </h2>
-                
-                {completedTodos.length === 0 ? (
-                  <div className="text-center py-8">
-                    <Check className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-                    <p className="text-gray-400">No completed tasks yet</p>
-                    <p className="text-gray-500 text-sm">Complete some tasks to see them here!</p>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {completedTodos.map((todo) => (
-                      <div
-                        key={todo.id}
-                        className="bg-green-900/20 rounded-lg p-4 border border-green-800/30"
-                      >
-                        <div className="flex items-center gap-3">
-                          <button
-                            onClick={() => handleToggleTodo(todo.id)}
-                            className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center"
-                          >
-                            <Check className="w-4 h-4" />
-                          </button>
-                          <span className="flex-1 text-gray-300 line-through">{todo.text}</span>
-                          <button
-                            onClick={() => handleDeleteTodo(todo.id)}
-                            className="text-gray-400 hover:text-red-500 transition-colors p-1"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Empty State */}
-          {!loading && todos.length === 0 && (
-            <div className="text-center py-16">
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-12 border border-gray-700">
-                <Clock className="w-16 h-16 text-gray-600 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-4">No tasks for this week</h3>
-                <p className="text-gray-400 mb-6">
-                  Start your productive week by adding your first task above!
-                </p>
-                <p className="text-gray-500 text-sm">
-                  💡 Tasks automatically refresh every Monday to keep you organized
-                </p>
-              </div>
-            </div>
-          )}
+          </form>
         </div>
+
+        {/* Loading State */}
+        {loading && (
+          <div className="bg-card border border-border rounded-lg p-12 text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading your tasks...</p>
+          </div>
+        )}
+
+        {/* Tasks Section */}
+        {!loading && (
+          <>
+            {todos.length === 0 ? (
+              <div className="bg-card border border-border rounded-lg p-12 text-center">
+                <Target className="w-16 h-16 text-muted-foreground mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-foreground mb-4">Ready to conquer this week?</h3>
+                <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                  Add your first task above and start building momentum for an amazing week ahead.
+                </p>
+                <div className="inline-block bg-muted/50 rounded-lg px-4 py-2">
+                  <p className="text-muted-foreground text-sm">
+                    💡 <span className="font-medium">Pro tip:</span> Tasks automatically reset every Monday for a fresh start
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-card border border-border rounded-lg">
+                <div className="p-6 border-b border-border">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary" />
+                    <h2 className="text-xl font-semibold text-foreground">Your Tasks</h2>
+                  </div>
+                </div>
+                
+                <div className="divide-y divide-border">
+                  {todos.map((todo) => (
+                    <div key={todo.id} className="p-6 hover:bg-muted/50 transition-colors group">
+                      <div className="flex items-start gap-4">
+                        <button
+                          onClick={() => toggleTodo(todo.id)}
+                          className={`w-6 h-6 rounded-full border-2 transition-all duration-200 flex items-center justify-center mt-0.5 flex-shrink-0 ${
+                            todo.completed
+                              ? 'bg-green-500 border-green-500 text-white'
+                              : 'border-muted-foreground hover:border-primary hover:bg-primary/10'
+                          }`}
+                        >
+                          {todo.completed && <Check className="w-4 h-4" />}
+                        </button>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex-1">
+                              <h3 
+                                className={`text-lg font-medium transition-all duration-200 ${
+                                  todo.completed 
+                                    ? 'text-muted-foreground line-through' 
+                                    : 'text-foreground'
+                                }`}
+                              >
+                                {todo.text}
+                              </h3>
+                              {todo.description && (
+                                <div className="mt-2">
+                                  <button
+                                    onClick={() => toggleExpanded(todo.id)}
+                                    className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors text-sm"
+                                  >
+                                    {expandedTodos.has(todo.id) ? (
+                                      <>
+                                        <ChevronUp className="w-4 h-4" />
+                                        Hide details
+                                      </>
+                                    ) : (
+                                      <>
+                                        <ChevronDown className="w-4 h-4" />
+                                        Show details
+                                      </>
+                                    )}
+                                  </button>
+                                  {expandedTodos.has(todo.id) && (
+                                    <div className="mt-3 p-3 bg-muted/50 rounded-lg border border-border">
+                                      <p className={`text-sm leading-relaxed ${
+                                        todo.completed ? 'text-muted-foreground' : 'text-foreground'
+                                      }`}>
+                                        {todo.description}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                            
+                            <button
+                              onClick={() => deleteTodo(todo.id)}
+                              className="text-muted-foreground hover:text-destructive transition-colors p-1 rounded opacity-0 group-hover:opacity-100"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Progress Section */}
+            {totalCount > 0 && (
+              <div className="bg-card border border-border rounded-lg p-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <Target className="w-5 h-5 text-primary" />
+                  <h2 className="text-xl font-semibold text-foreground">Weekly Progress</h2>
+                </div>
+                
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <div className="text-3xl font-bold text-foreground">
+                      {Math.round((completedCount / totalCount) * 100)}%
+                    </div>
+                    <div className="text-muted-foreground text-sm">
+                      {completedCount} of {totalCount} tasks completed
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="w-full bg-muted rounded-full h-2 mb-4 overflow-hidden">
+                  <div 
+                    className="bg-primary h-2 rounded-full transition-all duration-700"
+                    style={{ width: `${(completedCount / totalCount) * 100}%` }}
+                  ></div>
+                </div>
+                
+                <div className="text-center">
+                  {completedCount === totalCount ? (
+                    <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+                      <p className="text-green-600 font-semibold mb-1">
+                        🎉 Outstanding! You've conquered this week!
+                      </p>
+                      <p className="text-green-600/80 text-sm">
+                        All tasks completed - you're unstoppable!
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-muted-foreground">
+                      <span className="text-foreground font-semibold">{totalCount - completedCount}</span> task{totalCount - completedCount !== 1 ? 's' : ''} remaining
+                      <span className="block text-sm mt-1">Keep going, you've got this!</span>
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </NetflixDashboardLayout>
   );

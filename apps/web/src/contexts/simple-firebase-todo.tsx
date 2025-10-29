@@ -19,6 +19,7 @@ import { useAuth } from '@/contexts/auth-context';
 interface SimpleTodo {
   id: string;
   text: string;
+  description?: string;
   completed: boolean;
   createdAt: any;
   weekId: string;
@@ -36,7 +37,7 @@ interface SimpleTodoContextType {
   todos: SimpleTodo[];
   loading: boolean;
   currentWeekInfo: WeekInfo;
-  addTodo: (text: string) => Promise<void>;
+  addTodo: (text: string, description?: string) => Promise<void>;
   toggleTodo: (id: string) => Promise<void>;
   deleteTodo: (id: string) => Promise<void>;
 }
@@ -89,43 +90,66 @@ export function SimpleTodoProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!user) {
+      console.log('No user, clearing todos');
       setTodos([]);
       setLoading(false);
       return;
     }
 
+    console.log('Setting up todos listener for user:', user.uid, 'week:', currentWeekInfo.weekId);
+
     const todosRef = collection(db, 'todos');
+    // Simplified query first - remove orderBy to avoid index issues
     const q = query(
       todosRef,
       where('userId', '==', user.uid),
-      where('weekId', '==', currentWeekInfo.weekId),
-      orderBy('createdAt', 'desc')
+      where('weekId', '==', currentWeekInfo.weekId)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const todosData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as SimpleTodo[];
+      console.log('Todos snapshot received:', snapshot.docs.length, 'documents');
+      const todosData = snapshot.docs.map(doc => {
+        const data = { id: doc.id, ...doc.data() };
+        console.log('Todo document:', data);
+        return data;
+      }) as SimpleTodo[];
       
-      setTodos(todosData);
+      // Sort by createdAt in JavaScript instead of Firestore
+      const sortedTodos = todosData.sort((a, b) => {
+        if (!a.createdAt || !b.createdAt) return 0;
+        return b.createdAt.toMillis() - a.createdAt.toMillis();
+      });
+      
+      setTodos(sortedTodos);
+      setLoading(false);
+    }, (error) => {
+      console.error('Error listening to todos:', error);
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, [user, currentWeekInfo.weekId]);
 
-  const addTodo = async (text: string) => {
-    if (!user) return;
+  const addTodo = async (text: string, description?: string) => {
+    if (!user) {
+      console.log('Cannot add todo: no user');
+      return;
+    }
+
+    const todoData = {
+      text: text.trim(),
+      description: description?.trim() || '',
+      completed: false,
+      createdAt: serverTimestamp(),
+      weekId: currentWeekInfo.weekId,
+      userId: user.uid
+    };
+
+    console.log('Adding todo:', todoData);
 
     try {
-      await addDoc(collection(db, 'todos'), {
-        text: text.trim(),
-        completed: false,
-        createdAt: serverTimestamp(),
-        weekId: currentWeekInfo.weekId,
-        userId: user.uid
-      });
+      const docRef = await addDoc(collection(db, 'todos'), todoData);
+      console.log('Todo added successfully with ID:', docRef.id);
     } catch (error) {
       console.error('Error adding todo:', error);
     }

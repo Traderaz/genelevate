@@ -56,6 +56,7 @@ export function NetflixDashboardOverview() {
         items: [
           { name: 'Browse Courses', href: '/courses', icon: BookOpen, description: 'Explore our course library', premium: false },
           { name: 'Live Webinars', href: '/webinars', icon: Video, description: 'Join live learning sessions', premium: false },
+          { name: 'Weekly Tasks', href: '/todo', icon: Target, description: 'Plan and track your weekly goals', premium: false },
           { name: 'My Progress', href: '/dashboard/progress', icon: TrendingUp, description: 'Track your learning journey', premium: false },
           { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy, description: 'View your accomplishments', premium: false }
         ]
