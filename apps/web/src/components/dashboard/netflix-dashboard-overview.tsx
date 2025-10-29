@@ -36,7 +36,6 @@ import { useDashboardData } from '@/hooks/useDashboardData';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export function NetflixDashboardOverview() {
   const { user, userProfile } = useAuth();
@@ -192,7 +191,6 @@ export function NetflixDashboardOverview() {
   ];
 
   return (
-    <TooltipProvider>
       <div className="space-y-6">
         {/* Welcome Section */}
         <Card className="relative overflow-hidden border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
@@ -212,19 +210,12 @@ export function NetflixDashboardOverview() {
                   {userProfile?.role}
                 </Badge>
                 {(userProfile?.role === 'student' || userProfile?.role === 'admin') && (
-                  <Tooltip>
-                    <TooltipTrigger asChild>
                       <Button size="sm" variant="default" asChild className="ml-2">
                         <Link href="/ai">
                           <Sparkles className="w-4 h-4 mr-2" />
                           Ask AI
                         </Link>
                       </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Get personalized help from our AI assistant</p>
-                    </TooltipContent>
-                  </Tooltip>
                 )}
               </div>
             </div>
@@ -239,9 +230,7 @@ export function NetflixDashboardOverview() {
           {quickStats.map((stat, index) => {
             const IconComponent = stat.icon;
             return (
-              <Tooltip key={index}>
-                <TooltipTrigger asChild>
-                  <Card className="hover:shadow-lg transition-all duration-200 cursor-pointer group">
+                  <Card key={index} className="hover:shadow-lg transition-all duration-200 cursor-pointer group">
                     <CardContent className="p-4">
                       <div className="flex items-center space-x-3">
                         <div className={`p-2 rounded-lg ${stat.bgColor}`}>
@@ -258,11 +247,6 @@ export function NetflixDashboardOverview() {
                       </div>
                     </CardContent>
                   </Card>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Your {stat.label.toLowerCase()}: {stat.value}</p>
-                </TooltipContent>
-              </Tooltip>
             );
           })}
         </div>
@@ -303,9 +287,7 @@ export function NetflixDashboardOverview() {
                         const isAccessible = !item.premium || isPremiumUser || userProfile?.role === 'admin';
                         
                         return (
-                          <Tooltip key={itemIndex}>
-                            <TooltipTrigger asChild>
-                              <div className="relative">
+                              <div key={itemIndex} className="relative">
                                 {isAccessible ? (
                                   <Link
                                     href={item.href}
@@ -339,14 +321,6 @@ export function NetflixDashboardOverview() {
                                   </div>
                                 )}
                               </div>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>{item.description}</p>
-                              {item.premium && !isPremiumUser && userProfile?.role !== 'admin' && (
-                                <p className="text-xs text-muted-foreground mt-1">Requires premium subscription</p>
-                              )}
-                            </TooltipContent>
-                          </Tooltip>
                         );
                       })}
                     </div>
@@ -407,6 +381,5 @@ export function NetflixDashboardOverview() {
           <AddOnsWidget />
         </div>
       </div>
-    </TooltipProvider>
   );
 }

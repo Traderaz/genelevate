@@ -16,7 +16,6 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <ThemeProvider
       defaultTheme="dark"
-      storageKey="gen-elevate-theme"
     >
       <AuthProvider>
         <NotificationProvider>

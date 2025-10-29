@@ -38,7 +38,6 @@ import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { EnhancedThemeToggle } from '@/components/ui/enhanced-theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useAuth } from '@/contexts/auth-context';
 import { AIFloatingDock } from '@/components/ai/ai-floating-dock';
 import { useNotifications } from '@/contexts/notification-context';
@@ -255,8 +254,14 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       items: [
         { name: 'AI Assistant', href: '/ai', icon: Sparkles },
         { name: 'DNA Tracking', href: '/dna', icon: Zap },
-        { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
       ]
+    },
+    {
+      id: 'addons',
+      name: 'Add-Ons',
+      href: '/addons',
+      icon: ShoppingBag,
+      type: 'single' as const
     },
     {
       id: 'rewards',
@@ -275,7 +280,6 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
   ];
 
   return (
-    <TooltipProvider>
       <div className="min-h-screen bg-background">
         {/* Top Navigation Bar - Mobile Optimized */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-area-top ${
@@ -389,44 +393,28 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
           {/* Right Side - Mobile Optimized */}
           <div className="flex items-center gap-1 sm:gap-3">
             {/* Search - Hidden on mobile */}
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="hidden sm:flex">
-                    <Search className="w-5 h-5" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Search courses and content</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Button variant="ghost" size="icon" className="hidden sm:flex">
+              <Search className="w-5 h-5" />
+            </Button>
 
             {/* Notifications */}
             <div className="relative">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="icon"
-                    onClick={() => setIsNotificationOpen(!isNotificationOpen)}
-                    className="relative"
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+                className="relative"
+              >
+                <Bell className="w-5 h-5" />
+                {unreadCount > 0 && (
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center text-xs p-0"
                   >
-                    <Bell className="w-5 h-5" />
-                    {unreadCount > 0 && (
-                      <Badge 
-                        variant="destructive" 
-                        className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center text-xs p-0"
-                      >
-                        {unreadCount > 9 ? '9+' : unreadCount}
-                      </Badge>
-                    )}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Notifications {unreadCount > 0 && `(${unreadCount} unread)`}</p>
-                </TooltipContent>
-              </Tooltip>
+                    {unreadCount > 9 ? '9+' : unreadCount}
+                  </Badge>
+                )}
+              </Button>
               
               <NotificationDropdown 
                 isOpen={isNotificationOpen} 
@@ -746,6 +734,5 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
         {/* AI Floating Dock */}
         <AIFloatingDock />
       </div>
-    </TooltipProvider>
   );
 }

@@ -183,7 +183,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
     'subscription.stripeSubscriptionId': subscription.id,
     'subscription.stripeCustomerId': subscription.customer as string,
     'subscription.expiresAt': Timestamp.fromDate(
-      new Date(subscription.current_period_end * 1000)
+      new Date((subscription as any).current_period_end * 1000)
     ),
     updatedAt: Timestamp.now(),
   });
@@ -210,7 +210,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
     await userDoc.ref.update({
       'subscription.status': subscription.status === 'active' ? 'active' : 'inactive',
       'subscription.expiresAt': Timestamp.fromDate(
-        new Date(subscription.current_period_end * 1000)
+        new Date((subscription as any).current_period_end * 1000)
       ),
       updatedAt: Timestamp.now(),
     });
@@ -218,7 +218,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
     await db.collection('users').doc(userId).update({
       'subscription.status': subscription.status === 'active' ? 'active' : 'inactive',
       'subscription.expiresAt': Timestamp.fromDate(
-        new Date(subscription.current_period_end * 1000)
+        new Date((subscription as any).current_period_end * 1000)
       ),
       updatedAt: Timestamp.now(),
     });
@@ -253,7 +253,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
   console.log('Invoice payment succeeded:', invoice.id);
 
-  const subscriptionId = invoice.subscription as string;
+  const subscriptionId = (invoice as any).subscription as string;
   if (!subscriptionId) return;
 
   const usersSnapshot = await db.collection('users')
@@ -280,7 +280,7 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
   console.log('Invoice payment failed:', invoice.id);
 
-  const subscriptionId = invoice.subscription as string;
+  const subscriptionId = (invoice as any).subscription as string;
   if (!subscriptionId) return;
 
   const usersSnapshot = await db.collection('users')
