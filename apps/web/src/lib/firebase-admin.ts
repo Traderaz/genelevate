@@ -27,10 +27,10 @@ try {
         // Use individual credentials
         adminApp = initializeApp({
           credential: cert({
-            projectId,
-            clientEmail,
-            privateKey,
-          }),
+            project_id: projectId,
+            client_email: clientEmail,
+            private_key: privateKey,
+          } as any),
           projectId,
         });
       } else {

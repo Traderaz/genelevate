@@ -29,6 +29,9 @@ const mockDebates = [
     submissionCount: 47,
     participantCount: 45,
     viewCount: 234,
+    createdAt: new Date('2024-10-14T10:00:00Z'),
+    updatedAt: new Date('2024-10-20T15:30:00Z'),
+    createdBy: 'admin123',
   },
   {
     id: '2',
@@ -51,6 +54,9 @@ const mockDebates = [
     submissionCount: 0,
     participantCount: 0,
     viewCount: 12,
+    createdAt: new Date('2024-10-20T09:00:00Z'),
+    updatedAt: new Date('2024-10-20T09:00:00Z'),
+    createdBy: 'admin123',
   },
 ];
 

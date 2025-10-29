@@ -13,10 +13,10 @@ if (!getApps().length) {
   try {
     initializeApp({
       credential: cert({
-        projectId: process.env.FIREBASE_PROJECT_ID || 'dummy-project-id',
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL || 'dummy@example.com',
-        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n') || 'dummy-key',
-      }),
+        project_id: process.env.FIREBASE_PROJECT_ID || 'dummy-project-id',
+        client_email: process.env.FIREBASE_CLIENT_EMAIL || 'dummy@example.com',
+        private_key: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n') || 'dummy-key',
+      } as any),
     });
   } catch (error) {
     console.warn('Firebase Admin initialization failed during build:', error);

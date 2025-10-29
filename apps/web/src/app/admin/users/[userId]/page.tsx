@@ -230,7 +230,11 @@ export default function UserDetailsPage() {
     try {
       setSaving(true);
       const now = new Date();
-      let updatedSubscription = { ...user.subscription };
+      let updatedSubscription = { 
+        status: 'inactive',
+        plan: 'basic',
+        ...user.subscription 
+      };
 
       switch (action) {
         case 'upgrade':

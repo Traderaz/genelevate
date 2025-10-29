@@ -40,7 +40,7 @@ export function SubscriptionGuard({
   const effectivePlan = userProfile?.subscription?.plan || 'pro'; // Default to pro for testing
   const canAccessFeature = () => true; // Allow all features for testing
   const subscriptionLoading = false;
-  const upgradeSuggestions = [];
+  const upgradeSuggestions: Array<{ plan: keyof typeof planIcons; description: string; price: string; reason: string }> = [];
 
   // Combine all effects into one to maintain hooks order
   useEffect(() => {
@@ -100,8 +100,8 @@ export function SubscriptionGuard({
 
   // Show subscription required page
   const suggestedPlan = requiredPlan || upgradeSuggestions[0]?.plan;
-  const PlanIcon = suggestedPlan ? planIcons[suggestedPlan] : Lock;
-  const planColor = suggestedPlan ? planColors[suggestedPlan] : 'text-gray-600 bg-gray-100';
+  const PlanIcon = suggestedPlan ? (planIcons[suggestedPlan as keyof typeof planIcons] || Lock) : Lock;
+  const planColor = suggestedPlan ? (planColors[suggestedPlan as keyof typeof planColors] || 'text-gray-600 bg-gray-100') : 'text-gray-600 bg-gray-100';
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-6">
@@ -127,7 +127,7 @@ export function SubscriptionGuard({
             <p className="text-sm text-gray-400 mb-2">Your current plan:</p>
             <div className="flex items-center justify-center gap-2">
               {(() => {
-                const CurrentIcon = planIcons[effectivePlan];
+                const CurrentIcon = planIcons[effectivePlan as keyof typeof planIcons] || Lock;
                 return <CurrentIcon className="w-5 h-5" />;
               })()}
               <span className="font-semibold capitalize">{effectivePlan}</span>
@@ -141,8 +141,8 @@ export function SubscriptionGuard({
           
           <div className="space-y-3">
             {upgradeSuggestions.slice(0, 2).map((suggestion) => {
-              const SuggestionIcon = planIcons[suggestion.plan];
-              const suggestionColor = planColors[suggestion.plan];
+              const SuggestionIcon = planIcons[suggestion.plan] || Lock;
+              const suggestionColor = planColors[suggestion.plan] || 'text-gray-600 bg-gray-100';
               
               return (
                 <button
