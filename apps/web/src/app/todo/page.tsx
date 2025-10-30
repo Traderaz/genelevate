@@ -3,18 +3,21 @@
 import { useState } from 'react';
 import { useSimpleTodo } from '@/contexts/simple-firebase-todo';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
-import { Plus, Trash2, Check, Clock, CheckCircle, Calendar, Target, ChevronDown, ChevronUp } from 'lucide-react';
+import { Plus, Trash2, Check, Clock, CheckCircle, Calendar, Target, ChevronDown, ChevronUp, Edit2, Save, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const dynamic = 'force-dynamic';
 
 export default function TodoPage() {
-  const { todos, loading, currentWeekInfo, addTodo, toggleTodo, deleteTodo } = useSimpleTodo();
+  const { todos, loading, currentWeekInfo, addTodo, toggleTodo, deleteTodo, updateTodo } = useSimpleTodo();
   const [newTodoText, setNewTodoText] = useState('');
   const [newTodoDescription, setNewTodoDescription] = useState('');
   const [isAdding, setIsAdding] = useState(false);
   const [expandedTodos, setExpandedTodos] = useState<Set<string>>(new Set());
+  const [editingTodo, setEditingTodo] = useState<string | null>(null);
+  const [editText, setEditText] = useState('');
+  const [editDescription, setEditDescription] = useState('');
 
   const handleAddTodo = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +43,35 @@ export default function TodoPage() {
       newExpanded.add(todoId);
     }
     setExpandedTodos(newExpanded);
+  };
+
+  const startEditing = (todo: any) => {
+    setEditingTodo(todo.id);
+    setEditText(todo.text);
+    setEditDescription(todo.description || '');
+    // Expand the todo to show description field
+    const newExpanded = new Set(expandedTodos);
+    newExpanded.add(todo.id);
+    setExpandedTodos(newExpanded);
+  };
+
+  const cancelEditing = () => {
+    setEditingTodo(null);
+    setEditText('');
+    setEditDescription('');
+  };
+
+  const saveEdit = async (todoId: string) => {
+    if (!editText.trim()) return;
+    
+    try {
+      await updateTodo(todoId, editText, editDescription);
+      setEditingTodo(null);
+      setEditText('');
+      setEditDescription('');
+    } catch (error) {
+      console.error('Error updating todo:', error);
+    }
   };
 
   const completedCount = todos.filter(todo => todo.completed).length;
@@ -163,55 +195,101 @@ export default function TodoPage() {
                         </button>
                         
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between gap-4">
-                            <div className="flex-1">
-                              <h3 
-                                className={`text-lg font-medium transition-all duration-200 ${
-                                  todo.completed 
-                                    ? 'text-muted-foreground line-through' 
-                                    : 'text-foreground'
-                                }`}
-                              >
-                                {todo.text}
-                              </h3>
-                              {todo.description && (
-                                <div className="mt-2">
-                                  <button
-                                    onClick={() => toggleExpanded(todo.id)}
-                                    className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors text-sm"
-                                  >
-                                    {expandedTodos.has(todo.id) ? (
-                                      <>
-                                        <ChevronUp className="w-4 h-4" />
-                                        Hide details
-                                      </>
-                                    ) : (
-                                      <>
-                                        <ChevronDown className="w-4 h-4" />
-                                        Show details
-                                      </>
-                                    )}
-                                  </button>
-                                  {expandedTodos.has(todo.id) && (
-                                    <div className="mt-3 p-3 bg-muted/50 rounded-lg border border-border">
-                                      <p className={`text-sm leading-relaxed ${
-                                        todo.completed ? 'text-muted-foreground' : 'text-foreground'
-                                      }`}>
-                                        {todo.description}
-                                      </p>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
+                          {editingTodo === todo.id ? (
+                            // Edit Mode
+                            <div className="space-y-3">
+                              <input
+                                type="text"
+                                value={editText}
+                                onChange={(e) => setEditText(e.target.value)}
+                                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                placeholder="Task title"
+                                autoFocus
+                              />
+                              <textarea
+                                value={editDescription}
+                                onChange={(e) => setEditDescription(e.target.value)}
+                                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none h-20"
+                                placeholder="Description (optional)"
+                              />
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => saveEdit(todo.id)}
+                                  className="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors flex items-center gap-2"
+                                  disabled={!editText.trim()}
+                                >
+                                  <Save className="w-4 h-4" />
+                                  Save
+                                </button>
+                                <button
+                                  onClick={cancelEditing}
+                                  className="px-4 py-2 bg-muted text-foreground rounded-lg text-sm font-medium hover:bg-muted/80 transition-colors flex items-center gap-2"
+                                >
+                                  <X className="w-4 h-4" />
+                                  Cancel
+                                </button>
+                              </div>
                             </div>
-                            
-                            <button
-                              onClick={() => deleteTodo(todo.id)}
-                              className="text-muted-foreground hover:text-destructive transition-colors p-1 rounded opacity-0 group-hover:opacity-100"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
+                          ) : (
+                            // View Mode
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex-1">
+                                <h3 
+                                  className={`text-lg font-medium transition-all duration-200 ${
+                                    todo.completed 
+                                      ? 'text-muted-foreground line-through' 
+                                      : 'text-foreground'
+                                  }`}
+                                >
+                                  {todo.text}
+                                </h3>
+                                {todo.description && (
+                                  <div className="mt-2">
+                                    <button
+                                      onClick={() => toggleExpanded(todo.id)}
+                                      className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors text-sm"
+                                    >
+                                      {expandedTodos.has(todo.id) ? (
+                                        <>
+                                          <ChevronUp className="w-4 h-4" />
+                                          Hide details
+                                        </>
+                                      ) : (
+                                        <>
+                                          <ChevronDown className="w-4 h-4" />
+                                          Show details
+                                        </>
+                                      )}
+                                    </button>
+                                    {expandedTodos.has(todo.id) && (
+                                      <div className="mt-3 p-3 bg-muted/50 rounded-lg border border-border">
+                                        <p className={`text-sm leading-relaxed ${
+                                          todo.completed ? 'text-muted-foreground' : 'text-foreground'
+                                        }`}>
+                                          {todo.description}
+                                        </p>
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                              
+                              <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                  onClick={() => startEditing(todo)}
+                                  className="text-muted-foreground hover:text-primary transition-colors p-1 rounded"
+                                >
+                                  <Edit2 className="w-4 h-4" />
+                                </button>
+                                <button
+                                  onClick={() => deleteTodo(todo.id)}
+                                  className="text-muted-foreground hover:text-destructive transition-colors p-1 rounded"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>

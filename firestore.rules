@@ -131,15 +131,20 @@ service cloud.firestore {
                      (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
     }
 
-    // Courses collection - Public + Institution scoped
+    // Courses collection - Published courses readable by all authenticated users
     match /courses/{courseId} {
+      // All authenticated users can read published courses
       allow read: if isAuthenticated() && (
-        resource.data.accessLevel == 'public' ||
+        resource.data.published == true ||
         canAccessInstitutionData(resource.data.institutionId) ||
+        resource.data.accessLevel == 'public' ||
         (resource.data.accessLevel == 'cohort' && isInAllowedCohort(resource.data.allowedCohortIds))
       );
       
+      // Only admins and content creators can create/modify courses
       allow create, update, delete: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        hasRole('content-creator') ||
         canAccessInstitutionData(resource.data.institutionId)
       );
     }

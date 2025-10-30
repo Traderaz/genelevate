@@ -1,3 +1,8 @@
+import Link from 'next/link';
+import { getCourses } from '@/lib/services/courses';
+import { Badge } from '@/components/ui/badge';
+import { BookOpen, Users, Clock } from 'lucide-react';
+
 interface CourseGridProps {
   searchParams: {
     search?: string;
@@ -8,57 +13,100 @@ interface CourseGridProps {
   };
 }
 
-export function CourseGrid({ searchParams }: CourseGridProps) {
-  // Placeholder courses
-  const courses = [
-    {
-      id: '1',
-      title: 'GCSE Mathematics Mastery',
-      description: 'Complete GCSE mathematics preparation course',
-      subject: 'Mathematics',
-      difficulty: 'Intermediate',
-      duration: '12 weeks',
-      enrolled: 245,
-    },
-    {
-      id: '2',
-      title: 'A-Level Physics Excellence',
-      description: 'Advanced physics concepts and problem solving',
-      subject: 'Physics',
-      difficulty: 'Advanced',
-      duration: '16 weeks',
-      enrolled: 156,
-    },
-    {
-      id: '3',
-      title: 'English Literature Analysis',
-      description: 'Master literary analysis and essay writing',
-      subject: 'English',
-      difficulty: 'Intermediate',
-      duration: '10 weeks',
-      enrolled: 189,
-    },
-  ];
+export async function CourseGrid({ searchParams }: CourseGridProps) {
+  const courses = await getCourses({
+    search: searchParams.search,
+    subject: searchParams.subject,
+    yearGroup: searchParams.yearGroup,
+    difficulty: searchParams.difficulty,
+  });
+
+  if (courses.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">No courses found</h3>
+        <p className="text-gray-600">Try adjusting your filters or search terms</p>
+      </div>
+    );
+  }
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {courses.map((course) => (
-        <div key={course.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          <div className="p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">{course.title}</h3>
-            <p className="text-gray-600 text-sm mb-4">{course.description}</p>
-            <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-              <span>{course.subject}</span>
-              <span>{course.duration}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-500">{course.enrolled} enrolled</span>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors">
-                Enroll
-              </button>
-            </div>
+        <Link
+          key={course.id}
+          href={`/courses/${course.id}`}
+          className="group bg-[#1a1a1a] rounded-lg overflow-hidden border border-gray-800 hover:border-[#e50914] transition-all duration-300 hover:scale-105"
+        >
+          {/* Thumbnail */}
+          <div className="aspect-video bg-gradient-to-br from-[#e50914] to-[#831010] relative overflow-hidden">
+            {course.thumbnail ? (
+              <img
+                src={course.thumbnail}
+                alt={course.title}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <BookOpen className="w-16 h-16 text-white/30" />
+              </div>
+            )}
+            {course.featured && (
+              <div className="absolute top-3 right-3">
+                <Badge className="bg-[#e50914] text-white border-none">Featured</Badge>
+              </div>
+            )}
           </div>
-        </div>
+
+          {/* Content */}
+          <div className="p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Badge variant="outline" className="border-gray-700 text-gray-300">
+                {course.subject}
+              </Badge>
+              <Badge variant="outline" className="border-gray-700 text-gray-300 capitalize">
+                {course.difficulty}
+              </Badge>
+            </div>
+
+            <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#e50914] transition-colors">
+              {course.title}
+            </h3>
+            
+            <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+              {course.description}
+            </p>
+
+            {/* Metadata */}
+            <div className="flex items-center gap-4 text-sm text-gray-500">
+              <div className="flex items-center gap-1">
+                <BookOpen className="w-4 h-4" />
+                <span>{course.chapters.length} chapters</span>
+              </div>
+              {course.enrollmentCount !== undefined && course.enrollmentCount > 0 && (
+                <div className="flex items-center gap-1">
+                  <Users className="w-4 h-4" />
+                  <span>{course.enrollmentCount}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Tags */}
+            {course.tags && course.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-4">
+                {course.tags.slice(0, 3).map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs px-2 py-1 bg-gray-800 text-gray-400 rounded"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </Link>
       ))}
     </div>
   );

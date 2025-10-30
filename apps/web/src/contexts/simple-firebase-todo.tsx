@@ -40,6 +40,7 @@ interface SimpleTodoContextType {
   addTodo: (text: string, description?: string) => Promise<void>;
   toggleTodo: (id: string) => Promise<void>;
   deleteTodo: (id: string) => Promise<void>;
+  updateTodo: (id: string, text: string, description?: string) => Promise<void>;
 }
 
 const SimpleTodoContext = createContext<SimpleTodoContextType | undefined>(undefined);
@@ -176,13 +177,26 @@ export function SimpleTodoProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const updateTodo = async (id: string, text: string, description?: string) => {
+    try {
+      await updateDoc(doc(db, 'todos', id), {
+        text: text.trim(),
+        description: description?.trim() || ''
+      });
+    } catch (error) {
+      console.error('Error updating todo:', error);
+      throw error;
+    }
+  };
+
   const value = {
     todos,
     loading,
     currentWeekInfo,
     addTodo,
     toggleTodo,
-    deleteTodo
+    deleteTodo,
+    updateTodo
   };
 
   return (
