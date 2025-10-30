@@ -9,19 +9,9 @@ export function WebinarBanner() {
   const [timeUntil, setTimeUntil] = useState<string>('');
 
   useEffect(() => {
-    // TODO: Fetch next webinar from API
-    setNextWebinar({
-      id: '1',
-      title: 'Advanced Calculus: Integration Techniques',
-      scheduledAt: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours from now
-      host: {
-        name: 'Dr. Sarah Johnson',
-        avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face',
-      },
-      currentAttendees: 47,
-      maxAttendees: 100,
-      subject: 'Mathematics',
-    });
+    // TODO: Fetch next webinar from Firestore
+    // For now, show no upcoming webinar
+    setNextWebinar(null);
   }, []);
 
   useEffect(() => {

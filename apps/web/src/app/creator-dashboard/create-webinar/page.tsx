@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
+import { createWebinar } from '@/lib/services/webinars';
+import { storage } from '@/lib/firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { 
   ArrowLeft, 
   Check, 
@@ -16,7 +19,10 @@ import {
   Eye,
   Sparkles,
   Play,
-  Radio
+  Radio,
+  Loader2,
+  CheckCircle,
+  X
 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -36,13 +42,11 @@ export interface WebinarData {
   duration: number; // minutes
   timezone: string;
   
-  // Content
-  videoUrl?: string; // For pre-recorded
-  liveStreamUrl?: string; // For live (Zoom, YouTube, etc.)
-  platform?: 'zoom' | 'youtube' | 'vimeo' | 'other';
+  // Content - simplified to just embedUrl
+  embedUrl: string; // YouTube, Vimeo, or Zoom embed URL
+  platform: 'zoom' | 'youtube' | 'vimeo';
   
-  // Access Control
-  requiredPlan: 'basic' | 'premium' | 'pro';
+  // Access Control - handled automatically on backend
   maxAttendees?: number;
   
   // Additional Info
@@ -55,18 +59,19 @@ export interface WebinarData {
   // Features
   enableChat: boolean;
   enableQA: boolean;
-  enableRecording: boolean;
-  sendReminders: boolean;
   
   status: 'draft' | 'scheduled' | 'live' | 'completed' | 'cancelled';
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 export default function CreateWebinar() {
   const router = useRouter();
   const { user, userProfile } = useAuth();
   const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
   
   const [webinarData, setWebinarData] = useState<WebinarData>({
     title: '',
@@ -77,7 +82,8 @@ export default function CreateWebinar() {
     scheduledTime: '',
     duration: 60,
     timezone: 'Europe/London',
-    requiredPlan: 'basic',
+    embedUrl: '',
+    platform: 'youtube',
     thumbnail: '',
     tags: [],
     yearGroups: [],
@@ -85,43 +91,161 @@ export default function CreateWebinar() {
     hostBio: '',
     enableChat: true,
     enableQA: true,
-    enableRecording: true,
-    sendReminders: true,
-    status: 'draft',
-    createdAt: new Date(),
-    updatedAt: new Date()
+    status: 'draft'
   });
 
   const updateWebinarData = (updates: Partial<WebinarData>) => {
     setWebinarData(prev => ({
       ...prev,
-      ...updates,
-      updatedAt: new Date()
+      ...updates
     }));
+    setError(null);
+  };
+
+  const handleVideoUpload = async (file: File) => {
+    if (!user) return;
+
+    // Validate file size (5GB = 5 * 1024 * 1024 * 1024 bytes)
+    const maxSize = 5 * 1024 * 1024 * 1024;
+    if (file.size > maxSize) {
+      setError('File size must be less than 5GB');
+      return;
+    }
+
+    setIsUploading(true);
+    setUploadProgress(0);
+    setError(null);
+
+    try {
+      // Create a unique filename
+      const timestamp = Date.now();
+      const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+      const storagePath = `webinars/${user.uid}/${timestamp}_${sanitizedFileName}`;
+      const storageRef = ref(storage, storagePath);
+
+      // Upload with progress tracking
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(Math.round(progress));
+        },
+        (error) => {
+          console.error('Upload error:', error);
+          setError(`Upload failed: ${error.message}`);
+          setIsUploading(false);
+        },
+        async () => {
+          // Upload complete - get download URL
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          
+          // Update webinar data with the video URL
+          updateWebinarData({ 
+            embedUrl: downloadURL,
+            platform: 'youtube' // Will use custom player for uploaded videos
+          });
+          
+          setUploadedFileName(file.name);
+          setIsUploading(false);
+          setUploadProgress(100);
+        }
+      );
+    } catch (error: any) {
+      console.error('Upload error:', error);
+      setError(`Upload failed: ${error.message}`);
+      setIsUploading(false);
+    }
+  };
+
+  const handleRemoveUpload = () => {
+    setUploadedFileName(null);
+    setUploadProgress(0);
+    updateWebinarData({ embedUrl: '' });
+  };
+
+  const validateWebinar = (): boolean => {
+    if (!webinarData.title.trim()) {
+      setError('Please enter a webinar title');
+      return false;
+    }
+    if (!webinarData.description.trim()) {
+      setError('Please enter a description');
+      return false;
+    }
+    if (!webinarData.category) {
+      setError('Please select a category');
+      return false;
+    }
+    if (!webinarData.scheduledDate) {
+      setError('Please select a date');
+      return false;
+    }
+    if (!webinarData.scheduledTime) {
+      setError('Please select a time');
+      return false;
+    }
+    if (!webinarData.embedUrl.trim()) {
+      setError('Please enter the video/stream URL');
+      return false;
+    }
+    if (webinarData.yearGroups.length === 0) {
+      setError('Please select at least one year group');
+      return false;
+    }
+    return true;
   };
 
   const handleSaveDraft = async () => {
+    if (!user) return;
+    
     setIsSaving(true);
+    setError(null);
+    
     try {
-      // TODO: Save to Firestore as draft
-      console.log('Saving webinar draft:', webinarData);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await createWebinar({
+        ...webinarData,
+        status: 'draft',
+        createdBy: user.uid
+      });
+      
+      setSuccess(true);
+      setTimeout(() => {
+        router.push('/creator-dashboard');
+      }, 1500);
     } catch (error) {
       console.error('Error saving draft:', error);
+      setError('Failed to save draft. Please try again.');
     } finally {
       setIsSaving(false);
     }
   };
 
   const handlePublish = async () => {
+    if (!user) return;
+    
+    if (!validateWebinar()) {
+      return;
+    }
+    
     setIsSaving(true);
+    setError(null);
+    
     try {
-      // TODO: Validate and publish to Firestore
-      console.log('Publishing webinar:', webinarData);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      router.push('/creator-dashboard');
+      await createWebinar({
+        ...webinarData,
+        status: 'scheduled',
+        createdBy: user.uid
+      });
+      
+      setSuccess(true);
+      setTimeout(() => {
+        router.push('/creator-dashboard');
+      }, 1500);
     } catch (error) {
       console.error('Error publishing webinar:', error);
+      setError('Failed to publish webinar. Please try again.');
     } finally {
       setIsSaving(false);
     }
@@ -137,14 +261,33 @@ export default function CreateWebinar() {
     'Year 11', 'Year 12', 'Year 13', 'A-Level', 'All Years'
   ];
 
-  const plans = [
-    { value: 'basic', label: 'Basic', description: 'All paying members' },
-    { value: 'premium', label: 'Premium', description: 'Premium + Pro members' },
-    { value: 'pro', label: 'Pro', description: 'Pro members only' }
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      {/* Success Message */}
+      {success && (
+        <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 animate-in slide-in-from-right">
+          <CheckCircle className="w-5 h-5" />
+          <div>
+            <p className="font-semibold">Webinar {webinarData.status === 'draft' ? 'saved as draft' : 'published successfully'}!</p>
+            <p className="text-sm opacity-90">Redirecting to dashboard...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Error Message */}
+      {error && (
+        <div className="fixed top-4 right-4 z-50 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 animate-in slide-in-from-right">
+          <div className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center font-bold">!</div>
+          <div>
+            <p className="font-semibold">Error</p>
+            <p className="text-sm opacity-90">{error}</p>
+          </div>
+          <button onClick={() => setError(null)} className="ml-4 hover:opacity-75">
+            ✕
+          </button>
+        </div>
+      )}
+      
       {/* Header */}
       <div className="bg-card/95 backdrop-blur-xl border-b border-border shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -173,19 +316,37 @@ export default function CreateWebinar() {
                 variant="outline" 
                 size="sm"
                 onClick={handleSaveDraft}
-                disabled={isSaving}
+                disabled={isSaving || success}
               >
-                <Save className="w-4 h-4 mr-2" />
-                {isSaving ? 'Saving...' : 'Save Draft'}
+                {isSaving ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Draft
+                  </>
+                )}
               </Button>
               <Button 
                 size="sm"
                 onClick={handlePublish}
-                disabled={isSaving || !webinarData.title}
-                className="bg-gradient-to-r from-primary to-primary/80"
+                disabled={isSaving || success || !webinarData.title}
+                className="bg-gradient-to-r from-[#e50914] to-[#b00710]"
               >
-                <Upload className="w-4 h-4 mr-2" />
-                {isSaving ? 'Publishing...' : 'Publish Webinar'}
+                {isSaving ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Publishing...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-4 h-4 mr-2" />
+                    Publish Webinar
+                  </>
+                )}
               </Button>
             </div>
           </div>
@@ -350,6 +511,8 @@ export default function CreateWebinar() {
                   type="date"
                   value={webinarData.scheduledDate}
                   onChange={(e) => updateWebinarData({ scheduledDate: e.target.value })}
+                  className="[color-scheme:dark]"
+                  style={{ colorScheme: 'dark' }}
                 />
               </div>
 
@@ -362,6 +525,8 @@ export default function CreateWebinar() {
                   type="time"
                   value={webinarData.scheduledTime}
                   onChange={(e) => updateWebinarData({ scheduledTime: e.target.value })}
+                  className="[color-scheme:dark]"
+                  style={{ colorScheme: 'dark' }}
                 />
               </div>
             </div>
@@ -386,30 +551,29 @@ export default function CreateWebinar() {
         <Card>
           <CardHeader>
             <CardTitle>
-              {webinarData.type === 'live' ? 'Live Stream Link' : 'Video Upload'}
+              {webinarData.type === 'live' ? 'Live Stream Link' : 'Video Content'}
             </CardTitle>
             <CardDescription>
               {webinarData.type === 'live' 
-                ? 'Provide the link to your live stream'
-                : 'Upload your pre-recorded webinar video'
+                ? 'Provide your Zoom, YouTube Live, or Vimeo Live embed URL'
+                : 'Upload your video or provide a YouTube/Vimeo link'
               }
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-6">
             {webinarData.type === 'live' ? (
+              // Live stream - URL only
               <>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Platform</label>
+                  <label className="text-sm font-medium mb-2 block">Platform *</label>
                   <select
                     value={webinarData.platform}
                     onChange={(e) => updateWebinarData({ platform: e.target.value as any })}
                     className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm"
                   >
-                    <option value="">Select platform</option>
-                    <option value="zoom">Zoom</option>
                     <option value="youtube">YouTube Live</option>
                     <option value="vimeo">Vimeo Live</option>
-                    <option value="other">Other</option>
+                    <option value="zoom">Zoom</option>
                   </select>
                 </div>
 
@@ -419,67 +583,172 @@ export default function CreateWebinar() {
                     Live Stream URL *
                   </label>
                   <Input
-                    placeholder="https://zoom.us/j/... or https://youtube.com/live/..."
-                    value={webinarData.liveStreamUrl}
-                    onChange={(e) => updateWebinarData({ liveStreamUrl: e.target.value })}
+                    placeholder={
+                      webinarData.platform === 'zoom' 
+                        ? 'https://zoom.us/j/...' 
+                        : webinarData.platform === 'youtube'
+                        ? 'https://www.youtube.com/watch?v=...'
+                        : 'https://vimeo.com/...'
+                    }
+                    value={webinarData.embedUrl}
+                    onChange={(e) => updateWebinarData({ embedUrl: e.target.value })}
                   />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    This link will only be visible to registered paying members
+                  <p className="text-xs text-orange-600 dark:text-orange-400 mt-2">
+                    🔒 This link will only be visible to registered paying members
                   </p>
                 </div>
               </>
             ) : (
-              <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary transition-colors cursor-pointer">
-                <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                <p className="text-sm font-medium mb-2">Upload webinar video</p>
-                <p className="text-xs text-muted-foreground mb-4">
-                  MP4, WebM (max. 2GB)
-                </p>
-                <Button size="sm">
-                  Choose File
-                </Button>
-              </div>
+              // Pre-recorded - Upload OR URL
+              <>
+                <div className="space-y-4">
+                  {/* Upload Option */}
+                  <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary transition-colors">
+                    {isUploading ? (
+                      // Upload Progress
+                      <div className="space-y-4">
+                        <Loader2 className="w-12 h-12 mx-auto text-primary animate-spin" />
+                        <div>
+                          <p className="text-sm font-medium mb-2">Uploading Video...</p>
+                          <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
+                            <div 
+                              className="bg-gradient-to-r from-[#e50914] to-[#b00710] h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${uploadProgress}%` }}
+                            />
+                          </div>
+                          <p className="text-xs text-muted-foreground">{uploadProgress}% complete</p>
+                        </div>
+                      </div>
+                    ) : uploadedFileName ? (
+                      // Upload Complete
+                      <div className="space-y-4">
+                        <div className="w-12 h-12 mx-auto bg-green-500/10 rounded-full flex items-center justify-center">
+                          <CheckCircle className="w-8 h-8 text-green-500" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-green-600 dark:text-green-400 mb-1">
+                            Video uploaded successfully!
+                          </p>
+                          <p className="text-xs text-muted-foreground mb-3">{uploadedFileName}</p>
+                          <Button
+                            type="button"
+                            size="sm"
+                            variant="outline"
+                            onClick={handleRemoveUpload}
+                          >
+                            <X className="w-4 h-4 mr-2" />
+                            Remove & Upload Different File
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      // Upload Form
+                      <>
+                        <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+                        <p className="text-sm font-medium mb-2">Upload Video File</p>
+                        <p className="text-xs text-muted-foreground mb-4">
+                          MP4, WebM, MOV (max. 5GB) • Recommended: 1080p
+                        </p>
+                        <input
+                          type="file"
+                          accept="video/*"
+                          className="hidden"
+                          id="video-upload"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              handleVideoUpload(file);
+                            }
+                          }}
+                          disabled={isUploading}
+                        />
+                        <label htmlFor="video-upload">
+                          <Button type="button" size="sm" asChild disabled={isUploading}>
+                            <span className="cursor-pointer">Choose File</span>
+                          </Button>
+                        </label>
+                        <p className="text-xs text-green-600 dark:text-green-400 mt-3">
+                          ✓ Videos are automatically stored securely and optimized for streaming
+                        </p>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-border"></div>
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-card px-2 text-muted-foreground">Or provide a link</span>
+                    </div>
+                  </div>
+
+                  {/* URL Option */}
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Platform</label>
+                      <select
+                        value={webinarData.platform}
+                        onChange={(e) => updateWebinarData({ platform: e.target.value as any })}
+                        className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm"
+                      >
+                        <option value="youtube">YouTube</option>
+                        <option value="vimeo">Vimeo</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">
+                        <LinkIcon className="w-4 h-4 inline mr-1" />
+                        Video URL
+                      </label>
+                      <Input
+                        placeholder={
+                          webinarData.platform === 'youtube'
+                            ? 'https://www.youtube.com/watch?v=...'
+                            : 'https://vimeo.com/...'
+                        }
+                        value={webinarData.embedUrl}
+                        onChange={(e) => updateWebinarData({ embedUrl: e.target.value })}
+                      />
+                      <p className="text-xs text-muted-foreground mt-2">
+                        💡 {webinarData.platform === 'youtube' ? 'Use the share URL from YouTube' : 'Use the video URL from Vimeo'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                  <p className="text-sm text-blue-700 dark:text-blue-300">
+                    <strong>Scheduled Release:</strong> This video will go live to students at your scheduled date and time
+                  </p>
+                </div>
+              </>
             )}
           </CardContent>
         </Card>
 
-        {/* Access Control - PAYWALL */}
-        <Card className="border-primary/50">
+        {/* Access Control - Auto Paywall Info */}
+        <Card className="border-green-500/50 bg-green-500/5">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-green-600 dark:text-green-400">
               <Users className="w-5 h-5" />
               Access Control
             </CardTitle>
             <CardDescription>
-              All webinars are behind a paywall - only paying members can attend
+              Automatic paywall - only members with active paid subscriptions can access
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div>
-              <label className="text-sm font-medium mb-2 block">Required Membership Plan *</label>
-              <div className="space-y-3">
-                {plans.map(plan => (
-                  <button
-                    key={plan.value}
-                    onClick={() => updateWebinarData({ requiredPlan: plan.value as any })}
-                    className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
-                      webinarData.requiredPlan === plan.value
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border hover:border-primary/50'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-semibold">{plan.label}</h4>
-                        <p className="text-sm text-muted-foreground">{plan.description}</p>
-                      </div>
-                      {webinarData.requiredPlan === plan.value && (
-                        <Check className="w-5 h-5 text-primary" />
-                      )}
-                    </div>
-                  </button>
-                ))}
-              </div>
+          <CardContent className="space-y-4">
+            <div className="bg-background/50 rounded-lg p-4 space-y-2">
+              <p className="text-sm text-muted-foreground">
+                🔒 <strong>All webinars are automatically protected</strong>
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Only users with active Basic, Premium, or Pro subscriptions can view and register for webinars.
+                Non-subscribers will be redirected to the subscription page.
+              </p>
             </div>
 
             {webinarData.type === 'live' && (
@@ -497,7 +766,7 @@ export default function CreateWebinar() {
                   min="1"
                 />
                 <p className="text-xs text-muted-foreground mt-1">
-                  Limit attendees for more intimate sessions
+                  Limit attendees for more intimate live sessions
                 </p>
               </div>
             )}
@@ -536,65 +805,37 @@ export default function CreateWebinar() {
                 className="w-5 h-5"
               />
             </label>
-
-            {webinarData.type === 'live' && (
-              <label className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-accent/50 cursor-pointer">
-                <div>
-                  <p className="font-medium">Record Session</p>
-                  <p className="text-sm text-muted-foreground">Save recording for on-demand viewing</p>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={webinarData.enableRecording}
-                  onChange={(e) => updateWebinarData({ enableRecording: e.target.checked })}
-                  className="w-5 h-5"
-                />
-              </label>
-            )}
-
-            <label className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-accent/50 cursor-pointer">
-              <div>
-                <p className="font-medium">Send Email Reminders</p>
-                <p className="text-sm text-muted-foreground">Notify registered students before the webinar</p>
-              </div>
-              <input
-                type="checkbox"
-                checked={webinarData.sendReminders}
-                onChange={(e) => updateWebinarData({ sendReminders: e.target.checked })}
-                className="w-5 h-5"
-              />
-            </label>
           </CardContent>
         </Card>
 
-        {/* Preview Summary */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Summary</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Type</span>
-                <Badge>{webinarData.type === 'live' ? 'Live Stream' : 'Pre-recorded'}</Badge>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Required Plan</span>
-                <Badge variant="secondary" className="capitalize">{webinarData.requiredPlan}</Badge>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Duration</span>
-                <span className="font-medium">{webinarData.duration} minutes</span>
-              </div>
-              {webinarData.scheduledDate && (
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Scheduled</span>
-                  <span className="font-medium">{webinarData.scheduledDate} at {webinarData.scheduledTime}</span>
+            {/* Preview Summary */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Summary</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Type</span>
+                    <Badge>{webinarData.type === 'live' ? 'Live Stream' : 'Pre-recorded'}</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Access</span>
+                    <Badge variant="secondary" className="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">Paid Members Only</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Duration</span>
+                    <span className="font-medium">{webinarData.duration} minutes</span>
+                  </div>
+                  {webinarData.scheduledDate && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Scheduled</span>
+                      <span className="font-medium">{webinarData.scheduledDate} at {webinarData.scheduledTime}</span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
       </div>
     </div>
   );

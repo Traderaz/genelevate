@@ -5,35 +5,41 @@ import Link from 'next/link';
 import { Play, Video, Users, Calendar, Clock, Star, Zap } from 'lucide-react';
 
 export function NetflixWebinarBanner() {
-  const liveWebinar = {
-    id: 1,
-    title: 'A-Level Physics: Quantum Mechanics Deep Dive',
-    subtitle: 'Live Interactive Session',
-    description: 'Join Dr. Michael Chen for an intensive exploration of quantum mechanics principles. Interactive Q&A, real-time problem solving, and exam preparation.',
-    instructor: 'Dr. Michael Chen',
-    startTime: '3:00 PM Today',
-    duration: '90 minutes',
-    participants: 234,
-    rating: 4.8,
-    isLive: true,
-    thumbnail: '/api/placeholder/600/400'
-  };
+  // TODO: Fetch webinars from Firestore
+  const liveWebinar = null;
+  const upcomingWebinar = null;
 
-  const upcomingWebinar = {
-    id: 2,
-    title: 'GCSE Mathematics: Algebra Mastery Workshop',
-    subtitle: 'Tomorrow at 10:00 AM',
-    description: 'Master algebraic equations, inequalities, and graphing techniques in this comprehensive workshop designed for GCSE students.',
-    instructor: 'Prof. Sarah Williams',
-    startTime: 'Tomorrow, 10:00 AM',
-    duration: '75 minutes',
-    participants: 189,
-    rating: 4.9,
-    isLive: false,
-    thumbnail: '/api/placeholder/600/400'
-  };
+  const [activeWebinar, setActiveWebinar] = useState<any>(null);
 
-  const [activeWebinar, setActiveWebinar] = useState(liveWebinar);
+  // If no webinars, show empty state
+  if (!liveWebinar && !upcomingWebinar) {
+    return (
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 p-12">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#e50914]/10 via-transparent to-[#e50914]/5"></div>
+        <div className="relative text-center space-y-4">
+          <Video className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+          <h1 className="text-3xl font-bold text-white">Live Interactive Webinars</h1>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Join expert-led live sessions and workshops. Check back soon for upcoming webinars.
+          </p>
+          <div className="flex items-center justify-center gap-6 text-gray-500 pt-4">
+            <div className="flex items-center gap-2">
+              <Video className="w-5 h-5" />
+              <span>HD Video Quality</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              <span>Interactive Chat</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Calendar className="w-5 h-5" />
+              <span>Live Q&A</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-card via-card/95 to-card/80 border border-border">
@@ -42,7 +48,7 @@ export function NetflixWebinarBanner() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/20 rounded-full blur-3xl"></div>
       
       {/* Live Indicator */}
-      {activeWebinar.isLive && (
+      {activeWebinar?.isLive && (
         <div className="absolute top-6 left-6 z-20">
           <div className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-full text-sm font-bold animate-pulse">
             <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
@@ -193,25 +199,6 @@ export function NetflixWebinarBanner() {
           </div>
         </div>
 
-        {/* Quick Stats */}
-        <div className="mt-12 pt-8 border-t border-border">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { label: 'Live Sessions Today', value: '3', icon: Video },
-              { label: 'Total Participants', value: '1.2K', icon: Users },
-              { label: 'Average Rating', value: '4.9', icon: Star },
-              { label: 'Sessions This Week', value: '24', icon: Calendar }
-            ].map((stat, index) => (
-              <div key={stat.label} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/20 rounded-full mb-2">
-                  <stat.icon className="w-6 h-6 text-primary" />
-                </div>
-                <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

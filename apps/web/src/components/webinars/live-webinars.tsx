@@ -23,38 +23,10 @@ export function LiveWebinars() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: Fetch live webinars from API
-    setTimeout(() => {
-      setLiveWebinars([
-        {
-          id: '1',
-          title: 'Physics: Quantum Mechanics Deep Dive',
-          host: {
-            name: 'Dr. Michael Chen',
-            avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face',
-          },
-          currentAttendees: 73,
-          maxAttendees: 100,
-          startedAt: new Date(Date.now() - 15 * 60 * 1000), // Started 15 minutes ago
-          subject: 'Physics',
-          thumbnail: 'https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=300&h=200&fit=crop',
-        },
-        {
-          id: '2',
-          title: 'English Literature: Shakespeare Analysis',
-          host: {
-            name: 'Prof. Emily Rodriguez',
-            avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face',
-          },
-          currentAttendees: 45,
-          maxAttendees: 80,
-          startedAt: new Date(Date.now() - 5 * 60 * 1000), // Started 5 minutes ago
-          subject: 'English',
-          thumbnail: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=200&fit=crop',
-        },
-      ]);
-      setLoading(false);
-    }, 1000);
+    // TODO: Fetch live webinars from Firestore
+    // For now, show no live webinars
+    setLiveWebinars([]);
+    setLoading(false);
   }, []);
 
   const formatDuration = (startTime: Date) => {
@@ -79,15 +51,7 @@ export function LiveWebinars() {
   }
 
   if (liveWebinars.length === 0) {
-    return (
-      <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg border p-6 text-center">
-        <Video className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-        <h3 className="font-medium text-gray-900 mb-2">No Live Webinars</h3>
-        <p className="text-gray-600 text-sm">
-          Check back later or browse upcoming webinars below
-        </p>
-      </div>
-    );
+    return null; // Don't show anything if no live webinars
   }
 
   return (

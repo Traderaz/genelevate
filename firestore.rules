@@ -161,16 +161,31 @@ service cloud.firestore {
                      (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
     }
 
-    // Webinars collection - Public + Institution scoped
+    // Webinars collection - Authenticated users can read, creators can create
     match /webinars/{webinarId} {
+      // All authenticated users can read published webinars
+      allow read: if isAuthenticated();
+      
+      // Content creators and admins can create/modify webinars
+      allow create, update, delete: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        hasRole('content-creator') ||
+        canAccessInstitutionData(resource.data.institutionId)
+      );
+    }
+
+    // Webinar registrations - Users can register themselves
+    match /webinarRegistrations/{registrationId} {
       allow read: if isAuthenticated() && (
-        resource.data.accessLevel == 'public' ||
-        canAccessInstitutionData(resource.data.institutionId) ||
-        (resource.data.accessLevel == 'cohort' && isInAllowedCohort(resource.data.allowedCohortIds))
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin()
       );
       
-      allow create, update, delete: if isAuthenticated() && (
-        canAccessInstitutionData(resource.data.institutionId)
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      
+      allow update, delete: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin()
       );
     }
 
