@@ -25,7 +25,6 @@ import { EnhancedThemeToggle } from '@/components/ui/enhanced-theme-toggle';
 import { RoleBasedNavigation } from '@/components/ui/role-based-navigation';
 import { NotificationDropdown } from '@/components/ui/notification-dropdown';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { AIFloatingDock } from '@/components/ai/ai-floating-dock';
 import { cn } from '@/lib/utils';
 
 interface EnhancedDashboardLayoutProps {
@@ -420,9 +419,6 @@ export function EnhancedDashboardLayout({ children }: EnhancedDashboardLayoutPro
             </div>
           </main>
         </div>
-
-        {/* AI Floating Dock */}
-        <AIFloatingDock />
       </div>
     </TooltipProvider>
   );

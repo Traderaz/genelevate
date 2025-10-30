@@ -43,7 +43,6 @@ import { EnhancedThemeToggle } from '@/components/ui/enhanced-theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/contexts/auth-context';
-import { AIFloatingDock } from '@/components/ai/ai-floating-dock';
 import { useNotifications } from '@/contexts/notification-context';
 import { NotificationDropdown } from '@/components/ui/notification-dropdown';
 
@@ -751,9 +750,6 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
           {children}
         </div>
       </main>
-
-        {/* AI Floating Dock */}
-        <AIFloatingDock />
       </div>
   );
 }
