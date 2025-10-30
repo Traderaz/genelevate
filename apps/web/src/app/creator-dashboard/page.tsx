@@ -102,23 +102,87 @@ export default function CreatorDashboard() {
       if (!user) return;
 
       try {
-        // TODO: Implement Firestore queries to fetch:
-        // 1. Creator's courses and webinars
-        // 2. Analytics data (views, enrollments, revenue)
-        // 3. Recent activity logs
+        const { collection, query, where, getDocs, orderBy } = await import('firebase/firestore');
+        const { db } = await import('@/lib/firebase-client');
+
+        // Fetch creator's courses
+        const coursesRef = collection(db, 'courses');
+        const coursesQuery = query(coursesRef, where('createdBy', '==', user.uid));
+        const coursesSnapshot = await getDocs(coursesQuery);
         
-        // For now, set empty state until content is created
-        setContent([]);
+        const courses: ContentItem[] = coursesSnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            title: data.title,
+            type: 'course',
+            status: data.status || 'draft',
+            views: data.views || 0,
+            rating: data.rating || 0,
+            enrollments: data.enrollmentCount || 0,
+            completionRate: data.completionRate || 0,
+            revenue: 0, // TODO: Calculate from enrollments
+            duration: `${data.chapters?.length || 0} chapters`,
+            thumbnail: data.thumbnail,
+            createdAt: data.createdAt?.toDate() || new Date(),
+            updatedAt: data.updatedAt?.toDate() || new Date(),
+            publishedAt: data.publishedAt?.toDate(),
+          };
+        });
+
+        // Fetch creator's webinars
+        const webinarsRef = collection(db, 'webinars');
+        const webinarsQuery = query(webinarsRef, where('createdBy', '==', user.uid));
+        const webinarsSnapshot = await getDocs(webinarsQuery);
+        
+        const webinars: ContentItem[] = webinarsSnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            title: data.title,
+            type: 'webinar',
+            status: data.status || 'scheduled',
+            views: data.views || 0,
+            rating: data.rating || 0,
+            enrollments: data.registeredCount || 0,
+            completionRate: 0,
+            revenue: 0, // TODO: Calculate from registrations
+            duration: `${data.duration || 0} min`,
+            thumbnail: data.thumbnail,
+            createdAt: data.createdAt?.toDate() || new Date(),
+            updatedAt: data.updatedAt?.toDate() || new Date(),
+            publishedAt: data.scheduledAt?.toDate(),
+          };
+        });
+
+        // Combine and sort by creation date
+        const allContent = [...courses, ...webinars].sort((a, b) => 
+          b.createdAt.getTime() - a.createdAt.getTime()
+        );
+
+        setContent(allContent);
+
+        // Calculate analytics
+        const totalEnrollments = allContent.reduce((sum, item) => sum + item.enrollments, 0);
+        const totalViews = allContent.reduce((sum, item) => sum + item.views, 0);
+        const ratingsSum = allContent.reduce((sum, item) => sum + (item.rating > 0 ? item.rating : 0), 0);
+        const ratingsCount = allContent.filter(item => item.rating > 0).length;
+        const averageRating = ratingsCount > 0 ? ratingsSum / ratingsCount : 0;
+        const completionSum = allContent.reduce((sum, item) => sum + item.completionRate, 0);
+        const averageCompletionRate = allContent.length > 0 ? completionSum / allContent.length : 0;
+
         setAnalytics({
-          totalContent: 0,
-          totalViews: 0,
-          totalEnrollments: 0,
-          averageRating: 0,
-          pendingApproval: 0,
-          totalRevenue: 0,
-          averageCompletionRate: 0,
-          monthlyGrowth: 0,
-          topPerformingContent: [],
+          totalContent: allContent.length,
+          totalViews,
+          totalEnrollments,
+          averageRating,
+          pendingApproval: allContent.filter(item => item.status === 'pending').length,
+          totalRevenue: 0, // TODO: Calculate from actual revenue data
+          averageCompletionRate,
+          monthlyGrowth: 0, // TODO: Calculate from historical data
+          topPerformingContent: [...allContent]
+            .sort((a, b) => b.enrollments - a.enrollments)
+            .slice(0, 3),
           recentActivity: []
         });
       } catch (error) {
