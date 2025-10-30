@@ -72,6 +72,7 @@ export default function CreatorDashboard() {
   const { user, userProfile, loading, logout } = useAuth();
   const router = useRouter();
   const [content, setContent] = useState<ContentItem[]>([]);
+  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [analytics, setAnalytics] = useState<AnalyticsData>({
     totalContent: 0,
     totalViews: 0,
@@ -103,7 +104,7 @@ export default function CreatorDashboard() {
 
       try {
         const { collection, query, where, getDocs, orderBy } = await import('firebase/firestore');
-        const { db } = await import('@/lib/firebase-client');
+        const { db } = await import('@/lib/firebase');
 
         // Fetch creator's courses
         const coursesRef = collection(db, 'courses');
@@ -208,6 +209,28 @@ export default function CreatorDashboard() {
 
   // Check if creator is approved
   const isApproved = (userProfile as any)?.isApproved !== false;
+
+  const handleDelete = async (itemId: string, itemType: 'course' | 'webinar') => {
+    if (!user) return;
+
+    try {
+      if (itemType === 'webinar') {
+        const { deleteWebinar } = await import('@/lib/services/webinars');
+        await deleteWebinar(itemId);
+      } else {
+        const { deleteDoc, doc } = await import('firebase/firestore');
+        const { db } = await import('@/lib/firebase');
+        await deleteDoc(doc(db, 'courses', itemId));
+      }
+
+      // Remove from local state
+      setContent(prev => prev.filter(item => item.id !== itemId));
+      setDeleteConfirm(null);
+    } catch (error) {
+      console.error('Error deleting content:', error);
+      alert('Failed to delete. Please try again.');
+    }
+  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -451,13 +474,39 @@ export default function CreatorDashboard() {
                                 {getStatusIcon(item.status)}
                                 {item.status}
                               </Badge>
-                              <Button size="sm" variant="outline">
-                                <Edit className="w-4 h-4 mr-1" />
-                                Edit
+                              <Button size="sm" variant="outline" asChild>
+                                <Link href={item.type === 'webinar' ? `/creator-dashboard/edit-webinar/${item.id}` : `/creator-dashboard/edit-course/${item.id}`}>
+                                  <Edit className="w-4 h-4 mr-1" />
+                                  Edit
+                                </Link>
                               </Button>
-                              <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-destructive">
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
+                              {deleteConfirm === item.id ? (
+                                <div className="flex items-center gap-2">
+                                  <Button 
+                                    size="sm" 
+                                    variant="destructive"
+                                    onClick={() => handleDelete(item.id, item.type)}
+                                  >
+                                    Confirm
+                                  </Button>
+                                  <Button 
+                                    size="sm" 
+                                    variant="ghost"
+                                    onClick={() => setDeleteConfirm(null)}
+                                  >
+                                    Cancel
+                                  </Button>
+                                </div>
+                              ) : (
+                                <Button 
+                                  size="sm" 
+                                  variant="ghost" 
+                                  className="text-muted-foreground hover:text-destructive"
+                                  onClick={() => setDeleteConfirm(item.id)}
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              )}
                             </div>
                           </div>
                         </CardContent>

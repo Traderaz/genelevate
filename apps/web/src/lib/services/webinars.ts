@@ -24,23 +24,29 @@ export interface Webinar {
   // Scheduling
   scheduledDate: string; // ISO date string
   scheduledTime: string; // HH:MM format
+  scheduledAt?: Timestamp; // Combined timestamp for querying
   duration: number; // minutes
   timezone: string;
   
   // Content
-  embedUrl: string; // YouTube, Vimeo, Zoom embed URL
+  embedUrl?: string; // YouTube, Vimeo, Zoom embed URL
+  streamUrl?: string; // Alias for embedUrl (for backward compatibility)
+  videoUrl?: string; // Direct video URL for uploaded files
   platform: 'zoom' | 'youtube' | 'vimeo';
   
   // Access Control - Auto paywall for all paid subscribers
   requiresSubscription: boolean; // Always true, enforced on backend
   maxAttendees?: number;
+  maxParticipants?: number; // Alias for maxAttendees
   
   // Additional Info
   thumbnail?: string;
   tags: string[];
   yearGroups: string[];
-  hostName: string;
-  hostBio: string;
+  hostName?: string;
+  hostBio?: string;
+  instructor?: string; // Alias for hostName
+  instructorBio?: string; // Alias for hostBio
   
   // Features
   enableChat: boolean;
@@ -56,6 +62,8 @@ export interface Webinar {
   // Stats
   registeredCount: number;
   attendedCount: number;
+  views?: number;
+  rating?: number;
 }
 
 /**
@@ -66,17 +74,33 @@ export async function createWebinar(
   webinarData: Omit<Webinar, 'id' | 'createdAt' | 'updatedAt' | 'registeredCount' | 'attendedCount' | 'requiresSubscription'>
 ): Promise<string> {
   try {
+    // Convert scheduledDate and scheduledTime to a Timestamp
+    let scheduledAt: Timestamp | null = null;
+    if (webinarData.scheduledDate && webinarData.scheduledTime) {
+      const dateTimeString = `${webinarData.scheduledDate}T${webinarData.scheduledTime}:00`;
+      const scheduledDate = new Date(dateTimeString);
+      scheduledAt = Timestamp.fromDate(scheduledDate);
+    }
+
     const docRef = await addDoc(collection(db, 'webinars'), {
       ...webinarData,
+      scheduledAt, // Add scheduledAt Timestamp
+      streamUrl: webinarData.embedUrl, // Alias for backward compatibility
+      videoUrl: webinarData.embedUrl, // Alias for video player
+      instructor: webinarData.hostName, // Alias for instructor field
+      instructorBio: webinarData.hostBio, // Alias for instructor bio
       requiresSubscription: true, // Always true - all webinars are behind paywall
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
       publishedAt: webinarData.status === 'scheduled' ? serverTimestamp() : null,
       registeredCount: 0,
       attendedCount: 0,
+      views: 0,
+      rating: 0,
     });
 
     console.log('✅ Webinar created with automatic paywall:', docRef.id);
+    console.log('   Scheduled for:', scheduledAt?.toDate());
     return docRef.id;
   } catch (error) {
     console.error('❌ Error creating webinar:', error);

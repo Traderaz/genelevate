@@ -51,7 +51,24 @@ export default function WebinarPage() {
       return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0` : null;
     }
     
-    // Vimeo
+    // Vimeo Live Event
+    if (url.includes('vimeo.com/live/broadcaster/event/')) {
+      // Extract event ID from URLs like: vimeo.com/live/broadcaster/event/54877326
+      const eventId = url.match(/\/event\/(\d+)/)?.[1];
+      if (eventId) {
+        return `https://vimeo.com/event/${eventId}/embed`;
+      }
+    }
+    
+    // Vimeo Event (direct event URLs)
+    if (url.includes('vimeo.com/event/')) {
+      const eventId = url.match(/\/event\/(\d+)/)?.[1];
+      if (eventId) {
+        return `https://vimeo.com/event/${eventId}/embed`;
+      }
+    }
+    
+    // Vimeo Regular Video
     if (url.includes('vimeo.com')) {
       const videoId = url.match(/vimeo\.com\/(\d+)/)?.[1];
       return videoId ? `https://player.vimeo.com/video/${videoId}?autoplay=1` : null;
