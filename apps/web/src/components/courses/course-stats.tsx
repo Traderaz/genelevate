@@ -1,8 +1,43 @@
-import { BookOpen, Users, Clock, Award } from 'lucide-react';
-import { getCourseStats } from '@/lib/services/courses';
+'use client';
 
-export async function CourseStats() {
-  const stats = await getCourseStats();
+import { useEffect, useState } from 'react';
+import { BookOpen, Users, Clock, Award, Loader2 } from 'lucide-react';
+import { getCourseStats } from '@/lib/services/courses';
+import { useAuth } from '@/contexts/auth-context';
+
+export function CourseStats() {
+  const { user, loading: authLoading } = useAuth();
+  const [stats, setStats] = useState({
+    totalCourses: 0,
+    publishedCourses: 0,
+    totalEnrollments: 0,
+    totalChapters: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchStats() {
+      if (authLoading) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      const fetchedStats = await getCourseStats();
+      setStats(fetchedStats);
+      setLoading(false);
+    }
+
+    fetchStats();
+  }, [user, authLoading]);
+
+  if (authLoading || loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="w-8 h-8 text-[#e50914] animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

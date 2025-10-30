@@ -3,17 +3,43 @@
  * Run with: node scripts/seed-gcse-chemistry.js
  */
 
-const { initializeApp, getApps } = require('firebase-admin/app');
+const { initializeApp, cert, getApps } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 const fs = require('fs');
 const path = require('path');
 
-// Initialize Firebase Admin - using default credentials
+// Try loading from multiple paths
+require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: 'apps/web/.env.local' });
+
+// Initialize Firebase Admin
 if (getApps().length === 0) {
-  // This will use the Firebase CLI credentials or GOOGLE_APPLICATION_CREDENTIALS env var
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY 
+    ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
+    : undefined;
+
+  // Try to get project ID from multiple sources
+  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 
+                    process.env.FIREBASE_PROJECT_ID ||
+                    'gen-elevate'; // fallback
+
+  if (!process.env.FIREBASE_CLIENT_EMAIL || !privateKey) {
+    console.error('❌ Missing Firebase Admin credentials in .env.local');
+    console.error('Required: FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY');
+    console.error(`Found FIREBASE_CLIENT_EMAIL: ${!!process.env.FIREBASE_CLIENT_EMAIL}`);
+    console.error(`Found FIREBASE_PRIVATE_KEY: ${!!privateKey}`);
+    process.exit(1);
+  }
+
   initializeApp({
-    projectId: 'gen-elevate', // Your Firebase project ID
+    credential: cert({
+      projectId: projectId,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: privateKey,
+    }),
   });
+  
+  console.log(`✅ Initialized Firebase Admin for project: ${projectId}\n`);
 }
 
 const db = getFirestore();

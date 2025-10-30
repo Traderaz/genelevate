@@ -1,7 +1,11 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getCourses } from '@/lib/services/courses';
+import { getCourses, Course } from '@/lib/services/courses';
 import { Badge } from '@/components/ui/badge';
-import { BookOpen, Users, Clock } from 'lucide-react';
+import { BookOpen, Users, Clock, Loader2 } from 'lucide-react';
+import { useAuth } from '@/contexts/auth-context';
 
 interface CourseGridProps {
   searchParams: {
@@ -13,13 +17,42 @@ interface CourseGridProps {
   };
 }
 
-export async function CourseGrid({ searchParams }: CourseGridProps) {
-  const courses = await getCourses({
-    search: searchParams.search,
-    subject: searchParams.subject,
-    yearGroup: searchParams.yearGroup,
-    difficulty: searchParams.difficulty,
-  });
+export function CourseGrid({ searchParams }: CourseGridProps) {
+  const { user, loading: authLoading } = useAuth();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCourses() {
+      if (authLoading) return; // Wait for auth to load
+      if (!user) {
+        console.log('⚠️ No user, skipping course fetch');
+        setLoading(false);
+        return;
+      }
+
+      console.log('✅ User authenticated, fetching courses');
+      setLoading(true);
+      const fetchedCourses = await getCourses({
+        search: searchParams.search,
+        subject: searchParams.subject,
+        yearGroup: searchParams.yearGroup,
+        difficulty: searchParams.difficulty,
+      });
+      setCourses(fetchedCourses);
+      setLoading(false);
+    }
+
+    fetchCourses();
+  }, [user, authLoading, searchParams.search, searchParams.subject, searchParams.yearGroup, searchParams.difficulty]);
+
+  if (authLoading || loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="w-8 h-8 text-[#e50914] animate-spin" />
+      </div>
+    );
+  }
 
   if (courses.length === 0) {
     return (
@@ -41,20 +74,12 @@ export async function CourseGrid({ searchParams }: CourseGridProps) {
         >
           {/* Thumbnail */}
           <div className="aspect-video bg-gradient-to-br from-[#e50914] to-[#831010] relative overflow-hidden">
-            {course.thumbnail ? (
-              <img
-                src={course.thumbnail}
-                alt={course.title}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <BookOpen className="w-16 h-16 text-white/30" />
-              </div>
-            )}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <BookOpen className="w-16 h-16 text-white/30" />
+            </div>
             {course.featured && (
               <div className="absolute top-3 right-3">
-                <Badge className="bg-[#e50914] text-white border-none">Featured</Badge>
+                <Badge className="bg-white/20 text-white border-none">Featured</Badge>
               </div>
             )}
           </div>

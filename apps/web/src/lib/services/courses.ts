@@ -40,6 +40,7 @@ export interface Chapter {
   order: number;
   content: string; // Markdown content
   duration?: string; // e.g., "2 hours"
+  weight?: string; // e.g., "15%" - exam weighting
   lessons?: Lesson[];
 }
 
@@ -64,10 +65,12 @@ export async function getCourses(filters?: {
   search?: string;
 }): Promise<Course[]> {
   try {
+    console.log('🔍 Fetching courses with filters:', filters);
+    
+    // Build query - auth is handled by Firestore rules
     let q = query(
       collection(db, 'courses'),
-      where('published', '==', true),
-      orderBy('createdAt', 'desc')
+      where('published', '==', true)
     );
 
     if (filters?.subject) {
@@ -78,13 +81,23 @@ export async function getCourses(filters?: {
       q = query(q, where('difficulty', '==', filters.difficulty));
     }
 
+    console.log('🔄 Executing Firestore query...');
     const snapshot = await getDocs(q);
-    const courses = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-      createdAt: doc.data().createdAt?.toDate() || new Date(),
-      updatedAt: doc.data().updatedAt?.toDate() || new Date(),
-    })) as Course[];
+    console.log(`📚 Found ${snapshot.docs.length} courses in Firestore`);
+    
+    let courses = snapshot.docs.map(doc => {
+      const data = doc.data();
+      console.log('📖 Course:', doc.id, data.title, 'published:', data.published);
+      return {
+        id: doc.id,
+        ...data,
+        createdAt: data.createdAt?.toDate() || new Date(),
+        updatedAt: data.updatedAt?.toDate() || new Date(),
+      };
+    }) as Course[];
+
+    // Sort by createdAt on the client side
+    courses = courses.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 
     // Client-side filtering for search and yearGroup (array contains)
     let filteredCourses = courses;
@@ -104,9 +117,17 @@ export async function getCourses(filters?: {
       );
     }
 
+    console.log(`✅ Returning ${filteredCourses.length} filtered courses`);
     return filteredCourses;
   } catch (error) {
-    console.error('Error fetching courses:', error);
+    console.error('❌ Error fetching courses:', error);
+    if (error instanceof Error) {
+      console.error('Error details:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      });
+    }
     return [];
   }
 }
@@ -143,18 +164,22 @@ export async function getFeaturedCourses(limitCount = 3): Promise<Course[]> {
     const q = query(
       collection(db, 'courses'),
       where('published', '==', true),
-      where('featured', '==', true),
-      orderBy('enrollmentCount', 'desc'),
-      limit(limitCount)
+      where('featured', '==', true)
     );
 
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({
+    
+    // Sort by enrollmentCount on client side to avoid composite index requirement
+    let courses = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
       createdAt: doc.data().createdAt?.toDate() || new Date(),
       updatedAt: doc.data().updatedAt?.toDate() || new Date(),
     })) as Course[];
+    
+    courses.sort((a, b) => (b.enrollmentCount || 0) - (a.enrollmentCount || 0));
+    
+    return courses.slice(0, limitCount);
   } catch (error) {
     console.error('Error fetching featured courses:', error);
     return [];
@@ -202,11 +227,17 @@ export async function updateCourse(courseId: string, updates: Partial<Course>): 
  */
 export async function getCourseStats() {
   try {
-    const coursesSnapshot = await getDocs(collection(db, 'courses'));
+    // Only fetch published courses to comply with security rules
+    const q = query(
+      collection(db, 'courses'),
+      where('published', '==', true)
+    );
+    
+    const coursesSnapshot = await getDocs(q);
     const courses = coursesSnapshot.docs.map(doc => doc.data());
 
     const totalCourses = courses.length;
-    const publishedCourses = courses.filter(c => c.published).length;
+    const publishedCourses = courses.length; // All fetched courses are published
     const totalEnrollments = courses.reduce((sum, c) => sum + (c.enrollmentCount || 0), 0);
     
     // Calculate total chapters across all courses

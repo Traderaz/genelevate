@@ -131,15 +131,10 @@ service cloud.firestore {
                      (isInstitutionAdmin() && belongsToSameInstitution(resource.data.institutionId));
     }
 
-    // Courses collection - Published courses readable by all authenticated users
+    // Courses collection - All authenticated users with paid plans can access
     match /courses/{courseId} {
-      // All authenticated users can read published courses
-      allow read: if isAuthenticated() && (
-        resource.data.published == true ||
-        canAccessInstitutionData(resource.data.institutionId) ||
-        resource.data.accessLevel == 'public' ||
-        (resource.data.accessLevel == 'cohort' && isInAllowedCohort(resource.data.allowedCohortIds))
-      );
+      // Allow any authenticated user to read courses (subscription check happens at app level)
+      allow read: if isAuthenticated();
       
       // Only admins and content creators can create/modify courses
       allow create, update, delete: if isAuthenticated() && (

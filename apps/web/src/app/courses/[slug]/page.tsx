@@ -1,36 +1,71 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
 import { BasicPlanGuard } from '@/components/auth/subscription-guard';
-import { getCourse } from '@/lib/services/courses';
+import { getCourse, Course } from '@/lib/services/courses';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Clock, Award, ArrowLeft, Play, CheckCircle } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
+import { BookOpen, Clock, Award, ArrowLeft, Play, CheckCircle, Loader2 } from 'lucide-react';
+import { useAuth } from '@/contexts/auth-context';
 
-interface CoursePageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+export default function CoursePage() {
+  const params = useParams();
+  const { user, loading: authLoading } = useAuth();
+  const [course, setCourse] = useState<Course | null>(null);
+  const [loading, setLoading] = useState(true);
 
-export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const course = await getCourse(slug);
-  
-  return {
-    title: course ? `${course.title} - Gen Elevate` : 'Course - Gen Elevate',
-    description: course?.description || 'Learn with our comprehensive course designed for your academic success.',
-  };
-}
+  const slug = params.slug as string;
 
-export default async function CoursePage({ params }: CoursePageProps) {
-  const { slug } = await params;
-  const course = await getCourse(slug);
+  useEffect(() => {
+    async function fetchCourse() {
+      if (authLoading) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const fetchedCourse = await getCourse(slug);
+        setCourse(fetchedCourse);
+      } catch (error) {
+        console.error('Error fetching course:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCourse();
+  }, [slug, user, authLoading]);
+
+  if (authLoading || loading) {
+    return (
+      <BasicPlanGuard redirectTo={`/courses/${slug}`}>
+        <NetflixDashboardLayout>
+          <div className="flex items-center justify-center min-h-screen">
+            <Loader2 className="w-8 h-8 text-[#e50914] animate-spin" />
+          </div>
+        </NetflixDashboardLayout>
+      </BasicPlanGuard>
+    );
+  }
 
   if (!course) {
-    notFound();
+    return (
+      <BasicPlanGuard redirectTo={`/courses/${slug}`}>
+        <NetflixDashboardLayout>
+          <div className="text-center py-12">
+            <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-white mb-2">Course not found</h3>
+            <Link href="/courses" className="text-[#e50914] hover:underline">
+              Return to courses
+            </Link>
+          </div>
+        </NetflixDashboardLayout>
+      </BasicPlanGuard>
+    );
   }
 
   return (
