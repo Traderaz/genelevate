@@ -30,12 +30,11 @@ export function CourseFilters() {
             onChange={(e) => handleFilterChange('subject', e.target.value)}
           >
             <option value="">All Subjects</option>
-            <option value="mathematics">Mathematics</option>
-            <option value="english">English</option>
-            <option value="science">Science</option>
-            <option value="history">History</option>
-            <option value="computer-science">Computer Science</option>
-            <option value="languages">Languages</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="English Language">English Language</option>
+            <option value="Biology">Biology</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Physics">Physics</option>
           </select>
         </div>
         
