@@ -541,6 +541,44 @@ service cloud.firestore {
       allow create: if request.auth != null;
     }
 
+    // Interview Lab: Questions
+    match /interviewQuestions/{questionId} {
+      // All authenticated users can read active questions
+      allow read: if isAuthenticated();
+      
+      // Only admins and content creators can create/update/delete questions
+      allow create, update, delete: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        hasRole('content-creator')
+      );
+    }
+
+    // Interview Lab: Responses
+    match /interviewResponses/{responseId} {
+      // Users can read their own responses, admins/creators can read all
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.studentId) ||
+        isGlobalAdmin() ||
+        hasRole('content-creator')
+      );
+      
+      // Users can create their own responses
+      allow create: if isAuthenticated() && isOwner(request.resource.data.studentId);
+      
+      // Users can update their own responses, admins/creators can update any (for feedback)
+      allow update: if isAuthenticated() && (
+        isOwner(resource.data.studentId) ||
+        isGlobalAdmin() ||
+        hasRole('content-creator')
+      );
+      
+      // Only admins and content creators can delete
+      allow delete: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        hasRole('content-creator')
+      );
+    }
+
     // Default deny all other documents
     match /{document=**} {
       allow read, write: if false;

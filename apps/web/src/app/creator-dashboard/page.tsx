@@ -275,6 +275,12 @@ export default function CreatorDashboard() {
                   Create Webinar
                 </Link>
               </Button>
+              <Button asChild variant="outline" className="border-purple-500/30 hover:bg-purple-500/10">
+                <Link href="/creator-dashboard/interview-lab">
+                  <Video className="w-4 h-4 mr-2" />
+                  Interview Lab
+                </Link>
+              </Button>
               <Button
                 variant="ghost"
                 onClick={async () => {

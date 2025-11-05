@@ -82,6 +82,26 @@ service firebase.storage {
       allow write: if request.auth != null && request.auth.token.role == 'admin';
     }
 
+    // Interview Lab: Video Responses
+    match /interview-responses/{userId}/{fileName} {
+      // Users can read their own videos, admins and content creators can read all
+      allow read: if request.auth != null 
+                  && (request.auth.uid == userId 
+                      || request.auth.token.role == 'admin' 
+                      || request.auth.token.role == 'content-creator');
+      
+      // Users can upload their own interview response videos
+      allow write: if request.auth != null 
+                   && request.auth.uid == userId
+                   && request.resource.size < 500 * 1024 * 1024 // Max 500MB
+                   && request.resource.contentType.matches('video/.*'); // Only videos
+      
+      // Admins and content creators can delete any video (for cleanup)
+      allow delete: if request.auth != null 
+                    && (request.auth.token.role == 'admin' 
+                        || request.auth.token.role == 'content-creator');
+    }
+
     // Default deny all other paths
     match /{allPaths=**} {
       allow read, write: if false;
