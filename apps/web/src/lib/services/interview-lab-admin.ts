@@ -315,3 +315,44 @@ export async function deleteInterviewResponse(responseId: string) {
   }
 }
 
+// Get Interview Statistics
+export async function getInterviewStatistics() {
+  try {
+    const [questionsSnapshot, responsesSnapshot] = await Promise.all([
+      adminDb.collection('interviewQuestions').get(),
+      adminDb.collection('interviewResponses').get(),
+    ]);
+
+    const activeQuestions = questionsSnapshot.docs.filter(
+      (doc) => doc.data().active
+    ).length;
+
+    const totalResponses = responsesSnapshot.size;
+    const withFeedback = responsesSnapshot.docs.filter(
+      (doc) => doc.data().feedback
+    ).length;
+    const unviewed = responsesSnapshot.docs.filter(
+      (doc) => !doc.data().viewed
+    ).length;
+
+    return {
+      totalQuestions: questionsSnapshot.size,
+      activeQuestions,
+      totalResponses,
+      withFeedback,
+      unviewed,
+      pendingFeedback: totalResponses - withFeedback,
+    };
+  } catch (error) {
+    console.error('Error fetching interview statistics:', error);
+    return {
+      totalQuestions: 0,
+      activeQuestions: 0,
+      totalResponses: 0,
+      withFeedback: 0,
+      unviewed: 0,
+      pendingFeedback: 0,
+    };
+  }
+}
+

@@ -3,7 +3,7 @@ import {
   getInterviewQuestion,
   updateInterviewQuestion,
   deleteInterviewQuestion,
-} from '@/lib/services/interview-lab';
+} from '@/lib/services/interview-lab-admin';
 
 // GET /api/interview-lab/questions/[id]
 export async function GET(

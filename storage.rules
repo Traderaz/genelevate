@@ -91,14 +91,19 @@ service firebase.storage {
                       || request.auth.token.role == 'content-creator');
       
       // Users can upload their own interview response videos
-      allow write: if request.auth != null 
-                   && request.auth.uid == userId
-                   && request.resource.size < 500 * 1024 * 1024 // Max 500MB
-                   && request.resource.contentType.matches('video/.*'); // Only videos
+      // Be lenient with content type for iOS compatibility
+      allow create: if request.auth != null 
+                    && request.auth.uid == userId
+                    && request.resource.size < 500 * 1024 * 1024; // Max 500MB
       
-      // Admins and content creators can delete any video (for cleanup)
+      // Users can update their own videos
+      allow update: if request.auth != null 
+                    && request.auth.uid == userId;
+      
+      // Users can delete their own videos, admins and content creators can delete any
       allow delete: if request.auth != null 
-                    && (request.auth.token.role == 'admin' 
+                    && (request.auth.uid == userId
+                        || request.auth.token.role == 'admin' 
                         || request.auth.token.role == 'content-creator');
     }
 

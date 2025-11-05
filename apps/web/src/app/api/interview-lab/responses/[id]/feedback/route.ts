@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addInterviewFeedback } from '@/lib/services/interview-lab';
+import { addInterviewFeedback } from '@/lib/services/interview-lab-admin';
 
 // POST /api/interview-lab/responses/[id]/feedback
 export async function POST(

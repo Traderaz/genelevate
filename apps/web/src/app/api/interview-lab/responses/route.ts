@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import {
   submitInterviewResponse,
   getInterviewResponses,
-} from '@/lib/services/interview-lab';
+} from '@/lib/services/interview-lab-admin';
 
 // GET /api/interview-lab/responses
 export async function GET(request: NextRequest) {

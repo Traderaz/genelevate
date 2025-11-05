@@ -112,8 +112,11 @@ export default function InterviewLabPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate file type
-    if (!file.type.startsWith('video/')) {
+    // Validate file type - be more lenient for iOS
+    const validTypes = ['video/mp4', 'video/quicktime', 'video/webm', 'video/x-m4v', 'video/'];
+    const isValidType = validTypes.some(type => file.type.startsWith(type));
+    
+    if (!isValidType && file.type && !file.type.startsWith('video/')) {
       toast.error('Please select a video file');
       return;
     }
@@ -125,7 +128,16 @@ export default function InterviewLabPage() {
     }
 
     setVideoFile(file);
-    setVideoPreviewUrl(URL.createObjectURL(file));
+    
+    // Create preview URL - handle iOS quirks
+    try {
+      const previewUrl = URL.createObjectURL(file);
+      setVideoPreviewUrl(previewUrl);
+    } catch (error) {
+      console.error('Error creating preview:', error);
+      // Still set the file even if preview fails
+      toast.success(`Video selected: ${file.name}`);
+    }
   };
 
   const handleUpload = async () => {
@@ -386,17 +398,18 @@ export default function InterviewLabPage() {
                               <input
                                 ref={fileInputRef}
                                 type="file"
-                                accept="video/*"
+                                accept="video/*,video/mp4,video/quicktime,video/webm"
                                 onChange={handleFileSelect}
                                 className="hidden"
+                                id="video-upload-input"
                               />
-                              <Button
-                                onClick={() => fileInputRef.current?.click()}
-                                className="bg-red-600 hover:bg-red-700"
+                              <label 
+                                htmlFor="video-upload-input"
+                                className="inline-flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg cursor-pointer transition-colors"
                               >
                                 <Video className="w-4 h-4 mr-2" />
                                 Choose Video
-                              </Button>
+                              </label>
                             </>
                           )}
                         </div>
