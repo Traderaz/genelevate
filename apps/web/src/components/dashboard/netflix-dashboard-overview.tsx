@@ -70,6 +70,7 @@ export function NetflixDashboardOverview() {
         items: [
           { name: 'Life Skills', href: '/life-skills', icon: Heart, description: 'Essential life skills training', premium: false },
           { name: 'Career Explorer', href: '/careers', icon: Briefcase, description: 'Explore career paths', premium: false },
+          { name: 'Interview Lab', href: '/life-career/interview-lab', icon: Video, description: 'Practice interview skills with video', premium: false },
           { name: 'Debates', href: '/debates', icon: Users, description: 'Join academic discussions', premium: false },
           { name: 'Wellbeing', href: '/wellbeing', icon: Heart, description: 'Mental health resources', premium: false }
         ]
