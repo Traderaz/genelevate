@@ -82,10 +82,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // TODO: Add your Google Search Console verification code here
-    // google: 'your-google-verification-code-here',
-    // TODO: Add your Bing Webmaster verification code here
-    // yandex: 'your-yandex-verification-code-here',
+    google: 'YRwn0_4nKIkdWzOMhE_FrgCYHVXHnLi4WeC3kE5jSfI',
   },
 };
 
