@@ -1,0 +1,15 @@
+# Gen Elevate - Robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /creator-dashboard/
+Disallow: /settings/
+
+# Sitemap
+Sitemap: https://www.genelevate.co.uk/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+

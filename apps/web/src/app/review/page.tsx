@@ -74,7 +74,7 @@ export default function PublicReviewPage() {
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-3">
               <img 
-                src="/Genelevate logo.jpg" 
+                src="/Genelevate logo.png" 
                 alt="Gen Elevate Logo" 
                 className="h-16 w-auto"
               />
@@ -109,7 +109,7 @@ export default function PublicReviewPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3">
             <img 
-              src="/Genelevate logo.jpg" 
+              src="/Genelevate logo.png" 
               alt="Gen Elevate Logo" 
               className="h-16 w-auto"
             />

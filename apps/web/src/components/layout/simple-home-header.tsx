@@ -52,13 +52,13 @@ export function SimpleHomeHeader() {
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-netflix-red rounded-md flex items-center justify-center">
-                <span className="text-white font-bold text-lg">G</span>
-              </div>
-              <span className="text-xl font-bold netflix-text-gradient">
-                Gen Elevate
-              </span>
+            <Link href="/" className="flex items-baseline gap-1">
+              <span className="text-2xl font-bold text-white">Gen</span>
+              <span className="text-2xl font-bold" style={{ 
+                background: 'linear-gradient(90deg, #FFEAEA 0%, #FFB3B3 25%, #FF6B6B 50%, #E50914 75%, #E50914 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>Elevate</span>
             </Link>
           </div>
 

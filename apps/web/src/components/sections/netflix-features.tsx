@@ -10,11 +10,11 @@ export function NetflixFeatures() {
     {
       icon: BookOpen,
       title: 'GCSE & A-Level Courses',
-      description: 'Comprehensive courses in Mathematics, Biology, Physics, Chemistry, English Language, and Business Studies.',
+      description: 'Master every GCSE and A-Level subject with comprehensive, exam-focused courses designed to help you achieve top grades.',
       image: '/api/placeholder/600/400',
       highlights: [
         'Complete subject coverage',
-        '10 chapters per course',
+        'Structured learning paths',
         'Interactive content',
         'Progress tracking'
       ]
@@ -89,9 +89,9 @@ export function NetflixFeatures() {
 
         {/* Interactive Feature Showcase */}
         <div className="mb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center">
             {/* Feature Navigation */}
-            <div className="space-y-6">
+            <div className="space-y-4 lg:space-y-6 order-2 lg:order-1">
               {features.map((feature, index) => (
                 <div
                   key={index}
@@ -132,22 +132,18 @@ export function NetflixFeatures() {
             </div>
 
             {/* Premium Feature Preview */}
-            <div className="relative">
+            <div className="relative order-1 lg:order-2">
               <div className="aspect-video cinematic-card rounded-2xl overflow-hidden shadow-2xl">
-                <div className="w-full h-full bg-gradient-to-br from-red-900/30 to-black flex items-center justify-center relative">
+                <div className="w-full h-full bg-gradient-to-br from-red-900/30 to-black flex items-center justify-center relative p-4 sm:p-6">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_black_100%)] opacity-50"></div>
-                  <div className="text-center relative z-10">
-                    {React.createElement(features[activeFeature].icon, { className: "w-20 h-20 text-red-500 mx-auto mb-6 drop-shadow-2xl" })}
-                    <h3 className="text-2xl font-bold text-white mb-4 drop-shadow-lg">
+                  <div className="text-center relative z-10 w-full">
+                    {React.createElement(features[activeFeature].icon, { className: "w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-red-500 mx-auto mb-4 sm:mb-6 drop-shadow-2xl" })}
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4 drop-shadow-lg px-2">
                       {features[activeFeature].title}
                     </h3>
-                    <p className="text-gray-300 max-w-md mb-6 px-4">
+                    <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-lg mb-4 sm:mb-6 px-4 sm:px-6 mx-auto leading-relaxed">
                       {features[activeFeature].description}
                     </p>
-                    <button className="flex items-center gap-2 mx-auto px-8 py-4 premium-button text-white font-semibold rounded-lg">
-                      <Play className="w-5 h-5" />
-                      Watch Demo
-                    </button>
                   </div>
                 </div>
               </div>
@@ -177,7 +173,7 @@ export function NetflixFeatures() {
             {
               icon: BookOpen,
               title: 'GCSE & A-Level Courses',
-              description: 'Complete curriculum coverage in Mathematics, Sciences, English Language, and Business Studies.'
+              description: 'Complete curriculum coverage across all GCSE and A-Level subjects with exam-focused content.'
             },
             {
               icon: Users,
