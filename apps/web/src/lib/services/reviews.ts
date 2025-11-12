@@ -52,8 +52,7 @@ export async function getFeaturedReviews(): Promise<StudentReview[]> {
     const q = query(
       collection(db, 'studentReviews'),
       where('status', '==', 'approved'),
-      where('featured', '==', true),
-      orderBy('featuredAt', 'desc')
+      where('featured', '==', true)
     );
 
     const snapshot = await getDocs(q);
@@ -76,6 +75,13 @@ export async function getFeaturedReviews(): Promise<StudentReview[]> {
         reviewedBy: data.reviewedBy,
         reviewedAt: data.reviewedAt?.toDate(),
       });
+    });
+
+    // Sort by featuredAt on the client side to avoid composite index requirement
+    reviews.sort((a, b) => {
+      if (!a.featuredAt) return 1;
+      if (!b.featuredAt) return -1;
+      return b.featuredAt.getTime() - a.featuredAt.getTime();
     });
 
     return reviews;

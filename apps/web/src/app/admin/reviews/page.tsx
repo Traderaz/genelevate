@@ -24,10 +24,22 @@ export default function AdminReviewsPage() {
       const queryParam = filter !== 'all' ? `?status=${filter}` : '';
       const response = await fetch(`/api/reviews${queryParam}`);
       const data = await response.json();
-      setReviews(data);
+      
+      // Ensure data is an array
+      if (Array.isArray(data)) {
+        setReviews(data);
+      } else if (data.error) {
+        console.error('API Error:', data.error);
+        toast.error(data.error);
+        setReviews([]);
+      } else {
+        console.error('Unexpected response format:', data);
+        setReviews([]);
+      }
     } catch (error) {
       console.error('Error fetching reviews:', error);
       toast.error('Failed to load reviews');
+      setReviews([]);
     } finally {
       setLoading(false);
     }

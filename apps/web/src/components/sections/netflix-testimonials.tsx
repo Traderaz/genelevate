@@ -15,15 +15,10 @@ export function NetflixTestimonials() {
     async function loadReviews() {
       try {
         const featuredReviews = await getFeaturedReviews();
-        if (featuredReviews.length > 0) {
-          setReviews(featuredReviews);
-        } else {
-          // Fallback to placeholder if no reviews yet
-          setReviews(placeholderReviews);
-        }
+        setReviews(featuredReviews);
       } catch (error) {
         console.error('Error loading reviews:', error);
-        setReviews(placeholderReviews);
+        setReviews([]);
       } finally {
         setLoading(false);
       }
@@ -31,58 +26,6 @@ export function NetflixTestimonials() {
 
     loadReviews();
   }, []);
-
-  // Placeholder reviews (for when no real reviews exist yet)
-  const placeholderReviews: StudentReview[] = [
-    {
-      id: 'placeholder-1',
-      studentId: 'placeholder',
-      studentName: 'Sarah J.',
-      yearGroup: 'Year 13',
-      rating: 5,
-      reviewText: "The comprehensive Mathematics and Physics courses helped me understand complex topics. The AI tutor is brilliant for getting instant help when I'm stuck on homework.",
-      subject: 'Mathematics & Physics',
-      submittedAt: new Date(),
-      status: 'approved',
-      featured: true
-    },
-    {
-      id: 'placeholder-2',
-      studentId: 'placeholder',
-      studentName: 'Marcus C.',
-      yearGroup: 'Year 11',
-      rating: 5,
-      reviewText: "The live webinars are really helpful for exam preparation. Being able to ask questions in real-time makes such a difference compared to just watching videos.",
-      subject: 'Biology & Chemistry',
-      submittedAt: new Date(),
-      status: 'approved',
-      featured: true
-    },
-    {
-      id: 'placeholder-3',
-      studentId: 'placeholder',
-      studentName: 'Emma W.',
-      yearGroup: 'Year 10',
-      rating: 5,
-      reviewText: "The Life Skills and Career Explorer sections helped me discover what I want to do after school. Learning about different career paths and what they involve has been invaluable!",
-      subject: 'Career Planning',
-      submittedAt: new Date(),
-      status: 'approved',
-      featured: true
-    },
-    {
-      id: 'placeholder-4',
-      studentId: 'placeholder',
-      studentName: 'James M.',
-      yearGroup: 'Year 12',
-      rating: 5,
-      reviewText: "The Career Explorer showed me hundreds of career options I'd never even heard of. Now I understand what qualifications and skills I need for my dream career in engineering.",
-      subject: 'Career Guidance',
-      submittedAt: new Date(),
-      status: 'approved',
-      featured: true
-    }
-  ];
 
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % reviews.length);
