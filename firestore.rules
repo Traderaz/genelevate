@@ -581,8 +581,10 @@ service cloud.firestore {
 
     // Student Reviews
     match /studentReviews/{reviewId} {
-      // Anyone authenticated can read reviews (for homepage display)
-      allow read: if isAuthenticated();
+      // Public can read approved and featured reviews (for homepage display)
+      // Anyone can read all reviews if authenticated (for admin panel)
+      allow read: if resource.data.status == 'approved' && resource.data.featured == true ||
+                     isAuthenticated();
       
       // Students can create their own review OR external reviews via public link
       allow create: if (isAuthenticated() && 

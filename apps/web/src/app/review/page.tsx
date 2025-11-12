@@ -73,10 +73,11 @@ export default function PublicReviewPage() {
           {/* Logo */}
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-3">
-              <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-xl">G</span>
-              </div>
-              <span className="text-2xl font-bold text-white">Gen Elevate</span>
+              <img 
+                src="/Genelevate logo.jpg" 
+                alt="Gen Elevate Logo" 
+                className="h-16 w-auto"
+              />
             </Link>
           </div>
 
@@ -107,10 +108,11 @@ export default function PublicReviewPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3">
-            <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">G</span>
-            </div>
-            <span className="text-2xl font-bold text-white">Gen Elevate</span>
+            <img 
+              src="/Genelevate logo.jpg" 
+              alt="Gen Elevate Logo" 
+              className="h-16 w-auto"
+            />
           </Link>
         </div>
 
