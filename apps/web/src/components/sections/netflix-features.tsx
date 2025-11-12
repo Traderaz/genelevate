@@ -9,59 +9,59 @@ export function NetflixFeatures() {
   const features = [
     {
       icon: BookOpen,
-      title: 'Premium Course Library',
-      description: 'Access 500+ expertly crafted courses covering all subjects from Year 6 to A-Level.',
+      title: 'GCSE & A-Level Courses',
+      description: 'Comprehensive courses in Mathematics, Biology, Physics, Chemistry, English Language, and Business Studies.',
       image: '/api/placeholder/600/400',
       highlights: [
-        'Interactive video lessons',
-        'Downloadable resources',
-        'Progress tracking',
-        'Expert instructors'
+        '7+ complete subject courses',
+        '10 chapters per course',
+        'Interactive content',
+        'Progress tracking'
       ]
     },
     {
       icon: Video,
       title: 'Live Interactive Webinars',
-      description: 'Join live sessions with top educators and interact with peers in real-time.',
+      description: 'Join live sessions with expert educators, ask questions, and collaborate with peers in real-time.',
       image: '/api/placeholder/600/400',
       highlights: [
+        'Weekly live sessions',
         'Real-time Q&A',
-        'Screen sharing',
-        'Breakout rooms',
+        'Screen sharing & chat',
         'Recording available'
       ]
     },
     {
       icon: Brain,
-      title: 'AI-Powered Learning',
-      description: 'Get personalized recommendations and adaptive learning paths powered by AI.',
+      title: 'AI Learning Assistant',
+      description: 'Get instant help with your studies using our advanced AI tutor, available 24/7 for any subject.',
       image: '/api/placeholder/600/400',
       highlights: [
-        'Personalized curriculum',
-        'Smart recommendations',
+        'Subject-specific help',
+        'Step-by-step solutions',
         'Learning analytics',
-        '24/7 AI tutor'
+        '24/7 availability'
       ]
     },
     {
-      icon: Award,
-      title: 'Certificates & Achievements',
-      description: 'Earn verified certificates and unlock achievements as you progress.',
+      icon: Users,
+      title: 'Interview Lab & Debates',
+      description: 'Practice interview skills with video submissions and engage in academic debates with peers.',
       image: '/api/placeholder/600/400',
       highlights: [
-        'Verified certificates',
-        'Digital badges',
-        'Skill assessments',
-        'Portfolio building'
+        'Video interview practice',
+        'Expert feedback',
+        'Academic debates',
+        'Career preparation'
       ]
     }
   ];
 
   const stats = [
-    { icon: Users, value: '50K+', label: 'Active Students' },
-    { icon: BookOpen, value: '500+', label: 'Courses' },
-    { icon: Video, value: '100+', label: 'Live Sessions/Month' },
-    { icon: Globe, value: '50+', label: 'Countries' },
+    { icon: BookOpen, value: '7+', label: 'Subject Courses' },
+    { icon: Video, value: 'Weekly', label: 'Live Webinars' },
+    { icon: Brain, value: '24/7', label: 'AI Assistant' },
+    { icon: Users, value: 'Active', label: 'Debate Community' },
   ];
 
   return (
@@ -73,8 +73,8 @@ export function NetflixFeatures() {
             Everything You Need to <span className="netflix-text-gradient">Excel</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Our comprehensive platform combines the best of online learning with cutting-edge technology 
-            to deliver an unmatched educational experience.
+            From comprehensive GCSE & A-Level courses to AI tutoring and interview preparation, 
+            we provide all the tools you need to succeed in your academic journey.
           </p>
         </div>
 
@@ -165,34 +165,34 @@ export function NetflixFeatures() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              icon: Smartphone,
-              title: 'Mobile Learning',
-              description: 'Learn anywhere with our mobile app. Download content for offline access.'
-            },
-            {
-              icon: Users,
-              title: 'Collaborative Learning',
-              description: 'Connect with peers, join study groups, and learn together.'
-            },
-            {
-              icon: Brain,
-              title: 'Adaptive Technology',
-              description: 'AI adjusts to your learning style and pace for optimal results.'
-            },
-            {
-              icon: Award,
-              title: 'Skill Validation',
-              description: 'Earn industry-recognized certificates and showcase your achievements.'
-            },
-            {
-              icon: Globe,
-              title: 'Global Community',
-              description: 'Join a worldwide community of learners and educators.'
+              icon: BookOpen,
+              title: 'Complete Curriculum',
+              description: 'Full coverage of GCSE & A-Level subjects including Maths, Sciences, English & Business.'
             },
             {
               icon: Video,
-              title: 'HD Streaming',
-              description: 'Crystal clear video quality with adaptive streaming technology.'
+              title: 'Live Webinars',
+              description: 'Weekly interactive sessions with expert tutors and real-time Q&A support.'
+            },
+            {
+              icon: Brain,
+              title: 'AI Tutor',
+              description: 'Get instant help with homework and study questions 24/7 from our AI assistant.'
+            },
+            {
+              icon: Users,
+              title: 'Debate Platform',
+              description: 'Engage in academic debates and develop critical thinking skills.'
+            },
+            {
+              icon: Award,
+              title: 'Interview Lab',
+              description: 'Practice interview skills with video submissions and receive expert feedback.'
+            },
+            {
+              icon: Globe,
+              title: 'Career Explorer',
+              description: 'Discover career paths and get personalized guidance for your future.'
             }
           ].map((item, index) => (
             <div

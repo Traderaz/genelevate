@@ -8,58 +8,58 @@ export function NetflixTestimonials() {
 
   const testimonials = [
     {
-      name: 'Sarah Johnson',
+      name: 'Sarah J.',
       role: 'A-Level Student',
-      school: 'Westminster Academy',
+      school: 'Year 13',
       image: '/api/placeholder/80/80',
       rating: 5,
-      quote: "Gen Elevate transformed my learning experience. The AI-powered recommendations helped me focus on areas where I needed improvement, and I achieved grades I never thought possible.",
+      quote: "The comprehensive Mathematics and Physics courses helped me understand complex topics. The AI tutor is brilliant for getting instant help when I'm stuck on homework.",
       subject: 'Mathematics & Physics'
     },
     {
-      name: 'Marcus Chen',
-      role: 'Year 11 Student',
-      school: 'International School Singapore',
-      image: '/api/placeholder/80/80',
-      rating: 5,
-      quote: "The live webinars are incredible! Being able to ask questions in real-time and interact with top educators from around the world has been a game-changer for my studies.",
-      subject: 'Computer Science'
-    },
-    {
-      name: 'Emma Williams',
+      name: 'Marcus C.',
       role: 'GCSE Student',
-      school: 'Brighton College',
+      school: 'Year 11',
       image: '/api/placeholder/80/80',
       rating: 5,
-      quote: "I love how the platform adapts to my learning style. The bite-sized lessons and interactive quizzes make studying actually enjoyable. My confidence has grown so much!",
+      quote: "The live webinars are really helpful for exam preparation. Being able to ask questions in real-time makes such a difference compared to just watching videos.",
       subject: 'Biology & Chemistry'
     },
     {
-      name: 'Dr. James Mitchell',
-      role: 'Head of Mathematics',
-      school: 'Royal Grammar School',
+      name: 'Emma W.',
+      role: 'GCSE Student',
+      school: 'Year 10',
       image: '/api/placeholder/80/80',
       rating: 5,
-      quote: "As an educator, I'm impressed by the quality of content and the innovative teaching methods. Our students who use Gen Elevate consistently outperform their peers.",
-      subject: 'Mathematics Department'
+      quote: "I love the Interview Lab feature! Practicing my interview skills with video submissions and getting feedback from tutors has boosted my confidence massively.",
+      subject: 'Business Studies'
     },
     {
-      name: 'Priya Patel',
-      role: 'Year 13 Student',
-      school: 'London Academy',
+      name: 'James M.',
+      role: 'A-Level Student',
+      school: 'Year 12',
       image: '/api/placeholder/80/80',
       rating: 5,
-      quote: "The personalized learning paths helped me identify my strengths and weaknesses. I received offers from all my top university choices thanks to the comprehensive preparation.",
-      subject: 'Economics & Business'
+      quote: "The debate platform is amazing for developing critical thinking. It's really helped me structure arguments better for my English essays.",
+      subject: 'English Language'
     },
     {
-      name: 'Alex Thompson',
-      role: 'Year 10 Student',
-      school: 'Manchester High School',
+      name: 'Priya P.',
+      role: 'GCSE Student',
+      school: 'Year 11',
       image: '/api/placeholder/80/80',
       rating: 5,
-      quote: "The mobile app is perfect for learning on the go. I can download lessons and study during my commute. The offline feature is a lifesaver!",
-      subject: 'English Literature'
+      quote: "Having all the GCSE content in one place is so convenient. The progress tracking helps me see what I need to focus on for my exams.",
+      subject: 'Multiple Subjects'
+    },
+    {
+      name: 'Alex T.',
+      role: 'A-Level Student',
+      school: 'Year 13',
+      image: '/api/placeholder/80/80',
+      rating: 5,
+      quote: "The 24/7 AI assistant is a lifesaver during revision. I can get explanations for difficult Chemistry concepts anytime, even at 11pm before an exam!",
+      subject: 'Chemistry'
     }
   ];
 
@@ -97,7 +97,7 @@ export function NetflixTestimonials() {
             Loved by <span className="netflix-text-gradient">Students & Educators</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Join thousands of successful students who have transformed their learning journey with Gen Elevate.
+            See how Gen Elevate is helping students excel in their GCSE & A-Level studies.
           </p>
         </div>
 
@@ -180,30 +180,33 @@ export function NetflixTestimonials() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
-            <div className="text-4xl font-bold text-netflix-red mb-2">98%</div>
-            <div className="text-foreground font-semibold mb-1">Success Rate</div>
-            <div className="text-sm text-muted-foreground">Students achieve their target grades</div>
+            <div className="text-4xl font-bold text-netflix-red mb-2">7+</div>
+            <div className="text-foreground font-semibold mb-1">Subject Courses</div>
+            <div className="text-sm text-muted-foreground">GCSE & A-Level curriculum</div>
           </div>
           <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
-            <div className="text-4xl font-bold text-netflix-red mb-2">4.9/5</div>
-            <div className="text-foreground font-semibold mb-1">Average Rating</div>
-            <div className="text-sm text-muted-foreground">From 10,000+ student reviews</div>
+            <div className="text-4xl font-bold text-netflix-red mb-2">24/7</div>
+            <div className="text-foreground font-semibold mb-1">AI Assistant</div>
+            <div className="text-sm text-muted-foreground">Always available to help</div>
           </div>
           <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
-            <div className="text-4xl font-bold text-netflix-red mb-2">50K+</div>
-            <div className="text-foreground font-semibold mb-1">Happy Students</div>
-            <div className="text-sm text-muted-foreground">Across 50+ countries worldwide</div>
+            <div className="text-4xl font-bold text-netflix-red mb-2">Live</div>
+            <div className="text-foreground font-semibold mb-1">Weekly Webinars</div>
+            <div className="text-sm text-muted-foreground">Interactive learning sessions</div>
           </div>
         </div>
 
         {/* CTA */}
         <div className="text-center mt-16">
           <p className="text-muted-foreground mb-6">
-            Ready to join thousands of successful students?
+            Ready to elevate your learning?
           </p>
-          <button className="px-8 py-4 bg-netflix-red hover:bg-netflix-red-dark text-white font-semibold rounded-lg netflix-button">
-            Start Your Free Trial
-          </button>
+          <a 
+            href="/register"
+            className="inline-block px-8 py-4 bg-netflix-red hover:bg-netflix-red-dark text-white font-semibold rounded-lg netflix-button"
+          >
+            Get Started Today
+          </a>
         </div>
       </div>
     </section>

@@ -18,10 +18,10 @@ export function NetflixHero() {
   };
 
   const stats = [
-    { icon: Users, label: 'Active Students', value: '50K+' },
-    { icon: BookOpen, label: 'Courses Available', value: '500+' },
-    { icon: Video, label: 'Live Webinars', value: '100+' },
-    { icon: Star, label: 'Average Rating', value: '4.9' },
+    { icon: BookOpen, label: 'GCSE & A-Level Courses', value: '7+' },
+    { icon: Video, label: 'Live Webinars', value: 'Weekly' },
+    { icon: Users, label: 'Interactive Debates', value: 'Active' },
+    { icon: Star, label: 'AI Learning Assistant', value: '24/7' },
   ];
 
   return (
@@ -40,8 +40,8 @@ export function NetflixHero() {
           {/* Badge */}
           <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium mb-8 sm:mb-6 animate-fade-in">
             <Star className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
-            <span className="hidden xs:inline">Trusted by 50,000+ students worldwide</span>
-            <span className="xs:hidden">50K+ students trust us</span>
+            <span className="hidden xs:inline">AI-Powered Learning Platform for UK Students</span>
+            <span className="xs:hidden">AI-Powered Learning</span>
           </div>
 
           {/* Main Heading - Netflix Style - Mobile Optimized */}
@@ -56,8 +56,8 @@ export function NetflixHero() {
 
           {/* Subtitle - Netflix Style - Mobile Optimized */}
           <p className="mobile-text-lg text-muted-foreground mb-10 sm:mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in font-light">
-            Join the global learning revolution. Access premium courses, live webinars, 
-            and AI-powered personalized learning for students from Year 6 to A-Level.
+            Master GCSE & A-Level subjects with our comprehensive courses in Mathematics, Sciences, English, and Business. 
+            Features live webinars, AI tutoring, interactive debates, and interview preparation tools.
           </p>
 
           {/* Netflix-style Email Signup - Mobile Optimized */}
