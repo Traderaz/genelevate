@@ -579,6 +579,29 @@ service cloud.firestore {
       );
     }
 
+    // Student Reviews
+    match /studentReviews/{reviewId} {
+      // Anyone authenticated can read reviews (for homepage display)
+      allow read: if isAuthenticated();
+      
+      // Students can create their own review OR external reviews via public link
+      allow create: if (isAuthenticated() && 
+                        request.resource.data.studentId == request.auth.uid &&
+                        request.resource.data.status == 'pending') ||
+                       (request.resource.data.studentId == 'external-review' &&
+                        request.resource.data.status == 'pending' &&
+                        request.resource.data.source == 'external-link');
+      
+      // Only admins and content creators can update reviews (approve/reject/feature)
+      allow update: if isAuthenticated() && (
+        isGlobalAdmin() ||
+        hasRole('content-creator')
+      );
+      
+      // Only admins can delete reviews
+      allow delete: if isGlobalAdmin();
+    }
+
     // Default deny all other documents
     match /{document=**} {
       allow read, write: if false;

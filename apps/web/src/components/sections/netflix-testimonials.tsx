@@ -2,80 +2,102 @@
 
 import { useState, useEffect } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getFeaturedReviews } from '@/lib/services/reviews';
+import { StudentReview } from '@/types/review';
 
 export function NetflixTestimonials() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [reviews, setReviews] = useState<StudentReview[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const testimonials = [
+  // Fetch featured reviews from Firestore
+  useEffect(() => {
+    async function loadReviews() {
+      try {
+        const featuredReviews = await getFeaturedReviews();
+        if (featuredReviews.length > 0) {
+          setReviews(featuredReviews);
+        } else {
+          // Fallback to placeholder if no reviews yet
+          setReviews(placeholderReviews);
+        }
+      } catch (error) {
+        console.error('Error loading reviews:', error);
+        setReviews(placeholderReviews);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadReviews();
+  }, []);
+
+  // Placeholder reviews (for when no real reviews exist yet)
+  const placeholderReviews: StudentReview[] = [
     {
-      name: 'Sarah J.',
-      role: 'A-Level Student',
-      school: 'Year 13',
-      image: '/api/placeholder/80/80',
+      id: 'placeholder-1',
+      studentId: 'placeholder',
+      studentName: 'Sarah J.',
+      yearGroup: 'Year 13',
       rating: 5,
-      quote: "The comprehensive Mathematics and Physics courses helped me understand complex topics. The AI tutor is brilliant for getting instant help when I'm stuck on homework.",
-      subject: 'Mathematics & Physics'
+      reviewText: "The comprehensive Mathematics and Physics courses helped me understand complex topics. The AI tutor is brilliant for getting instant help when I'm stuck on homework.",
+      subject: 'Mathematics & Physics',
+      submittedAt: new Date(),
+      status: 'approved',
+      featured: true
     },
     {
-      name: 'Marcus C.',
-      role: 'GCSE Student',
-      school: 'Year 11',
-      image: '/api/placeholder/80/80',
+      id: 'placeholder-2',
+      studentId: 'placeholder',
+      studentName: 'Marcus C.',
+      yearGroup: 'Year 11',
       rating: 5,
-      quote: "The live webinars are really helpful for exam preparation. Being able to ask questions in real-time makes such a difference compared to just watching videos.",
-      subject: 'Biology & Chemistry'
+      reviewText: "The live webinars are really helpful for exam preparation. Being able to ask questions in real-time makes such a difference compared to just watching videos.",
+      subject: 'Biology & Chemistry',
+      submittedAt: new Date(),
+      status: 'approved',
+      featured: true
     },
     {
-      name: 'Emma W.',
-      role: 'GCSE Student',
-      school: 'Year 10',
-      image: '/api/placeholder/80/80',
+      id: 'placeholder-3',
+      studentId: 'placeholder',
+      studentName: 'Emma W.',
+      yearGroup: 'Year 10',
       rating: 5,
-      quote: "I love the Interview Lab feature! Practicing my interview skills with video submissions and getting feedback from tutors has boosted my confidence massively.",
-      subject: 'Business Studies'
+      reviewText: "The Life Skills and Career Explorer sections helped me discover what I want to do after school. Learning about different career paths and what they involve has been invaluable!",
+      subject: 'Career Planning',
+      submittedAt: new Date(),
+      status: 'approved',
+      featured: true
     },
     {
-      name: 'James M.',
-      role: 'A-Level Student',
-      school: 'Year 12',
-      image: '/api/placeholder/80/80',
+      id: 'placeholder-4',
+      studentId: 'placeholder',
+      studentName: 'James M.',
+      yearGroup: 'Year 12',
       rating: 5,
-      quote: "The debate platform is amazing for developing critical thinking. It's really helped me structure arguments better for my English essays.",
-      subject: 'English Language'
-    },
-    {
-      name: 'Priya P.',
-      role: 'GCSE Student',
-      school: 'Year 11',
-      image: '/api/placeholder/80/80',
-      rating: 5,
-      quote: "Having all the GCSE content in one place is so convenient. The progress tracking helps me see what I need to focus on for my exams.",
-      subject: 'Multiple Subjects'
-    },
-    {
-      name: 'Alex T.',
-      role: 'A-Level Student',
-      school: 'Year 13',
-      image: '/api/placeholder/80/80',
-      rating: 5,
-      quote: "The 24/7 AI assistant is a lifesaver during revision. I can get explanations for difficult Chemistry concepts anytime, even at 11pm before an exam!",
-      subject: 'Chemistry'
+      reviewText: "The Career Explorer showed me hundreds of career options I'd never even heard of. Now I understand what qualifications and skills I need for my dream career in engineering.",
+      subject: 'Career Guidance',
+      submittedAt: new Date(),
+      status: 'approved',
+      featured: true
     }
   ];
 
   const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    setCurrentTestimonial((prev) => (prev + 1) % reviews.length);
   };
 
   const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentTestimonial((prev) => (prev - 1 + reviews.length) % reviews.length);
   };
 
   // Auto-rotate testimonials
   useEffect(() => {
+    if (reviews.length === 0) return;
     const interval = setInterval(nextTestimonial, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [reviews]);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -87,6 +109,22 @@ export function NetflixTestimonials() {
       />
     ));
   };
+
+  if (loading) {
+    return (
+      <section className="py-24 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (reviews.length === 0) {
+    return null; // Don't show testimonials section if no reviews
+  }
 
   return (
     <section className="py-24 bg-muted/30">
@@ -116,31 +154,33 @@ export function NetflixTestimonials() {
               <div className="flex-1">
                 {/* Stars */}
                 <div className="flex items-center gap-1 mb-4">
-                  {renderStars(testimonials[currentTestimonial].rating)}
+                  {renderStars(reviews[currentTestimonial].rating)}
                 </div>
 
                 {/* Quote */}
                 <blockquote className="text-xl md:text-2xl text-foreground leading-relaxed mb-6">
-                  "{testimonials[currentTestimonial].quote}"
+                  "{reviews[currentTestimonial].reviewText}"
                 </blockquote>
 
                 {/* Author Info */}
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-gradient-to-br from-netflix-red to-netflix-red-dark rounded-full flex items-center justify-center">
                     <span className="text-white font-bold text-lg">
-                      {testimonials[currentTestimonial].name.charAt(0)}
+                      {reviews[currentTestimonial].studentName.charAt(0)}
                     </span>
                   </div>
                   <div>
                     <div className="font-semibold text-foreground">
-                      {testimonials[currentTestimonial].name}
+                      {reviews[currentTestimonial].studentName}
                     </div>
                     <div className="text-muted-foreground">
-                      {testimonials[currentTestimonial].role} • {testimonials[currentTestimonial].school}
+                      {reviews[currentTestimonial].yearGroup}
                     </div>
-                    <div className="text-sm text-netflix-red">
-                      {testimonials[currentTestimonial].subject}
-                    </div>
+                    {reviews[currentTestimonial].subject && (
+                      <div className="text-sm text-netflix-red">
+                        {reviews[currentTestimonial].subject}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -163,7 +203,7 @@ export function NetflixTestimonials() {
 
           {/* Dots Indicator */}
           <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
+            {reviews.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentTestimonial(index)}
@@ -180,19 +220,19 @@ export function NetflixTestimonials() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
-            <div className="text-4xl font-bold text-netflix-red mb-2">7+</div>
-            <div className="text-foreground font-semibold mb-1">Subject Courses</div>
-            <div className="text-sm text-muted-foreground">GCSE & A-Level curriculum</div>
+            <div className="text-4xl font-bold text-netflix-red mb-2">Courses</div>
+            <div className="text-foreground font-semibold mb-1">GCSE & A-Level</div>
+            <div className="text-sm text-muted-foreground">Complete curriculum coverage</div>
+          </div>
+          <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
+            <div className="text-4xl font-bold text-netflix-red mb-2">Hundreds</div>
+            <div className="text-foreground font-semibold mb-1">Career Pathways</div>
+            <div className="text-sm text-muted-foreground">Explore all your options</div>
           </div>
           <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
             <div className="text-4xl font-bold text-netflix-red mb-2">24/7</div>
-            <div className="text-foreground font-semibold mb-1">AI Assistant</div>
-            <div className="text-sm text-muted-foreground">Always available to help</div>
-          </div>
-          <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
-            <div className="text-4xl font-bold text-netflix-red mb-2">Live</div>
-            <div className="text-foreground font-semibold mb-1">Weekly Webinars</div>
-            <div className="text-sm text-muted-foreground">Interactive learning sessions</div>
+            <div className="text-foreground font-semibold mb-1">AI Tutor</div>
+            <div className="text-sm text-muted-foreground">Always here to help</div>
           </div>
         </div>
 

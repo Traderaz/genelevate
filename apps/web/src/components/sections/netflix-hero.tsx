@@ -18,49 +18,62 @@ export function NetflixHero() {
   };
 
   const stats = [
-    { icon: BookOpen, label: 'GCSE & A-Level Courses', value: '7+' },
+    { icon: BookOpen, label: 'GCSE & A-Level Courses', value: 'Available' },
     { icon: Video, label: 'Live Webinars', value: 'Weekly' },
-    { icon: Users, label: 'Interactive Debates', value: 'Active' },
+    { icon: Users, label: 'Life & Career Skills', value: 'Guidance' },
     { icon: Star, label: 'AI Learning Assistant', value: '24/7' },
   ];
 
   return (
-    <section className="relative min-h-screen flex items-start justify-center overflow-hidden bg-background pt-14 sm:pt-16">
-      {/* Dynamic Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background"></div>
+    <section className="relative min-h-screen flex items-start justify-center overflow-hidden bg-black pt-14 sm:pt-16">
+      {/* Premium Gradient Background from Top Left */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/40 via-black to-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-black via-neutral-950 to-red-950/20"></div>
+      </div>
       
-      {/* Cinematic Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/40"></div>
+      {/* Cinematic Overlay with Vignette */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] opacity-30"></div>
       
-      {/* Netflix Red Accent Glow - Smaller on mobile */}
-      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-primary/20 rounded-full blur-3xl"></div>
+      {/* Animated Gradient Orbs */}
+      <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-gradient-to-br from-red-600/30 via-red-900/20 to-transparent rounded-full blur-3xl floating-animation"></div>
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-orange-600/20 via-red-900/10 to-transparent rounded-full blur-3xl pulse-glow"></div>
+      
+      {/* Subtle Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `linear-gradient(rgba(229, 9, 20, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(229, 9, 20, 0.15) 1px, transparent 1px)`,
+          backgroundSize: '80px 80px'
+        }}></div>
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-6 sm:pt-8 pb-8 sm:pb-12 safe-area-bottom">
         <div className="max-w-5xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium mb-8 sm:mb-6 animate-fade-in">
-            <Star className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
+          {/* Premium Badge */}
+          <div className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 rounded-full premium-glass shimmer text-white text-xs sm:text-sm font-semibold mb-8 sm:mb-6 animate-fade-in shadow-lg">
+            <Star className="w-3 sm:w-4 h-3 sm:h-4 mr-2 text-red-500" />
             <span className="hidden xs:inline">AI-Powered Learning Platform for UK Students</span>
             <span className="xs:hidden">AI-Powered Learning</span>
           </div>
 
-          {/* Main Heading - Netflix Style - Mobile Optimized */}
+          {/* Cinematic Main Heading */}
           <h1 className="font-display font-extrabold mb-8 sm:mb-6 animate-fade-in leading-tight">
-            <span className="block mobile-heading-xl text-foreground mb-3 sm:mb-4 tracking-tight pb-2">
+            <span className="block mobile-heading-xl text-white mb-3 sm:mb-4 tracking-tight pb-2 drop-shadow-2xl">
               Elevate Your
             </span>
-            <span className="block text-4xl xs:text-5xl sm:text-7xl lg:text-8xl xl:text-9xl netflix-text-gradient tracking-tight pb-4">
+            <span className="block text-4xl xs:text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tighter pb-4 bg-gradient-to-r from-red-500 via-red-600 to-orange-500 bg-clip-text text-transparent drop-shadow-2xl">
               Learning Journey
             </span>
           </h1>
 
-          {/* Subtitle - Netflix Style - Mobile Optimized */}
-          <p className="mobile-text-lg text-muted-foreground mb-10 sm:mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in font-light">
-            Master GCSE & A-Level subjects with our comprehensive courses in Mathematics, Sciences, English, and Business. 
-            Features live webinars, AI tutoring, interactive debates, and interview preparation tools.
+          {/* Premium Subtitle */}
+          <p className="mobile-text-lg text-gray-300 mb-10 sm:mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in font-light drop-shadow-lg">
+            Master every GCSE & A-Level subject with comprehensive courses designed for exam success. 
+            Discover your perfect career path with expert guidance, explore hundreds of professions, and prepare for your future with 24/7 AI tutoring, live expert sessions, and interview practice.
           </p>
 
-          {/* Netflix-style Email Signup - Mobile Optimized */}
+          {/* Premium Email Signup */}
           <form onSubmit={handleGetStarted} className="max-w-2xl mx-auto mb-12 sm:mb-10 animate-fade-in">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <input
@@ -68,67 +81,60 @@ export function NetflixHero() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
-                className="flex-1 px-4 sm:px-6 py-4 sm:py-5 text-base sm:text-lg rounded-md bg-card/50 backdrop-blur-sm border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 min-h-touch"
+                className="flex-1 px-4 sm:px-6 py-4 sm:py-5 text-base sm:text-lg rounded-lg premium-glass text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 min-h-touch shadow-xl"
                 required
               />
               <button
                 type="submit"
-                className="px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg rounded-md netflix-button flex items-center justify-center gap-2 sm:gap-3 min-w-fit min-h-touch tap-highlight-transparent"
+                className="px-8 sm:px-10 py-4 sm:py-5 premium-button text-white font-bold text-base sm:text-lg rounded-lg flex items-center justify-center gap-2 sm:gap-3 min-w-fit min-h-touch tap-highlight-transparent"
               >
                 Get Started
                 <ChevronRight className="w-5 sm:w-6 h-5 sm:h-6" />
               </button>
             </div>
-            <p className="text-muted-foreground mt-3 sm:mt-4 text-center text-sm sm:text-base">
+            <p className="text-gray-400 mt-3 sm:mt-4 text-center text-sm sm:text-base">
               Ready to learn? Enter your email to get started with your subscription.
             </p>
           </form>
 
-          {/* Netflix-style Action Buttons - Mobile Optimized */}
+          {/* Premium Action Buttons */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-12 animate-fade-in">
             <Link
               href="/courses"
-              className="group flex items-center justify-center gap-3 sm:gap-4 px-8 sm:px-12 py-4 bg-secondary text-secondary-foreground font-bold text-base sm:text-lg rounded-md netflix-button hover:bg-secondary/90 transition-all duration-300 shadow-netflix min-h-touch tap-highlight-transparent"
+              className="group flex items-center justify-center gap-3 sm:gap-4 px-8 sm:px-12 py-4 premium-glass hover:bg-white/10 text-white font-bold text-base sm:text-lg rounded-lg transition-all duration-300 shadow-2xl min-h-touch tap-highlight-transparent border border-white/10 hover:border-white/30"
             >
               <Play className="w-5 sm:w-6 h-5 sm:h-6 group-hover:scale-110 transition-transform" />
               Explore Courses
             </Link>
             <Link
               href="#features"
-              className="flex items-center justify-center gap-3 sm:gap-4 px-8 sm:px-12 py-4 border-2 border-border text-foreground font-bold text-base sm:text-lg rounded-md netflix-button hover:border-primary hover:bg-card/50 transition-all duration-300 min-h-touch tap-highlight-transparent"
+              className="flex items-center justify-center gap-3 sm:gap-4 px-8 sm:px-12 py-4 border-2 border-white/20 text-white font-bold text-base sm:text-lg rounded-lg hover:border-red-500 hover:bg-red-500/10 transition-all duration-300 min-h-touch tap-highlight-transparent backdrop-blur-sm"
             >
               <Info className="w-5 sm:w-6 h-5 sm:h-6" />
               Learn More
             </Link>
           </div>
 
-          {/* Netflix-style Stats - Mobile Optimized */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 animate-fade-in mt-20 sm:mt-12">
+          {/* Premium Stats with Cinematic Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 animate-fade-in mt-20 sm:mt-12">
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="text-center group tap-highlight-transparent"
+                className="text-center group tap-highlight-transparent cinematic-card rounded-2xl p-4 sm:p-6"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full mb-3 sm:mb-4 group-hover:bg-primary/30 transition-all duration-300">
-                  <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-full mb-3 group-hover:from-red-500/40 group-hover:to-orange-500/40 transition-all duration-300 shadow-lg">
+                  <stat.icon className="w-6 h-6 sm:w-7 sm:h-7 text-red-500 group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-1 sm:mb-2 group-hover:text-primary transition-colors duration-300">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-red-500 transition-colors duration-300">
                   {stat.value}
                 </div>
-                <div className="text-xs sm:text-sm md:text-base text-muted-foreground font-medium">
+                <div className="text-xs sm:text-sm text-gray-400 font-medium">
                   {stat.label}
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Netflix-style Scroll Indicator - Hidden on mobile */}
-      <div className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce safe-area-bottom">
-        <div className="w-8 h-12 border-2 border-muted-foreground/40 rounded-full flex justify-center cursor-pointer hover:border-primary transition-colors duration-300">
-          <div className="w-1.5 h-4 bg-muted-foreground/60 rounded-full mt-3 animate-pulse"></div>
         </div>
       </div>
     </section>
