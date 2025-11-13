@@ -151,6 +151,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       items: [
         { name: 'My Courses', href: '/courses', icon: BookOpen },
         { name: 'Live Webinars', href: '/webinars', icon: Video },
+        { name: 'Grade Tracker', href: '/dashboard/grades', icon: Award },
         { name: 'Weekly To Do', href: '/todo', icon: CheckSquare },
         { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
         { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
@@ -188,6 +189,19 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       icon: Award,
       href: '/rewards',
       type: 'single' as const
+    },
+    {
+      id: 'account',
+      name: 'Account',
+      icon: User,
+      type: 'dropdown' as const,
+      items: [
+        { name: 'My Profile', href: '/dashboard/profile', icon: UserCircle },
+        { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
+        { name: 'Submit Review', href: '/dashboard/submit-review', icon: Star },
+        { name: 'Pricing', href: '/pricing', icon: ShoppingBag },
+        { name: 'Settings', href: '/settings', icon: Settings },
+      ]
     }
   ];
 
@@ -252,9 +266,11 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       items: [
         { name: 'My Courses', href: '/courses', icon: BookOpen },
         { name: 'Live Webinars', href: '/webinars', icon: Video },
+        { name: 'Grade Tracker', href: '/dashboard/grades', icon: Award },
         { name: 'Weekly Tasks', href: '/todo', icon: CheckSquare },
         { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
         { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
+        { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar },
       ]
     },
     {
@@ -280,14 +296,8 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       items: [
         { name: 'AI Assistant', href: '/ai', icon: Sparkles },
         { name: 'DNA Tracking', href: '/dna', icon: Zap },
+        { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
       ]
-    },
-    {
-      id: 'addons',
-      name: 'Add-Ons',
-      href: '/addons',
-      icon: ShoppingBag,
-      type: 'single' as const
     },
     {
       id: 'rewards',
