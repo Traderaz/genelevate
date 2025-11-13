@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function GradesPage() {
   return (
-    <RoleGuard allowedRoles={['student']}>
+    <RoleGuard allowedRoles={['student', 'admin']}>
       <div className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <GradeTracker />
