@@ -26,7 +26,10 @@ import {
   Lock,
   Award,
   Brain,
-  Globe
+  Globe,
+  Newspaper,
+  Bell,
+  CheckSquare
 } from 'lucide-react';
 import { WellbeingWidget } from './wellbeing-widget';
 import { RewardsWidget } from './rewards-widget';
@@ -55,9 +58,11 @@ export function NetflixDashboardOverview() {
         items: [
           { name: 'Browse Courses', href: '/courses', icon: BookOpen, description: 'Explore our course library', premium: false },
           { name: 'Live Webinars', href: '/webinars', icon: Video, description: 'Join live learning sessions', premium: false },
-          { name: 'Weekly Tasks', href: '/todo', icon: Target, description: 'Plan and track your weekly goals', premium: false },
+          { name: 'Grade Tracker', href: '/dashboard/grades', icon: Award, description: 'Track your academic grades', premium: false },
+          { name: 'Weekly Tasks', href: '/todo', icon: CheckSquare, description: 'Plan and track your weekly goals', premium: false },
           { name: 'My Progress', href: '/dashboard/progress', icon: TrendingUp, description: 'Track your learning journey', premium: false },
-          { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy, description: 'View your accomplishments', premium: false }
+          { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy, description: 'View your accomplishments', premium: false },
+          { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar, description: 'Manage your learning schedule', premium: false }
         ]
       },
       {
@@ -70,6 +75,7 @@ export function NetflixDashboardOverview() {
         items: [
           { name: 'Life Skills', href: '/life-skills', icon: Heart, description: 'Essential life skills training', premium: false },
           { name: 'Career Explorer', href: '/careers', icon: Briefcase, description: 'Explore career paths', premium: false },
+          { name: 'Industry News', href: '/news', icon: Newspaper, description: 'Latest industry news and trends', premium: false },
           { name: 'Interview Lab', href: '/life-career/interview-lab', icon: Video, description: 'Practice interview skills with video', premium: false },
           { name: 'Debates', href: '/debates', icon: Users, description: 'Join academic discussions', premium: false },
           { name: 'Wellbeing', href: '/wellbeing', icon: Heart, description: 'Mental health resources', premium: false }
@@ -97,9 +103,10 @@ export function NetflixDashboardOverview() {
         gradient: 'from-gray-500/20 to-gray-600/10',
         items: [
           { name: 'My Profile', href: '/dashboard/profile', icon: User, description: 'Manage your profile', premium: false },
-          { name: 'Settings', href: '/dashboard/settings', icon: Settings, description: 'Account preferences', premium: false },
-          { name: 'Notifications', href: '/dashboard/notifications', icon: Calendar, description: 'Manage notifications', premium: false },
-          { name: 'Help & Support', href: '/help', icon: Users, description: 'Get help and support', premium: false }
+          { name: 'Notifications', href: '/dashboard/notifications', icon: Bell, description: 'Manage notifications', premium: false },
+          { name: 'Submit Review', href: '/dashboard/submit-review', icon: Star, description: 'Share your experience', premium: false },
+          { name: 'Pricing', href: '/pricing', icon: ShoppingBag, description: 'View pricing plans', premium: false },
+          { name: 'Settings', href: '/dashboard/settings', icon: Settings, description: 'Account preferences', premium: false }
         ]
       }
     ];
