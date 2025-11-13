@@ -326,13 +326,13 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
             </button>
 
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">G</span>
-              </div>
-              <span className="text-xl font-bold netflix-text-gradient hidden sm:block">
-                Gen Elevate
-              </span>
+            <Link href="/" className="flex items-baseline gap-1">
+              <span className="text-2xl font-bold text-white">Gen</span>
+              <span className="text-2xl font-bold" style={{ 
+                background: 'linear-gradient(90deg, #FFEAEA 0%, #FFB3B3 25%, #FF6B6B 50%, #E50914 75%, #E50914 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>Elevate</span>
             </Link>
 
             {/* Desktop Navigation with Hover Dropdowns */}
