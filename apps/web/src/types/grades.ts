@@ -1,11 +1,12 @@
 /**
  * UK Education Grade System Types
- * Supports GCSE (9-1) and A-Level (A*-E) grading systems
+ * Supports GCSE (9-1), A-Level (A*-E), and BTEC (Pass/Merit/Distinction) grading systems
  */
 
 export type GCSEGrade = '9' | '8' | '7' | '6' | '5' | '4' | '3' | '2' | '1' | 'U';
 export type ALevelGrade = 'A*' | 'A' | 'B' | 'C' | 'D' | 'E' | 'U';
-export type Grade = GCSEGrade | ALevelGrade;
+export type BTECGrade = 'D*D*' | 'D*D' | 'DD' | 'DM' | 'MM' | 'MP' | 'PP' | 'P' | 'U' | 'Distinction*' | 'Distinction' | 'Merit' | 'Pass';
+export type Grade = GCSEGrade | ALevelGrade | BTECGrade;
 
 export type QualificationLevel = 'GCSE' | 'A-Level' | 'BTEC' | 'Other';
 
@@ -62,7 +63,7 @@ export interface GradeStats {
 }
 
 // Grade conversion utilities
-export const GRADE_VALUES: Record<Grade, number> = {
+export const GRADE_VALUES: Record<string, number> = {
   // GCSE
   '9': 9,
   '8': 8,
@@ -81,10 +82,25 @@ export const GRADE_VALUES: Record<Grade, number> = {
   'C': 5,
   'D': 3,
   'E': 1,
+  // BTEC Extended (Level 3)
+  'D*D*': 10,
+  'D*D': 9,
+  'DD': 8,
+  'DM': 7,
+  'MM': 6,
+  'MP': 5,
+  'PP': 4,
+  // BTEC Single/Unit grades
+  'Distinction*': 10,
+  'Distinction': 8,
+  'Merit': 6,
+  'Pass': 4,
+  'P': 4,
 };
 
 export const GCSE_GRADES: GCSEGrade[] = ['9', '8', '7', '6', '5', '4', '3', '2', '1', 'U'];
 export const A_LEVEL_GRADES: ALevelGrade[] = ['A*', 'A', 'B', 'C', 'D', 'E', 'U'];
+export const BTEC_GRADES: BTECGrade[] = ['Distinction*', 'Distinction', 'Merit', 'Pass', 'U'];
 
 export const CORE_SUBJECTS: CoreSubject[] = [
   'Mathematics',

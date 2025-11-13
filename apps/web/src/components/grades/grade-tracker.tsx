@@ -24,7 +24,7 @@ import {
   getGradeBgColor,
 } from '@/lib/services/grades';
 import type { SubjectGrade, Grade, QualificationLevel } from '@/types/grades';
-import { GCSE_GRADES, A_LEVEL_GRADES, COMMON_SUBJECTS, GRADE_VALUES } from '@/types/grades';
+import { GCSE_GRADES, A_LEVEL_GRADES, BTEC_GRADES, COMMON_SUBJECTS, GRADE_VALUES } from '@/types/grades';
 
 export function GradeTracker() {
   const { user } = useAuth();
@@ -112,8 +112,11 @@ export function GradeTracker() {
   };
 
   const stats = calculateGradeStats(subjects);
-  const availableGrades = (level: QualificationLevel) => 
-    level === 'A-Level' ? A_LEVEL_GRADES : GCSE_GRADES;
+  const availableGrades = (level: QualificationLevel) => {
+    if (level === 'A-Level') return A_LEVEL_GRADES;
+    if (level === 'BTEC') return BTEC_GRADES;
+    return GCSE_GRADES;
+  };
 
   if (isLoading) {
     return (

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Plus, Trash2, Award } from 'lucide-react';
 import type { SubjectGrade, Grade, QualificationLevel } from '@/types/grades';
-import { GCSE_GRADES, A_LEVEL_GRADES, COMMON_SUBJECTS } from '@/types/grades';
+import { GCSE_GRADES, A_LEVEL_GRADES, BTEC_GRADES, COMMON_SUBJECTS } from '@/types/grades';
 
 interface GradeSetupStepProps {
   onComplete: (subjects: SubjectGrade[], yearGroup: number) => void;
@@ -55,8 +55,11 @@ export function GradeSetupStep({ onComplete, onSkip }: GradeSetupStepProps) {
     onComplete(subjects, yearGroup);
   };
 
-  const availableGrades = (level: QualificationLevel) => 
-    level === 'A-Level' ? A_LEVEL_GRADES : GCSE_GRADES;
+  const availableGrades = (level: QualificationLevel) => {
+    if (level === 'A-Level') return A_LEVEL_GRADES;
+    if (level === 'BTEC') return BTEC_GRADES;
+    return GCSE_GRADES;
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
