@@ -55,9 +55,9 @@ export const metadata: Metadata = {
     description: 'Master GCSE & A-Level subjects with AI tutoring, live webinars, career guidance, and interview practice. Join thousands of students achieving top grades.',
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: '/Genelevate logo.png',
+        width: 512,
+        height: 512,
         alt: 'Gen Elevate - AI Education & Career Platform',
       },
     ],
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Gen Elevate | AI-Powered Education & Career Platform',
     description: 'Master GCSE & A-Level subjects with AI tutoring, expert webinars, and career guidance. 24/7 learning support for UK students.',
-    images: ['/og-image.jpg'],
+    images: ['/Genelevate logo.png'],
     creator: '@genelevate',
     site: '@genelevate',
   },
@@ -83,6 +83,15 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'YRwn0_4nKIkdWzOMhE_FrgCYHVXHnLi4WeC3kE5jSfI',
+  },
+  icons: {
+    icon: [
+      { url: '/Genelevate logo.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/Genelevate logo.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/Genelevate logo.png',
   },
 };
 
