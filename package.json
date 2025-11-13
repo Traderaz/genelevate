@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cd apps/web && npm run dev",
     "build": "npm run install-all && cd apps/web && npm run build",
-    "install-all": "npm install && cd packages/config && npm install && cd ../ui && npm install && cd ../shared && npm install && cd ../../apps/web && npm install && cd ../functions && npm install"
+    "install-all": "npm install && cd packages/config && npm install && cd ../ui && npm install && cd ../shared && npm install && cd ../../apps/web && npm install && cd ../functions && npm install",
+    "seed-careers": "ts-node --project apps/web/tsconfig.json apps/web/src/scripts/seed-careers.ts"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",

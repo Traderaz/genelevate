@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Newspaper, ExternalLink, Clock, TrendingUp, Bookmark } from 'lucide-react';
+import { Newspaper, ExternalLink, Clock, TrendingUp, Bookmark, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface NewsArticle {
@@ -21,64 +21,36 @@ export function IndustryNewsFeed() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  // Mock data - In production, this would fetch from Firestore (populated by Cloud Function)
+  // Fetch real news from RSS feeds via API
   useEffect(() => {
-    const mockArticles: NewsArticle[] = [
-      {
-        id: '1',
-        title: 'AI Revolution: How Machine Learning is Transforming Industries',
-        source: 'Tech Insights',
-        category: 'Technology',
-        excerpt: 'Artificial intelligence is reshaping how businesses operate, creating new opportunities for tech professionals...',
-        url: '#',
-        publishedAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
-        trending: true
-      },
-      {
-        id: '2',
-        title: 'UK Job Market Shows Strong Growth in Green Energy Sector',
-        source: 'Career News',
-        category: 'Engineering',
-        excerpt: 'The renewable energy sector is experiencing unprecedented growth, with thousands of new positions opening...',
-        url: '#',
-        publishedAt: new Date(Date.now() - 5 * 60 * 60 * 1000), // 5 hours ago
-        trending: true
-      },
-      {
-        id: '3',
-        title: 'Remote Work Trends: What Students Need to Know',
-        source: 'Future of Work',
-        category: 'General',
-        excerpt: 'As remote work becomes the norm, understanding digital collaboration tools is essential for career success...',
-        url: '#',
-        publishedAt: new Date(Date.now() - 8 * 60 * 60 * 1000), // 8 hours ago
-        trending: false
-      },
-      {
-        id: '4',
-        title: 'Healthcare Careers: Rising Demand for Digital Health Specialists',
-        source: 'Healthcare Today',
-        category: 'Healthcare',
-        excerpt: 'The intersection of healthcare and technology is creating exciting new career opportunities for graduates...',
-        url: '#',
-        publishedAt: new Date(Date.now() - 12 * 60 * 60 * 1000), // 12 hours ago
-        trending: false
-      },
-      {
-        id: '5',
-        title: 'Financial Technology: The Future of Banking and Finance',
-        source: 'Finance Weekly',
-        category: 'Finance',
-        excerpt: 'FinTech is revolutionizing the financial services industry, creating demand for tech-savvy finance professionals...',
-        url: '#',
-        publishedAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
-        trending: false
+    const fetchNews = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          `/api/news${selectedCategory !== 'all' ? `?category=${selectedCategory}` : ''}`
+        );
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch news');
+        }
+        
+        const data = await response.json();
+        const newsArticles = (data.articles || []).map((article: any) => ({
+          ...article,
+          publishedAt: new Date(article.publishedAt),
+        }));
+        
+        setArticles(newsArticles);
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        setArticles([]);
+      } finally {
+        setIsLoading(false);
       }
-    ];
+    };
 
-    setArticles(mockArticles);
-    setIsLoading(false);
-  }, []);
+    fetchNews();
+  }, [selectedCategory]);
 
   const categories = ['all', ...Array.from(new Set(articles.map(a => a.category)))];
 
@@ -104,10 +76,19 @@ export function IndustryNewsFeed() {
           <Newspaper className="w-6 h-6 text-primary" />
           <h2 className="text-2xl font-bold text-foreground">Industry News</h2>
         </div>
-        <span className="px-3 py-1 bg-green-500/20 text-green-400 text-xs rounded-full font-medium flex items-center gap-1">
-          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-          Live
-        </span>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/news"
+            className="text-sm text-primary hover:text-primary/80 transition-colors font-medium flex items-center gap-1"
+          >
+            View All News
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+          <span className="px-3 py-1 bg-green-500/20 text-green-400 text-xs rounded-full font-medium flex items-center gap-1">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            Live
+          </span>
+        </div>
       </div>
 
       {/* Category Filter */}

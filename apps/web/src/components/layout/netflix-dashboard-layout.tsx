@@ -28,6 +28,7 @@ import {
   Sparkles,
   LogOut,
   UserCircle,
+  Newspaper,
   ChevronDown,
   ChevronRight,
   Zap,
@@ -164,6 +165,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       items: [
         { name: 'Life Skills', href: '/life-skills', icon: Heart },
         { name: 'Career Explorer', href: '/careers', icon: Briefcase },
+        { name: 'Industry News', href: '/news', icon: Newspaper },
         { name: 'Interview Lab', href: '/life-career/interview-lab', icon: Video },
         { name: 'Wellbeing', href: '/wellbeing', icon: Heart },
         { name: 'Debate Room', href: '/debates', icon: Users },
@@ -263,6 +265,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       items: [
         { name: 'Life Skills', href: '/life-skills', icon: Heart },
         { name: 'Career Explorer', href: '/careers', icon: Briefcase },
+        { name: 'Industry News', href: '/news', icon: Newspaper },
         { name: 'Interview Lab', href: '/life-career/interview-lab', icon: Video },
         { name: 'Wellbeing', href: '/wellbeing', icon: Heart },
         { name: 'Debates', href: '/debates', icon: Users },

@@ -36,117 +36,28 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
   const [selectedLevel, setSelectedLevel] = useState(searchParams.level || 'all');
   const [isLoading, setIsLoading] = useState(true);
 
-  // Mock data - In production, this would fetch from Firestore
+  // Fetch real career data from API
   useEffect(() => {
-    const mockCareers: Career[] = [
-      {
-        id: '1',
-        title: 'Software Engineer',
-        sector: 'Technology',
-        description: 'Design, develop, and maintain software applications and systems',
-        salaryRange: '£30K - £80K',
-        growthRate: '+15%',
-        education: 'Bachelor\'s Degree',
-        location: 'London, UK',
-        skills: ['JavaScript', 'Python', 'Problem Solving', 'Teamwork'],
-        trending: true,
-        demandLevel: 'high'
-      },
-      {
-        id: '2',
-        title: 'Data Scientist',
-        sector: 'Technology',
-        description: 'Analyze complex data to help organizations make better decisions',
-        salaryRange: '£35K - £90K',
-        growthRate: '+22%',
-        education: 'Master\'s Degree',
-        location: 'Manchester, UK',
-        skills: ['Python', 'Statistics', 'Machine Learning', 'SQL'],
-        trending: true,
-        demandLevel: 'high'
-      },
-      {
-        id: '3',
-        title: 'Renewable Energy Engineer',
-        sector: 'Engineering',
-        description: 'Design and develop renewable energy systems and solutions',
-        salaryRange: '£28K - £65K',
-        growthRate: '+18%',
-        education: 'Bachelor\'s Degree',
-        location: 'Edinburgh, UK',
-        skills: ['Engineering', 'Sustainability', 'Project Management'],
-        trending: true,
-        demandLevel: 'high'
-      },
-      {
-        id: '4',
-        title: 'Digital Marketing Manager',
-        sector: 'Marketing',
-        description: 'Plan and execute digital marketing campaigns across multiple channels',
-        salaryRange: '£25K - £55K',
-        growthRate: '+12%',
-        education: 'Bachelor\'s Degree',
-        location: 'Birmingham, UK',
-        skills: ['SEO', 'Content Marketing', 'Analytics', 'Social Media'],
-        trending: false,
-        demandLevel: 'medium'
-      },
-      {
-        id: '5',
-        title: 'Healthcare Administrator',
-        sector: 'Healthcare',
-        description: 'Manage healthcare facilities and coordinate medical services',
-        salaryRange: '£24K - £50K',
-        growthRate: '+8%',
-        education: 'Bachelor\'s Degree',
-        location: 'Leeds, UK',
-        skills: ['Management', 'Communication', 'Healthcare Knowledge'],
-        trending: false,
-        demandLevel: 'medium'
-      },
-      {
-        id: '6',
-        title: 'Financial Analyst',
-        sector: 'Finance',
-        description: 'Analyze financial data and provide investment recommendations',
-        salaryRange: '£32K - £75K',
-        growthRate: '+10%',
-        education: 'Bachelor\'s Degree',
-        location: 'London, UK',
-        skills: ['Financial Modeling', 'Excel', 'Analysis', 'Communication'],
-        trending: false,
-        demandLevel: 'high'
-      },
-      {
-        id: '7',
-        title: 'UX/UI Designer',
-        sector: 'Design',
-        description: 'Create user-centered designs for digital products and services',
-        salaryRange: '£28K - £60K',
-        growthRate: '+14%',
-        education: 'Bachelor\'s Degree',
-        location: 'Bristol, UK',
-        skills: ['Figma', 'User Research', 'Prototyping', 'Design Thinking'],
-        trending: true,
-        demandLevel: 'high'
-      },
-      {
-        id: '8',
-        title: 'Cybersecurity Analyst',
-        sector: 'Technology',
-        description: 'Protect organizations from cyber threats and security breaches',
-        salaryRange: '£35K - £85K',
-        growthRate: '+20%',
-        education: 'Bachelor\'s Degree',
-        location: 'London, UK',
-        skills: ['Network Security', 'Ethical Hacking', 'Risk Assessment'],
-        trending: true,
-        demandLevel: 'high'
+    const fetchCareers = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch('/api/careers');
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch careers');
+        }
+        
+        const data = await response.json();
+        setCareers(data);
+      } catch (error) {
+        console.error('Error fetching careers:', error);
+        setCareers([]);
+      } finally {
+        setIsLoading(false);
       }
-    ];
+    };
 
-    setCareers(mockCareers);
-    setIsLoading(false);
+    fetchCareers();
   }, []);
 
   // Filter careers based on search and filters

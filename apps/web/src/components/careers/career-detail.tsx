@@ -61,97 +61,30 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Mock data - In production, fetch from Firestore
-    const mockCareer: CareerData = {
-      id: careerId,
-      title: 'Software Engineer',
-      sector: 'Technology',
-      description: 'Design, develop, and maintain software applications and systems',
-      salaryRange: '£30K - £80K',
-      growthRate: '+15%',
-      education: 'Bachelor\'s Degree',
-      location: 'London, UK',
-      skills: ['JavaScript', 'Python', 'Problem Solving', 'Teamwork', 'Git', 'Agile'],
-      trending: true,
-      demandLevel: 'high',
-      overview: 'Software engineers are the architects of the digital world. They design, develop, test, and maintain software applications that power everything from mobile apps to enterprise systems. This role combines creativity with technical expertise, requiring both analytical thinking and collaborative skills.',
-      responsibilities: [
-        'Design and develop software applications using modern programming languages',
-        'Write clean, maintainable, and efficient code',
-        'Collaborate with cross-functional teams to define and implement new features',
-        'Debug and resolve technical issues in existing systems',
-        'Participate in code reviews and contribute to team knowledge sharing',
-        'Stay updated with emerging technologies and industry best practices',
-        'Document technical specifications and system architecture'
-      ],
-      requirements: [
-        'Bachelor\'s degree in Computer Science, Software Engineering, or related field',
-        'Strong programming skills in languages like JavaScript, Python, Java, or C++',
-        'Understanding of data structures, algorithms, and software design patterns',
-        'Experience with version control systems (Git)',
-        'Knowledge of web technologies (HTML, CSS, JavaScript frameworks)',
-        'Problem-solving mindset and attention to detail',
-        'Good communication and teamwork skills'
-      ],
-      careerPath: [
-        {
-          level: 'Entry Level',
-          title: 'Junior Software Engineer',
-          years: '0-2 years',
-          salary: '£25K - £35K'
-        },
-        {
-          level: 'Mid Level',
-          title: 'Software Engineer',
-          years: '2-5 years',
-          salary: '£35K - £55K'
-        },
-        {
-          level: 'Senior Level',
-          title: 'Senior Software Engineer',
-          years: '5-8 years',
-          salary: '£55K - £80K'
-        },
-        {
-          level: 'Lead',
-          title: 'Lead Engineer / Tech Lead',
-          years: '8-12 years',
-          salary: '£80K - £110K'
-        },
-        {
-          level: 'Management',
-          title: 'Engineering Manager / Architect',
-          years: '12+ years',
-          salary: '£100K - £150K+'
+    const fetchCareer = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(`/api/careers/${careerId}`);
+        
+        if (!response.ok) {
+          if (response.status === 404) {
+            setCareer(null);
+            return;
+          }
+          throw new Error('Failed to fetch career');
         }
-      ],
-      relatedCourses: [
-        {
-          id: '1',
-          title: 'Introduction to Programming',
-          subject: 'Computer Science'
-        },
-        {
-          id: '2',
-          title: 'Web Development Fundamentals',
-          subject: 'Computer Science'
-        },
-        {
-          id: '3',
-          title: 'Data Structures & Algorithms',
-          subject: 'Computer Science'
-        }
-      ],
-      industryInsights: {
-        jobOpenings: '15,000+',
-        averageSalary: '£52,000',
-        topEmployers: ['Google', 'Amazon', 'Microsoft', 'Meta', 'Apple', 'Spotify', 'Revolut'],
-        futureOutlook: 'The demand for software engineers is expected to grow by 22% over the next decade, much faster than average. Emerging technologies like AI, cloud computing, and IoT are creating new opportunities.'
+        
+        const data = await response.json();
+        setCareer(data);
+      } catch (error) {
+        console.error('Error fetching career:', error);
+        setCareer(null);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    setCareer(mockCareer);
-    setIsLoading(false);
+    fetchCareer();
   }, [careerId]);
 
   if (isLoading) {

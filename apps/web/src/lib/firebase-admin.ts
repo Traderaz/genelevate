@@ -55,7 +55,7 @@ function initializeFirebaseAdmin() {
       adminApp = getApps()[0];
       adminDb = getFirestore(adminApp);
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('❌ Firebase Admin SDK initialization failed:', error);
     // Don't throw, just log - allow the app to continue
     // Rethrow only if it's not a settings error
@@ -68,5 +68,5 @@ function initializeFirebaseAdmin() {
 // Initialize immediately
 initializeFirebaseAdmin();
 
-export { adminApp, adminDb };
+export { adminApp, adminDb, initializeFirebaseAdmin };
 
