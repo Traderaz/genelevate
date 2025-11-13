@@ -134,18 +134,19 @@ export function GradeTracker() {
   return (
     <div className="space-y-6">
       {/* Header & Stats */}
-      <div className="bg-gradient-to-br from-card via-card/95 to-card/80 border border-border rounded-2xl p-6">
-        <div className="flex items-center justify-between mb-6">
+      <div className="bg-gradient-to-br from-card via-card/95 to-card/80 border border-border rounded-2xl p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Grade Tracker</h1>
-            <p className="text-muted-foreground mt-1">Monitor your academic progress</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Grade Tracker</h1>
+            <p className="text-sm sm:text-base text-muted-foreground mt-1">Monitor your academic progress</p>
           </div>
           <button
             onClick={() => setIsAddingSubject(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
           >
             <Plus className="w-4 h-4" />
-            Add Subject
+            <span className="hidden sm:inline">Add Subject</span>
+            <span className="sm:hidden">Add</span>
           </button>
         </div>
 

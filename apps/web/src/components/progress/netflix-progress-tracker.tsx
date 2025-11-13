@@ -80,8 +80,8 @@ export function NetflixProgressTracker() {
       {/* Header */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Progress Tracker</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Progress Tracker</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">
             Monitor your learning journey and academic achievements
           </p>
         </div>

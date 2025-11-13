@@ -77,18 +77,18 @@ export function IndustryNewsPage() {
       
       {/* Hero Header */}
       <div className="bg-gradient-to-r from-card via-card/95 to-card/80 border-b border-border mt-16">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="flex items-center justify-between mb-6">
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-primary/20 rounded-xl">
-                <Newspaper className="w-8 h-8 text-primary" />
+              <div className="p-2 sm:p-3 bg-primary/20 rounded-xl">
+                <Newspaper className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-foreground">Industry News</h1>
-                <p className="text-muted-foreground mt-1">Real-time news from trusted UK sources</p>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">Industry News</h1>
+                <p className="text-sm sm:text-base text-muted-foreground mt-1">Real-time news from trusted UK sources</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <button
                 onClick={fetchNews}
                 disabled={isLoading}
