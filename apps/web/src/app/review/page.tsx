@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import Link from 'next/link';
+import { SimpleHomeHeader } from '@/components/layout/simple-home-header';
 
 export default function PublicReviewPage() {
   const [rating, setRating] = useState(0);
@@ -68,18 +69,21 @@ export default function PublicReviewPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full">
-          {/* Logo */}
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center gap-3">
-              <img 
-                src="/Genelevate logo.png" 
-                alt="Gen Elevate Logo" 
-                className="h-16 w-auto"
-              />
-            </Link>
-          </div>
+      <div className="min-h-screen bg-black">
+        <SimpleHomeHeader />
+        
+        <div className="flex items-center justify-center p-4 pt-24">
+          <div className="max-w-2xl w-full">
+            {/* Logo */}
+            <div className="text-center mb-8">
+              <Link href="/" className="inline-flex items-center gap-3">
+                <img 
+                  src="/Genelevate logo.png" 
+                  alt="Gen Elevate Logo" 
+                  className="h-16 w-auto"
+                />
+              </Link>
+            </div>
 
           <div className="cinematic-card rounded-2xl p-8 text-center">
             <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
@@ -103,16 +107,19 @@ export default function PublicReviewPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-3">
-            <img 
-              src="/Genelevate logo.png" 
-              alt="Gen Elevate Logo" 
-              className="h-16 w-auto"
-            />
+    <div className="min-h-screen bg-black">
+      <SimpleHomeHeader />
+      
+      <div className="flex items-center justify-center p-4 pt-24">
+        <div className="max-w-2xl w-full">
+          {/* Logo */}
+          <div className="text-center mb-8">
+            <Link href="/" className="inline-flex items-center gap-3">
+              <img 
+                src="/Genelevate logo.png" 
+                alt="Gen Elevate Logo" 
+                className="h-16 w-auto"
+              />
           </Link>
         </div>
 

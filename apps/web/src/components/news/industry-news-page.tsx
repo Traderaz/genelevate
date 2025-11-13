@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Newspaper, ExternalLink, Clock, TrendingUp, Bookmark, Search, Filter, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
+import { SimpleHomeHeader } from '@/components/layout/simple-home-header';
 import type { NewsArticle } from '@/types/news';
 
 export function IndustryNewsPage() {
@@ -72,8 +73,10 @@ export function IndustryNewsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SimpleHomeHeader />
+      
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-card via-card/95 to-card/80 border-b border-border">
+      <div className="bg-gradient-to-r from-card via-card/95 to-card/80 border-b border-border mt-16">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
