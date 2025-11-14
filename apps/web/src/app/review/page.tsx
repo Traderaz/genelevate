@@ -101,6 +101,7 @@ export default function PublicReviewPage() {
               Visit Our Website
             </Link>
           </div>
+          </div>
         </div>
       </div>
     );
@@ -269,4 +270,3 @@ export default function PublicReviewPage() {
     </div>
   );
 }
-
