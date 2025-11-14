@@ -619,6 +619,15 @@ service cloud.firestore {
       allow delete: if isGlobalAdmin();
     }
 
+    // Founders collection - Public read access, admin write
+    match /founders/{founderId} {
+      // Anyone can read active founder profiles (for homepage display)
+      allow read: if true;
+      
+      // Only admins can create, update, or delete founder profiles
+      allow create, update, delete: if isGlobalAdmin();
+    }
+
     // Default deny all other documents
     match /{document=**} {
       allow read, write: if false;

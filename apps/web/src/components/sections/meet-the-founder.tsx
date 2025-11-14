@@ -14,6 +14,7 @@ export function MeetTheFounder() {
   useEffect(() => {
     const fetchFounders = async () => {
       try {
+        console.log('Fetching founders from Firestore...');
         const foundersRef = collection(db, 'founders');
         
         // Try with orderBy first, if it fails (no index), fetch without orderBy
@@ -25,6 +26,7 @@ export function MeetTheFounder() {
             orderBy('order', 'asc')
           );
           querySnapshot = await getDocs(q);
+          console.log('Fetched with orderBy:', querySnapshot.docs.length, 'documents');
         } catch (indexError: any) {
           console.log('Fetching founders without index (this is fine for now)');
           // Fallback: just get active founders without ordering
@@ -33,10 +35,12 @@ export function MeetTheFounder() {
             where('isActive', '==', true)
           );
           querySnapshot = await getDocs(simpleQuery);
+          console.log('Fetched without orderBy:', querySnapshot.docs.length, 'documents');
         }
         
         const foundersData: Founder[] = querySnapshot.docs.map(doc => {
           const data = doc.data();
+          console.log('Founder data:', data.name, 'isActive:', data.isActive);
           return {
             id: doc.id,
             name: data.name,
@@ -55,7 +59,8 @@ export function MeetTheFounder() {
         // Sort manually if needed
         foundersData.sort((a, b) => a.order - b.order);
 
-        console.log('Founders loaded:', foundersData.length);
+        console.log('Founders loaded successfully:', foundersData.length);
+        console.log('Founder details:', foundersData);
         setFounders(foundersData);
       } catch (error) {
         console.error('Error fetching founders:', error);
@@ -71,14 +76,42 @@ export function MeetTheFounder() {
     return (
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-card/20">
         <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Meet the <span className="text-primary">Founder</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Passionate about empowering the next generation of learners and leaders
+            </p>
+          </div>
           <div className="h-96 bg-card/50 animate-pulse rounded-2xl" />
         </div>
       </section>
     );
   }
 
+  // Show a message if no founders (instead of hiding completely)
   if (founders.length === 0) {
-    return null; // Don't show section if no founders are active
+    return (
+      <section className="py-20 bg-gradient-to-b from-background to-card/20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Meet the <span className="text-primary">Founder</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+              Passionate about empowering the next generation of learners and leaders
+            </p>
+            <div className="bg-card/50 border border-border rounded-2xl p-8 max-w-2xl mx-auto">
+              <p className="text-muted-foreground">
+                No founder profiles available yet. If you're an admin, please add a founder profile in the admin panel.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
