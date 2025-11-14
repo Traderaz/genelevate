@@ -38,7 +38,7 @@ export function EnhancedDashboardOverview() {
 
   if (!userProfile) return null;
 
-  // Mock stats - in real app, these would come from the API
+  // Only show stats with real data
   const stats = [
     {
       title: 'Learning Streak',
@@ -47,8 +47,7 @@ export function EnhancedDashboardOverview() {
       icon: Flame,
       color: 'text-orange-500',
       bgColor: 'bg-orange-500/10',
-      change: '+2 from yesterday',
-      trend: 'up'
+      show: (userProfile.stats?.currentStreak || 0) > 0
     },
     {
       title: 'Total Points',
@@ -57,8 +56,7 @@ export function EnhancedDashboardOverview() {
       icon: Star,
       color: 'text-yellow-500',
       bgColor: 'bg-yellow-500/10',
-      change: '+150 this week',
-      trend: 'up'
+      show: (userProfile.stats?.totalPoints || 0) > 0
     },
     {
       title: 'Courses Completed',
@@ -67,20 +65,18 @@ export function EnhancedDashboardOverview() {
       icon: Trophy,
       color: 'text-green-500',
       bgColor: 'bg-green-500/10',
-      change: 'Great progress!',
-      trend: 'up'
+      show: true
     },
     {
-      title: 'Study Hours',
-      value: userProfile.stats?.totalHours || 0,
-      unit: 'hours',
-      icon: Clock,
+      title: 'Active Courses',
+      value: continueWatching?.length || 0,
+      unit: 'courses',
+      icon: BookOpen,
       color: 'text-blue-500',
       bgColor: 'bg-blue-500/10',
-      change: '+5.5 this week',
-      trend: 'up'
+      show: true
     }
-  ];
+  ].filter(stat => stat.show);
 
   const getGreeting = () => {
     const hour = new Date().getHours();

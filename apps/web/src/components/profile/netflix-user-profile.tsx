@@ -47,36 +47,33 @@ export function NetflixUserProfile() {
 
   const yearGroupInfo = getYearGroupInfo(userProfile.yearGroup);
 
+  // Only show stats with real data
   const stats = [
     {
       label: 'Courses Completed',
-      value: '12',
+      value: (userProfile as any)?.coursesCompleted || 0,
       icon: Trophy,
       color: 'text-yellow-500',
-      bgColor: 'bg-yellow-500/10'
+      bgColor: 'bg-yellow-500/10',
+      show: true
     },
     {
-      label: 'Hours Learned',
-      value: '147',
-      icon: Clock,
+      label: 'Total Points',
+      value: (userProfile as any)?.totalPoints || 0,
+      icon: Star,
       color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10'
+      bgColor: 'bg-blue-500/10',
+      show: (userProfile as any)?.totalPoints > 0
     },
     {
       label: 'Current Streak',
-      value: '23 days',
+      value: `${(userProfile as any)?.streakDays || 0} days`,
       icon: Zap,
       color: 'text-orange-500',
-      bgColor: 'bg-orange-500/10'
-    },
-    {
-      label: 'Average Score',
-      value: '94%',
-      icon: Target,
-      color: 'text-green-500',
-      bgColor: 'bg-green-500/10'
+      bgColor: 'bg-orange-500/10',
+      show: (userProfile as any)?.streakDays > 0
     }
-  ];
+  ].filter(stat => stat.show);
 
   const achievements = [
     { name: 'First Course Complete', icon: '🎓', date: 'Oct 2023', unlocked: true },

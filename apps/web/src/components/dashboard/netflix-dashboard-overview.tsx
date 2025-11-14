@@ -58,6 +58,7 @@ export function NetflixDashboardOverview() {
         items: [
           { name: 'Browse Courses', href: '/courses', icon: BookOpen, description: 'Explore our course library', premium: false },
           { name: 'Live Webinars', href: '/webinars', icon: Video, description: 'Join live learning sessions', premium: false },
+          { name: 'Events Calendar', href: '/dashboard/events', icon: Calendar, description: 'Upcoming events and workshops', premium: true },
           { name: 'Grade Tracker', href: '/dashboard/grades', icon: Award, description: 'Track your academic grades', premium: false },
           { name: 'Weekly Tasks', href: '/todo', icon: CheckSquare, description: 'Plan and track your weekly goals', premium: false },
           { name: 'My Progress', href: '/dashboard/progress', icon: TrendingUp, description: 'Track your learning journey', premium: false },
@@ -166,37 +167,41 @@ export function NetflixDashboardOverview() {
   const sections = getAllSections();
   const isPremiumUser = userProfile?.subscription?.plan !== 'free';
 
-  // Quick stats for the overview
+  // Quick stats for the overview - only show if user has real data
   const quickStats = [
     {
       label: 'Courses Completed',
       value: (userProfile as any)?.coursesCompleted || 0,
       icon: Trophy,
       color: 'text-yellow-500',
-      bgColor: 'bg-yellow-500/10'
+      bgColor: 'bg-yellow-500/10',
+      show: true // Always show this
     },
     {
       label: 'Total Points',
       value: (userProfile as any)?.totalPoints || 0,
       icon: Star,
       color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10'
+      bgColor: 'bg-blue-500/10',
+      show: (userProfile as any)?.totalPoints > 0 // Only show if user has points
     },
     {
-      label: 'Current Level',
-      value: (userProfile as any)?.level || 1,
-      icon: Target,
+      label: 'Active Courses',
+      value: continueWatching?.length || 0,
+      icon: BookOpen,
       color: 'text-purple-500',
-      bgColor: 'bg-purple-500/10'
+      bgColor: 'bg-purple-500/10',
+      show: true // Always show this
     },
     {
-      label: 'Streak Days',
-      value: (userProfile as any)?.streakDays || 0,
-      icon: Zap,
+      label: 'Upcoming Webinars',
+      value: upcomingWebinars?.length || 0,
+      icon: Video,
       color: 'text-green-500',
-      bgColor: 'bg-green-500/10'
+      bgColor: 'bg-green-500/10',
+      show: true // Always show this
     }
-  ];
+  ].filter(stat => stat.show);
 
   return (
       <div className="space-y-6">

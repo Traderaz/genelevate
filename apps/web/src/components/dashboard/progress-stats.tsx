@@ -1,10 +1,25 @@
+import { useAuth } from '@/contexts/auth-context';
+
 export function ProgressStats() {
+  const { userProfile } = useAuth();
+
+  // Only show stats with real data - no fake numbers
   const stats = [
-    { name: 'Total Points', value: '2,847', change: '+12%' },
-    { name: 'Current Level', value: '8', change: '+1' },
-    { name: 'Courses Completed', value: '12', change: '+2' },
-    { name: 'Study Hours', value: '47', change: '+5h' },
-  ];
+    { 
+      name: 'Total Points', 
+      value: (userProfile as any)?.totalPoints || 0, 
+      show: (userProfile as any)?.totalPoints > 0 
+    },
+    { 
+      name: 'Courses Completed', 
+      value: (userProfile as any)?.coursesCompleted || 0, 
+      show: true 
+    },
+  ].filter(stat => stat.show);
+
+  if (stats.length === 0) {
+    return null; // Don't show anything if no real data
+  }
 
   return (
     <>
@@ -13,10 +28,7 @@ export function ProgressStats() {
           <div className="flex items-center">
             <div className="flex-1">
               <p className="text-sm font-medium text-gray-600">{stat.name}</p>
-              <p className="text-2xl font-semibold text-gray-900">{stat.value}</p>
-            </div>
-            <div className="ml-4">
-              <span className="text-sm font-medium text-green-600">{stat.change}</span>
+              <p className="text-2xl font-semibold text-gray-900">{stat.value.toLocaleString()}</p>
             </div>
           </div>
         </div>

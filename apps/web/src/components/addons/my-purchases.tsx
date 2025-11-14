@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { ShoppingBag, CheckCircle, Clock, XCircle, ExternalLink } from 'lucide-react';
+import { useAuth } from '@/contexts/auth-context';
+import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 interface Purchase {
   id: string;
@@ -16,36 +19,51 @@ interface Purchase {
 }
 
 export function MyPurchases() {
+  const { user } = useAuth();
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Mock data - In production, fetch from Firestore
-    const mockPurchases: Purchase[] = [
-      {
-        id: '1',
-        addOnTitle: 'Mock Interview Session',
-        addOnId: 'mock-interview',
-        price: 49.99,
-        currency: 'GBP',
-        status: 'completed',
-        purchasedAt: new Date('2024-03-10'),
-        sessionInfo: 'Scheduled for March 25, 2024 at 2:00 PM'
-      },
-      {
-        id: '2',
-        addOnTitle: 'CV Writing Service',
-        addOnId: 'cv-help',
-        price: 29.99,
-        currency: 'GBP',
-        status: 'completed',
-        purchasedAt: new Date('2024-03-05')
+    const fetchPurchases = async () => {
+      if (!user) {
+        setIsLoading(false);
+        return;
       }
-    ];
 
-    setPurchases(mockPurchases);
-    setIsLoading(false);
-  }, []);
+      try {
+        const purchasesRef = collection(db, 'addonPurchases');
+        const q = query(
+          purchasesRef,
+          where('userId', '==', user.uid),
+          orderBy('purchasedAt', 'desc')
+        );
+        
+        const querySnapshot = await getDocs(q);
+        const purchasesData: Purchase[] = querySnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            addOnTitle: data.addOnTitle,
+            addOnId: data.addOnId,
+            price: data.price,
+            currency: data.currency || 'GBP',
+            status: data.status,
+            purchasedAt: data.purchasedAt?.toDate() || new Date(),
+            expiresAt: data.expiresAt?.toDate(),
+            sessionInfo: data.sessionInfo
+          };
+        });
+
+        setPurchases(purchasesData);
+      } catch (error) {
+        console.error('Error fetching purchases:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPurchases();
+  }, [user]);
 
   const getStatusIcon = (status: string) => {
     switch (status) {

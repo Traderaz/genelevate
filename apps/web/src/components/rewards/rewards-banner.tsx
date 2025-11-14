@@ -1,8 +1,11 @@
 'use client';
 
-import { Trophy, Star, Gift, TrendingUp } from 'lucide-react';
+import { Trophy, Star, Gift } from 'lucide-react';
+import { useAuth } from '@/contexts/auth-context';
 
 export function RewardsBanner() {
+  const { userProfile } = useAuth();
+  const totalPoints = (userProfile as any)?.totalPoints || 0;
   return (
     <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-card via-card/95 to-card/80 border border-border">
       {/* Background Effects */}
@@ -54,19 +57,13 @@ export function RewardsBanner() {
             <div className="aspect-video bg-gradient-to-br from-yellow-500/20 to-background rounded-xl overflow-hidden shadow-netflix p-6">
               <div className="flex flex-col items-center justify-center h-full">
                 <Trophy className="w-20 h-20 text-yellow-500 mb-4" />
-                <p className="text-3xl font-bold text-foreground mb-2">1,250</p>
+                <p className="text-3xl font-bold text-foreground mb-2">{totalPoints.toLocaleString()}</p>
                 <p className="text-sm text-muted-foreground">Total Points Earned</p>
-                <div className="mt-6 flex items-center gap-4">
-                  <div className="text-center">
-                    <p className="text-xl font-bold text-green-500">#5</p>
-                    <p className="text-xs text-muted-foreground">Weekly Rank</p>
-                  </div>
-                  <div className="w-px h-12 bg-border"></div>
-                  <div className="text-center">
-                    <p className="text-xl font-bold text-blue-500">#12</p>
-                    <p className="text-xs text-muted-foreground">Monthly Rank</p>
-                  </div>
-                </div>
+                {totalPoints === 0 && (
+                  <p className="mt-4 text-xs text-muted-foreground text-center max-w-xs">
+                    Start completing courses and activities to earn points and climb the leaderboard!
+                  </p>
+                )}
               </div>
             </div>
           </div>

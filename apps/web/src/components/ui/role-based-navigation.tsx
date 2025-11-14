@@ -128,6 +128,14 @@ const navigationItems: NavigationItem[] = [
     isPremium: true
   },
   {
+    name: 'Events',
+    href: '/dashboard/events',
+    icon: Calendar,
+    roles: ['student', 'parent', 'institution', 'admin'],
+    description: 'Upcoming events and workshops',
+    isPremium: true
+  },
+  {
     name: 'Wellbeing',
     href: '/wellbeing',
     icon: Heart,

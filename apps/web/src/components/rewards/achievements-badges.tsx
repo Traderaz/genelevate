@@ -1,153 +1,71 @@
 'use client';
 
 import { Award, Lock } from 'lucide-react';
-
-interface Achievement {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-  points: number;
-  unlocked: boolean;
-  unlockedAt?: Date;
-  progress?: number;
-  total?: number;
-}
+import { useAchievements } from '@/hooks/useAchievements';
 
 export function AchievementsBadges() {
-  // Mock achievements - In production, fetch from Firestore
-  const achievements: Achievement[] = [
-    {
-      id: '1',
-      title: 'First Steps',
-      description: 'Complete your first course',
-      icon: '🎯',
-      points: 10,
-      unlocked: true,
-      unlockedAt: new Date('2024-01-15')
-    },
-    {
-      id: '2',
-      title: 'Knowledge Seeker',
-      description: 'Complete 10 courses',
-      icon: '📚',
-      points: 50,
-      unlocked: true,
-      unlockedAt: new Date('2024-02-20')
-    },
-    {
-      id: '3',
-      title: 'Webinar Warrior',
-      description: 'Attend 5 live webinars',
-      icon: '🎥',
-      points: 25,
-      unlocked: true,
-      unlockedAt: new Date('2024-03-10')
-    },
-    {
-      id: '4',
-      title: 'Perfect Score',
-      description: 'Get 100% on any quiz',
-      icon: '💯',
-      points: 20,
-      unlocked: true,
-      unlockedAt: new Date('2024-01-25')
-    },
-    {
-      id: '5',
-      title: 'Streak Master',
-      description: 'Maintain a 7-day learning streak',
-      icon: '🔥',
-      points: 30,
-      unlocked: true,
-      unlockedAt: new Date('2024-03-15')
-    },
-    {
-      id: '6',
-      title: 'Course Marathon',
-      description: 'Complete 25 courses',
-      icon: '🏃',
-      points: 100,
-      unlocked: false,
-      progress: 12,
-      total: 25
-    },
-    {
-      id: '7',
-      title: 'Social Butterfly',
-      description: 'Attend 20 webinars',
-      icon: '🦋',
-      points: 75,
-      unlocked: false,
-      progress: 8,
-      total: 20
-    },
-    {
-      id: '8',
-      title: 'Quiz Champion',
-      description: 'Score 100% on 10 quizzes',
-      icon: '👑',
-      points: 50,
-      unlocked: false,
-      progress: 3,
-      total: 10
-    },
-    {
-      id: '9',
-      title: 'Dedication',
-      description: 'Maintain a 30-day streak',
-      icon: '⭐',
-      points: 100,
-      unlocked: false,
-      progress: 7,
-      total: 30
-    },
-    {
-      id: '10',
-      title: 'Legend',
-      description: 'Earn 10,000 total points',
-      icon: '🏆',
-      points: 200,
-      unlocked: false,
-      progress: 1250,
-      total: 10000
-    }
-  ];
+  const { achievements, stats, isLoading } = useAchievements();
 
-  const unlockedCount = achievements.filter(a => a.unlocked).length;
-  const totalPoints = achievements.filter(a => a.unlocked).reduce((sum, a) => sum + a.points, 0);
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="h-12 bg-card animate-pulse rounded-xl" />
+        <div className="h-32 bg-card animate-pulse rounded-xl" />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[1, 2, 3, 4, 5].map(i => (
+            <div key={i} className="h-48 bg-card animate-pulse rounded-xl" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (achievements.length === 0) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center gap-2">
+          <Award className="w-6 h-6 text-primary" />
+          <h2 className="text-2xl font-bold text-foreground">Achievements</h2>
+        </div>
+        <div className="text-center py-12 bg-card rounded-xl border border-border">
+          <Award className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+          <p className="text-muted-foreground">No achievements available yet</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Award className="w-6 h-6 text-yellow-500" />
+          <Award className="w-6 h-6 text-primary" />
           <h2 className="text-2xl font-bold text-foreground">Achievements</h2>
         </div>
         <div className="text-right">
           <p className="text-sm text-muted-foreground">Unlocked</p>
           <p className="text-lg font-bold text-foreground">
-            {unlockedCount}/{achievements.length}
+            {stats.earnedCount}/{stats.totalCount}
           </p>
         </div>
       </div>
 
       {/* Summary Card */}
-      <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-6">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           <div>
             <p className="text-sm text-muted-foreground mb-1">Achievements</p>
-            <p className="text-2xl font-bold text-foreground">{unlockedCount}</p>
+            <p className="text-2xl font-bold text-foreground">{stats.earnedCount}</p>
           </div>
           <div>
             <p className="text-sm text-muted-foreground mb-1">Points Earned</p>
-            <p className="text-2xl font-bold text-foreground">{totalPoints}</p>
+            <p className="text-2xl font-bold text-foreground">{stats.totalPoints}</p>
           </div>
           <div>
             <p className="text-sm text-muted-foreground mb-1">Completion</p>
             <p className="text-2xl font-bold text-foreground">
-              {Math.round((unlockedCount / achievements.length) * 100)}%
+              {stats.completionRate}%
             </p>
           </div>
         </div>
@@ -158,17 +76,17 @@ export function AchievementsBadges() {
         {achievements.map((achievement) => (
           <div
             key={achievement.id}
-            className={`bg-card border rounded-xl p-4 text-center netflix-card ${
-              achievement.unlocked
-                ? 'border-yellow-500/30'
-                : 'border-border opacity-60'
+            className={`bg-card border rounded-xl p-4 text-center transition-all hover:border-primary group ${
+              achievement.earned
+                ? 'border-primary/30'
+                : 'border-border opacity-70 hover:opacity-100'
             }`}
           >
             <div className="relative inline-block mb-3">
-              <div className={`text-4xl ${achievement.unlocked ? '' : 'grayscale'}`}>
+              <div className={`text-4xl transition-all ${achievement.earned ? '' : 'grayscale group-hover:grayscale-0'}`}>
                 {achievement.icon}
               </div>
-              {!achievement.unlocked && (
+              {!achievement.earned && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Lock className="w-6 h-6 text-muted-foreground" />
                 </div>
@@ -178,25 +96,25 @@ export function AchievementsBadges() {
             <h3 className="font-semibold text-foreground text-sm mb-1">
               {achievement.title}
             </h3>
-            <p className="text-xs text-muted-foreground mb-2">
+            <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
               {achievement.description}
             </p>
             
-            {achievement.unlocked ? (
-              <div className="flex items-center justify-center gap-1 text-xs text-yellow-500">
+            {achievement.earned ? (
+              <div className="flex items-center justify-center gap-1 text-xs text-primary">
                 <Award className="w-3 h-3" />
                 <span className="font-medium">+{achievement.points} pts</span>
               </div>
-            ) : achievement.progress !== undefined && achievement.total !== undefined ? (
+            ) : achievement.current !== undefined && achievement.required !== undefined ? (
               <div className="space-y-1">
                 <div className="w-full bg-secondary rounded-full h-1.5">
                   <div
                     className="bg-primary h-1.5 rounded-full transition-all"
-                    style={{ width: `${(achievement.progress / achievement.total) * 100}%` }}
+                    style={{ width: `${(achievement.current / achievement.required) * 100}%` }}
                   ></div>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {achievement.progress}/{achievement.total}
+                  {achievement.current}/{achievement.required}
                 </p>
               </div>
             ) : (

@@ -152,19 +152,54 @@ export function NetflixFeatures() {
         </div>
 
         {/* Premium Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="text-center p-6 cinematic-card rounded-2xl"
-            >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-full mb-4 shadow-lg">
-                <stat.icon className="w-6 h-6 text-red-500" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+          {stats.map((stat, index) => {
+            // Define unique gradient colors for each card
+            const cardStyles = [
+              { 
+                gradient: 'from-blue-500/10 via-blue-600/5 to-purple-600/10',
+                border: 'border-blue-500/30',
+                iconBg: 'from-blue-500 to-blue-600',
+                iconGlow: 'shadow-blue-500/50',
+                textGlow: 'text-blue-400'
+              },
+              { 
+                gradient: 'from-purple-500/10 via-purple-600/5 to-pink-600/10',
+                border: 'border-purple-500/30',
+                iconBg: 'from-purple-500 to-pink-600',
+                iconGlow: 'shadow-purple-500/50',
+                textGlow: 'text-purple-400'
+              },
+              { 
+                gradient: 'from-orange-500/10 via-red-600/5 to-pink-600/10',
+                border: 'border-orange-500/30',
+                iconBg: 'from-orange-500 to-red-600',
+                iconGlow: 'shadow-orange-500/50',
+                textGlow: 'text-orange-400'
+              },
+              { 
+                gradient: 'from-green-500/10 via-emerald-600/5 to-teal-600/10',
+                border: 'border-green-500/30',
+                iconBg: 'from-green-500 to-emerald-600',
+                iconGlow: 'shadow-green-500/50',
+                textGlow: 'text-green-400'
+              }
+            ];
+            const style = cardStyles[index];
+            
+            return (
+              <div
+                key={index}
+                className={`text-center p-6 rounded-2xl backdrop-blur-sm bg-gradient-to-br ${style.gradient} border ${style.border} hover:scale-105 transition-all duration-300 hover:shadow-xl group`}
+              >
+                <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${style.iconBg} rounded-full mb-4 shadow-lg ${style.iconGlow} group-hover:scale-110 transition-transform duration-300`}>
+                  <stat.icon className="w-7 h-7 text-white" />
+                </div>
+                <div className={`text-3xl font-bold text-white mb-2 drop-shadow-lg ${style.textGlow}`}>{stat.value}</div>
+                <div className="text-gray-300 font-medium">{stat.label}</div>
               </div>
-              <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
-              <div className="text-gray-400">{stat.label}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Platform Features Grid */}

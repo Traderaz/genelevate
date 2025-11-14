@@ -1,0 +1,70 @@
+═══════════════════════════════════════════════════════════════════
+🔥 FIREBASE STORAGE RULES - COPY AND PASTE THIS
+═══════════════════════════════════════════════════════════════════
+
+The error "storage/unauthorized" means you need to update Firebase Storage rules.
+
+📋 QUICK FIX - Follow these steps:
+
+1. Go to: https://console.firebase.google.com/
+2. Select your "gen-elevate" project
+3. Click "Storage" in the left sidebar
+4. Click the "Rules" tab at the top
+5. Copy the rules below and paste them into the editor
+6. Click "Publish"
+
+═══════════════════════════════════════════════════════════════════
+COPY THIS (START HERE) ⬇️
+═══════════════════════════════════════════════════════════════════
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Founder images - authenticated users can upload, anyone can read
+    match /founders/{imageId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Allow reading all other files (for existing functionality)
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
+
+═══════════════════════════════════════════════════════════════════
+COPY THIS (END HERE) ⬆️
+═══════════════════════════════════════════════════════════════════
+
+After publishing, refresh your browser and try uploading again!
+
+═══════════════════════════════════════════════════════════════════
+MORE SECURE VERSION (For Production Later):
+═══════════════════════════════════════════════════════════════════
+
+If you want to restrict uploads to admins only (recommended for production):
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Founder images - only admins can upload, anyone can read
+    match /founders/{imageId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+                     request.auth.token.role == 'admin';
+    }
+    
+    // Default rules for other paths
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
+
+Note: This requires your user to have role: 'admin' in their custom claims.
+
+═══════════════════════════════════════════════════════════════════
+

@@ -117,23 +117,66 @@ export function NetflixHero() {
 
           {/* Premium Stats with Cinematic Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 animate-fade-in mt-20 sm:mt-12">
-            {stats.map((stat, index) => (
-              <div
-                key={stat.label}
-                className="text-center group tap-highlight-transparent cinematic-card rounded-2xl p-4 sm:p-6"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-full mb-3 group-hover:from-red-500/40 group-hover:to-orange-500/40 transition-all duration-300 shadow-lg">
-                  <stat.icon className="w-6 h-6 sm:w-7 sm:h-7 text-red-500 group-hover:scale-110 transition-transform duration-300" />
+            {stats.map((stat, index) => {
+              // Define unique gradient colors for each card
+              const cardStyles = [
+                { 
+                  gradient: 'from-blue-500/10 via-blue-600/5 to-purple-600/10',
+                  border: 'border-blue-500/30',
+                  iconBg: 'from-blue-500 to-blue-600',
+                  iconBgHover: 'group-hover:from-blue-500 group-hover:to-blue-600',
+                  iconGlow: 'shadow-blue-500/50',
+                  textColor: 'text-blue-400',
+                  textColorHover: 'group-hover:text-blue-400'
+                },
+                { 
+                  gradient: 'from-purple-500/10 via-purple-600/5 to-pink-600/10',
+                  border: 'border-purple-500/30',
+                  iconBg: 'from-purple-500 to-pink-600',
+                  iconBgHover: 'group-hover:from-purple-500 group-hover:to-pink-600',
+                  iconGlow: 'shadow-purple-500/50',
+                  textColor: 'text-purple-400',
+                  textColorHover: 'group-hover:text-purple-400'
+                },
+                { 
+                  gradient: 'from-orange-500/10 via-red-600/5 to-pink-600/10',
+                  border: 'border-orange-500/30',
+                  iconBg: 'from-orange-500 to-red-600',
+                  iconBgHover: 'group-hover:from-orange-500 group-hover:to-red-600',
+                  iconGlow: 'shadow-orange-500/50',
+                  textColor: 'text-orange-400',
+                  textColorHover: 'group-hover:text-orange-400'
+                },
+                { 
+                  gradient: 'from-green-500/10 via-emerald-600/5 to-teal-600/10',
+                  border: 'border-green-500/30',
+                  iconBg: 'from-green-500 to-emerald-600',
+                  iconBgHover: 'group-hover:from-green-500 group-hover:to-emerald-600',
+                  iconGlow: 'shadow-green-500/50',
+                  textColor: 'text-green-400',
+                  textColorHover: 'group-hover:text-green-400'
+                }
+              ];
+              const style = cardStyles[index];
+              
+              return (
+                <div
+                  key={stat.label}
+                  className={`text-center group tap-highlight-transparent backdrop-blur-sm bg-gradient-to-br ${style.gradient} border ${style.border} rounded-2xl p-4 sm:p-6 hover:scale-105 transition-all duration-300 hover:shadow-xl`}
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  <div className={`inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br ${style.iconBg} ${style.iconBgHover} rounded-full mb-3 transition-all duration-300 shadow-lg ${style.iconGlow} group-hover:scale-110`}>
+                    <stat.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <div className={`text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2 ${style.textColorHover} transition-colors duration-300 drop-shadow-lg`}>
+                    {stat.value}
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-300 font-medium">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-red-500 transition-colors duration-300">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-gray-400 font-medium">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

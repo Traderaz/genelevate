@@ -1,38 +1,14 @@
 'use client';
 
-import { Award, Clock, TrendingUp, Target } from 'lucide-react';
+import { Award } from 'lucide-react';
 
 export function WellbeingStats() {
+  // Removed fake data - stats will be added when we have real data from user progress
   const stats = [
     {
-      label: 'Modules Completed',
-      value: '3/12',
-      percentage: 25,
+      label: 'Get Started',
+      value: 'Begin your wellbeing journey',
       icon: Award,
-      color: 'text-yellow-500',
-      bgColor: 'bg-yellow-500/10'
-    },
-    {
-      label: 'Learning Time',
-      value: '2.5h',
-      change: '+30 min this week',
-      icon: Clock,
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10'
-    },
-    {
-      label: 'Streak Days',
-      value: '7',
-      change: 'Keep it up!',
-      icon: TrendingUp,
-      color: 'text-green-500',
-      bgColor: 'bg-green-500/10'
-    },
-    {
-      label: 'Skills Mastered',
-      value: '5/20',
-      percentage: 25,
-      icon: Target,
       color: 'text-purple-500',
       bgColor: 'bg-purple-500/10'
     }

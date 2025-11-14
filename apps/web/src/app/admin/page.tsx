@@ -20,7 +20,8 @@ import {
   CheckCircle,
   XCircle,
   Eye,
-  RefreshCw
+  RefreshCw,
+  Calendar
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -133,7 +134,8 @@ export default function AdminDashboard() {
       icon: Users,
       href: '/admin/users',
       color: 'bg-blue-500',
-      stats: `${stats.totalUsers} total users`
+      stats: `${stats.totalUsers} total users`,
+      available: true
     },
     {
       title: 'Content Management',
@@ -141,7 +143,26 @@ export default function AdminDashboard() {
       icon: BookOpen,
       href: '/admin/content',
       color: 'bg-green-500',
-      stats: `${stats.totalCourses} courses, ${stats.totalWebinars} webinars`
+      stats: `${stats.totalCourses} courses, ${stats.totalWebinars} webinars`,
+      available: true
+    },
+    {
+      title: 'Events Management',
+      description: 'Create and manage platform events and workshops',
+      icon: Calendar,
+      href: '/admin/events',
+      color: 'bg-cyan-500',
+      stats: 'Upcoming events',
+      available: true
+    },
+    {
+      title: 'Founders Management',
+      description: 'Manage founder profiles on homepage',
+      icon: Users,
+      href: '/admin/founders',
+      color: 'bg-emerald-500',
+      stats: 'Meet the team',
+      available: true
     },
     {
       title: 'System Monitoring',
@@ -149,31 +170,35 @@ export default function AdminDashboard() {
       icon: Activity,
       href: '/admin/monitoring',
       color: 'bg-purple-500',
-      stats: `System ${stats.systemHealth}`
+      stats: `System ${stats.systemHealth}`,
+      available: true
     },
     {
-      title: 'Support Tickets',
-      description: 'Handle user support requests and issues',
+      title: 'Reviews Management',
+      description: 'Manage platform reviews and feedback',
       icon: MessageSquare,
-      href: '/admin/support',
-      color: 'bg-orange-500',
-      stats: `${stats.pendingIssues} pending issues`
+      href: '/admin/reviews',
+      color: 'bg-yellow-500',
+      stats: 'User feedback',
+      available: true
     },
     {
-      title: 'Financial Management',
-      description: 'Manage subscriptions, payments, and billing',
-      icon: BarChart3,
-      href: '/admin/finance',
-      color: 'bg-red-500',
-      stats: 'Revenue tracking'
+      title: 'Interview Lab',
+      description: 'Manage interview practice submissions and responses',
+      icon: Video,
+      href: '/admin/interview-lab',
+      color: 'bg-pink-500',
+      stats: 'Video submissions',
+      available: true
     },
     {
-      title: 'System Settings',
-      description: 'Configure system settings and preferences',
-      icon: Settings,
-      href: '/admin/settings',
-      color: 'bg-gray-500',
-      stats: 'Global configuration'
+      title: 'Creator Dashboard',
+      description: 'Content creator tools and analytics',
+      icon: FileText,
+      href: '/creator-dashboard',
+      color: 'bg-indigo-500',
+      stats: 'Content creation',
+      available: true
     }
   ];
 

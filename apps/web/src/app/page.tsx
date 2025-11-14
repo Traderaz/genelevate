@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 // Dynamically import below-the-fold components
+const MeetTheFounder = dynamic(() => import('@/components/sections/meet-the-founder').then(mod => ({ default: mod.MeetTheFounder })));
 const NetflixFeatures = dynamic(() => import('@/components/sections/netflix-features').then(mod => ({ default: mod.NetflixFeatures })));
 const NetflixPricing = dynamic(() => import('@/components/sections/netflix-pricing').then(mod => ({ default: mod.NetflixPricing })));
 const NetflixTestimonials = dynamic(() => import('@/components/sections/netflix-testimonials').then(mod => ({ default: mod.NetflixTestimonials })));
@@ -27,6 +28,7 @@ export default function HomePage() {
       <SimpleHomeHeader />
       <main className="relative">
         <NetflixHero />
+        <MeetTheFounder />
         <NetflixFeatures />
         <NetflixPricing />
         <NetflixTestimonials />
