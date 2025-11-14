@@ -120,10 +120,10 @@ export default function PublicReviewPage() {
                 alt="Gen Elevate Logo" 
                 className="h-16 w-auto"
               />
-          </Link>
-        </div>
+            </Link>
+          </div>
 
-        <div className="cinematic-card rounded-2xl p-6 sm:p-8">
+          <div className="cinematic-card rounded-2xl p-6 sm:p-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-white mb-2">
               Share Your Experience
@@ -263,6 +263,7 @@ export default function PublicReviewPage() {
           <p className="text-xs text-gray-500 text-center mt-6">
             Your review will be reviewed before being published on our website
           </p>
+          </div>
         </div>
       </div>
     </div>
