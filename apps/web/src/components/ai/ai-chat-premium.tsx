@@ -35,11 +35,11 @@ export default function AIChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const sessionTypes = [
-    { id: 'general', label: 'General Help', icon: MessageCircle, color: 'text-blue-500', gradient: 'from-blue-500 to-cyan-500' },
-    { id: 'study-help', label: 'Study Help', icon: BookOpen, color: 'text-green-500', gradient: 'from-green-500 to-emerald-500' },
-    { id: 'career-guidance', label: 'Career Guidance', icon: Briefcase, color: 'text-purple-500', gradient: 'from-purple-500 to-pink-500' },
-    { id: 'course-support', label: 'Course Support', icon: Sparkles, color: 'text-yellow-500', gradient: 'from-yellow-500 to-orange-500' },
-    { id: 'motivation', label: 'Motivation', icon: Zap, color: 'text-orange-500', gradient: 'from-orange-500 to-red-500' },
+    { id: 'general', label: 'General Help', icon: MessageCircle, color: 'text-teal-primary', gradient: 'from-teal-blue-medium to-teal-primary' },
+    { id: 'study-help', label: 'Study Help', icon: BookOpen, color: 'text-teal-light', gradient: 'from-teal-primary to-teal-light' },
+    { id: 'career-guidance', label: 'Career Guidance', icon: Briefcase, color: 'text-teal-gold', gradient: 'from-teal-gold to-teal-light' },
+    { id: 'course-support', label: 'Course Support', icon: Sparkles, color: 'text-teal-gold', gradient: 'from-teal-gold-dark to-teal-gold' },
+    { id: 'motivation', label: 'Motivation', icon: Zap, color: 'text-teal-primary', gradient: 'from-teal-primary to-teal-blue-deep' },
   ];
 
   // Load messages for current session
@@ -214,32 +214,32 @@ export default function AIChat() {
   const TypeIcon = selectedType?.icon || MessageCircle;
 
   return (
-    <div className="min-h-[calc(100vh-120px)] bg-gradient-to-br from-background via-background/95 to-background">
+    <div className="min-h-[calc(100vh-120px)]">
       {/* Premium Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-gold/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
       <div className="relative z-10">
         {/* Premium Header */}
-        <div className="border-b border-border bg-card/60 backdrop-blur-2xl sticky top-0 z-20 shadow-lg">
+        <div className="border-b border-white/10 bg-white/10 backdrop-blur-2xl sticky top-0 z-20 shadow-lg">
           <div className="max-w-6xl mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 {/* Animated Logo */}
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-purple-500 to-pink-500 rounded-xl blur-lg opacity-50 group-hover:opacity-70 transition-opacity animate-pulse"></div>
-                  <div className="relative w-12 h-12 bg-gradient-to-br from-primary via-primary/90 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 border border-primary/40 transform group-hover:scale-105 transition-transform">
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-primary via-teal-light to-teal-gold rounded-xl blur-lg opacity-50 group-hover:opacity-70 transition-opacity animate-pulse"></div>
+                  <div className="relative w-12 h-12 bg-gradient-to-br from-teal-blue-medium to-teal-primary rounded-xl flex items-center justify-center shadow-lg border border-teal-gold/40 transform group-hover:scale-105 transition-transform">
                     <Sparkles className="w-6 h-6 text-white animate-pulse" />
                   </div>
                 </div>
 
                 <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground via-primary to-purple-400 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-bold text-white">
                     Gen Elevate AI
                   </h1>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-white/70">
                     Your premium AI assistant powered by advanced intelligence
                   </p>
                 </div>
@@ -247,20 +247,20 @@ export default function AIChat() {
               
               <div className="flex items-center gap-4">
                 {/* Rate Limits Card */}
-                <div className="hidden md:flex flex-col gap-1 px-4 py-2 rounded-lg bg-card/80 border border-border backdrop-blur-sm shadow-sm">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    Daily: <span className="text-primary font-bold text-sm">{rateLimits.remainingDaily}</span>
+                <div className="hidden md:flex flex-col gap-1 px-4 py-2 rounded-lg teal-card-glass border border-white/20 backdrop-blur-sm shadow-lg">
+                  <div className="flex items-center gap-2 text-xs text-white/80">
+                    <div className="w-2 h-2 rounded-full bg-teal-gold animate-pulse"></div>
+                    Daily: <span className="text-teal-gold font-bold text-sm">{rateLimits.remainingDaily}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-                    Monthly: <span className="text-purple-400 font-bold text-sm">{rateLimits.remainingMonthly}</span>
+                  <div className="flex items-center gap-2 text-xs text-white/80">
+                    <div className="w-2 h-2 rounded-full bg-teal-light animate-pulse"></div>
+                    Monthly: <span className="text-teal-light font-bold text-sm">{rateLimits.remainingMonthly}</span>
                   </div>
                 </div>
 
                 <button
                   onClick={handleNewChat}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-500 shadow-lg shadow-primary/20 border border-primary/40 rounded-lg transform hover:scale-105 transition-all text-white"
+                  className="teal-button-primary flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
                   <span className="hidden sm:inline">New Chat</span>
@@ -276,7 +276,7 @@ export default function AIChat() {
           <div className="mb-6">
             <button
               onClick={() => setShowTypeSelector(!showTypeSelector)}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900/50 border border-zinc-700 hover:border-primary/50 backdrop-blur-sm transition-colors text-white"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg teal-card-glass border border-white/20 hover:border-teal-gold/50 backdrop-blur-sm transition-colors text-white"
             >
               <TypeIcon className={`w-4 h-4 ${selectedType?.color}`} />
               <span>{selectedType?.label}</span>
@@ -284,7 +284,7 @@ export default function AIChat() {
             </button>
 
             {showTypeSelector && (
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4 p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 backdrop-blur-sm">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4 p-4 teal-card-glass rounded-xl border border-white/20 backdrop-blur-sm">
                 {sessionTypes.map((type) => {
                   const Icon = type.icon;
                   return (
@@ -296,14 +296,14 @@ export default function AIChat() {
                       }}
                       className={`group p-4 rounded-xl border-2 transition-all ${
                         sessionType === type.id
-                          ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
-                          : 'border-zinc-700 hover:border-primary/50 bg-zinc-800/50'
+                          ? 'border-teal-gold bg-teal-gold/10 shadow-lg'
+                          : 'border-white/20 hover:border-teal-gold/50 bg-white/5'
                       }`}
                     >
                       <div className={`w-10 h-10 mx-auto mb-2 rounded-lg bg-gradient-to-br ${type.gradient} p-2 shadow-lg transform group-hover:scale-110 transition-transform`}>
                         <Icon className="w-full h-full text-white" />
                       </div>
-                      <span className="text-xs font-medium text-zinc-300 block text-center">
+                      <span className="text-xs font-medium text-white block text-center">
                         {type.label}
                       </span>
                     </button>
@@ -314,28 +314,28 @@ export default function AIChat() {
           </div>
 
           {/* Chat Container */}
-          <div className="bg-gradient-to-br from-card/90 to-card/95 border border-border rounded-2xl overflow-hidden shadow-xl backdrop-blur-xl" style={{ height: 'calc(100vh - 500px)', minHeight: '400px' }}>
+          <div className="teal-card rounded-2xl overflow-hidden shadow-xl" style={{ height: 'calc(100vh - 500px)', minHeight: '400px' }}>
             {/* Messages */}
-            <div className="h-full overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+            <div className="h-full overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
               {messages.length === 0 ? (
                 <div className="flex items-center justify-center h-full">
                   <div className="text-center max-w-2xl">
                     <div className="relative inline-block mb-6">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-500 rounded-full blur-2xl opacity-50 animate-pulse"></div>
-                      <Sparkles className="relative w-20 h-20 text-primary mx-auto animate-pulse" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-teal-primary to-teal-gold rounded-full blur-2xl opacity-50 animate-pulse"></div>
+                      <Sparkles className="relative w-20 h-20 text-teal-primary mx-auto animate-pulse" />
                     </div>
-                    <h3 className="text-2xl font-bold text-foreground mb-3 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                    <h3 className="text-2xl font-bold text-teal-card-text mb-3">
                       Welcome to Gen Elevate AI!
                     </h3>
-                    <p className="text-muted-foreground mb-8">
+                    <p className="text-teal-card-text-muted mb-8">
                       Your premium AI assistant is ready. Ask me anything about your studies, career, courses, or motivation!
                     </p>
                     <div className="grid grid-cols-2 gap-3">
                       {[
-                        { text: 'Can you help me with calculus?', gradient: 'from-blue-500/20 to-cyan-500/20' },
-                        { text: 'What careers are good for Biology?', gradient: 'from-green-500/20 to-emerald-500/20' },
-                        { text: 'How do I improve my study habits?', gradient: 'from-purple-500/20 to-pink-500/20' },
-                        { text: 'Tell me about university options', gradient: 'from-orange-500/20 to-red-500/20' },
+                        { text: 'Can you help me with calculus?', gradient: 'from-teal-blue-medium/20 to-teal-primary/20' },
+                        { text: 'What careers are good for Biology?', gradient: 'from-teal-primary/20 to-teal-light/20' },
+                        { text: 'How do I improve my study habits?', gradient: 'from-teal-gold/20 to-teal-light/20' },
+                        { text: 'Tell me about university options', gradient: 'from-teal-light/20 to-teal-primary/20' },
                       ].map((suggestion, i) => (
                         <button
                           key={i}
@@ -348,9 +348,9 @@ export default function AIChat() {
                             }
                           }}
                           disabled={isLoading}
-                          className={`p-4 text-sm bg-gradient-to-br ${suggestion.gradient} hover:scale-105 rounded-xl transition-all text-left border border-border hover:border-primary/50 backdrop-blur-sm group disabled:opacity-50 disabled:cursor-not-allowed`}
+                          className={`p-4 text-sm bg-gradient-to-br ${suggestion.gradient} hover:scale-105 rounded-xl transition-all text-left border border-gray-200 hover:border-teal-gold/50 backdrop-blur-sm group disabled:opacity-50 disabled:cursor-not-allowed`}
                         >
-                          <span className="text-muted-foreground group-hover:text-foreground transition-colors">{suggestion.text}</span>
+                          <span className="text-teal-card-text-muted group-hover:text-teal-card-text transition-colors">{suggestion.text}</span>
                         </button>
                       ))}
                     </div>
@@ -364,15 +364,15 @@ export default function AIChat() {
                       className={`flex gap-4 ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-4 duration-500`}
                     >
                       {msg.role === 'assistant' && (
-                        <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/30">
+                        <div className="w-10 h-10 bg-gradient-to-br from-teal-blue-medium to-teal-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                           <Sparkles className="w-5 h-5 text-white" />
                         </div>
                       )}
                       <div
                         className={`max-w-[75%] rounded-2xl p-5 ${
                           msg.role === 'user'
-                            ? 'bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-xl shadow-primary/20'
-                            : 'bg-card/80 text-card-foreground border border-border backdrop-blur-sm'
+                            ? 'bg-gradient-to-br from-teal-primary to-teal-blue-medium text-white shadow-xl'
+                            : 'bg-white/90 text-teal-card-text border border-gray-200 backdrop-blur-sm'
                         }`}
                       >
                         <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
@@ -384,8 +384,8 @@ export default function AIChat() {
                         </span>
                       </div>
                       {msg.role === 'user' && userProfile && (
-                        <div className="w-10 h-10 bg-gradient-to-br from-zinc-700 to-zinc-800 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg border border-zinc-600">
-                          <span className="text-sm font-bold text-white">
+                        <div className="w-10 h-10 bg-gradient-to-br from-teal-gold to-teal-gold-dark rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                          <span className="text-sm font-bold text-teal-card-text">
                             {userProfile.displayName?.charAt(0) || userProfile.firstName.charAt(0)}
                           </span>
                         </div>
@@ -394,13 +394,13 @@ export default function AIChat() {
                   ))}
                   {isLoading && (
                     <div className="flex gap-4 justify-start animate-in fade-in slide-in-from-bottom-4">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/30">
+                      <div className="w-10 h-10 bg-gradient-to-br from-teal-blue-medium to-teal-primary rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                         <Sparkles className="w-5 h-5 text-white animate-pulse" />
                       </div>
-                      <div className="bg-zinc-800/80 border border-zinc-700/50 rounded-2xl p-5 backdrop-blur-sm">
+                      <div className="bg-white/90 border border-gray-200 rounded-2xl p-5 backdrop-blur-sm">
                         <div className="flex items-center gap-2">
-                          <Loader2 className="w-4 h-4 animate-spin text-primary" />
-                          <span className="text-sm text-zinc-400">Thinking...</span>
+                          <Loader2 className="w-4 h-4 animate-spin text-teal-primary" />
+                          <span className="text-sm text-teal-card-text-muted">Thinking...</span>
                         </div>
                       </div>
                     </div>
@@ -430,13 +430,13 @@ export default function AIChat() {
                   }
                 }}
                 placeholder="Ask me anything..."
-                className="w-full min-h-[100px] pr-14 p-4 bg-background/80 border border-border focus:border-primary/50 focus:outline-none rounded-xl resize-none backdrop-blur-sm text-foreground placeholder:text-muted-foreground"
+                className="w-full min-h-[100px] pr-14 p-4 teal-card border border-gray-300 focus:border-teal-gold focus:outline-none focus:ring-2 focus:ring-teal-gold rounded-xl resize-none text-teal-card-text placeholder:text-teal-card-text-muted"
                 disabled={isLoading}
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!inputMessage.trim() || isLoading}
-                className="absolute bottom-3 right-3 h-10 w-10 flex items-center justify-center bg-gradient-to-br from-primary to-purple-600 hover:from-primary/90 hover:to-purple-500 shadow-xl shadow-primary/30 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-all rounded-lg text-white"
+                className="absolute bottom-3 right-3 h-10 w-10 flex items-center justify-center bg-gradient-to-br from-teal-blue-medium to-teal-primary hover:from-teal-primary hover:to-teal-light shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-all rounded-lg text-white"
               >
                 {isLoading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -445,8 +445,8 @@ export default function AIChat() {
                 )}
               </button>
             </div>
-            <p className="text-xs text-zinc-500 mt-3 text-center">
-              Press <kbd className="px-2 py-1 bg-zinc-800 rounded border border-zinc-700">Enter</kbd> to send, <kbd className="px-2 py-1 bg-zinc-800 rounded border border-zinc-700">Shift + Enter</kbd> for new line
+            <p className="text-xs text-white/70 mt-3 text-center">
+              Press <kbd className="px-2 py-1 teal-card-glass rounded border border-white/20 text-white">Enter</kbd> to send, <kbd className="px-2 py-1 teal-card-glass rounded border border-white/20 text-white">Shift + Enter</kbd> for new line
             </p>
           </div>
         </div>

@@ -19,7 +19,7 @@ export default function WellbeingPage() {
         <WellbeingBanner />
 
         {/* Daily Wellbeing Check */}
-        <Suspense fallback={<div className="h-32 bg-card animate-pulse rounded-xl" />}>
+        <Suspense fallback={<div className="h-32 teal-card animate-pulse rounded-xl" />}>
           <DailyWellbeingCheck />
         </Suspense>
 

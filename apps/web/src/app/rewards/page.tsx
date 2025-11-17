@@ -20,7 +20,7 @@ export default function RewardsPage() {
         <RewardsBanner />
 
         {/* Points Summary */}
-        <Suspense fallback={<div className="h-48 bg-card animate-pulse rounded-xl" />}>
+        <Suspense fallback={<div className="h-48 teal-card animate-pulse rounded-xl" />}>
           <PointsSummary />
         </Suspense>
 
@@ -28,21 +28,21 @@ export default function RewardsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Leaderboards - Takes 2 columns */}
           <div className="lg:col-span-2">
-            <Suspense fallback={<div className="h-96 bg-card animate-pulse rounded-xl" />}>
+            <Suspense fallback={<div className="h-96 teal-card animate-pulse rounded-xl" />}>
               <Leaderboards />
             </Suspense>
           </div>
 
           {/* Rewards Store - Takes 1 column */}
           <div className="lg:col-span-1">
-            <Suspense fallback={<div className="h-96 bg-card animate-pulse rounded-xl" />}>
+            <Suspense fallback={<div className="h-96 teal-card animate-pulse rounded-xl" />}>
               <RewardsStore />
             </Suspense>
           </div>
         </div>
 
         {/* Achievements & Badges */}
-        <Suspense fallback={<div className="h-64 bg-card animate-pulse rounded-xl" />}>
+        <Suspense fallback={<div className="h-64 teal-card animate-pulse rounded-xl" />}>
           <AchievementsBadges />
         </Suspense>
       </div>

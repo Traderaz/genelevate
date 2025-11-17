@@ -48,8 +48,8 @@ export function WellbeingQuickAccess() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-foreground">Quick Access</h2>
-        <span className="text-sm text-muted-foreground">Always available</span>
+        <h2 className="text-2xl font-bold text-white">Quick Access</h2>
+        <span className="text-sm text-white/80">Always available</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -63,8 +63,8 @@ export function WellbeingQuickAccess() {
           <Component
             key={action.title}
             {...linkProps}
-            className={`relative bg-card border rounded-xl p-6 netflix-card hover:border-primary transition-all group ${
-              action.priority === 'high' ? 'border-orange-500/50' : 'border-border'
+            className={`relative teal-card border-2 rounded-xl p-6 hover:border-teal-gold/50 transition-all group ${
+              action.priority === 'high' ? 'border-orange-500/50' : 'border-white/20'
             }`}
           >
             {action.priority === 'high' && (
@@ -75,10 +75,10 @@ export function WellbeingQuickAccess() {
             <div className={`w-12 h-12 ${action.bgColor} rounded-lg flex items-center justify-center mb-4`}>
               <action.icon className={`w-6 h-6 ${action.color}`} />
             </div>
-            <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+            <h3 className="font-semibold text-teal-card-text mb-2 group-hover:text-teal-gold transition-colors">
               {action.title}
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-teal-card-text-muted">
               {action.description}
             </p>
           </Component>
@@ -87,23 +87,23 @@ export function WellbeingQuickAccess() {
       </div>
 
       {/* Safeguarding Notice */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+      <div className="teal-card border-2 border-teal-primary/30 rounded-xl p-4">
         <div className="flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-teal-primary flex-shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <p className="text-sm font-semibold text-foreground">Your wellbeing matters</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm font-semibold text-teal-card-text">Your wellbeing matters</p>
+            <p className="text-sm text-teal-card-text-muted">
               All content is safeguarding-approved and non-medical. If you're experiencing a crisis, 
               please contact emergency services (999) or speak to a trusted adult immediately.
             </p>
             <div className="flex flex-wrap gap-4 mt-3 text-sm">
-              <a href="tel:116123" className="text-primary hover:underline">
+              <a href="tel:116123" className="text-teal-gold hover:underline font-medium">
                 Samaritans: 116 123
               </a>
-              <a href="tel:08001111" className="text-primary hover:underline">
+              <a href="tel:08001111" className="text-teal-gold hover:underline font-medium">
                 Childline: 0800 1111
               </a>
-              <a href="https://www.youngminds.org.uk" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              <a href="https://www.youngminds.org.uk" target="_blank" rel="noopener noreferrer" className="text-teal-gold hover:underline font-medium">
                 YoungMinds Crisis Messenger
               </a>
             </div>

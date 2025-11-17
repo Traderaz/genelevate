@@ -628,6 +628,42 @@ service cloud.firestore {
       allow create, update, delete: if isGlobalAdmin();
     }
 
+    // Debate Topics collection - Read-only for authenticated users
+    match /debateTopics/{topicId} {
+      // All authenticated users can read debate topics
+      allow read: if isAuthenticated();
+      
+      // Only admins can create, update, or delete debate topics
+      allow create, update, delete: if isGlobalAdmin();
+    }
+
+    // Debate Submissions collection - Students submit, admins grade
+    match /debateSubmissions/{submissionId} {
+      // Students can read their own submissions, admins can read all
+      allow read: if isAuthenticated() && (
+        isOwner(resource.data.userId) ||
+        isGlobalAdmin()
+      );
+      
+      // Students can create their own submissions
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      
+      // Only admins can update (for grading and feedback)
+      allow update: if isGlobalAdmin();
+      
+      // Only admins can delete
+      allow delete: if isGlobalAdmin();
+    }
+
+    // Virtual Debates collection - Authenticated users can read, admins can manage
+    match /virtualDebates/{debateId} {
+      // All authenticated users can read virtual debates
+      allow read: if isAuthenticated();
+      
+      // Only admins can create, update, or delete virtual debates
+      allow create, update, delete: if isGlobalAdmin();
+    }
+
     // Default deny all other documents
     match /{document=**} {
       allow read, write: if false;

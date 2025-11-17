@@ -19,11 +19,10 @@ const NetflixFeatures = dynamic(() => import('@/components/sections/netflix-feat
 const NetflixPricing = dynamic(() => import('@/components/sections/netflix-pricing').then(mod => ({ default: mod.NetflixPricing })));
 const NetflixTestimonials = dynamic(() => import('@/components/sections/netflix-testimonials').then(mod => ({ default: mod.NetflixTestimonials })));
 const NetflixFAQ = dynamic(() => import('@/components/sections/netflix-faq').then(mod => ({ default: mod.NetflixFAQ })));
-const NetflixCTA = dynamic(() => import('@/components/sections/netflix-cta').then(mod => ({ default: mod.NetflixCTA })));
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <ProductSchema />
       <SimpleHomeHeader />
       <main className="relative">
@@ -33,7 +32,6 @@ export default function HomePage() {
         <NetflixPricing />
         <NetflixTestimonials />
         <NetflixFAQ />
-        <NetflixCTA />
       </main>
       <NetflixFooter />
     </div>

@@ -38,14 +38,14 @@ export default async function CareersPage({ searchParams }: CareersPageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Career Explorer - Takes 2 columns */}
           <div className="lg:col-span-2">
-            <Suspense fallback={<div className="h-96 bg-card animate-pulse rounded-xl" />}>
+            <Suspense fallback={<div className="h-96 teal-card animate-pulse rounded-xl" />}>
               <CareerExplorer searchParams={resolvedSearchParams} />
             </Suspense>
           </div>
 
           {/* Industry News Feed - Takes 1 column */}
           <div className="lg:col-span-1">
-            <Suspense fallback={<div className="h-96 bg-card animate-pulse rounded-xl" />}>
+            <Suspense fallback={<div className="h-96 teal-card animate-pulse rounded-xl" />}>
               <IndustryNewsFeed />
             </Suspense>
           </div>

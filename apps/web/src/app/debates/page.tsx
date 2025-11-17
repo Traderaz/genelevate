@@ -1,126 +1,130 @@
 'use client';
 
-import { useState } from 'react';
-import { Trophy, Calendar, Users, Play, TrendingUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Trophy, Calendar, Users, BookOpen, TrendingUp, Video } from 'lucide-react';
 import { DebateCard } from '@/components/debates/debate-card';
+import { DebatingGuide } from '@/components/debates/debating-guide';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
 import { BasicPlanGuard } from '@/components/auth/subscription-guard';
+import { useAuth } from '@/contexts/auth-context';
+import Link from 'next/link';
 
-// Mock data for now - will connect to Firestore later
-const mockDebates = [
-  {
-    id: '1',
-    topicId: 'topic1',
-    title: 'Should social media companies be held responsible for teen mental health?',
-    description: 'Explore the role of social media platforms in teen mental health. Consider corporate responsibility, free speech, parental controls, and government regulation.',
-    category: 'technology',
-    difficulty: 'intermediate' as const,
-    status: 'active' as const,
-    weekNumber: 42,
-    startDate: new Date('2024-10-21'),
-    submissionDeadline: new Date('2024-10-26'),
-    endDate: new Date('2024-10-27'),
-    institutionId: undefined,
-    isGlobal: true,
-    allowedSubmissionTypes: ['video' as const, 'audio' as const, 'text' as const],
-    maxDurationSeconds: 60,
-    maxTextWords: 500,
-    pointsReward: 50,
-    submissionCount: 47,
-    participantCount: 45,
-    viewCount: 234,
-    createdAt: new Date('2024-10-14T10:00:00Z'),
-    updatedAt: new Date('2024-10-20T15:30:00Z'),
-    createdBy: 'admin123',
-  },
-  {
-    id: '2',
-    topicId: 'topic2',
-    title: 'Is climate change education mandatory in schools?',
-    description: 'Debate whether climate change should be a required part of the curriculum. Consider scientific literacy, student engagement, and preparing for the future.',
-    category: 'environment',
-    difficulty: 'beginner' as const,
-    status: 'upcoming' as const,
-    weekNumber: 43,
-    startDate: new Date('2024-10-28'),
-    submissionDeadline: new Date('2024-11-02'),
-    endDate: new Date('2024-11-03'),
-    institutionId: undefined,
-    isGlobal: true,
-    allowedSubmissionTypes: ['video' as const, 'audio' as const, 'text' as const],
-    maxDurationSeconds: 60,
-    maxTextWords: 500,
-    pointsReward: 50,
-    submissionCount: 0,
-    participantCount: 0,
-    viewCount: 12,
-    createdAt: new Date('2024-10-20T09:00:00Z'),
-    updatedAt: new Date('2024-10-20T09:00:00Z'),
-    createdBy: 'admin123',
-  },
-];
+interface DebateTopic {
+  id: string;
+  title: string;
+  description: string;
+  month: string;
+  year: number;
+  submissionDeadline: any;
+  pointsReward: number;
+  createdAt: any;
+  createdBy: string;
+}
 
 function DebatesPageContent() {
-  const [activeFilter, setActiveFilter] = useState<'all' | 'active' | 'upcoming' | 'completed'>('all');
+  const { user } = useAuth();
+  const [debates, setDebates] = useState<DebateTopic[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showGuide, setShowGuide] = useState(false);
 
-  const filteredDebates = mockDebates.filter(debate => {
-    if (activeFilter === 'all') return true;
-    return debate.status === activeFilter;
-  });
+  useEffect(() => {
+    loadDebates();
+  }, []);
+
+  const loadDebates = async () => {
+    setLoading(true);
+    try {
+      const { collection, query, where, orderBy, getDocs } = await import('firebase/firestore');
+      const { db } = await import('@/lib/firebase');
+
+      const debatesRef = collection(db, 'debateTopics');
+      const q = query(
+        debatesRef,
+        orderBy('createdAt', 'desc')
+      );
+
+      const snapshot = await getDocs(q);
+      const debatesData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as DebateTopic[];
+
+      setDebates(debatesData);
+    } catch (error) {
+      console.error('Error loading debates:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <NetflixDashboardLayout>
       <div className="space-y-8">
         {/* Hero Section */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-500/20 via-purple-500/20 to-blue-500/20 border border-primary/30 p-8">
+        <div className="relative overflow-hidden rounded-2xl teal-card-glass border-2 border-white/20 p-8">
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-gold/10 via-transparent to-teal-primary/10"></div>
           <div className="relative z-10">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center">
-                <Users className="w-8 h-8 text-primary" />
+              <div className="w-16 h-16 rounded-xl bg-teal-gold/20 flex items-center justify-center">
+                <Users className="w-8 h-8 text-teal-gold" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-foreground">
-                  🎯 AI-Moderated Debate Room
+                <h1 className="text-4xl font-bold text-white">
+                  🎯 Monthly Debate Challenge
                 </h1>
-                <p className="text-muted-foreground text-lg">
+                <p className="text-white/80 text-lg">
                   Sharpen your critical thinking and argumentation skills
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-              <div className="bg-background/50 backdrop-blur-sm rounded-lg p-4 border border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-6">
+              <button
+                onClick={() => setShowGuide(true)}
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20 hover:border-teal-gold/50 transition-all group"
+              >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center">
-                    <Trophy className="w-5 h-5 text-yellow-500" />
+                  <div className="w-10 h-10 rounded-lg bg-teal-gold/20 flex items-center justify-center group-hover:bg-teal-gold/30 transition-colors">
+                    <BookOpen className="w-5 h-5 text-teal-gold" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-lg font-bold text-white">Guide</div>
+                    <div className="text-xs text-white/70">Learn to debate</div>
+                  </div>
+                </div>
+              </button>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-teal-gold/20 flex items-center justify-center">
+                    <Trophy className="w-5 h-5 text-teal-gold" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-foreground">50+</div>
-                    <div className="text-sm text-muted-foreground">Points per debate</div>
+                    <div className="text-2xl font-bold text-white">50+</div>
+                    <div className="text-sm text-white/70">Points per debate</div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-background/50 backdrop-blur-sm rounded-lg p-4 border border-border">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-green-500" />
+                  <div className="w-10 h-10 rounded-lg bg-teal-gold/20 flex items-center justify-center">
+                    <Calendar className="w-5 h-5 text-teal-gold" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-foreground">Weekly</div>
-                    <div className="text-sm text-muted-foreground">New topics</div>
+                    <div className="text-2xl font-bold text-white">Monthly</div>
+                    <div className="text-sm text-white/70">New topics</div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-background/50 backdrop-blur-sm rounded-lg p-4 border border-border">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-blue-500" />
+                  <div className="w-10 h-10 rounded-lg bg-teal-gold/20 flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5 text-teal-gold" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-foreground">AI</div>
-                    <div className="text-sm text-muted-foreground">Powered scoring</div>
+                    <div className="text-2xl font-bold text-white">Admin</div>
+                    <div className="text-sm text-white/70">Expert feedback</div>
                   </div>
                 </div>
               </div>
@@ -128,107 +132,62 @@ function DebatesPageContent() {
           </div>
         </div>
 
-        {/* How It Works */}
-        <div className="bg-card border border-border rounded-xl p-6">
-          <h2 className="text-2xl font-bold text-foreground mb-4">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <span className="text-primary font-bold text-xl">1</span>
+        {/* Virtual Debates Link */}
+        <Link href="/debates/virtual">
+          <div className="teal-card border-2 border-teal-gold/30 rounded-xl p-6 hover:border-teal-gold/50 transition-all cursor-pointer group">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-xl bg-teal-gold/20 flex items-center justify-center group-hover:bg-teal-gold/30 transition-colors">
+                  <Video className="w-7 h-7 text-teal-gold" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-teal-card-text mb-1">
+                    🎥 Virtual Debate Arena
+                  </h3>
+                  <p className="text-teal-card-text-muted">
+                    Join live team debates with top performers
+                  </p>
+                </div>
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Choose Topic</h3>
-              <p className="text-sm text-muted-foreground">
-                Pick from weekly debate topics
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <span className="text-primary font-bold text-xl">2</span>
+              <div className="text-teal-gold group-hover:translate-x-1 transition-transform">
+                →
               </div>
-              <h3 className="font-semibold text-foreground mb-2">Submit Argument</h3>
-              <p className="text-sm text-muted-foreground">
-                Video, audio, or text (60s/500 words)
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <span className="text-primary font-bold text-xl">3</span>
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Get AI Feedback</h3>
-              <p className="text-sm text-muted-foreground">
-                Scored on clarity, logic, evidence
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <span className="text-primary font-bold text-xl">4</span>
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Compete & Win</h3>
-              <p className="text-sm text-muted-foreground">
-                Earn points and climb leaderboard
-              </p>
             </div>
           </div>
-        </div>
+        </Link>
 
-        {/* Filters */}
-        <div className="flex items-center gap-4 border-b border-border">
-          {[
-            { id: 'all', label: 'All Debates' },
-            { id: 'active', label: 'Active' },
-            { id: 'upcoming', label: 'Upcoming' },
-            { id: 'completed', label: 'Completed' },
-          ].map((filter) => (
-            <button
-              key={filter.id}
-              onClick={() => setActiveFilter(filter.id as any)}
-              className={`px-4 py-3 font-medium transition-colors relative ${
-                activeFilter === filter.id
-                  ? 'text-primary border-b-2 border-primary'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              {filter.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Debates Grid */}
-        {filteredDebates.length === 0 ? (
-          <div className="bg-card border border-border rounded-xl p-12 text-center">
-            <Users className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-            <h3 className="text-xl font-semibold text-foreground mb-2">
-              No debates found
+        {/* Debates List */}
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-gold"></div>
+          </div>
+        ) : debates.length === 0 ? (
+          <div className="teal-card border border-white/20 rounded-xl p-12 text-center">
+            <Users className="w-16 h-16 text-teal-card-text-muted mx-auto mb-4 opacity-50" />
+            <h3 className="text-xl font-semibold text-teal-card-text mb-2">
+              No debates available
             </h3>
-            <p className="text-muted-foreground mb-6">
-              Check back soon for new debate topics!
+            <p className="text-teal-card-text-muted mb-6">
+              Check back soon for new monthly debate topics!
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {filteredDebates.map((debate) => (
+          <div className="grid grid-cols-1 gap-6">
+            {debates.map((debate) => (
               <DebateCard
                 key={debate.id}
                 debate={debate}
-                userSubmitted={false}
+                userId={user?.uid}
               />
             ))}
           </div>
         )}
-
-        {/* Coming Soon Banner */}
-        <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/30 rounded-xl p-6 text-center">
-          <h3 className="text-xl font-bold text-foreground mb-2">
-            🚀 More Features Coming Soon!
-          </h3>
-          <p className="text-muted-foreground">
-            Video/audio submissions, live leaderboards, peer voting, and institution tournaments
-          </p>
-        </div>
       </div>
+
+      {/* Debating Guide Modal */}
+      {showGuide && (
+        <DebatingGuide onClose={() => setShowGuide(false)} />
+      )}
     </NetflixDashboardLayout>
   );
 }

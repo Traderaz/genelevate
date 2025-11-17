@@ -6,74 +6,49 @@
 
 @layer base {
   :root {
-    /* Light theme - Netflix-inspired */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Teal Theme - Gen Elevate */
+    --background: 0 0% 100%; /* White for cards/content */
+    --foreground: 0 0% 100%; /* White text on gradient */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100% / 0.95; /* Slightly transparent white cards */
+    --card-foreground: 210 65% 10%; /* Dark text on cards */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 65% 10%;
 
-    --primary: 0 84% 45%; /* Netflix red */
+    --primary: 193 49% 47%; /* #0F7C89 - blue-medium */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 0 84% 45%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 0 84% 45%;
-
-    --radius: 0.5rem;
-
-    /* Netflix custom properties */
-    --netflix-red: 229 84% 45%;
-    --netflix-black: 0 0% 6%;
-    --netflix-gray-dark: 0 0% 10%;
-    --netflix-gray-medium: 0 0% 16%;
-    --netflix-gray-light: 0 0% 25%;
-  }
-
-  .dark {
-    /* Dark theme - Netflix style */
-    --background: 0 0% 6%; /* Netflix black */
-    --foreground: 0 0% 100%;
-
-    --card: 0 0% 10%; /* Netflix gray-dark */
-    --card-foreground: 0 0% 100%;
-
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 100%;
-
-    --primary: 0 84% 45%; /* Netflix red */
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 0 0% 16%; /* Netflix gray-medium */
+    --secondary: 189 82% 45%; /* #0CB1A2 - teal */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 16%;
-    --muted-foreground: 0 0% 70%; /* Netflix text-secondary */
+    --muted: 0 0% 100% / 0.1; /* Subtle white overlay */
+    --muted-foreground: 0 0% 100% / 0.8; /* Light white text */
 
-    --accent: 0 84% 45%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 40 100% 67%; /* #FFC857 - gold */
+    --accent-foreground: 210 65% 10%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 25%; /* Netflix gray-light */
-    --input: 0 0% 16%;
-    --ring: 0 84% 45%;
+    --border: 0 0% 100% / 0.2; /* Subtle white borders */
+    --input: 0 0% 100% / 0.1; /* Slightly transparent inputs */
+    --ring: 40 100% 67%; /* Gold focus ring */
+
+    --radius: 1rem;
+
+    /* Teal Theme Colors */
+    --teal-blue-deep: 203 74% 33%; /* #0B5C9E */
+    --teal-blue-medium: 197 73% 40%; /* #1E88B8 */
+    --teal-primary: 184 55% 44%; /* #2CA9B8 */
+    --teal-light: 180 54% 57%; /* #5FC5C5 */
+    --teal-gold: 40 100% 70%; /* #FFD166 */
+    --teal-gold-dark: 40 100% 64%; /* #FFC247 */
+    
+    /* Text colors for Teal theme */
+    --teal-text-primary: 0 0% 100%; /* White */
+    --teal-text-secondary: 0 0% 100% / 0.9; /* 90% white */
+    --teal-text-muted: 0 0% 100% / 0.7; /* 70% white */
   }
 }
 
@@ -87,8 +62,10 @@
   }
   
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background: linear-gradient(135deg, #083D66 0%, #1565A0 25%, #2B8FC4 50%, #3FA8C8 75%, #4DB5BE 100%) fixed;
+    min-height: 100vh;
   }
 
   /* Netflix-style scrollbar */
@@ -109,14 +86,6 @@
     @apply bg-muted-foreground/50;
   }
 
-  /* Dark theme scrollbar */
-  .dark ::-webkit-scrollbar-thumb {
-    @apply bg-white/20;
-  }
-
-  .dark ::-webkit-scrollbar-thumb:hover {
-    @apply bg-white/30;
-  }
 }
 
 @layer components {
@@ -153,23 +122,35 @@
     @apply min-h-[44px] text-base sm:text-sm;
   }
 
-  /* Netflix-style hero gradient */
+  /* Gen Elevate Brand Gradients */
   .hero-gradient {
     background: linear-gradient(
       135deg,
-      hsl(var(--background)) 0%,
-      hsl(var(--background)) 50%,
-      hsl(var(--primary) / 0.1) 100%
+      #0D4A7C 0%,
+      #0F7C89 50%,
+      #0CB1A2 100%
     );
   }
 
-  .dark .hero-gradient {
+  .hero-gradient-soft {
     background: linear-gradient(
       135deg,
-      hsl(var(--background)) 0%,
-      hsl(var(--background)) 30%,
-      hsl(var(--primary) / 0.2) 100%
+      #F4F8FB 0%,
+      rgba(13, 74, 124, 0.05) 100%
     );
+  }
+  
+  /* Brand button styles */
+  .btn-brand-primary {
+    @apply bg-brand-gold hover:bg-brand-gold-dark text-brand-navy font-bold px-8 py-4 rounded-xl shadow-gold-glow hover:shadow-gold-glow-hover transition-all duration-300 hover:scale-105;
+  }
+  
+  .btn-brand-secondary {
+    @apply brand-glass text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all duration-300;
+  }
+  
+  .btn-brand-outline {
+    @apply border-2 border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300;
   }
 
   /* Mobile-specific utilities */
@@ -236,7 +217,55 @@
     display: none;  /* Chrome, Safari and Opera */
   }
 
-  /* Cinematic enhancements */
+  /* Brand glow effects */
+  .brand-glow {
+    box-shadow: 
+      0 0 40px rgba(12, 177, 162, 0.3),
+      0 0 80px rgba(15, 124, 137, 0.2),
+      0 0 120px rgba(13, 74, 124, 0.1);
+  }
+
+  .brand-text-glow {
+    text-shadow: 
+      0 0 20px rgba(12, 177, 162, 0.5),
+      0 0 40px rgba(15, 124, 137, 0.3),
+      0 0 60px rgba(13, 74, 124, 0.2);
+  }
+  
+  .gold-text-glow {
+    text-shadow: 
+      0 0 20px rgba(255, 200, 87, 0.6),
+      0 0 40px rgba(255, 200, 87, 0.4);
+  }
+  
+  /* === TEAL THEME UTILITIES === */
+  .teal-gradient {
+    background: linear-gradient(135deg, #0B5C9E 0%, #1E88B8 40%, #2CA9B8 70%, #5FC5C5 100%);
+  }
+  
+  .teal-card {
+    background-color: rgba(240, 248, 252, 0.95) !important;
+    backdrop-filter: blur(10px);
+    @apply rounded-2xl shadow-lg border border-white/50;
+  }
+  
+  .teal-card-glass {
+    @apply bg-white/10 backdrop-blur-md rounded-2xl border border-white/20;
+  }
+  
+  .teal-button-primary {
+    @apply bg-teal-gold hover:bg-teal-gold-dark text-teal-card-text font-bold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105;
+  }
+  
+  .teal-button-secondary {
+    @apply bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/30 hover:border-white/50 transition-all duration-300;
+  }
+  
+  .teal-text-gradient {
+    @apply bg-gradient-to-r from-teal-gold via-teal-light to-teal-primary bg-clip-text text-transparent font-bold;
+  }
+  
+  /* Legacy cinematic (Netflix) */
   .cinematic-glow {
     box-shadow: 
       0 0 40px rgba(229, 9, 20, 0.3),
@@ -258,13 +287,41 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .dark .premium-glass {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Brand card styles */
+  .brand-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(13, 74, 124, 0.08);
+    border: 1px solid rgba(13, 74, 124, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .brand-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(13, 74, 124, 0.15);
+    border-color: rgba(12, 177, 162, 0.3);
+  }
+  
+  .brand-card-glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    border: 1px solid rgba(12, 177, 162, 0.2);
+    box-shadow: 
+      0 8px 32px 0 rgba(13, 74, 124, 0.15),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .brand-card-glass:hover {
+    transform: translateY(-6px);
+    box-shadow: 
+      0 16px 48px 0 rgba(12, 177, 162, 0.25),
+      0 8px 32px 0 rgba(13, 74, 124, 0.2),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+  }
+  
+  /* Legacy cinematic card (Netflix) */
   .cinematic-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
     backdrop-filter: blur(10px);

@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class'],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -26,7 +25,45 @@ module.exports = {
         'mouse': {'raw': '(hover: hover) and (pointer: fine)'},
       },
       colors: {
-        // Netflix-inspired color system
+        // Teal Gradient Theme
+        teal: {
+          // Gradient colors
+          'blue-deep': '#0B5C9E',
+          'blue-medium': '#1E88B8',
+          'primary': '#2CA9B8',
+          'light': '#5FC5C5',
+          
+          // Gold accents
+          'gold': '#FFD166',
+          'gold-dark': '#FFC247',
+          
+          // Text (white on gradient)
+          'text': '#FFFFFF',
+          'text-90': 'rgba(255, 255, 255, 0.9)',
+          'text-70': 'rgba(255, 255, 255, 0.7)',
+          
+          // Card text (dark on white cards)
+          'card-text': '#1A3D5C',
+          'card-text-muted': '#4A6B82',
+        },
+        
+        // Legacy brand colors
+        brand: {
+          'blue-deep': '#0B5C9E',
+          'blue-medium': '#1E88B8',
+          'teal': '#2CA9B8',
+          'teal-light': '#5FC5C5',
+          'gold': '#FFD166',
+          'gold-dark': '#FFC247',
+          'navy': '#1A3D5C',
+          'navy-light': '#4A6B82',
+          'bg-light': '#E8F4F8',
+          'bg-lighter': '#F5FAFB',
+          'glass': 'rgba(255, 255, 255, 0.15)',
+          'glass-dark': 'rgba(26, 61, 92, 0.7)',
+        },
+        
+        // Legacy netflix colors (keeping for gradual migration)
         netflix: {
           red: '#e50914',
           'red-dark': '#b20710',
@@ -83,6 +120,13 @@ module.exports = {
       boxShadow: {
         'netflix': '0 4px 16px rgba(0, 0, 0, 0.75)',
         'netflix-hover': '0 8px 32px rgba(0, 0, 0, 0.9)',
+        // Premium brand shadows
+        'brand-sm': '0 2px 8px rgba(13, 74, 124, 0.1)',
+        'brand-md': '0 4px 16px rgba(13, 74, 124, 0.15)',
+        'brand-lg': '0 8px 32px rgba(13, 74, 124, 0.2)',
+        'brand-xl': '0 16px 48px rgba(13, 74, 124, 0.25)',
+        'gold-glow': '0 4px 20px rgba(255, 200, 87, 0.4)',
+        'gold-glow-hover': '0 8px 32px rgba(255, 200, 87, 0.6)',
       },
       keyframes: {
         'accordion-down': {
@@ -159,6 +203,28 @@ module.exports = {
           '-webkit-background-clip': 'text',
           '-webkit-text-fill-color': 'transparent',
           'background-clip': 'text',
+        },
+        // Gen Elevate Brand Gradients
+        '.brand-gradient': {
+          'background': 'linear-gradient(135deg, #0D4A7C 0%, #0F7C89 50%, #0CB1A2 100%)',
+        },
+        '.brand-gradient-radial': {
+          'background': 'radial-gradient(circle at top right, #0D4A7C 0%, #0F7C89 50%, #0CB1A2 100%)',
+        },
+        '.brand-text-gradient': {
+          'background': 'linear-gradient(135deg, #0D4A7C 0%, #0CB1A2 100%)',
+          '-webkit-background-clip': 'text',
+          '-webkit-text-fill-color': 'transparent',
+          'background-clip': 'text',
+        },
+        '.gold-gradient': {
+          'background': 'linear-gradient(135deg, #FFC857 0%, #FFB627 100%)',
+        },
+        '.brand-glass': {
+          'background': 'rgba(255, 255, 255, 0.1)',
+          'backdrop-filter': 'blur(20px) saturate(180%)',
+          '-webkit-backdrop-filter': 'blur(20px) saturate(180%)',
+          'border': '1px solid rgba(255, 255, 255, 0.2)',
         },
         // Mobile-first utilities
         '.touch-action-none': {

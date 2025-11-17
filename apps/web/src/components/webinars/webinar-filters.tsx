@@ -18,14 +18,14 @@ export function WebinarFilters() {
   };
 
   return (
-    <div className="bg-card rounded-lg border border-border p-6">
-      <h3 className="text-lg font-semibold text-foreground mb-4">Filters</h3>
+    <div className="teal-card rounded-lg p-6">
+      <h3 className="text-lg font-semibold text-teal-card-text mb-4">Filters</h3>
       
       <div className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-foreground mb-2">Subject</label>
+          <label className="block text-sm font-medium text-teal-card-text mb-2">Subject</label>
           <select 
-            className="w-full border border-border bg-background rounded-md px-3 py-2 text-sm text-foreground"
+            className="w-full border border-gray-300 bg-white rounded-md px-3 py-2 text-sm text-teal-card-text focus:ring-2 focus:ring-teal-gold focus:border-transparent"
             value={searchParams.get('subject') || ''}
             onChange={(e) => handleFilterChange('subject', e.target.value)}
           >
@@ -40,9 +40,9 @@ export function WebinarFilters() {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-foreground mb-2">Year Group / Stage</label>
+          <label className="block text-sm font-medium text-teal-card-text mb-2">Year Group / Stage</label>
           <select 
-            className="w-full border border-border bg-background rounded-md px-3 py-2 text-sm text-foreground"
+            className="w-full border border-gray-300 bg-white rounded-md px-3 py-2 text-sm text-teal-card-text focus:ring-2 focus:ring-teal-gold focus:border-transparent"
             value={searchParams.get('yearGroup') || ''}
             onChange={(e) => handleFilterChange('yearGroup', e.target.value)}
           >
@@ -56,9 +56,9 @@ export function WebinarFilters() {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-foreground mb-2">Type</label>
+          <label className="block text-sm font-medium text-teal-card-text mb-2">Type</label>
           <select 
-            className="w-full border border-border bg-background rounded-md px-3 py-2 text-sm text-foreground"
+            className="w-full border border-gray-300 bg-white rounded-md px-3 py-2 text-sm text-teal-card-text focus:ring-2 focus:ring-teal-gold focus:border-transparent"
             value={searchParams.get('type') || ''}
             onChange={(e) => handleFilterChange('type', e.target.value)}
           >
@@ -69,9 +69,9 @@ export function WebinarFilters() {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-foreground mb-2">Status</label>
+          <label className="block text-sm font-medium text-teal-card-text mb-2">Status</label>
           <select 
-            className="w-full border border-border bg-background rounded-md px-3 py-2 text-sm text-foreground"
+            className="w-full border border-gray-300 bg-white rounded-md px-3 py-2 text-sm text-teal-card-text focus:ring-2 focus:ring-teal-gold focus:border-transparent"
             value={searchParams.get('status') || ''}
             onChange={(e) => handleFilterChange('status', e.target.value)}
           >

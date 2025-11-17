@@ -28,12 +28,12 @@ export function DailyWellbeingCheck() {
 
   if (isSubmitted) {
     return (
-      <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-xl p-6">
+      <div className="teal-card border-2 border-teal-gold/30 rounded-xl p-6">
         <div className="flex items-center gap-3">
-          <CheckCircle className="w-6 h-6 text-green-500" />
+          <CheckCircle className="w-6 h-6 text-teal-gold" />
           <div>
-            <h3 className="font-semibold text-foreground">Thanks for checking in!</h3>
-            <p className="text-sm text-muted-foreground">
+            <h3 className="font-semibold text-teal-card-text">Thanks for checking in!</h3>
+            <p className="text-sm text-teal-card-text-muted">
               Your wellbeing matters. Keep up the great work! 🌟
             </p>
           </div>
@@ -43,13 +43,13 @@ export function DailyWellbeingCheck() {
   }
 
   return (
-    <div className="bg-card border border-border rounded-xl p-6">
+    <div className="teal-card border border-white/20 rounded-xl p-6">
       <div className="flex items-center gap-2 mb-4">
-        <Heart className="w-5 h-5 text-red-500" />
-        <h3 className="text-lg font-semibold text-foreground">Daily Wellbeing Check-In</h3>
+        <Heart className="w-5 h-5 text-teal-gold" />
+        <h3 className="text-lg font-semibold text-teal-card-text">Daily Wellbeing Check-In</h3>
       </div>
       
-      <p className="text-muted-foreground mb-6">How are you feeling today?</p>
+      <p className="text-teal-card-text-muted mb-6">How are you feeling today?</p>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {moods.map((mood) => (
@@ -59,14 +59,14 @@ export function DailyWellbeingCheck() {
             className={`p-4 rounded-xl border-2 transition-all ${
               selectedMood === mood.id
                 ? `${mood.bgColor} border-current ${mood.color}`
-                : 'border-border hover:border-primary/50'
+                : 'border-white/20 hover:border-teal-gold/50 bg-white/5'
             }`}
           >
             <mood.icon className={`w-8 h-8 mx-auto mb-2 ${
-              selectedMood === mood.id ? mood.color : 'text-muted-foreground'
+              selectedMood === mood.id ? mood.color : 'text-teal-card-text-muted'
             }`} />
             <p className={`text-sm font-medium ${
-              selectedMood === mood.id ? mood.color : 'text-muted-foreground'
+              selectedMood === mood.id ? mood.color : 'text-teal-card-text-muted'
             }`}>
               {mood.label}
             </p>
@@ -77,7 +77,7 @@ export function DailyWellbeingCheck() {
       <button
         onClick={handleSubmit}
         disabled={!selectedMood}
-        className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg netflix-button disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full px-6 py-3 teal-button-primary rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Submit Check-In
       </button>

@@ -34,92 +34,21 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
   const loadDNA = async () => {
     setLoading(true);
     try {
-      // Try to fetch real DNA data from Firestore
+      // Fetch real DNA data from Firestore
       const { doc, getDoc } = await import('firebase/firestore');
       const { db } = await import('@/lib/firebase');
       
       const dnaDoc = await getDoc(doc(db, 'learningDNA', userId));
       
       if (dnaDoc.exists()) {
-        // Use real data if it exists
         setDNA(dnaDoc.data() as LearningDNA);
-        setLoading(false);
-        return;
+      } else {
+        // No DNA profile exists
+        setDNA(null);
       }
-      
-      // Fallback to mock data for users without enough history yet
-      console.log('No DNA data yet, showing example profile');
-      const mockDNA: LearningDNA = {
-        id: userId,
-        userId,
-        cognitiveProfile: {
-          visual: 85,
-          auditory: 60,
-          kinesthetic: 70,
-          logical: 90,
-          creative: 75,
-          social: 55,
-          solitary: 80,
-          dominantStyle: 'logical',
-          secondaryStyle: 'visual',
-        },
-        learningPatterns: {
-          peakHours: [14, 15, 20],
-          avgSessionDuration: 45,
-          preferredDayOfWeek: ['Monday', 'Wednesday', 'Thursday'],
-          consistencyScore: 78,
-          focusScore: 82,
-          completionRate: 75,
-          retentionRate: 88,
-        },
-        subjectAffinities: {
-          'Mathematics': {
-            affinity: 92,
-            performance: 88,
-            engagement: 90,
-            lastUpdated: new Date() as any,
-          },
-          'Physics': {
-            affinity: 85,
-            performance: 82,
-            engagement: 88,
-            lastUpdated: new Date() as any,
-          },
-          'Computer Science': {
-            affinity: 95,
-            performance: 90,
-            engagement: 98,
-            lastUpdated: new Date() as any,
-          },
-          'English Literature': {
-            affinity: 65,
-            performance: 70,
-            engagement: 60,
-            lastUpdated: new Date() as any,
-          },
-        },
-        lastCalculated: new Date() as any,
-        dataPoints: 1247,
-        confidence: 87,
-        sharing: {
-          isPublic: false,
-          parentCanView: true,
-          institutionCanView: false,
-          sharedWith: [],
-        },
-        consent: {
-          dataCollection: true,
-          parentalConsent: true,
-          consentDate: new Date() as any,
-          consentVersion: '1.0',
-        },
-        createdAt: new Date() as any,
-        updatedAt: new Date() as any,
-      };
-      
-      setDNA(mockDNA);
     } catch (error) {
       console.error('Error loading DNA:', error);
+      setDNA(null);
     } finally {
       setLoading(false);
     }
@@ -133,10 +62,10 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
-          <Brain className="w-16 h-16 animate-pulse text-primary mx-auto" />
-          <p className="text-muted-foreground">Analyzing your Learning DNA...</p>
+          <Brain className="w-16 h-16 animate-pulse text-teal-gold mx-auto" />
+          <p className="text-white/80">Analyzing your Learning DNA...</p>
         </div>
       </div>
     );
@@ -144,14 +73,14 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
 
   if (!dna) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center space-y-4 max-w-md">
-          <Brain className="w-16 h-16 text-muted-foreground mx-auto" />
-          <h2 className="text-2xl font-bold text-foreground">No DNA Profile Yet</h2>
-          <p className="text-muted-foreground">
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center space-y-4 max-w-md teal-card border-2 border-white/20 rounded-xl p-8">
+          <Brain className="w-16 h-16 text-teal-gold mx-auto" />
+          <h2 className="text-2xl font-bold text-teal-card-text">No DNA Profile Yet</h2>
+          <p className="text-teal-card-text-muted">
             Complete the learning style questionnaire to discover your unique Academic DNA!
           </p>
-          <button className="btn-netflix bg-primary hover:bg-primary/80 text-white">
+          <button className="teal-button-primary px-6 py-3 rounded-lg">
             Take Questionnaire
           </button>
         </div>
@@ -160,17 +89,17 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-4xl font-extrabold text-white flex items-center gap-3 mb-2">
-                <Brain className="w-10 h-10 text-purple-400" />
+                <Brain className="w-10 h-10 text-teal-gold" />
                 Your Academic DNA
               </h1>
-              <p className="text-gray-300 text-lg">
+              <p className="text-white/80 text-lg">
                 Your unique learning fingerprint
               </p>
             </div>
@@ -179,11 +108,11 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowShareModal(true)}
-                  className="btn-netflix bg-purple-600 hover:bg-purple-700 text-white"
+                  className="teal-button-primary px-4 py-2 rounded-lg flex items-center gap-2"
                 >
                   <Share2 className="w-5 h-5" /> Share
                 </button>
-                <button className="btn-netflix bg-gray-700 hover:bg-gray-600 text-white">
+                <button className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                   <Download className="w-5 h-5" /> Export
                 </button>
               </div>
@@ -191,12 +120,12 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
           </div>
           
           {/* Confidence Badge */}
-          <div className="mt-4 inline-flex items-center gap-2 bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2">
+          <div className="mt-4 inline-flex items-center gap-2 teal-card border border-white/20 rounded-lg px-4 py-2">
             <TrendingUp className={`w-5 h-5 ${getConfidenceColor(dna.confidence)}`} />
-            <span className="text-white font-medium">
+            <span className="text-teal-card-text font-medium">
               {dna.confidence}% Confidence
             </span>
-            <span className="text-gray-400 text-sm">
+            <span className="text-teal-card-text-muted text-sm">
               • {dna.dataPoints.toLocaleString()} data points
             </span>
           </div>
@@ -208,13 +137,13 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
         </div>
 
         {/* Tabs */}
-        <div className="mb-6 flex gap-2 bg-gray-800/50 border border-gray-700 rounded-lg p-1">
+        <div className="mb-6 flex gap-2 teal-card border border-white/20 rounded-lg p-1">
           <button
             onClick={() => setActiveTab('cognitive')}
             className={`flex-1 py-3 px-4 rounded-md font-medium transition-colors ${
               activeTab === 'cognitive'
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
+                ? 'teal-button-primary'
+                : 'text-teal-card-text-muted hover:text-teal-card-text hover:bg-white/5'
             }`}
           >
             <Brain className="w-5 h-5 inline mr-2" />
@@ -224,8 +153,8 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
             onClick={() => setActiveTab('patterns')}
             className={`flex-1 py-3 px-4 rounded-md font-medium transition-colors ${
               activeTab === 'patterns'
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
+                ? 'teal-button-primary'
+                : 'text-teal-card-text-muted hover:text-teal-card-text hover:bg-white/5'
             }`}
           >
             <Clock className="w-5 h-5 inline mr-2" />
@@ -235,8 +164,8 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
             onClick={() => setActiveTab('subjects')}
             className={`flex-1 py-3 px-4 rounded-md font-medium transition-colors ${
               activeTab === 'subjects'
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
+                ? 'teal-button-primary'
+                : 'text-teal-card-text-muted hover:text-teal-card-text hover:bg-white/5'
             }`}
           >
             <Award className="w-5 h-5 inline mr-2" />
@@ -250,24 +179,24 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
             <>
               <CognitiveStrengthBars cognitiveProfile={dna.cognitiveProfile} />
               
-              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4">What This Means</h3>
+              <div className="teal-card border border-white/20 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-teal-card-text mb-4">What This Means</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
-                    <h4 className="font-semibold text-purple-300 mb-2">
+                  <div className="bg-teal-gold/10 border border-teal-gold/30 rounded-lg p-4">
+                    <h4 className="font-semibold text-teal-gold mb-2">
                       🎯 Your Dominant Style: {dna.cognitiveProfile.dominantStyle.charAt(0).toUpperCase() + dna.cognitiveProfile.dominantStyle.slice(1)}
                     </h4>
-                    <p className="text-gray-300 text-sm">
+                    <p className="text-teal-card-text-muted text-sm">
                       {getDominantStyleDescription(dna.cognitiveProfile.dominantStyle)}
                     </p>
                   </div>
                   
                   {dna.cognitiveProfile.secondaryStyle && (
-                    <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
-                      <h4 className="font-semibold text-blue-300 mb-2">
+                    <div className="bg-teal-primary/10 border border-teal-primary/30 rounded-lg p-4">
+                      <h4 className="font-semibold text-teal-primary mb-2">
                         ⭐ Secondary Style: {dna.cognitiveProfile.secondaryStyle.charAt(0).toUpperCase() + dna.cognitiveProfile.secondaryStyle.slice(1)}
                       </h4>
-                      <p className="text-gray-300 text-sm">
+                      <p className="text-teal-card-text-muted text-sm">
                         {getDominantStyleDescription(dna.cognitiveProfile.secondaryStyle)}
                       </p>
                     </div>
@@ -282,48 +211,48 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
               <LearningHeatmap patterns={dna.learningPatterns} />
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">
+                <div className="teal-card border border-white/20 rounded-xl p-6">
+                  <div className="text-3xl font-bold text-teal-gold mb-2">
                     {dna.learningPatterns.avgSessionDuration}min
                   </div>
-                  <div className="text-gray-400 text-sm">Avg. Session Length</div>
+                  <div className="text-teal-card-text-muted text-sm">Avg. Session Length</div>
                 </div>
                 
-                <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-                  <div className="text-3xl font-bold text-blue-400 mb-2">
+                <div className="teal-card border border-white/20 rounded-xl p-6">
+                  <div className="text-3xl font-bold text-teal-primary mb-2">
                     {dna.learningPatterns.consistencyScore}%
                   </div>
-                  <div className="text-gray-400 text-sm">Consistency Score</div>
+                  <div className="text-teal-card-text-muted text-sm">Consistency Score</div>
                 </div>
                 
-                <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-                  <div className="text-3xl font-bold text-green-400 mb-2">
+                <div className="teal-card border border-white/20 rounded-xl p-6">
+                  <div className="text-3xl font-bold text-teal-gold mb-2">
                     {dna.learningPatterns.focusScore}%
                   </div>
-                  <div className="text-gray-400 text-sm">Focus Score</div>
+                  <div className="text-teal-card-text-muted text-sm">Focus Score</div>
                 </div>
                 
-                <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-                  <div className="text-3xl font-bold text-yellow-400 mb-2">
+                <div className="teal-card border border-white/20 rounded-xl p-6">
+                  <div className="text-3xl font-bold text-teal-primary mb-2">
                     {dna.learningPatterns.completionRate}%
                   </div>
-                  <div className="text-gray-400 text-sm">Completion Rate</div>
+                  <div className="text-teal-card-text-muted text-sm">Completion Rate</div>
                 </div>
               </div>
 
-              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4">Your Best Learning Times</h3>
+              <div className="teal-card border border-white/20 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-teal-card-text mb-4">Your Best Learning Times</h3>
                 <div className="flex flex-wrap gap-2">
                   {dna.learningPatterns.peakHours.map((hour) => (
                     <span
                       key={hour}
-                      className="px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-full text-purple-300 font-medium"
+                      className="px-4 py-2 bg-teal-gold/20 border border-teal-gold/30 rounded-full text-teal-gold font-medium"
                     >
                       {formatHour(hour)}
                     </span>
                   ))}
                 </div>
-                <p className="mt-4 text-gray-400 text-sm">
+                <p className="mt-4 text-teal-card-text-muted text-sm">
                   Based on your activity, you're most engaged during these hours. Try scheduling important study sessions then!
                 </p>
               </div>
@@ -336,21 +265,21 @@ export function DNAProfileView({ userId, isOwnProfile = true }: DNAProfileViewPr
         </div>
 
         {/* Recommendations */}
-        <div className="mt-8 bg-gradient-to-r from-purple-900/50 to-blue-900/50 border border-purple-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-            <Award className="w-6 h-6 text-yellow-400" />
+        <div className="mt-8 teal-card-glass border-2 border-teal-gold/30 rounded-xl p-6">
+          <h3 className="text-xl font-bold text-teal-card-text mb-4 flex items-center gap-2">
+            <Award className="w-6 h-6 text-teal-gold" />
             Personalized Recommendations
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-800/50 rounded-lg p-4">
-              <h4 className="font-semibold text-white mb-2">📚 Study Methods</h4>
-              <p className="text-gray-300 text-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <h4 className="font-semibold text-teal-card-text mb-2">📚 Study Methods</h4>
+              <p className="text-teal-card-text-muted text-sm">
                 Your logical and visual strengths suggest diagram-based learning and problem-solving exercises will be most effective.
               </p>
             </div>
-            <div className="bg-gray-800/50 rounded-lg p-4">
-              <h4 className="font-semibold text-white mb-2">⏰ Study Schedule</h4>
-              <p className="text-gray-300 text-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <h4 className="font-semibold text-teal-card-text mb-2">⏰ Study Schedule</h4>
+              <p className="text-teal-card-text-muted text-sm">
                 Plan your most challenging tasks for 2-4 PM and 8 PM when you're most focused.
               </p>
             </div>

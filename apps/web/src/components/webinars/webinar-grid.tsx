@@ -68,7 +68,7 @@ export function WebinarGrid({ searchParams }: WebinarGridProps) {
   if (loading || authLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="w-8 h-8 text-[#e50914] animate-spin" />
+        <Loader2 className="w-8 h-8 text-teal-gold animate-spin" />
       </div>
     );
   }
@@ -76,10 +76,10 @@ export function WebinarGrid({ searchParams }: WebinarGridProps) {
   if (webinars.length === 0) {
     return (
       <div className="text-center py-16">
-        <Video className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+        <Video className="w-16 h-16 text-white/50 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-white mb-2">No webinars available yet</h3>
-        <p className="text-gray-400 mb-6">Check back soon for upcoming live sessions and workshops</p>
-        <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
+        <p className="text-white/70 mb-6">Check back soon for upcoming live sessions and workshops</p>
+        <div className="flex items-center justify-center gap-4 text-sm text-white/60">
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4" />
             <span>Coming soon</span>
@@ -112,18 +112,18 @@ export function WebinarGrid({ searchParams }: WebinarGridProps) {
           <Link
             key={webinar.id}
             href={`/webinars/${webinar.id}`}
-            className="group bg-[#1a1a1a] rounded-lg border border-gray-800 overflow-hidden hover:border-[#e50914] transition-all"
+            className="group teal-card rounded-lg overflow-hidden border-2 border-transparent hover:border-teal-gold transition-all hover:shadow-xl"
           >
             {/* Thumbnail */}
-            <div className="aspect-video bg-gradient-to-br from-[#e50914] to-[#831010] relative overflow-hidden">
+            <div className="aspect-video bg-gradient-to-br from-teal-blue-medium to-teal-primary relative overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Video className="w-16 h-16 text-white/30" />
               </div>
               <div className="absolute top-3 left-3">
                 <Badge 
                   className={
-                    isLive ? 'bg-red-500 text-white animate-pulse' :
-                    isScheduled ? 'bg-green-500 text-white' :
+                    isLive ? 'bg-teal-primary text-white animate-pulse shadow-lg' :
+                    isScheduled ? 'bg-teal-gold text-teal-card-text shadow-lg' :
                     'bg-gray-500 text-white'
                   }
                 >
@@ -131,7 +131,7 @@ export function WebinarGrid({ searchParams }: WebinarGridProps) {
                 </Badge>
               </div>
               <div className="absolute top-3 right-3">
-                <Badge variant="secondary" className="bg-black/50 text-white border-none">
+                <Badge variant="secondary" className="bg-white/20 text-white border-none backdrop-blur-sm">
                   {webinar.type === 'live' ? 'Live' : 'Pre-recorded'}
                 </Badge>
               </div>
@@ -140,21 +140,21 @@ export function WebinarGrid({ searchParams }: WebinarGridProps) {
             {/* Content */}
             <div className="p-6">
               <div className="flex items-center gap-2 mb-3">
-                <Badge variant="outline" className="border-gray-700 text-gray-300">
+                <Badge variant="outline" className="border-gray-300 text-teal-card-text">
                   {webinar.category}
                 </Badge>
               </div>
 
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#e50914] transition-colors line-clamp-2">
+              <h3 className="text-lg font-semibold text-teal-card-text mb-2 group-hover:text-teal-primary transition-colors line-clamp-2">
                 {webinar.title}
               </h3>
               
-              <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+              <p className="text-teal-card-text-muted text-sm mb-4 line-clamp-2">
                 {webinar.description}
               </p>
 
               {/* Metadata */}
-              <div className="space-y-2 text-sm text-gray-500 mb-4">
+              <div className="space-y-2 text-sm text-teal-card-text-muted mb-4">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span>{formattedDate} at {formattedTime}</span>
@@ -172,17 +172,17 @@ export function WebinarGrid({ searchParams }: WebinarGridProps) {
               </div>
 
               {/* Host */}
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-800">
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center text-xs font-semibold text-white">
+              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-300">
+                <div className="w-8 h-8 bg-gradient-to-br from-teal-blue-medium to-teal-primary rounded-full flex items-center justify-center text-xs font-semibold text-white shadow-sm">
                   {webinar.hostName.charAt(0).toUpperCase()}
                 </div>
                 <div className="text-sm">
-                  <p className="text-white font-medium">{webinar.hostName}</p>
+                  <p className="text-teal-card-text font-medium">{webinar.hostName}</p>
                 </div>
               </div>
 
               {/* CTA Button */}
-              <button className="w-full bg-gradient-to-r from-[#e50914] to-[#b00710] text-white px-4 py-2.5 rounded-md text-sm font-medium hover:from-[#b00710] hover:to-[#e50914] transition-all">
+              <button className="w-full teal-button-primary">
                 {isLive ? '🔴 Join Live Now' : 
                  isScheduled ? 'Register' : 
                  'Watch Recording'}

@@ -58,23 +58,14 @@ export function NetflixFeatures() {
   ];
 
   return (
-    <section id="features" className="py-24 bg-black relative overflow-hidden">
-      {/* Premium Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-900 to-black"></div>
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle, rgba(229, 9, 20, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }}></div>
-      </div>
-      
+    <section id="features" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Premium Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Everything You Need to <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">Excel</span>
+            Everything You Need to <span className="text-brand-gold font-black">Excel</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
             From GCSE & A-Level courses to career guidance and AI tutoring, we help you excel academically 
             while discovering the perfect career path with comprehensive life skills and industry insights.
           </p>
@@ -88,16 +79,18 @@ export function NetflixFeatures() {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className={`p-6 rounded-xl cursor-pointer transition-all duration-300 ${
+                  className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 ${
                     activeFeature === index
-                      ? 'cinematic-card border-red-500 border-2'
-                      : 'premium-glass hover:border-red-500/50 border border-white/10'
+                      ? 'teal-card-glass border-teal-gold border-2 shadow-xl'
+                      : 'teal-card-glass border border-white/20 hover:border-teal-gold/50'
                   }`}
                   onClick={() => setActiveFeature(index)}
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`p-3 rounded-lg transition-all duration-300 ${
-                      activeFeature === index ? 'bg-gradient-to-br from-red-500 to-orange-500 text-white shadow-lg' : 'bg-white/5 text-gray-400'
+                    <div className={`p-3 rounded-xl transition-all duration-300 ${
+                      activeFeature === index 
+                        ? 'bg-gradient-to-br from-teal-blue-medium to-teal-primary text-white shadow-lg' 
+                        : 'bg-white/10 text-white/70'
                     }`}>
                       <feature.icon className="w-6 h-6" />
                     </div>
@@ -105,15 +98,15 @@ export function NetflixFeatures() {
                       <h3 className="text-xl font-semibold text-white mb-2">
                         {feature.title}
                       </h3>
-                      <p className="text-gray-400 mb-4">
+                      <p className="text-white/80 mb-4">
                         {feature.description}
                       </p>
                       {activeFeature === index && (
                         <div className="space-y-2 animate-fade-in">
                           {feature.highlights.map((highlight, highlightIndex) => (
                             <div key={highlightIndex} className="flex items-center gap-2">
-                              <div className="w-2 h-2 bg-red-500 rounded-full shadow-lg shadow-red-500/50"></div>
-                              <span className="text-sm text-white">{highlight}</span>
+                              <div className="w-2 h-2 bg-brand-gold rounded-full shadow-md shadow-brand-gold/50"></div>
+                              <span className="text-sm text-white/90 font-medium">{highlight}</span>
                             </div>
                           ))}
                         </div>
@@ -126,15 +119,15 @@ export function NetflixFeatures() {
 
             {/* Premium Feature Preview */}
             <div className="relative order-1 lg:order-2">
-              <div className="aspect-video cinematic-card rounded-2xl overflow-hidden shadow-2xl">
-                <div className="w-full h-full bg-gradient-to-br from-red-900/30 to-black flex items-center justify-center relative p-4 sm:p-6">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_black_100%)] opacity-50"></div>
+              <div className="aspect-video brand-card-glass rounded-2xl overflow-hidden shadow-brand-xl border-2 border-brand-teal/20">
+                <div className="w-full h-full brand-gradient flex items-center justify-center relative p-4 sm:p-6">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(13,74,124,0.8)_100%)] opacity-40"></div>
                   <div className="text-center relative z-10 w-full">
-                    {React.createElement(features[activeFeature].icon, { className: "w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-red-500 mx-auto mb-4 sm:mb-6 drop-shadow-2xl" })}
+                    {React.createElement(features[activeFeature].icon, { className: "w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-brand-gold mx-auto mb-4 sm:mb-6 drop-shadow-2xl" })}
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-3 sm:mb-4 drop-shadow-lg px-2">
                       {features[activeFeature].title}
                     </h3>
-                    <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-lg mb-4 sm:mb-6 px-4 sm:px-6 mx-auto leading-relaxed">
+                    <p className="text-sm sm:text-base lg:text-lg text-gray-100 max-w-lg mb-4 sm:mb-6 px-4 sm:px-6 mx-auto leading-relaxed font-light">
                       {features[activeFeature].description}
                     </p>
                   </div>
@@ -204,13 +197,13 @@ export function NetflixFeatures() {
           ].map((item, index) => (
             <div
               key={index}
-              className={`p-6 rounded-2xl backdrop-blur-sm bg-gradient-to-br ${item.gradient} border ${item.border} hover:scale-105 transition-all duration-300 group`}
+              className={`p-6 rounded-2xl teal-card-glass border ${item.border} hover:scale-105 transition-all duration-300 group shadow-lg hover:shadow-xl`}
             >
               <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${item.iconBg} rounded-full mb-4 shadow-lg ${item.iconGlow} group-hover:scale-110 transition-transform duration-300`}>
                 <item.icon className="w-7 h-7 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
-              <p className="text-gray-400">{item.description}</p>
+              <p className="text-white/80 leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>

@@ -108,8 +108,8 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-foreground">Career Explorer</h2>
-        <span className="text-sm text-muted-foreground">
+        <h2 className="text-2xl font-bold text-white">Career Explorer</h2>
+        <span className="text-sm text-white/80">
           {filteredCareers.length} career{filteredCareers.length !== 1 ? 's' : ''} found
         </span>
       </div>
@@ -118,13 +118,13 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
       <div className="space-y-4">
         {/* Search Bar */}
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-teal-card-text-muted" />
           <input
             type="text"
             placeholder="Search careers, skills, or industries..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+            className="w-full pl-12 pr-4 py-3 teal-card border border-gray-300 rounded-lg text-teal-card-text placeholder:text-teal-card-text-muted focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-teal-gold transition-all"
           />
         </div>
 
@@ -133,7 +133,7 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
           <select
             value={selectedSector}
             onChange={(e) => setSelectedSector(e.target.value)}
-            className="px-4 py-3 bg-card border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+            className="px-4 py-3 teal-card border border-gray-300 rounded-lg text-teal-card-text focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-teal-gold transition-all"
           >
             {sectors.map(sector => (
               <option key={sector} value={sector}>
@@ -145,7 +145,7 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
           <select
             value={selectedLocation}
             onChange={(e) => setSelectedLocation(e.target.value)}
-            className="px-4 py-3 bg-card border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+            className="px-4 py-3 teal-card border border-gray-300 rounded-lg text-teal-card-text focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-teal-gold transition-all"
           >
             {locations.map(location => (
               <option key={location} value={location}>
@@ -157,7 +157,7 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
           <select
             value={selectedLevel}
             onChange={(e) => setSelectedLevel(e.target.value)}
-            className="px-4 py-3 bg-card border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+            className="px-4 py-3 teal-card border border-gray-300 rounded-lg text-teal-card-text focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-teal-gold transition-all"
           >
             {educationLevels.map(level => (
               <option key={level} value={level}>
@@ -172,14 +172,14 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
       {isLoading ? (
         <div className="space-y-4">
           {[1, 2, 3].map(i => (
-            <div key={i} className="h-48 bg-card animate-pulse rounded-xl" />
+            <div key={i} className="h-48 teal-card animate-pulse rounded-xl" />
           ))}
         </div>
       ) : filteredCareers.length === 0 ? (
-        <div className="text-center py-12 bg-card rounded-xl border border-border">
-          <Briefcase className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-foreground mb-2">No careers found</h3>
-          <p className="text-muted-foreground">Try adjusting your filters or search query</p>
+        <div className="text-center py-12 teal-card rounded-xl">
+          <Briefcase className="w-16 h-16 text-teal-card-text-muted mx-auto mb-4" />
+          <h3 className="text-xl font-semibold text-teal-card-text mb-2">No careers found</h3>
+          <p className="text-teal-card-text-muted">Try adjusting your filters or search query</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -187,7 +187,7 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
             <Link
               key={career.id}
               href={`/careers/${career.id}`}
-              className="block bg-card border border-border rounded-xl p-6 netflix-card hover:border-primary transition-all group"
+              className="block teal-card border-2 border-transparent rounded-xl p-6 hover:border-teal-gold hover:shadow-xl transition-all group"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 space-y-3">
@@ -195,37 +195,37 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                        <h3 className="text-xl font-bold text-teal-card-text group-hover:text-teal-primary transition-colors">
                           {career.title}
                         </h3>
                         {career.trending && (
-                          <span className="px-2 py-1 bg-primary/20 text-primary text-xs rounded-full font-medium flex items-center gap-1">
+                          <span className="px-2 py-1 bg-teal-primary/20 text-teal-primary text-xs rounded-full font-medium flex items-center gap-1">
                             <TrendingUp className="w-3 h-3" />
                             Trending
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground">{career.sector}</p>
+                      <p className="text-sm text-teal-card-text-muted">{career.sector}</p>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <ChevronRight className="w-5 h-5 text-teal-card-text-muted group-hover:text-teal-primary transition-colors" />
                   </div>
 
                   {/* Description */}
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-teal-card-text-muted leading-relaxed">
                     {career.description}
                   </p>
 
                   {/* Stats */}
                   <div className="flex flex-wrap items-center gap-4 text-sm">
-                    <span className="flex items-center gap-2 text-muted-foreground">
+                    <span className="flex items-center gap-2 text-teal-card-text-muted">
                       <DollarSign className="w-4 h-4" />
                       {career.salaryRange}
                     </span>
-                    <span className="flex items-center gap-2 text-green-500">
+                    <span className="flex items-center gap-2 text-green-600 font-medium">
                       <TrendingUp className="w-4 h-4" />
                       {career.growthRate} growth
                     </span>
-                    <span className="flex items-center gap-2 text-muted-foreground">
+                    <span className="flex items-center gap-2 text-teal-card-text-muted">
                       <MapPin className="w-4 h-4" />
                       {career.location}
                     </span>
@@ -239,13 +239,13 @@ export function CareerExplorer({ searchParams }: CareerExplorerProps) {
                     {career.skills.slice(0, 4).map((skill, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-secondary text-secondary-foreground text-xs rounded-full"
+                        className="px-3 py-1 bg-teal-primary/10 text-teal-primary text-xs rounded-full font-medium"
                       >
                         {skill}
                       </span>
                     ))}
                     {career.skills.length > 4 && (
-                      <span className="px-3 py-1 bg-secondary text-secondary-foreground text-xs rounded-full">
+                      <span className="px-3 py-1 bg-teal-primary/10 text-teal-primary text-xs rounded-full font-medium">
                         +{career.skills.length - 4} more
                       </span>
                     )}

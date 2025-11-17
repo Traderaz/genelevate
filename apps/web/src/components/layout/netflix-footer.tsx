@@ -57,7 +57,7 @@ export function NetflixFooter() {
   ];
 
   return (
-    <footer className="bg-card border-t border-border">
+    <footer className="bg-white/5 backdrop-blur-sm border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16">
@@ -65,30 +65,31 @@ export function NetflixFooter() {
             {/* Brand Section */}
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-netflix-red rounded-md flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-teal-blue-medium to-teal-primary rounded-md flex items-center justify-center shadow-lg">
                   <span className="text-white font-bold text-xl">G</span>
                 </div>
-                <span className="text-2xl font-bold netflix-text-gradient">
-                  Gen Elevate
-                </span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl font-bold text-white">Gen</span>
+                  <span className="text-2xl font-bold teal-text-gradient">Elevate</span>
+                </div>
               </Link>
               
-              <p className="text-muted-foreground mb-6 max-w-sm">
+              <p className="text-white/80 mb-6 max-w-sm">
                 Empowering students worldwide with premium education technology. 
                 Join the learning revolution and unlock your potential.
               </p>
 
               {/* Contact Info */}
               <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 text-muted-foreground">
+                <div className="flex items-center gap-3 text-white/70">
                   <Mail className="w-4 h-4" />
                   <span className="text-sm">support@genelevate.com</span>
                 </div>
-                <div className="flex items-center gap-3 text-muted-foreground">
+                <div className="flex items-center gap-3 text-white/70">
                   <Phone className="w-4 h-4" />
                   <span className="text-sm">+1 (555) 123-4567</span>
                 </div>
-                <div className="flex items-center gap-3 text-muted-foreground">
+                <div className="flex items-center gap-3 text-white/70">
                   <MapPin className="w-4 h-4" />
                   <span className="text-sm">London, UK</span>
                 </div>
@@ -100,7 +101,7 @@ export function NetflixFooter() {
                   <Link
                     key={social.name}
                     href={social.href}
-                    className="w-10 h-10 bg-muted/20 rounded-full flex items-center justify-center text-muted-foreground hover:bg-netflix-red hover:text-white transition-all duration-300 netflix-button"
+                    className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white/70 hover:bg-teal-gold hover:text-teal-card-text transition-all duration-300"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -113,13 +114,13 @@ export function NetflixFooter() {
             {/* Footer Links */}
             {Object.entries(footerLinks).map(([key, section]) => (
               <div key={key}>
-                <h3 className="font-semibold text-foreground mb-4">{section.title}</h3>
+                <h3 className="font-semibold text-white mb-4">{section.title}</h3>
                 <ul className="space-y-3">
                   {section.links.map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                        className="text-white/70 hover:text-white transition-colors duration-200"
                       >
                         {link.name}
                       </Link>
@@ -132,11 +133,11 @@ export function NetflixFooter() {
         </div>
 
         {/* Newsletter Signup */}
-        <div className="py-8 border-t border-border">
+        <div className="py-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="font-semibold text-foreground mb-2">Stay Updated</h3>
-              <p className="text-muted-foreground">
+              <h3 className="font-semibold text-white mb-2">Stay Updated</h3>
+              <p className="text-white/70">
                 Get the latest news, updates, and learning tips delivered to your inbox.
               </p>
             </div>
@@ -144,9 +145,9 @@ export function NetflixFooter() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-netflix-red focus:border-transparent transition-all duration-200"
+                className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-transparent transition-all duration-200"
               />
-              <button className="px-6 py-3 bg-netflix-red hover:bg-netflix-red-dark text-white font-semibold rounded-lg netflix-button whitespace-nowrap">
+              <button className="teal-button-primary whitespace-nowrap">
                 Subscribe
               </button>
             </div>
@@ -154,27 +155,21 @@ export function NetflixFooter() {
         </div>
 
         {/* Bottom Footer */}
-        <div className="py-8 border-t border-border">
+        <div className="py-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex flex-col sm:flex-row items-center gap-6 text-sm text-muted-foreground">
+            <div className="flex flex-col sm:flex-row items-center gap-6 text-sm text-white/70">
               <span>© 2024 Gen Elevate. All rights reserved.</span>
               <div className="flex items-center gap-4">
-                <Link href="/privacy" className="hover:text-foreground transition-colors">
+                <Link href="/privacy" className="hover:text-white transition-colors">
                   Privacy
                 </Link>
-                <Link href="/terms" className="hover:text-foreground transition-colors">
+                <Link href="/terms" className="hover:text-white transition-colors">
                   Terms
                 </Link>
-                <Link href="/cookies" className="hover:text-foreground transition-colors">
+                <Link href="/cookies" className="hover:text-white transition-colors">
                   Cookies
                 </Link>
               </div>
-            </div>
-
-            {/* Theme Toggle */}
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-muted-foreground">Theme:</span>
-              <ThemeToggleWithLabel />
             </div>
           </div>
         </div>

@@ -74,17 +74,17 @@ export function MeetTheFounder() {
 
   if (isLoading) {
     return (
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-card/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Meet the <span className="text-primary">Founder</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Meet the <span className="text-teal-gold">Founder</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
               Passionate about empowering the next generation of learners and leaders
             </p>
           </div>
-          <div className="h-96 bg-card/50 animate-pulse rounded-2xl" />
+          <div className="h-96 bg-white/10 animate-pulse rounded-2xl" />
         </div>
       </section>
     );
@@ -93,18 +93,17 @@ export function MeetTheFounder() {
   // Show a message if no founders (instead of hiding completely)
   if (founders.length === 0) {
     return (
-      <section className="py-20 bg-gradient-to-b from-background to-card/20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5" />
+      <section className="py-20 relative overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Meet the <span className="text-primary">Founder</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Meet the <span className="text-teal-gold">Founder</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8">
               Passionate about empowering the next generation of learners and leaders
             </p>
-            <div className="bg-card/50 border border-border rounded-2xl p-8 max-w-2xl mx-auto">
-              <p className="text-muted-foreground">
+            <div className="teal-card rounded-2xl p-8 max-w-2xl mx-auto">
+              <p className="text-teal-card-text-muted">
                 No founder profiles available yet. If you're an admin, please add a founder profile in the admin panel.
               </p>
             </div>
@@ -115,19 +114,14 @@ export function MeetTheFounder() {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-card/20 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-      
+    <section className="py-20 relative overflow-hidden">
       <div className="relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Meet the <span className="text-primary">Founder{founders.length > 1 ? 's' : ''}</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Meet the <span className="text-teal-gold">Founder{founders.length > 1 ? 's' : ''}</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 max-w-2xl mx-auto">
             Passionate about empowering the next generation of learners and leaders
           </p>
         </div>
@@ -153,10 +147,10 @@ export function MeetTheFounder() {
                     animation: `fadeInSlide 0.5s ease-out ${index * 0.1}s both`
                   }}
                 >
-                  <div className="h-full bg-gradient-to-br from-card via-card/95 to-card/80 backdrop-blur-sm border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1">
+                  <div className="h-full teal-card-glass backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden hover:border-teal-gold/50 transition-all duration-300 hover:shadow-2xl hover:shadow-teal-gold/10 hover:-translate-y-1">
                     <div className="flex flex-col md:flex-row">
                       {/* Founder Image */}
-                      <div className="relative w-full md:w-80 lg:w-96 h-[400px] md:h-auto bg-gradient-to-br from-primary/20 to-purple-500/20 flex-shrink-0">
+                      <div className="relative w-full md:w-80 lg:w-96 h-[400px] md:h-auto bg-gradient-to-br from-white/10 to-white/5 flex-shrink-0">
                         <Image
                           src={founder.imageUrl}
                           alt={founder.name}
@@ -171,33 +165,33 @@ export function MeetTheFounder() {
                       <div className="flex-1 p-8 lg:p-10 flex flex-col">
                         <div className="space-y-5">
                           <div>
-                            <h3 className="text-3xl lg:text-4xl font-bold text-foreground mb-2">
+                            <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2">
                               {founder.name}
                             </h3>
-                            <p className="text-primary font-medium text-xl">
+                            <p className="text-teal-gold font-medium text-xl">
                               {founder.role}
                             </p>
                           </div>
 
                           {/* Full Bio - No truncation */}
-                          <p className="text-muted-foreground leading-relaxed text-base">
+                          <p className="text-white/90 leading-relaxed text-base">
                             {founder.bio}
                           </p>
 
                           {/* Achievements */}
                           {founder.achievements && founder.achievements.length > 0 && (
                             <div className="space-y-3 pt-2">
-                              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                                <Award className="w-5 h-5 text-primary" />
+                              <div className="flex items-center gap-2 text-sm font-medium text-white">
+                                <Award className="w-5 h-5 text-teal-gold" />
                                 <span>Key Achievements</span>
                               </div>
                               <ul className="space-y-2">
                                 {founder.achievements.map((achievement, idx) => (
                                   <li
                                     key={idx}
-                                    className="text-sm text-muted-foreground flex items-start gap-2"
+                                    className="text-sm text-white/80 flex items-start gap-2"
                                   >
-                                    <span className="text-primary mt-1">•</span>
+                                    <span className="text-teal-gold mt-1">•</span>
                                     <span>{achievement}</span>
                                   </li>
                                 ))}
@@ -214,10 +208,10 @@ export function MeetTheFounder() {
                                 href={founder.socialLinks.linkedin}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-12 h-12 bg-primary/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                                className="w-12 h-12 bg-teal-gold/10 hover:bg-teal-gold/20 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
                                 aria-label="LinkedIn"
                               >
-                                <Linkedin className="w-6 h-6 text-primary" />
+                                <Linkedin className="w-6 h-6 text-teal-gold" />
                               </a>
                             )}
                             {founder.socialLinks.twitter && (
@@ -225,19 +219,19 @@ export function MeetTheFounder() {
                                 href={founder.socialLinks.twitter}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-12 h-12 bg-primary/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                                className="w-12 h-12 bg-teal-gold/10 hover:bg-teal-gold/20 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
                                 aria-label="Twitter"
                               >
-                                <Twitter className="w-6 h-6 text-primary" />
+                                <Twitter className="w-6 h-6 text-teal-gold" />
                               </a>
                             )}
                             {founder.socialLinks.email && (
                               <a
                                 href={`mailto:${founder.socialLinks.email}`}
-                                className="w-12 h-12 bg-primary/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                                className="w-12 h-12 bg-teal-gold/10 hover:bg-teal-gold/20 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
                                 aria-label="Email"
                               >
-                                <Mail className="w-6 h-6 text-primary" />
+                                <Mail className="w-6 h-6 text-teal-gold" />
                               </a>
                             )}
                           </div>

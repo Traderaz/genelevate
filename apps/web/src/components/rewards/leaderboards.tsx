@@ -89,10 +89,10 @@ export function Leaderboards() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Trophy className="w-6 h-6 text-yellow-500" />
-          <h2 className="text-2xl font-bold text-foreground">Leaderboards</h2>
+          <Trophy className="w-6 h-6 text-teal-gold" />
+          <h2 className="text-2xl font-bold text-white">Leaderboards</h2>
         </div>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-sm text-white/70">
           Updated every Monday at 6 AM
         </span>
       </div>
@@ -109,8 +109,8 @@ export function Leaderboards() {
             onClick={() => setActiveTab(tab.id as any)}
             className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
               activeTab === tab.id
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-card text-muted-foreground hover:bg-accent hover:text-accent-foreground border border-border'
+                ? 'teal-button-primary'
+                : 'teal-card text-teal-card-text hover:bg-white/10 border border-white/20'
             }`}
           >
             {tab.label}
@@ -119,31 +119,31 @@ export function Leaderboards() {
       </div>
 
       {/* Leaderboard Table */}
-      <div className="bg-card border border-border rounded-xl overflow-hidden">
+      <div className="teal-card border border-white/20 rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-secondary">
+            <thead className="bg-white/5">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Rank</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Student</th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-foreground">Points</th>
-                <th className="px-6 py-4 text-center text-sm font-semibold text-foreground">Change</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-teal-card-text">Rank</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-teal-card-text">Student</th>
+                <th className="px-6 py-4 text-right text-sm font-semibold text-teal-card-text">Points</th>
+                <th className="px-6 py-4 text-center text-sm font-semibold text-teal-card-text">Change</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-y divide-white/10">
               {getLeaderboard().map((entry) => (
                 <tr
                   key={entry.userId}
                   className={`transition-colors ${
                     entry.isCurrentUser
-                      ? 'bg-primary/10 hover:bg-primary/20'
-                      : 'hover:bg-accent'
+                      ? 'bg-teal-gold/10 hover:bg-teal-gold/20'
+                      : 'hover:bg-white/5'
                   }`}
                 >
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       {getRankIcon(entry.rank) || (
-                        <span className="text-lg font-bold text-foreground w-5 text-center">
+                        <span className="text-lg font-bold text-teal-card-text w-5 text-center">
                           {entry.rank}
                         </span>
                       )}
@@ -151,23 +151,23 @@ export function Leaderboards() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/40 rounded-full flex items-center justify-center">
-                        <span className="text-sm font-semibold text-foreground">
+                      <div className="w-10 h-10 bg-gradient-to-br from-teal-gold/20 to-teal-primary/40 rounded-full flex items-center justify-center">
+                        <span className="text-sm font-semibold text-teal-card-text">
                           {entry.displayName[0]}
                         </span>
                       </div>
                       <div>
-                        <p className={`font-medium ${entry.isCurrentUser ? 'text-primary' : 'text-foreground'}`}>
+                        <p className={`font-medium ${entry.isCurrentUser ? 'text-teal-gold' : 'text-teal-card-text'}`}>
                           {entry.displayName}
                         </p>
                         {entry.isCurrentUser && (
-                          <p className="text-xs text-muted-foreground">That's you!</p>
+                          <p className="text-xs text-teal-card-text-muted">That's you!</p>
                         )}
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <span className="text-lg font-bold text-foreground">
+                    <span className="text-lg font-bold text-teal-card-text">
                       {entry.points.toLocaleString()}
                     </span>
                   </td>
@@ -177,7 +177,7 @@ export function Leaderboards() {
                       <span className={`text-sm font-medium ${
                         entry.change > 0 ? 'text-green-500' :
                         entry.change < 0 ? 'text-red-500' :
-                        'text-muted-foreground'
+                        'text-teal-card-text-muted'
                       }`}>
                         {getChangeText(entry.change)}
                       </span>
@@ -191,8 +191,8 @@ export function Leaderboards() {
       </div>
 
       {/* Info Box */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
-        <p className="text-sm text-foreground">
+      <div className="teal-card border-2 border-teal-primary/30 rounded-xl p-4">
+        <p className="text-sm text-teal-card-text">
           <span className="font-semibold">How rankings work:</span> Leaderboards are computed automatically 
           every Monday at 6 AM. Your position is based on points earned during the period. Keep learning 
           to climb the ranks!

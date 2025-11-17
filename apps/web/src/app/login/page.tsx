@@ -12,16 +12,16 @@ export default function LoginPage() {
     <NetflixAuthLayout>
       <div className="w-full max-w-md mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Sign In</h1>
-          <p className="text-lg text-muted-foreground">
+          <h1 className="text-4xl font-bold text-brand-navy mb-4">Sign In</h1>
+          <p className="text-lg text-brand-navy-light">
             Welcome back to your learning journey
           </p>
         </div>
         <NetflixLoginForm />
         <div className="mt-8 text-center">
-          <p className="text-muted-foreground">
+          <p className="text-brand-navy-light">
             New to Gen Elevate?{' '}
-            <a href="/register" className="font-semibold text-primary hover:text-primary/80 transition-colors">
+            <a href="/register" className="font-semibold text-brand-teal hover:text-brand-blue-medium transition-colors">
               Sign up now
             </a>
           </p>

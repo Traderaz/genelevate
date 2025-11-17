@@ -43,18 +43,18 @@ export function PointsSummary() {
   return (
     <div className="space-y-6">
       {/* Total Points Card */}
-      <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-xl p-6">
+      <div className="teal-card border-2 border-teal-gold/30 rounded-xl p-6">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-muted-foreground mb-2">Total Points</p>
-            <p className="text-4xl font-bold text-foreground">{totalPoints.toLocaleString()}</p>
+            <p className="text-sm text-teal-card-text-muted mb-2">Total Points</p>
+            <p className="text-4xl font-bold text-teal-card-text">{totalPoints.toLocaleString()}</p>
             <div className="flex items-center gap-2 mt-2">
-              <TrendingUp className="w-4 h-4 text-green-500" />
-              <span className="text-sm text-green-500 font-medium">+120 this week</span>
+              <TrendingUp className="w-4 h-4 text-teal-gold" />
+              <span className="text-sm text-teal-gold font-medium">+120 this week</span>
             </div>
           </div>
-          <div className="w-20 h-20 bg-yellow-500/20 rounded-full flex items-center justify-center">
-            <Star className="w-10 h-10 text-yellow-500" />
+          <div className="w-20 h-20 bg-teal-gold/20 rounded-full flex items-center justify-center">
+            <Star className="w-10 h-10 text-teal-gold" />
           </div>
         </div>
       </div>
@@ -64,58 +64,58 @@ export function PointsSummary() {
         {pointsSources.map((source) => (
           <div
             key={source.label}
-            className="bg-card border border-border rounded-xl p-6 netflix-card"
+            className="teal-card border border-white/20 rounded-xl p-6 hover:border-teal-gold/50 transition-all"
           >
             <div className={`w-12 h-12 ${source.bgColor} rounded-lg flex items-center justify-center mb-4`}>
               <source.icon className={`w-6 h-6 ${source.color}`} />
             </div>
             <div className="space-y-2">
-              <p className="text-2xl font-bold text-foreground">{source.points}</p>
-              <p className="text-sm text-muted-foreground">{source.label}</p>
-              <p className="text-xs text-muted-foreground">{source.count} activities</p>
+              <p className="text-2xl font-bold text-teal-card-text">{source.points}</p>
+              <p className="text-sm text-teal-card-text-muted">{source.label}</p>
+              <p className="text-xs text-teal-card-text-muted">{source.count} activities</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Points Earning Info */}
-      <div className="bg-card border border-border rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-foreground mb-4">How to Earn Points</h3>
+      <div className="teal-card border border-white/20 rounded-xl p-6">
+        <h3 className="text-lg font-semibold text-teal-card-text mb-4">How to Earn Points</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-              <BookOpen className="w-4 h-4 text-blue-500" />
+            <div className="w-8 h-8 bg-teal-gold/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <BookOpen className="w-4 h-4 text-teal-gold" />
             </div>
             <div>
-              <p className="font-medium text-foreground">Complete Courses</p>
-              <p className="text-sm text-muted-foreground">50 points per course + bonus for perfect scores</p>
+              <p className="font-medium text-teal-card-text">Complete Courses</p>
+              <p className="text-sm text-teal-card-text-muted">50 points per course + bonus for perfect scores</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Video className="w-4 h-4 text-green-500" />
+            <div className="w-8 h-8 bg-teal-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Video className="w-4 h-4 text-teal-primary" />
             </div>
             <div>
-              <p className="font-medium text-foreground">Attend Webinars</p>
-              <p className="text-sm text-muted-foreground">50 points per webinar + engagement bonus</p>
+              <p className="font-medium text-teal-card-text">Attend Webinars</p>
+              <p className="text-sm text-teal-card-text-muted">50 points per webinar + engagement bonus</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Calendar className="w-4 h-4 text-purple-500" />
+            <div className="w-8 h-8 bg-teal-gold/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Calendar className="w-4 h-4 text-teal-gold" />
             </div>
             <div>
-              <p className="font-medium text-foreground">Join Events</p>
-              <p className="text-sm text-muted-foreground">50 points per event participation</p>
+              <p className="font-medium text-teal-card-text">Join Events</p>
+              <p className="text-sm text-teal-card-text-muted">50 points per event participation</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-yellow-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Award className="w-4 h-4 text-yellow-500" />
+            <div className="w-8 h-8 bg-teal-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Award className="w-4 h-4 text-teal-primary" />
             </div>
             <div>
-              <p className="font-medium text-foreground">Unlock Achievements</p>
-              <p className="text-sm text-muted-foreground">10-100 points per achievement</p>
+              <p className="font-medium text-teal-card-text">Unlock Achievements</p>
+              <p className="text-sm text-teal-card-text-muted">10-100 points per achievement</p>
             </div>
           </div>
         </div>

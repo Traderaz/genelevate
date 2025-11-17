@@ -206,24 +206,24 @@ export function NetflixDashboardOverview() {
   return (
       <div className="space-y-6">
         {/* Welcome Section */}
-        <Card className="relative overflow-hidden border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+        <Card className="teal-card relative overflow-hidden border-none shadow-xl">
           <CardContent className="p-6 sm:p-8">
             <div className="relative z-10">
-              <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+              <h1 className="text-2xl sm:text-3xl font-bold text-teal-card-text mb-2">
                 Welcome back, {userProfile?.displayName || userProfile?.firstName || 'Student'}! 👋
               </h1>
-              <p className="text-base sm:text-lg text-muted-foreground mb-4">
+              <p className="text-base sm:text-lg text-teal-card-text-muted mb-4">
                 Explore all the amazing features and tools available to you
               </p>
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                <Badge variant={userProfile?.subscription?.plan === 'free' ? 'outline' : 'default'}>
+                <Badge variant={userProfile?.subscription?.plan === 'free' ? 'outline' : 'default'} className="bg-teal-gold text-teal-card-text font-semibold border-none">
                   {userProfile?.subscription?.plan || 'Free'} Plan
                 </Badge>
-                <Badge variant="secondary" className="capitalize">
+                <Badge variant="secondary" className="capitalize bg-teal-primary/10 text-teal-primary font-semibold border-none">
                   {userProfile?.role}
                 </Badge>
                 {(userProfile?.role === 'student' || userProfile?.role === 'admin') && (
-                      <Button size="sm" variant="default" asChild className="ml-2">
+                      <Button size="sm" variant="default" asChild className="ml-2 teal-button-primary">
                         <Link href="/ai">
                           <Sparkles className="w-4 h-4 mr-2" />
                           Ask AI
@@ -234,7 +234,7 @@ export function NetflixDashboardOverview() {
             </div>
             
             {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl -translate-y-16 sm:-translate-y-32 translate-x-16 sm:translate-x-32" />
+            <div className="absolute top-0 right-0 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-to-br from-teal-gold/20 to-transparent rounded-full blur-3xl -translate-y-16 sm:-translate-y-32 translate-x-16 sm:translate-x-32" />
           </CardContent>
         </Card>
 
@@ -243,17 +243,17 @@ export function NetflixDashboardOverview() {
           {quickStats.map((stat, index) => {
             const IconComponent = stat.icon;
             return (
-                  <Card key={index} className="hover:shadow-lg transition-all duration-200 cursor-pointer group">
+                  <Card key={index} className="teal-card hover:shadow-xl hover:border-teal-gold/50 transition-all duration-200 cursor-pointer group border-2 border-transparent">
                     <CardContent className="p-4">
                       <div className="flex items-center space-x-3">
                         <div className={`p-2 rounded-lg ${stat.bgColor}`}>
                           <IconComponent className={`w-5 h-5 ${stat.color}`} />
                         </div>
                         <div>
-                          <p className="text-2xl font-bold text-foreground group-hover:scale-105 transition-transform">
+                          <p className="text-2xl font-bold text-teal-card-text group-hover:scale-105 transition-transform">
                             {stat.value}
                           </p>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-teal-card-text-muted">
                             {stat.label}
                           </p>
                         </div>
@@ -267,8 +267,8 @@ export function NetflixDashboardOverview() {
         {/* All Sections Overview */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-foreground">All Features & Tools</h2>
-            <Badge variant="outline" className="text-xs">
+            <h2 className="text-xl font-bold text-white">All Features & Tools</h2>
+            <Badge variant="outline" className="text-xs bg-teal-gold text-teal-card-text border-none font-semibold">
               {sections.length} sections available
             </Badge>
           </div>
@@ -277,17 +277,17 @@ export function NetflixDashboardOverview() {
             {sections.map((section) => {
               const SectionIcon = section.icon;
               return (
-                <Card key={section.id} className="group hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/30">
+                <Card key={section.id} className="teal-card group hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-teal-gold/50">
                   <CardHeader className="pb-3">
                     <div className="flex items-center space-x-3">
                       <div className={`p-2 rounded-lg ${section.color}/10 group-hover:${section.color}/20 transition-colors`}>
                         <SectionIcon className={`w-6 h-6 text-white`} style={{color: section.color.replace('bg-', '').replace('-500', '')}} />
                       </div>
                       <div>
-                        <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                        <CardTitle className="text-lg text-teal-card-text group-hover:text-teal-primary transition-colors">
                           {section.title}
                         </CardTitle>
-                        <CardDescription className="text-sm">
+                        <CardDescription className="text-sm text-teal-card-text-muted">
                           {section.description}
                         </CardDescription>
                       </div>
@@ -304,31 +304,31 @@ export function NetflixDashboardOverview() {
                                 {isAccessible ? (
                                   <Link
                                     href={item.href}
-                                    className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/60 transition-all duration-200 group/item"
+                                    className="flex items-center justify-between p-3 rounded-lg hover:bg-white/40 transition-all duration-200 group/item"
                                   >
                                     <div className="flex items-center space-x-3">
-                                      <ItemIcon className="w-4 h-4 text-muted-foreground group-hover/item:text-foreground transition-colors" />
-                                      <span className="text-sm font-medium text-foreground group-hover/item:text-primary transition-colors">
+                                      <ItemIcon className="w-4 h-4 text-teal-card-text-muted group-hover/item:text-teal-card-text transition-colors" />
+                                      <span className="text-sm font-medium text-teal-card-text group-hover/item:text-teal-primary transition-colors">
                                         {item.name}
                                       </span>
                                       {item.premium && (
-                                        <Badge variant="outline" className="text-xs px-1.5 py-0.5">
+                                        <Badge variant="outline" className="text-xs px-1.5 py-0.5 bg-teal-gold/20 text-teal-gold-dark border-teal-gold font-semibold">
                                           Pro
                                         </Badge>
                                       )}
                                     </div>
-                                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover/item:text-primary group-hover/item:translate-x-1 transition-all" />
+                                    <ArrowRight className="w-4 h-4 text-teal-card-text-muted group-hover/item:text-teal-primary group-hover/item:translate-x-1 transition-all" />
                                   </Link>
                                 ) : (
-                                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/20 opacity-60 cursor-not-allowed">
+                                  <div className="flex items-center justify-between p-3 rounded-lg opacity-60 cursor-not-allowed">
                                     <div className="flex items-center space-x-3">
-                                      <ItemIcon className="w-4 h-4 text-muted-foreground" />
-                                      <span className="text-sm font-medium text-muted-foreground">
+                                      <ItemIcon className="w-4 h-4 text-teal-card-text-muted" />
+                                      <span className="text-sm font-medium text-teal-card-text-muted">
                                         {item.name}
                                       </span>
-                                      <Lock className="w-3 h-3 text-muted-foreground" />
+                                      <Lock className="w-3 h-3 text-teal-card-text-muted" />
                                     </div>
-                                    <Badge variant="outline" className="text-xs">
+                                    <Badge variant="outline" className="text-xs bg-teal-gold/20 text-teal-gold-dark border-teal-gold">
                                       Premium
                                     </Badge>
                                   </div>

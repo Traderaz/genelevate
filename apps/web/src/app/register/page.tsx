@@ -12,16 +12,16 @@ export default function RegisterPage() {
     <NetflixAuthLayout>
       <div className="w-full max-w-md mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Join Gen Elevate</h1>
-          <p className="text-lg text-muted-foreground">
+          <h1 className="text-4xl font-bold text-teal-card-text mb-4">Join Gen Elevate</h1>
+          <p className="text-lg text-teal-card-text-muted">
             Start your learning journey today
           </p>
         </div>
         <NetflixRegisterForm />
         <div className="mt-8 text-center">
-          <p className="text-muted-foreground">
+          <p className="text-teal-card-text-muted">
             Already have an account?{' '}
-            <a href="/login" className="font-semibold text-primary hover:text-primary/80 transition-colors">
+            <a href="/login" className="font-semibold text-teal-primary hover:text-teal-blue-medium transition-colors">
               Sign in
             </a>
           </p>

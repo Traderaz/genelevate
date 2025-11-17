@@ -18,12 +18,12 @@ export default function AddOnsPage() {
         <AddOnsBanner />
 
         {/* My Purchases */}
-        <Suspense fallback={<div className="h-48 bg-card animate-pulse rounded-xl" />}>
+        <Suspense fallback={<div className="h-48 teal-card animate-pulse rounded-xl" />}>
           <MyPurchases />
         </Suspense>
 
         {/* Add-Ons Grid */}
-        <Suspense fallback={<div className="h-96 bg-card animate-pulse rounded-xl" />}>
+        <Suspense fallback={<div className="h-96 teal-card animate-pulse rounded-xl" />}>
           <AddOnsGrid />
         </Suspense>
       </div>

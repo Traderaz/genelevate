@@ -24,8 +24,8 @@ export default function DNAPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-white">Loading...</div>
       </div>
     );
   }

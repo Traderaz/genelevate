@@ -147,6 +147,15 @@ export default function AdminDashboard() {
       available: true
     },
     {
+      title: 'Webinar Management',
+      description: 'Create and manage live webinars with embedded video rooms',
+      icon: Video,
+      href: '/admin/webinars',
+      color: 'bg-indigo-500',
+      stats: 'Live video sessions',
+      available: true
+    },
+    {
       title: 'Events Management',
       description: 'Create and manage platform events and workshops',
       icon: Calendar,
@@ -189,6 +198,15 @@ export default function AdminDashboard() {
       href: '/admin/interview-lab',
       color: 'bg-pink-500',
       stats: 'Video submissions',
+      available: true
+    },
+    {
+      title: 'Debates Management',
+      description: 'Grade debate submissions and manage virtual debates',
+      icon: MessageSquare,
+      href: '/admin/debates',
+      color: 'bg-orange-500',
+      stats: 'Student responses',
       available: true
     },
     {

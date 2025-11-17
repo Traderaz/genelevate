@@ -43,7 +43,7 @@ export function CareerStats() {
       {stats.map((stat, index) => (
         <div
           key={stat.label}
-          className="bg-card border border-border rounded-xl p-6 netflix-card"
+          className="teal-card border-2 border-transparent rounded-xl p-6 hover:border-teal-gold/50 hover:shadow-lg transition-all"
         >
           <div className="flex items-center justify-between mb-4">
             <div className={`w-12 h-12 ${stat.bgColor} rounded-lg flex items-center justify-center`}>
@@ -51,9 +51,9 @@ export function CareerStats() {
             </div>
           </div>
           <div className="space-y-1">
-            <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-            <p className="text-sm text-muted-foreground">{stat.label}</p>
-            <p className="text-xs text-muted-foreground">{stat.change}</p>
+            <p className="text-2xl font-bold text-teal-card-text">{stat.value}</p>
+            <p className="text-sm text-teal-card-text">{stat.label}</p>
+            <p className="text-xs text-teal-card-text-muted">{stat.change}</p>
           </div>
         </div>
       ))}

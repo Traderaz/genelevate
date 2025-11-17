@@ -55,10 +55,10 @@ export function NetflixTestimonials() {
 
   if (loading) {
     return (
-      <section className="py-24 bg-muted/30">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
           </div>
         </div>
       </section>
@@ -70,26 +70,26 @@ export function NetflixTestimonials() {
   }
 
   return (
-    <section className="py-24 bg-muted/30">
+    <section className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            Loved by <span className="netflix-text-gradient">Students & Educators</span>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+            Loved by <span className="text-teal-gold font-black">Students & Educators</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
             See how Gen Elevate is helping students excel in their GCSE & A-Level studies.
           </p>
         </div>
 
         {/* Main Testimonial Carousel */}
         <div className="relative max-w-4xl mx-auto mb-16">
-          <div className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-netflix">
+          <div className="brand-card-glass border-2 border-brand-teal/20 rounded-2xl p-8 md:p-12 shadow-brand-xl">
             <div className="flex items-start gap-6">
               {/* Quote Icon */}
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-netflix-red/10 rounded-full flex items-center justify-center">
-                  <Quote className="w-6 h-6 text-netflix-red" />
+                <div className="w-12 h-12 bg-gradient-to-br from-brand-blue-medium to-brand-teal rounded-full flex items-center justify-center shadow-brand-sm">
+                  <Quote className="w-6 h-6 text-white" />
                 </div>
               </div>
 
@@ -101,26 +101,26 @@ export function NetflixTestimonials() {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="text-xl md:text-2xl text-foreground leading-relaxed mb-6">
+                <blockquote className="text-xl md:text-2xl text-brand-navy leading-relaxed mb-6 font-light">
                   "{reviews[currentTestimonial].reviewText}"
                 </blockquote>
 
                 {/* Author Info */}
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-netflix-red to-netflix-red-dark rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-brand-blue-medium to-brand-teal rounded-full flex items-center justify-center shadow-brand-md">
                     <span className="text-white font-bold text-lg">
                       {reviews[currentTestimonial].studentName.charAt(0)}
                     </span>
                   </div>
                   <div>
-                    <div className="font-semibold text-foreground">
+                    <div className="font-semibold text-brand-navy">
                       {reviews[currentTestimonial].studentName}
                     </div>
-                    <div className="text-muted-foreground">
+                    <div className="text-brand-navy-light">
                       {reviews[currentTestimonial].yearGroup}
                     </div>
                     {reviews[currentTestimonial].subject && (
-                      <div className="text-sm text-netflix-red">
+                      <div className="text-sm text-brand-teal font-medium">
                         {reviews[currentTestimonial].subject}
                       </div>
                     )}
@@ -133,13 +133,13 @@ export function NetflixTestimonials() {
           {/* Navigation Arrows */}
           <button
             onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-card border border-border rounded-full flex items-center justify-center netflix-button hover:border-netflix-red hover:text-netflix-red transition-all duration-300"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white border-2 border-brand-teal/30 text-brand-teal rounded-full flex items-center justify-center hover:bg-brand-teal hover:text-white hover:border-brand-teal transition-all duration-300 shadow-brand-sm hover:shadow-brand-md"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-card border border-border rounded-full flex items-center justify-center netflix-button hover:border-netflix-red hover:text-netflix-red transition-all duration-300"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white border-2 border-brand-teal/30 text-brand-teal rounded-full flex items-center justify-center hover:bg-brand-teal hover:text-white hover:border-brand-teal transition-all duration-300 shadow-brand-sm hover:shadow-brand-md"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -152,8 +152,8 @@ export function NetflixTestimonials() {
                 onClick={() => setCurrentTestimonial(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentTestimonial
-                    ? 'bg-netflix-red'
-                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                    ? 'bg-brand-teal w-8'
+                    : 'bg-brand-navy-light/30 hover:bg-brand-navy-light/50'
                 }`}
               />
             ))}
@@ -162,31 +162,31 @@ export function NetflixTestimonials() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
-            <div className="text-4xl font-bold text-netflix-red mb-2">Courses</div>
-            <div className="text-foreground font-semibold mb-1">GCSE & A-Level</div>
-            <div className="text-sm text-muted-foreground">Complete curriculum coverage</div>
+          <div className="text-center p-6 brand-card rounded-2xl hover:scale-105 transition-all duration-300 shadow-brand-md">
+            <div className="text-4xl font-bold text-brand-teal mb-2">Courses</div>
+            <div className="text-brand-navy font-semibold mb-1">GCSE & A-Level</div>
+            <div className="text-sm text-brand-navy-light">Complete curriculum coverage</div>
           </div>
-          <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
-            <div className="text-4xl font-bold text-netflix-red mb-2">Hundreds</div>
-            <div className="text-foreground font-semibold mb-1">Career Pathways</div>
-            <div className="text-sm text-muted-foreground">Explore all your options</div>
+          <div className="text-center p-6 brand-card rounded-2xl hover:scale-105 transition-all duration-300 shadow-brand-md">
+            <div className="text-4xl font-bold text-brand-teal mb-2">Hundreds</div>
+            <div className="text-brand-navy font-semibold mb-1">Career Pathways</div>
+            <div className="text-sm text-brand-navy-light">Explore all your options</div>
           </div>
-          <div className="text-center p-6 bg-card border border-border rounded-xl netflix-card">
-            <div className="text-4xl font-bold text-netflix-red mb-2">24/7</div>
-            <div className="text-foreground font-semibold mb-1">AI Tutor</div>
-            <div className="text-sm text-muted-foreground">Always here to help</div>
+          <div className="text-center p-6 brand-card rounded-2xl hover:scale-105 transition-all duration-300 shadow-brand-md">
+            <div className="text-4xl font-bold text-brand-teal mb-2">24/7</div>
+            <div className="text-brand-navy font-semibold mb-1">AI Tutor</div>
+            <div className="text-sm text-brand-navy-light">Always here to help</div>
           </div>
         </div>
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <p className="text-muted-foreground mb-6">
+          <p className="text-brand-navy-light mb-6 text-lg">
             Ready to elevate your learning?
           </p>
           <a 
             href="/register"
-            className="inline-block px-8 py-4 bg-netflix-red hover:bg-netflix-red-dark text-white font-semibold rounded-lg netflix-button"
+            className="inline-block px-8 py-4 gold-gradient text-brand-navy font-bold rounded-xl shadow-gold-glow hover:shadow-gold-glow-hover hover:scale-105 transition-all duration-300"
           >
             Get Started Today
           </a>

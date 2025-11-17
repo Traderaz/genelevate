@@ -232,14 +232,14 @@ export default function InterviewLabPage() {
         </div>
 
         {/* Info Banner */}
-        <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-500/20 p-6">
+        <Card className="teal-card p-6 border-2 border-teal-gold/30">
           <div className="flex items-start gap-4">
-            <div className="bg-blue-500/10 p-3 rounded-lg">
-              <AlertCircle className="w-6 h-6 text-blue-400" />
+            <div className="bg-teal-gold/20 p-3 rounded-lg">
+              <AlertCircle className="w-6 h-6 text-teal-gold" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-white mb-2">How It Works</h3>
-              <ul className="text-gray-300 space-y-1 text-sm">
+              <h3 className="text-lg font-semibold text-teal-card-text mb-2">How It Works</h3>
+              <ul className="text-teal-card-text space-y-1 text-sm">
                 <li>• Select a question and record or upload your video response</li>
                 <li>• Videos are automatically deleted after 60 days</li>
                 <li>• Our team will review your response and provide personalized feedback</li>

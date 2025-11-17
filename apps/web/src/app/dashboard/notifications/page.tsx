@@ -95,8 +95,8 @@ export default function NotificationsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Notifications</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-3xl font-bold text-white">Notifications</h1>
+          <p className="text-white/80 mt-1">
             {unreadCount > 0 ? `${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}` : 'All caught up!'}
           </p>
         </div>
@@ -105,7 +105,7 @@ export default function NotificationsPage() {
           {unreadCount > 0 && (
             <button
               onClick={markAllAsRead}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 teal-button-primary"
             >
               <CheckCircle2 className="w-4 h-4" />
               Mark All Read
@@ -115,7 +115,7 @@ export default function NotificationsPage() {
           {notifications.length > 0 && (
             <button
               onClick={clearAllNotifications}
-              className="inline-flex items-center gap-2 px-4 py-2 border border-destructive/20 text-destructive rounded-lg hover:bg-destructive/10 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 border border-red-500/20 text-red-500 rounded-lg hover:bg-red-500/10 transition-colors"
             >
               <Trash2 className="w-4 h-4" />
               Clear All
@@ -125,26 +125,26 @@ export default function NotificationsPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4 p-4 bg-card rounded-lg border border-border">
+      <div className="flex flex-col sm:flex-row gap-4 p-4 teal-card rounded-lg">
         {/* Search */}
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-teal-card-text-muted" />
           <input
             type="text"
             placeholder="Search notifications..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-teal-gold text-teal-card-text"
           />
         </div>
         
         {/* Status Filter */}
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-muted-foreground" />
+          <Filter className="w-4 h-4 text-teal-card-text-muted" />
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value as 'all' | 'unread' | 'read')}
-            className="px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-teal-gold text-teal-card-text"
           >
             <option value="all">All</option>
             <option value="unread">Unread</option>
@@ -156,7 +156,7 @@ export default function NotificationsPage() {
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          className="px-3 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-teal-gold text-teal-card-text"
         >
           <option value="all">All Types</option>
           {notificationTypes.map(type => (
@@ -170,15 +170,15 @@ export default function NotificationsPage() {
       {/* Notifications List */}
       <div className="space-y-4">
         {filteredNotifications.length === 0 ? (
-          <div className="text-center py-12 bg-card rounded-lg border border-border">
-            <Bell className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
-            <h3 className="text-lg font-medium text-foreground mb-2">
+          <div className="text-center py-12 teal-card rounded-lg">
+            <Bell className="w-12 h-12 mx-auto mb-4 text-teal-card-text-muted opacity-50" />
+            <h3 className="text-lg font-medium text-teal-card-text mb-2">
               {searchQuery || filter !== 'all' || typeFilter !== 'all' 
                 ? 'No notifications match your filters' 
                 : 'No notifications yet'
               }
             </h3>
-            <p className="text-muted-foreground">
+            <p className="text-teal-card-text-muted">
               {searchQuery || filter !== 'all' || typeFilter !== 'all'
                 ? 'Try adjusting your search or filters'
                 : "We'll notify you when something important happens"
@@ -189,10 +189,10 @@ export default function NotificationsPage() {
           filteredNotifications.map((notification) => (
             <div
               key={notification.id}
-              className={`p-6 bg-card rounded-lg border transition-all hover:shadow-md ${
+              className={`p-6 teal-card rounded-lg border-2 transition-all hover:shadow-lg ${
                 notification.read 
-                  ? 'border-border opacity-75' 
-                  : 'border-primary/20 shadow-sm'
+                  ? 'border-transparent opacity-75' 
+                  : 'border-teal-gold/50 shadow-md'
               }`}
             >
               <div className="flex items-start gap-4">
@@ -204,29 +204,29 @@ export default function NotificationsPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <h3 className={`text-lg font-medium ${
-                        notification.read ? 'text-muted-foreground' : 'text-foreground'
+                        notification.read ? 'text-teal-card-text-muted' : 'text-teal-card-text'
                       }`}>
                         {notification.title}
                       </h3>
                       
                       <p className={`mt-1 ${
-                        notification.read ? 'text-muted-foreground' : 'text-foreground/80'
+                        notification.read ? 'text-teal-card-text-muted' : 'text-teal-card-text'
                       }`}>
                         {notification.message}
                       </p>
                       
                       <div className="flex items-center gap-4 mt-3">
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm text-teal-card-text-muted">
                           {getTimeAgo(notification.createdAt)}
                         </span>
                         
-                        <span className={`inline-block px-2 py-1 text-xs rounded-full ${
-                          notification.type === 'course' ? 'bg-blue-500/20 text-blue-500' :
-                          notification.type === 'webinar' ? 'bg-purple-500/20 text-purple-500' :
-                          notification.type === 'success' ? 'bg-green-500/20 text-green-500' :
-                          notification.type === 'warning' ? 'bg-yellow-500/20 text-yellow-500' :
-                          notification.type === 'error' ? 'bg-red-500/20 text-red-500' :
-                          'bg-blue-500/20 text-blue-500'
+                        <span className={`inline-block px-2 py-1 text-xs rounded-full font-medium ${
+                          notification.type === 'course' ? 'bg-teal-primary/20 text-teal-primary' :
+                          notification.type === 'webinar' ? 'bg-teal-light/20 text-teal-light' :
+                          notification.type === 'success' ? 'bg-green-500/20 text-green-600' :
+                          notification.type === 'warning' ? 'bg-yellow-500/20 text-yellow-600' :
+                          notification.type === 'error' ? 'bg-red-500/20 text-red-600' :
+                          'bg-teal-primary/20 text-teal-primary'
                         }`}>
                           {notification.type}
                         </span>
@@ -236,7 +236,7 @@ export default function NotificationsPage() {
                         <div className="mt-4">
                           <a
                             href={notification.actionUrl}
-                            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium text-sm"
+                            className="inline-flex items-center gap-2 text-teal-primary hover:text-teal-blue-medium font-medium text-sm"
                           >
                             {notification.actionText} →
                           </a>
@@ -248,7 +248,7 @@ export default function NotificationsPage() {
                       {!notification.read && (
                         <button
                           onClick={() => markAsRead(notification.id)}
-                          className="p-2 text-muted-foreground hover:text-primary transition-colors rounded-lg hover:bg-primary/10"
+                          className="p-2 text-teal-card-text-muted hover:text-teal-primary transition-colors rounded-lg hover:bg-teal-primary/10"
                           title="Mark as read"
                         >
                           <Check className="w-4 h-4" />
@@ -257,7 +257,7 @@ export default function NotificationsPage() {
                       
                       <button
                         onClick={() => deleteNotification(notification.id)}
-                        className="p-2 text-muted-foreground hover:text-destructive transition-colors rounded-lg hover:bg-destructive/10"
+                        className="p-2 text-teal-card-text-muted hover:text-red-600 transition-colors rounded-lg hover:bg-red-50"
                         title="Delete notification"
                       >
                         <Trash2 className="w-4 h-4" />

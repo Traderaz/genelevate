@@ -27,6 +27,24 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "debateTopics",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "year",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "month",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": []

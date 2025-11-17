@@ -316,12 +316,12 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
   ];
 
   return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen">
         {/* Top Navigation Bar - Mobile Optimized */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-area-top ${
         isScrolled 
-          ? 'bg-background/95 backdrop-blur-md border-b border-border' 
-          : 'bg-background/80 backdrop-blur-sm'
+          ? 'border-b border-white/10 shadow-sm' 
+          : ''
       }`}>
         <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-14 sm:h-16">
           {/* Left Side */}
@@ -338,11 +338,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
             {/* Logo */}
             <Link href="/" className="flex items-baseline gap-1">
               <span className="text-2xl font-bold text-white">Gen</span>
-              <span className="text-2xl font-bold" style={{ 
-                background: 'linear-gradient(90deg, #FFEAEA 0%, #FFB3B3 25%, #FF6B6B 50%, #E50914 75%, #E50914 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>Elevate</span>
+              <span className="text-2xl font-bold teal-text-gradient">Elevate</span>
             </Link>
 
             {/* Desktop Navigation with Hover Dropdowns */}
@@ -357,12 +353,12 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                   {item.type === 'single' ? (
                     <Link
                       href={item.href!}
-                      className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
+                      className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-semibold transition-colors whitespace-nowrap ${
                         pathname === item.href
-                          ? 'text-primary bg-primary/10'
+                          ? 'text-teal-gold bg-white/10 shadow-sm'
                           : item.highlight
-                          ? 'text-primary hover:text-primary/80 bg-primary/5'
-                          : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                          ? 'text-teal-gold hover:text-teal-gold-dark bg-white/10'
+                          : 'text-white hover:text-white hover:bg-white/15'
                       }`}
                     >
                       <item.icon className="w-4 h-4" />
@@ -371,12 +367,12 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                   ) : (
                     <>
                       <div
-                        className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap cursor-pointer ${
+                        className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-semibold transition-colors whitespace-nowrap cursor-pointer ${
                           hoveredDropdown === item.id || item.items?.some(subItem => pathname === subItem.href)
-                            ? 'text-primary bg-primary/10'
+                            ? 'text-teal-gold bg-white/10 shadow-sm'
                             : item.highlight
-                            ? 'text-primary hover:text-primary/80 bg-primary/5'
-                            : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                            ? 'text-teal-gold hover:text-teal-gold-dark bg-white/10'
+                            : 'text-white hover:text-white hover:bg-white/15'
                         }`}
                       >
                         <item.icon className="w-4 h-4" />
@@ -389,7 +385,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                       {/* Hover Dropdown Menu */}
                       {hoveredDropdown === item.id && (
                         <div 
-                          className="absolute top-full left-0 mt-0 w-56 bg-card border border-border rounded-lg shadow-lg z-50 animate-in fade-in-0 slide-in-from-top-2 duration-200"
+                          className="absolute top-full left-0 mt-0 w-56 teal-card border-2 border-white/30 rounded-lg shadow-xl z-50 animate-in fade-in-0 slide-in-from-top-2 duration-200"
                           onMouseEnter={() => handleDropdownEnter(item.id)}
                           onMouseLeave={handleDropdownLeave}
                         >
@@ -406,10 +402,10 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                                   setHoveredDropdown(null);
                                   setIsTransitioning(false);
                                 }}
-                                className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-accent/50 ${
+                                className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/40 ${
                                   pathname === subItem.href
-                                    ? 'text-primary bg-primary/10'
-                                    : 'text-foreground/80 hover:text-foreground'
+                                    ? 'text-teal-primary bg-teal-gold/20'
+                                    : 'text-teal-card-text hover:text-teal-primary'
                                 }`}
                               >
                                 <subItem.icon className="w-4 h-4" />
@@ -458,18 +454,13 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
               />
             </div>
 
-            {/* Enhanced Theme Toggle - Hidden on small mobile */}
-            <div className="hidden xs:block tap-highlight-transparent">
-              <EnhancedThemeToggle />
-            </div>
-
             {/* User Menu */}
             <div className="relative">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center gap-2 p-2 text-foreground/80 hover:text-foreground transition-colors tap-highlight-transparent min-h-touch rounded-lg hover:bg-accent/50"
+                className="flex items-center gap-2 p-2 text-white/80 hover:text-white transition-colors tap-highlight-transparent min-h-touch rounded-lg hover:bg-white/10"
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-teal-blue-medium to-teal-primary rounded-full flex items-center justify-center shadow-lg">
                   {userProfile?.photoURL ? (
                     <img 
                       src={userProfile.photoURL} 
@@ -477,10 +468,10 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                       className="w-8 h-8 rounded-full object-cover"
                     />
                   ) : (
-                    <User className="w-4 h-4 text-primary-foreground" />
+                    <User className="w-4 h-4 text-white" />
                   )}
                 </div>
-                <span className="hidden sm:block text-sm font-medium">
+                <span className="hidden sm:block text-sm font-medium text-white">
                   {userProfile?.firstName || userProfile?.displayName || 'User'}
                 </span>
               </button>
@@ -533,7 +524,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                     <div className="py-1">
                       <Link
                         href="/dashboard/profile"
-                        className="flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:bg-accent/50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-teal-card-text hover:bg-white/40 hover:text-teal-primary transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <UserCircle className="w-4 h-4" />
@@ -542,7 +533,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                       
                       <Link
                         href="/dashboard/settings"
-                        className="flex items-center gap-3 px-4 py-2 text-sm text-foreground hover:bg-accent/50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-teal-card-text hover:bg-white/40 hover:text-teal-primary transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <Settings className="w-4 h-4" />
@@ -559,7 +550,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                             console.error('Logout failed:', error);
                           }
                         }}
-                        className="flex items-center gap-3 px-4 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors w-full text-left"
+                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors w-full text-left"
                       >
                         <LogOut className="w-4 h-4" />
                         Sign Out
@@ -582,19 +573,22 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       )}
 
       {/* Mobile Sidebar - Optimized */}
-      <aside className={`fixed top-0 left-0 z-50 h-full w-80 max-w-[85vw] bg-card border-r border-border transform transition-transform duration-300 lg:hidden safe-area-left safe-area-top safe-area-bottom scroll-smooth-mobile ${
+      <aside className={`fixed top-0 left-0 z-50 h-full w-80 max-w-[85vw] teal-card border-r border-gray-200 transform transition-transform duration-300 lg:hidden safe-area-left safe-area-top safe-area-bottom scroll-smooth-mobile ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div className="flex items-center justify-between p-4 border-b border-border">
-          <Link href="/" className="flex items-center space-x-2 tap-highlight-transparent" onClick={() => setIsSidebarOpen(false)}>
-            <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">G</span>
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <Link href="/" className="flex items-center gap-1 tap-highlight-transparent" onClick={() => setIsSidebarOpen(false)}>
+            <div className="w-8 h-8 bg-gradient-to-br from-teal-blue-medium to-teal-primary rounded-md flex items-center justify-center shadow-lg">
+              <span className="text-white font-bold text-lg">G</span>
             </div>
-            <span className="text-xl font-bold netflix-text-gradient">Gen Elevate</span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-xl font-bold text-teal-card-text">Gen</span>
+              <span className="text-xl font-bold teal-text-gradient">Elevate</span>
+            </div>
           </Link>
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="p-2 text-foreground/80 hover:text-foreground transition-colors tap-highlight-transparent min-h-touch min-w-touch flex items-center justify-center"
+            className="p-2 text-teal-card-text-muted hover:text-teal-card-text transition-colors tap-highlight-transparent min-h-touch min-w-touch flex items-center justify-center"
             aria-label="Close sidebar"
           >
             <X className="w-5 h-5" />
@@ -611,10 +605,10 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                 <Link
                   key={category.id}
                   href={category.href!}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors min-h-touch tap-highlight-transparent ${
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-colors min-h-touch tap-highlight-transparent ${
                     pathname === category.href
-                      ? 'text-primary bg-primary/10'
-                      : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                      ? 'text-teal-primary bg-teal-gold/20'
+                      : 'text-teal-card-text hover:text-teal-primary hover:bg-gray-100'
                   }`}
                   onClick={() => setIsSidebarOpen(false)}
                 >
@@ -629,10 +623,10 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                 {/* Category Header */}
                 <button
                   onClick={() => toggleDropdown(category.id)}
-                  className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors min-h-touch tap-highlight-transparent ${
+                  className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-colors min-h-touch tap-highlight-transparent ${
                     category.items?.some(item => pathname === item.href)
-                      ? 'text-primary bg-primary/10'
-                      : 'text-foreground/80 hover:text-foreground hover:bg-accent/50'
+                      ? 'text-teal-primary bg-teal-gold/20'
+                      : 'text-teal-card-text hover:text-teal-primary hover:bg-gray-100'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -644,17 +638,17 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
 
                 {/* Dropdown Items */}
                 {isOpen && category.items && (
-                  <div className="ml-4 space-y-1 border-l border-border/50 pl-4">
+                  <div className="ml-4 space-y-1 border-l border-gray-300 pl-4">
                     {category.items.map((item) => {
                       const ItemIcon = item.icon;
                       return (
                         <Link
                           key={item.name}
                           href={item.href}
-                          className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors min-h-touch tap-highlight-transparent ${
+                          className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors min-h-touch tap-highlight-transparent ${
                             pathname === item.href
-                              ? 'text-primary bg-primary/10 font-medium'
-                              : 'text-foreground/70 hover:text-foreground hover:bg-accent/30'
+                              ? 'text-teal-primary bg-teal-gold/20 font-semibold'
+                              : 'text-teal-card-text-muted hover:text-teal-card-text hover:bg-gray-100'
                           }`}
                           onClick={() => setIsSidebarOpen(false)}
                         >
@@ -671,10 +665,10 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
         </nav>
 
         {/* User Info & Actions */}
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t border-gray-200">
           {/* User Info */}
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-teal-blue-medium to-teal-primary rounded-full flex items-center justify-center shadow-lg">
               {userProfile?.photoURL ? (
                 <img 
                   src={userProfile.photoURL} 
@@ -682,21 +676,21 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                   className="w-10 h-10 rounded-full object-cover"
                 />
               ) : (
-                <User className="w-5 h-5 text-primary-foreground" />
+                <User className="w-5 h-5 text-white" />
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-foreground truncate">
+              <p className="text-sm font-semibold text-teal-card-text truncate">
                 {userProfile?.displayName || 'User'}
               </p>
-              <p className="text-xs text-muted-foreground truncate">
+              <p className="text-xs text-teal-card-text-muted truncate">
                 {userProfile?.email}
               </p>
               <div className="flex items-center space-x-2 mt-1">
-                <Badge variant="secondary" className="text-xs capitalize">
+                <Badge variant="secondary" className="text-xs capitalize bg-teal-primary/10 text-teal-primary border-none font-semibold">
                   {userProfile?.role}
                 </Badge>
-                <Badge variant={userProfile?.subscription?.plan === 'free' ? 'outline' : 'netflix'} className="text-xs">
+                <Badge className="text-xs bg-teal-gold text-teal-card-text border-none font-semibold">
                   {userProfile?.subscription?.plan || 'Free'}
                 </Badge>
               </div>
@@ -707,7 +701,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
           <div className="space-y-2 mb-4">
             <Link
               href="/dashboard/profile"
-              className="flex items-center gap-3 px-3 py-2 text-sm text-foreground hover:bg-accent/50 transition-colors rounded-lg tap-highlight-transparent min-h-touch"
+              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-teal-card-text hover:text-teal-primary hover:bg-gray-100 transition-colors rounded-lg tap-highlight-transparent min-h-touch"
               onClick={() => setIsSidebarOpen(false)}
             >
               <UserCircle className="w-4 h-4" />
@@ -716,7 +710,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
             
             <Link
               href="/dashboard/settings"
-              className="flex items-center gap-3 px-3 py-2 text-sm text-foreground hover:bg-accent/50 transition-colors rounded-lg tap-highlight-transparent min-h-touch"
+              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-teal-card-text hover:text-teal-primary hover:bg-gray-100 transition-colors rounded-lg tap-highlight-transparent min-h-touch"
               onClick={() => setIsSidebarOpen(false)}
             >
               <Settings className="w-4 h-4" />
@@ -733,7 +727,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                   console.error('Logout failed:', error);
                 }
               }}
-              className="flex items-center gap-3 px-3 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors rounded-lg w-full text-left tap-highlight-transparent min-h-touch"
+              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors rounded-lg w-full text-left tap-highlight-transparent min-h-touch"
             >
               <LogOut className="w-4 h-4" />
               Sign Out
@@ -741,19 +735,19 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
           </div>
 
           {/* Quick Actions */}
-          <h3 className="text-sm font-semibold text-foreground mb-3">Quick Actions</h3>
+          <h3 className="text-sm font-semibold text-teal-card-text mb-3">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-2">
             {quickActions.map((action) => (
               <Link
                 key={action.name}
                 href={action.href}
-                className="flex flex-col items-center gap-2 p-3 rounded-lg bg-accent/50 hover:bg-accent transition-colors tap-highlight-transparent min-h-[80px]"
+                className="flex flex-col items-center gap-2 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors tap-highlight-transparent min-h-[80px]"
                 onClick={() => setIsSidebarOpen(false)}
               >
-                <div className={`w-8 h-8 ${action.color} rounded-full flex items-center justify-center`}>
+                <div className={`w-8 h-8 ${action.color} rounded-full flex items-center justify-center shadow-sm`}>
                   <action.icon className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-xs font-medium text-center">{action.name}</span>
+                <span className="text-xs font-medium text-center text-teal-card-text">{action.name}</span>
               </Link>
             ))}
           </div>

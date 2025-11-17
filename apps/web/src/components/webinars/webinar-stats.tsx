@@ -38,10 +38,10 @@ export function WebinarStats() {
     return (
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[...Array(4)].map((_, i) => (
-          <div key={i} className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4 animate-pulse">
-            <div className="h-4 bg-gray-700 rounded w-3/4 mb-3" />
-            <div className="h-6 bg-gray-700 rounded w-1/2 mb-2" />
-            <div className="h-3 bg-gray-700 rounded w-2/3" />
+          <div key={i} className="teal-card p-4 animate-pulse">
+            <div className="h-4 bg-gray-300 rounded w-3/4 mb-3" />
+            <div className="h-6 bg-gray-300 rounded w-1/2 mb-2" />
+            <div className="h-3 bg-gray-300 rounded w-2/3" />
           </div>
         ))}
       </div>
@@ -55,23 +55,23 @@ export function WebinarStats() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {/* Webinars Attended */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4">
+      <div className="teal-card p-4 hover:shadow-xl hover:border-teal-gold/50 transition-all duration-200 border-2 border-transparent">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center space-x-2">
             <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Video className="w-4 h-4 text-blue-400" />
+              <Video className="w-4 h-4 text-blue-500" />
             </div>
-            <span className="text-sm font-medium text-gray-400">Attended</span>
+            <span className="text-sm font-medium text-teal-card-text-muted">Attended</span>
           </div>
         </div>
         <div className="space-y-2">
-          <div className="text-2xl font-bold text-white">
+          <div className="text-2xl font-bold text-teal-card-text">
             {stats.attendedWebinars}
           </div>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-teal-card-text-muted">
             of {stats.totalWebinars} webinars
           </div>
-          <div className="w-full bg-gray-800 rounded-full h-1.5">
+          <div className="w-full bg-gray-300 rounded-full h-1.5">
             <div 
               className="bg-blue-500 h-1.5 rounded-full transition-all duration-300"
               style={{ width: `${attendanceRate}%` }}
@@ -81,23 +81,23 @@ export function WebinarStats() {
       </div>
 
       {/* Learning Hours */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4">
+      <div className="teal-card p-4 hover:shadow-xl hover:border-teal-gold/50 transition-all duration-200 border-2 border-transparent">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center space-x-2">
             <div className="p-2 bg-green-500/20 rounded-lg">
-              <Clock className="w-4 h-4 text-green-400" />
+              <Clock className="w-4 h-4 text-green-500" />
             </div>
-            <span className="text-sm font-medium text-gray-400">Hours</span>
+            <span className="text-sm font-medium text-teal-card-text-muted">Hours</span>
           </div>
         </div>
         <div className="space-y-2">
-          <div className="text-2xl font-bold text-white">
+          <div className="text-2xl font-bold text-teal-card-text">
             {stats.totalHours}h
           </div>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-teal-card-text-muted">
             +{stats.thisWeekHours}h this week
           </div>
-          <div className="flex items-center space-x-1 text-xs text-green-400">
+          <div className="flex items-center space-x-1 text-xs text-green-500">
             <TrendingUp className="w-3 h-3" />
             <span>+12% vs last week</span>
           </div>
@@ -105,23 +105,23 @@ export function WebinarStats() {
       </div>
 
       {/* Attendance Rate */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4">
+      <div className="teal-card p-4 hover:shadow-xl hover:border-teal-gold/50 transition-all duration-200 border-2 border-transparent">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center space-x-2">
             <div className="p-2 bg-purple-500/20 rounded-lg">
-              <Users className="w-4 h-4 text-purple-400" />
+              <Users className="w-4 h-4 text-purple-500" />
             </div>
-            <span className="text-sm font-medium text-gray-400">Attendance</span>
+            <span className="text-sm font-medium text-teal-card-text-muted">Attendance</span>
           </div>
         </div>
         <div className="space-y-2">
-          <div className="text-2xl font-bold text-white">
+          <div className="text-2xl font-bold text-teal-card-text">
             {stats.averageAttendance}%
           </div>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-teal-card-text-muted">
             average rate
           </div>
-          <div className="w-full bg-gray-800 rounded-full h-1.5">
+          <div className="w-full bg-gray-300 rounded-full h-1.5">
             <div 
               className="bg-purple-500 h-1.5 rounded-full transition-all duration-300"
               style={{ width: `${stats.averageAttendance}%` }}
@@ -131,23 +131,23 @@ export function WebinarStats() {
       </div>
 
       {/* Upcoming Webinars */}
-      <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4">
+      <div className="teal-card p-4 hover:shadow-xl hover:border-teal-gold/50 transition-all duration-200 border-2 border-transparent">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center space-x-2">
             <div className="p-2 bg-orange-500/20 rounded-lg">
-              <Calendar className="w-4 h-4 text-orange-400" />
+              <Calendar className="w-4 h-4 text-orange-500" />
             </div>
-            <span className="text-sm font-medium text-gray-400">Upcoming</span>
+            <span className="text-sm font-medium text-teal-card-text-muted">Upcoming</span>
           </div>
         </div>
         <div className="space-y-2">
-          <div className="text-2xl font-bold text-white">
+          <div className="text-2xl font-bold text-teal-card-text">
             {stats.upcomingWebinars}
           </div>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-teal-card-text-muted">
             registered webinars
           </div>
-          <div className="flex items-center space-x-1 text-xs text-orange-400">
+          <div className="flex items-center space-x-1 text-xs text-orange-500">
             <Calendar className="w-3 h-3" />
             <span>Next: Tomorrow 2PM</span>
           </div>
@@ -155,37 +155,37 @@ export function WebinarStats() {
       </div>
 
       {/* Learning Streak (Mobile: spans 2 columns) */}
-      <div className="bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-lg border border-orange-500/30 p-4 col-span-2 md:col-span-2">
+      <div className="teal-card-glass border-teal-gold/50 p-4 col-span-2 md:col-span-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="text-3xl">🔥</div>
             <div>
               <h3 className="font-semibold text-white">Learning Streak</h3>
-              <p className="text-sm text-gray-400">Keep attending to maintain your streak!</p>
+              <p className="text-sm text-white/80">Keep attending to maintain your streak!</p>
             </div>
           </div>
           <div className="text-right">
-            <div className="text-3xl font-bold text-orange-400">{stats.currentStreak}</div>
-            <div className="text-sm text-gray-500">days</div>
+            <div className="text-3xl font-bold text-teal-gold">{stats.currentStreak}</div>
+            <div className="text-sm text-white/70">days</div>
           </div>
         </div>
       </div>
 
       {/* Certificates Earned (Mobile: spans 2 columns) */}
-      <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30 p-4 col-span-2 md:col-span-2">
+      <div className="teal-card-glass border-teal-primary/50 p-4 col-span-2 md:col-span-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <Award className="w-6 h-6 text-blue-400" />
+            <div className="p-2 bg-teal-gold/20 rounded-lg">
+              <Award className="w-6 h-6 text-teal-gold" />
             </div>
             <div>
               <h3 className="font-semibold text-white">Certificates Earned</h3>
-              <p className="text-sm text-gray-400">Webinar completion certificates</p>
+              <p className="text-sm text-white/80">Webinar completion certificates</p>
             </div>
           </div>
           <div className="text-right">
-            <div className="text-3xl font-bold text-blue-400">{stats.certificatesEarned}</div>
-            <div className="text-sm text-gray-500">certificates</div>
+            <div className="text-3xl font-bold text-teal-gold">{stats.certificatesEarned}</div>
+            <div className="text-sm text-white/70">certificates</div>
           </div>
         </div>
       </div>

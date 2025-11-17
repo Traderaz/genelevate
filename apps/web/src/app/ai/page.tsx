@@ -8,10 +8,10 @@ import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-la
 // Dynamically import AI Chat component (not loaded until needed)
 const AIChat = dynamic(() => import('@/components/ai/ai-chat-premium'), {
   loading: () => (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="text-center space-y-4">
-        <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto" />
-        <p className="text-muted-foreground">Loading AI Assistant...</p>
+        <Loader2 className="w-12 h-12 animate-spin text-teal-gold mx-auto" />
+        <p className="text-white/80">Loading AI Assistant...</p>
       </div>
     </div>
   ),

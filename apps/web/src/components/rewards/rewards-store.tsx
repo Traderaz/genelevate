@@ -96,19 +96,19 @@ export function RewardsStore() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Gift className="w-6 h-6 text-purple-500" />
-          <h2 className="text-2xl font-bold text-foreground">Rewards Store</h2>
+          <Gift className="w-6 h-6 text-teal-gold" />
+          <h2 className="text-2xl font-bold text-white">Rewards Store</h2>
         </div>
       </div>
 
       {/* Your Points */}
-      <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-xl p-4">
+      <div className="teal-card border-2 border-teal-gold/30 rounded-xl p-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-muted-foreground">Your Points</p>
-            <p className="text-2xl font-bold text-foreground">{userPoints.toLocaleString()}</p>
+            <p className="text-sm text-teal-card-text-muted">Your Points</p>
+            <p className="text-2xl font-bold text-teal-card-text">{userPoints.toLocaleString()}</p>
           </div>
-          <Star className="w-8 h-8 text-yellow-500" />
+          <Star className="w-8 h-8 text-teal-gold" />
         </div>
       </div>
 
@@ -121,23 +121,23 @@ export function RewardsStore() {
           return (
             <div
               key={reward.id}
-              className={`bg-card border rounded-xl p-4 transition-all ${
+              className={`teal-card border rounded-xl p-4 transition-all ${
                 disabled
-                  ? 'border-border opacity-60'
-                  : 'border-border hover:border-primary netflix-card'
+                  ? 'border-white/20 opacity-60'
+                  : 'border-white/20 hover:border-teal-gold/50'
               }`}
             >
               <div className="flex items-start gap-4">
                 <div className="text-3xl flex-shrink-0">{reward.icon}</div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground mb-1">{reward.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-3">{reward.description}</p>
+                  <h3 className="font-semibold text-teal-card-text mb-1">{reward.title}</h3>
+                  <p className="text-sm text-teal-card-text-muted mb-3">{reward.description}</p>
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Star className="w-4 h-4 text-yellow-500" />
+                      <Star className="w-4 h-4 text-teal-gold" />
                       <span className={`text-sm font-semibold ${
-                        affordable ? 'text-foreground' : 'text-red-500'
+                        affordable ? 'text-teal-card-text' : 'text-red-500'
                       }`}>
                         {reward.pointsCost.toLocaleString()} points
                       </span>
@@ -149,7 +149,7 @@ export function RewardsStore() {
                         Redeemed
                       </span>
                     ) : !reward.available ? (
-                      <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1 text-sm text-teal-card-text-muted">
                         <Lock className="w-4 h-4" />
                         Unavailable
                       </span>
@@ -159,8 +159,8 @@ export function RewardsStore() {
                         disabled={disabled}
                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                           disabled
-                            ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-                            : 'bg-primary text-primary-foreground netflix-button'
+                            ? 'bg-white/10 text-teal-card-text-muted cursor-not-allowed'
+                            : 'teal-button-primary'
                         }`}
                       >
                         Redeem
@@ -175,8 +175,8 @@ export function RewardsStore() {
       </div>
 
       {/* Info */}
-      <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
-        <p className="text-sm text-foreground">
+      <div className="teal-card border-2 border-teal-primary/30 rounded-xl p-4">
+        <p className="text-sm text-teal-card-text">
           <span className="font-semibold">Institution rewards:</span> Your school may add custom 
           rewards like gift cards or course credits. Check back regularly for new rewards!
         </p>

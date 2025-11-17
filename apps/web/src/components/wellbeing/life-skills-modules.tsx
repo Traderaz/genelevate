@@ -229,7 +229,7 @@ export function LifeSkillsModules() {
       );
     }
     return (
-      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-full">
+      <span className="px-2 py-1 bg-teal-primary/20 text-teal-primary text-xs rounded-full font-medium">
         Not Started
       </span>
     );
@@ -239,8 +239,8 @@ export function LifeSkillsModules() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-foreground">Life Skills Modules</h2>
-        <span className="text-sm text-muted-foreground">
+        <h2 className="text-2xl font-bold text-white">Life Skills Modules</h2>
+        <span className="text-sm text-white/80">
           {filteredModules.length} module{filteredModules.length !== 1 ? 's' : ''}
         </span>
       </div>
@@ -253,8 +253,8 @@ export function LifeSkillsModules() {
             onClick={() => setSelectedCategory(category.id)}
             className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all flex items-center gap-2 ${
               selectedCategory === category.id
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-card text-muted-foreground hover:bg-accent hover:text-accent-foreground border border-border'
+                ? 'bg-gradient-to-r from-teal-blue-medium to-teal-primary text-white shadow-lg'
+                : 'teal-card text-teal-card-text-muted hover:bg-gray-100 hover:text-teal-card-text border border-gray-300'
             }`}
           >
             {category.icon && <category.icon className="w-4 h-4" />}
@@ -269,7 +269,7 @@ export function LifeSkillsModules() {
           <Link
             key={module.id}
             href={module.locked ? '#' : `/wellbeing/module/${module.id}`}
-            className={`bg-card border border-border rounded-xl p-6 netflix-card hover:border-primary transition-all group ${
+            className={`teal-card border-2 border-transparent rounded-xl p-6 hover:border-teal-gold hover:shadow-xl transition-all group ${
               module.locked ? 'opacity-60 cursor-not-allowed' : ''
             }`}
           >
@@ -284,16 +284,16 @@ export function LifeSkillsModules() {
 
               {/* Content */}
               <div>
-                <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="font-semibold text-teal-card-text mb-2 group-hover:text-teal-primary transition-colors">
                   {module.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-teal-card-text-muted leading-relaxed">
                   {module.description}
                 </p>
               </div>
 
               {/* Meta */}
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <div className="flex items-center gap-4 text-sm text-teal-card-text-muted">
                 <span className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
                   {module.duration}
@@ -305,17 +305,17 @@ export function LifeSkillsModules() {
               {!module.locked && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Progress</span>
-                    <span className="font-semibold text-foreground">
+                    <span className="text-teal-card-text-muted">Progress</span>
+                    <span className="font-semibold text-teal-card-text">
                       {module.completed}/{module.lessons}
                     </span>
                   </div>
-                  <div className="w-full bg-secondary rounded-full h-2">
+                  <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
                       className={`h-2 rounded-full transition-all ${
                         module.completed === module.lessons
                           ? 'bg-green-500'
-                          : 'bg-primary'
+                          : 'bg-teal-primary'
                       }`}
                       style={{ width: `${getProgressPercentage(module.completed, module.lessons)}%` }}
                     ></div>

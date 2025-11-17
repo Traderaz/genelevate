@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Bell, User, ChevronDown, LogOut } from 'lucide-react';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { useAuth } from '@/contexts/auth-context';
 import { useNotifications } from '@/contexts/notification-context';
 import { NotificationDropdown } from '@/components/ui/notification-dropdown';
@@ -44,7 +43,7 @@ export function SimpleHomeHeader() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-background/95 backdrop-blur-md border-b border-border'
+          ? 'bg-white/10 backdrop-blur-md border-b border-white/20 shadow-lg'
           : 'bg-transparent'
       }`}
     >
@@ -52,33 +51,24 @@ export function SimpleHomeHeader() {
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-white">Gen</span>
-              <span className="text-2xl font-bold" style={{ 
-                background: 'linear-gradient(90deg, #FFEAEA 0%, #FFB3B3 25%, #FF6B6B 50%, #E50914 75%, #E50914 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>Elevate</span>
+            <Link href="/" className="flex items-baseline gap-1 group">
+              <span className="text-2xl font-bold text-white group-hover:text-teal-gold transition-colors">Gen</span>
+              <span className="text-2xl font-bold teal-text-gradient">Elevate</span>
             </Link>
           </div>
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Theme Toggle */}
-            <div className="tap-highlight-transparent">
-              <ThemeToggle />
-            </div>
-
             {/* Notifications - Only show for authenticated users */}
             {user && (
               <div className="relative" data-dropdown>
                 <button 
                   onClick={() => setIsNotificationOpen(!isNotificationOpen)}
-                  className="flex p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 relative tap-highlight-transparent min-h-touch min-w-touch items-center justify-center"
+                  className="flex p-2 text-white hover:text-teal-gold transition-all duration-200 relative tap-highlight-transparent min-h-touch min-w-touch items-center justify-center hover:scale-110"
                 >
-                  <Bell className="w-5 h-5" />
+                  <Bell className="w-6 h-6" />
                   {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-netflix-red text-white text-xs rounded-full flex items-center justify-center font-medium">
+                    <span className="absolute -top-1 -right-1 min-w-[20px] h-[20px] bg-teal-gold text-teal-card-text text-xs rounded-full flex items-center justify-center font-bold shadow-lg animate-pulse">
                       {unreadCount > 9 ? '9+' : unreadCount}
                     </span>
                   )}
@@ -95,15 +85,15 @@ export function SimpleHomeHeader() {
             <div className="relative" data-dropdown>
               <button
                 onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                className="flex items-center space-x-2 p-2 text-foreground/80 hover:text-foreground transition-colors duration-200 tap-highlight-transparent min-h-touch"
+                className="flex items-center space-x-2 p-2 text-brand-navy-light hover:text-brand-navy transition-colors duration-200 tap-highlight-transparent min-h-touch"
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-brand-blue-medium to-brand-teal rounded-full flex items-center justify-center shadow-brand-sm">
                   {user && userProfile ? (
-                    <span className="text-primary-foreground font-semibold text-sm">
+                    <span className="text-white font-semibold text-sm">
                       {userProfile.firstName?.[0] || userProfile.displayName?.[0] || 'U'}
                     </span>
                   ) : (
-                    <User className="w-4 h-4 text-primary-foreground" />
+                    <User className="w-4 h-4 text-white" />
                   )}
                 </div>
                 <ChevronDown className="w-4 h-4" />
@@ -111,15 +101,15 @@ export function SimpleHomeHeader() {
 
               {/* Profile Dropdown */}
               {isProfileMenuOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-card border border-border rounded-lg shadow-netflix animate-scale-in z-50">
+                <div className="absolute right-0 mt-2 w-56 bg-white border border-brand-blue-deep/10 rounded-xl shadow-brand-lg animate-scale-in z-50">
                   {user && userProfile ? (
                     // Authenticated user menu
                     <div className="py-2">
                       {/* User Info */}
-                      <div className="px-4 py-3 border-b border-border">
-                        <p className="font-semibold text-foreground">{userProfile.displayName}</p>
-                        <p className="text-sm text-muted-foreground">{user.email}</p>
-                        <span className="inline-block mt-1 px-2 py-1 bg-primary/20 text-primary text-xs rounded-full">
+                      <div className="px-4 py-3 border-b border-brand-blue-deep/10">
+                        <p className="font-semibold text-brand-navy">{userProfile.displayName}</p>
+                        <p className="text-sm text-brand-navy-light">{user.email}</p>
+                        <span className="inline-block mt-1 px-2 py-1 bg-brand-teal/10 text-brand-teal text-xs rounded-full font-medium">
                           {userProfile.subscription?.plan || 'Free'} Plan
                         </span>
                       </div>
@@ -130,7 +120,7 @@ export function SimpleHomeHeader() {
                           setIsProfileMenuOpen(false);
                           router.push('/dashboard');
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
                       >
                         Dashboard
                       </button>
@@ -139,7 +129,7 @@ export function SimpleHomeHeader() {
                           setIsProfileMenuOpen(false);
                           router.push('/dashboard/profile');
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
                       >
                         My Profile
                       </button>
@@ -148,7 +138,7 @@ export function SimpleHomeHeader() {
                           setIsProfileMenuOpen(false);
                           router.push('/courses');
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
                       >
                         My Courses
                       </button>
@@ -157,19 +147,19 @@ export function SimpleHomeHeader() {
                           setIsProfileMenuOpen(false);
                           router.push('/dashboard/progress');
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
                       >
                         Progress
                       </button>
                       
-                      <div className="border-t border-border my-2"></div>
+                      <div className="border-t border-brand-blue-deep/10 my-2"></div>
                       
                       <button
                         onClick={() => {
                           setIsProfileMenuOpen(false);
                           router.push('/settings');
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
                       >
                         Settings
                       </button>
@@ -182,7 +172,7 @@ export function SimpleHomeHeader() {
                             console.error('Logout failed:', error);
                           }
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors flex items-center gap-2"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors flex items-center gap-2"
                       >
                         <LogOut className="w-4 h-4" />
                         Sign Out
@@ -196,7 +186,7 @@ export function SimpleHomeHeader() {
                           setIsProfileMenuOpen(false);
                           router.push('/login');
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
                       >
                         Sign In
                       </button>
@@ -205,7 +195,7 @@ export function SimpleHomeHeader() {
                           setIsProfileMenuOpen(false);
                           router.push('/signup');
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
                       >
                         Create Account
                       </button>
@@ -214,7 +204,7 @@ export function SimpleHomeHeader() {
                           setIsProfileMenuOpen(false);
                           router.push('/pricing');
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
                       >
                         View Pricing
                       </button>

@@ -9,8 +9,8 @@ export function WellbeingStats() {
       label: 'Get Started',
       value: 'Begin your wellbeing journey',
       icon: Award,
-      color: 'text-purple-500',
-      bgColor: 'bg-purple-500/10'
+      color: 'text-teal-gold',
+      bgColor: 'bg-teal-gold/10'
     }
   ];
 
@@ -19,7 +19,7 @@ export function WellbeingStats() {
       {stats.map((stat, index) => (
         <div
           key={stat.label}
-          className="bg-card border border-border rounded-xl p-6 netflix-card"
+          className="teal-card border border-white/20 rounded-xl p-6 hover:border-teal-gold/50 transition-all"
         >
           <div className="flex items-center justify-between mb-4">
             <div className={`w-12 h-12 ${stat.bgColor} rounded-lg flex items-center justify-center`}>
@@ -27,14 +27,14 @@ export function WellbeingStats() {
             </div>
           </div>
           <div className="space-y-2">
-            <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-            <p className="text-sm text-muted-foreground">{stat.label}</p>
+            <p className="text-2xl font-bold text-teal-card-text">{stat.value}</p>
+            <p className="text-sm text-teal-card-text-muted">{stat.label}</p>
             {stat.change && (
-              <p className="text-xs text-muted-foreground">{stat.change}</p>
+              <p className="text-xs text-teal-card-text-muted">{stat.change}</p>
             )}
             {stat.percentage !== undefined && (
               <div className="mt-3">
-                <div className="w-full bg-secondary rounded-full h-2">
+                <div className="w-full bg-white/20 rounded-full h-2">
                   <div
                     className={`h-2 rounded-full ${stat.bgColor.replace('/10', '')}`}
                     style={{ width: `${stat.percentage}%` }}

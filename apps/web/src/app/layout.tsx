@@ -126,8 +126,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Gen Elevate" />
-        <meta name="theme-color" content="#e50914" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#0B5C9E" />
         <meta name="google-site-verification" content="YRwn0_4nKIkdWzOMhE_FrgCYHVXHnLi4WeC3kE5jSfI" />
       </head>
       <body className={`${inter.className} tap-highlight-transparent text-size-adjust-none`}>

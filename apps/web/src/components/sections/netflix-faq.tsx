@@ -46,14 +46,14 @@ export function NetflixFAQ() {
   };
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            Frequently Asked <span className="netflix-text-gradient">Questions</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            Frequently Asked <span className="text-teal-gold">Questions</span>
           </h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-white/90">
             Everything you need to know about Gen Elevate. Can't find what you're looking for? 
             Contact our support team.
           </p>
@@ -64,25 +64,25 @@ export function NetflixFAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-card border border-border rounded-lg overflow-hidden netflix-card"
+              className="teal-card overflow-hidden"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-accent/50 transition-colors duration-200"
+                className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-white/40 transition-colors duration-200"
               >
-                <span className="text-lg font-semibold text-foreground pr-4">
+                <span className="text-lg font-semibold text-teal-card-text pr-4">
                   {faq.question}
                 </span>
                 {openFAQ === index ? (
-                  <ChevronUp className="w-6 h-6 text-netflix-red flex-shrink-0" />
+                  <ChevronUp className="w-6 h-6 text-teal-gold flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-6 h-6 text-muted-foreground flex-shrink-0" />
+                  <ChevronDown className="w-6 h-6 text-teal-card-text-muted flex-shrink-0" />
                 )}
               </button>
               
               {openFAQ === index && (
                 <div className="px-6 pb-6 animate-fade-in">
-                  <div className="text-muted-foreground leading-relaxed">
+                  <div className="text-teal-card-text-muted leading-relaxed">
                     {faq.answer}
                   </div>
                 </div>
@@ -92,18 +92,18 @@ export function NetflixFAQ() {
         </div>
 
         {/* Contact CTA */}
-        <div className="text-center mt-16 p-8 bg-card border border-border rounded-xl">
-          <h3 className="text-2xl font-bold text-foreground mb-4">
+        <div className="text-center mt-16 p-8 teal-card">
+          <h3 className="text-2xl font-bold text-teal-card-text mb-4">
             Still have questions?
           </h3>
-          <p className="text-muted-foreground mb-6">
+          <p className="text-teal-card-text-muted mb-6">
             Our support team is here to help you get started with Gen Elevate.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="px-6 py-3 bg-netflix-red hover:bg-netflix-red-dark text-white font-semibold rounded-lg netflix-button">
+            <button className="teal-button-primary">
               Contact Support
             </button>
-            <button className="px-6 py-3 bg-card border border-border text-foreground font-semibold rounded-lg netflix-button hover:border-netflix-red hover:text-netflix-red transition-all duration-300">
+            <button className="px-6 py-3 bg-white border-2 border-teal-primary text-teal-primary font-semibold rounded-lg hover:bg-teal-primary hover:text-white transition-all duration-300">
               Schedule a Demo
             </button>
           </div>

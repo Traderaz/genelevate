@@ -208,28 +208,28 @@ export default function SchedulePage() {
   return (
     <RoleGuard allowedRoles={['student', 'parent', 'institution', 'admin']}>
       <NetflixDashboardLayout>
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen">
           {/* Header */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-card via-card/95 to-card/80 border-b border-border">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5"></div>
+          <div className="relative overflow-hidden teal-card-glass border-b border-white/20">
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-primary/5 via-transparent to-teal-gold/5"></div>
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-5">
-                  <div className="p-4 sm:p-5 bg-gradient-to-br from-primary to-primary/80 rounded-2xl shadow-lg shadow-primary/25">
+                  <div className="p-4 sm:p-5 bg-gradient-to-br from-teal-primary to-teal-blue-medium rounded-2xl shadow-lg">
                     <CalendarIcon className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
                   </div>
                   <div>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-2">My Schedule</h1>
-                    <p className="text-base sm:text-lg text-muted-foreground">
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2">My Schedule</h1>
+                    <p className="text-base sm:text-lg text-white/80">
                       All your webinars, events, and sessions in one place
                     </p>
                   </div>
                 </div>
                 <div className="hidden md:flex gap-2">
-                  <Button variant="outline" onClick={goToToday}>
+                  <Button variant="outline" onClick={goToToday} className="bg-white/10 border-white/20 text-white hover:bg-white/20">
                     Today
                   </Button>
-                  <Button variant="outline">
+                  <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
                     <Bell className="w-4 h-4 mr-2" />
                     Reminders
                   </Button>
@@ -242,13 +242,13 @@ export default function SchedulePage() {
             {/* Controls */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
               <div className="flex items-center gap-3">
-                <Button variant="outline" size="sm" onClick={previousWeek}>
+                <Button variant="outline" size="sm" onClick={previousWeek} className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20">
                   <ChevronLeft className="w-4 h-4" />
                 </Button>
-                <div className="text-xl font-bold text-foreground">
+                <div className="text-xl font-bold text-white">
                   {weekDays[0].toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
                 </div>
-                <Button variant="outline" size="sm" onClick={nextWeek}>
+                <Button variant="outline" size="sm" onClick={nextWeek} className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20">
                   <ChevronRight className="w-4 h-4" />
                 </Button>
               </div>
@@ -257,7 +257,7 @@ export default function SchedulePage() {
                 <select
                   value={filterType}
                   onChange={(e) => setFilterType(e.target.value as any)}
-                  className="px-4 py-2 border border-border rounded-lg bg-background text-foreground"
+                  className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-gold focus:border-teal-gold"
                 >
                   <option value="all">All Items</option>
                   <option value="webinar">Webinars</option>
@@ -271,7 +271,7 @@ export default function SchedulePage() {
             {isLoading ? (
               <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
                 {[...Array(7)].map((_, i) => (
-                  <div key={i} className="bg-card rounded-xl p-4 h-64 animate-pulse" />
+                  <div key={i} className="bg-white/10 backdrop-blur-md rounded-xl p-4 h-64 animate-pulse border border-white/20" />
                 ))}
               </div>
             ) : (
@@ -285,20 +285,20 @@ export default function SchedulePage() {
 
                   return (
                     <div key={index} className="flex flex-col">
-                      <div className={`text-center p-3 rounded-t-xl border-b border-border ${
-                        isToday ? 'bg-primary text-primary-foreground' : 'bg-card'
+                      <div className={`text-center p-3 rounded-t-xl border-b ${
+                        isToday ? 'bg-gradient-to-r from-teal-primary to-teal-gold text-white border-teal-gold' : 'bg-white/10 backdrop-blur-md border border-white/20 text-white'
                       }`}>
                         <div className="text-sm font-medium">
                           {day.toLocaleDateString('en-GB', { weekday: 'short' })}
                         </div>
-                        <div className={`text-2xl font-bold ${isToday ? '' : 'text-foreground'}`}>
+                        <div className="text-2xl font-bold">
                           {day.getDate()}
                         </div>
                       </div>
                       
-                      <div className="bg-card rounded-b-xl border border-t-0 border-border p-2 min-h-[400px] space-y-2">
+                      <div className="bg-white/5 backdrop-blur-md rounded-b-xl border border-t-0 border-white/20 p-2 min-h-[400px] space-y-2">
                         {dayItems.length === 0 ? (
-                          <div className="text-center py-8 text-muted-foreground text-sm">
+                          <div className="text-center py-8 text-white/60 text-sm">
                             No items
                           </div>
                         ) : (
@@ -354,9 +354,9 @@ export default function SchedulePage() {
 
             {/* List View for Mobile */}
             <div className="md:hidden mt-8 space-y-4">
-              <h3 className="text-xl font-bold text-foreground">This Week's Schedule</h3>
+              <h3 className="text-xl font-bold text-white">This Week's Schedule</h3>
               {filteredItems.map((item) => (
-                <Card key={item.id} className="hover:shadow-lg transition-all">
+                <Card key={item.id} className="teal-card hover:shadow-lg transition-all border-2 border-transparent hover:border-teal-gold">
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">
                       <div className={`${item.color} p-3 rounded-xl`}>
@@ -369,9 +369,9 @@ export default function SchedulePage() {
                         )}
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-bold text-foreground mb-1">{item.title}</h4>
-                        <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <h4 className="font-bold text-teal-card-text mb-1">{item.title}</h4>
+                        <p className="text-sm text-teal-card-text-muted mb-2">{item.description}</p>
+                        <div className="flex items-center gap-4 text-sm text-teal-card-text-muted">
                           <span className="flex items-center gap-1">
                             <CalendarIcon className="w-4 h-4" />
                             {formatDate(item.startDate)}
@@ -382,7 +382,7 @@ export default function SchedulePage() {
                           </span>
                         </div>
                         {item.meetingLink && (
-                          <Button size="sm" className="mt-3" asChild>
+                          <Button size="sm" className="mt-3 bg-teal-gold text-teal-card-text hover:bg-teal-gold-dark font-bold shadow-md" asChild>
                             <a href={item.meetingLink} target="_blank" rel="noopener noreferrer">
                               Join
                               <ExternalLink className="w-4 h-4 ml-2" />
@@ -398,41 +398,41 @@ export default function SchedulePage() {
 
             {/* Stats */}
             <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Card>
+              <Card className="teal-card border-2 border-transparent hover:border-teal-gold hover:shadow-lg transition-all">
                 <CardContent className="p-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-foreground">{filteredItems.length}</div>
-                    <div className="text-sm text-muted-foreground">This Week</div>
+                    <div className="text-3xl font-bold text-teal-card-text">{filteredItems.length}</div>
+                    <div className="text-sm text-teal-card-text-muted">This Week</div>
                   </div>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="teal-card border-2 border-transparent hover:border-teal-gold hover:shadow-lg transition-all">
                 <CardContent className="p-4">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-blue-500">
                       {filteredItems.filter(i => i.type === 'webinar').length}
                     </div>
-                    <div className="text-sm text-muted-foreground">Webinars</div>
+                    <div className="text-sm text-teal-card-text-muted">Webinars</div>
                   </div>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="teal-card border-2 border-transparent hover:border-teal-gold hover:shadow-lg transition-all">
                 <CardContent className="p-4">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-purple-500">
                       {filteredItems.filter(i => i.type === 'event').length}
                     </div>
-                    <div className="text-sm text-muted-foreground">Events</div>
+                    <div className="text-sm text-teal-card-text-muted">Events</div>
                   </div>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="teal-card border-2 border-transparent hover:border-teal-gold hover:shadow-lg transition-all">
                 <CardContent className="p-4">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-green-500">
                       {filteredItems.filter(i => i.isVirtual).length}
                     </div>
-                    <div className="text-sm text-muted-foreground">Virtual</div>
+                    <div className="text-sm text-teal-card-text-muted">Virtual</div>
                   </div>
                 </CardContent>
               </Card>

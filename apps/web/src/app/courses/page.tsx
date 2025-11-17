@@ -46,7 +46,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
 
           {/* Main Course Browser */}
           <div>
-            <h2 className="text-2xl font-bold tracking-tight mb-6">All Courses</h2>
+            <h2 className="text-2xl font-bold tracking-tight mb-6 text-white">All Courses</h2>
             
             <div className="flex flex-col gap-6 lg:flex-row">
               <aside className="w-full lg:w-64">

@@ -4,7 +4,7 @@ import { NetflixFooter } from '@/components/layout/netflix-footer';
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <NetflixHeader />
       <main className="pt-16">
         <NetflixPricing />
