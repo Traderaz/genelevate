@@ -25,7 +25,8 @@ import {
   FileText,
   Award,
   Target,
-  Zap
+  Zap,
+  MessageSquare
 } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -413,6 +414,12 @@ export default function CreatorDashboard() {
                         <Link href="/creator-dashboard/create-webinar">
                           <Video className="w-4 h-4 mr-2" />
                           Create Webinar
+                        </Link>
+                      </Button>
+                      <Button asChild variant="outline">
+                        <Link href="/creator-dashboard/interview-lab">
+                          <MessageSquare className="w-4 h-4 mr-2" />
+                          Interview Lab
                         </Link>
                       </Button>
                     </div>

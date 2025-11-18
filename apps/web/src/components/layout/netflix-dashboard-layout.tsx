@@ -317,11 +317,11 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
 
   return (
       <div className="min-h-screen">
-        {/* Top Navigation Bar - Mobile Optimized */}
+        {/* Top Navigation Bar - Mobile Optimized with Frosted Glass Effect */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-area-top ${
         isScrolled 
-          ? 'border-b border-white/10 shadow-sm' 
-          : ''
+          ? 'bg-white/10 backdrop-blur-xl border-b border-white/20 shadow-xl' 
+          : 'bg-gradient-to-b from-black/20 to-transparent backdrop-blur-sm'
       }`}>
         <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-14 sm:h-16">
           {/* Left Side */}

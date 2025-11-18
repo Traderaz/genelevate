@@ -90,8 +90,8 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
   if (isLoading) {
     return (
       <div className="space-y-6">
-        <div className="h-64 bg-card animate-pulse rounded-xl" />
-        <div className="h-96 bg-card animate-pulse rounded-xl" />
+        <div className="h-64 teal-card animate-pulse rounded-xl" />
+        <div className="h-96 teal-card animate-pulse rounded-xl" />
       </div>
     );
   }
@@ -99,12 +99,12 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
   if (!career) {
     return (
       <div className="text-center py-12">
-        <AlertCircle className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-foreground mb-2">Career Not Found</h2>
-        <p className="text-muted-foreground mb-6">The career you're looking for doesn't exist.</p>
+        <AlertCircle className="w-16 h-16 text-white/60 mx-auto mb-4" />
+        <h2 className="text-2xl font-bold text-white mb-2">Career Not Found</h2>
+        <p className="text-white/80 mb-6">The career you're looking for doesn't exist.</p>
         <button
           onClick={() => router.push('/careers')}
-          className="px-6 py-3 bg-primary text-primary-foreground rounded-lg netflix-button"
+          className="teal-button-primary"
         >
           Back to Careers
         </button>
@@ -114,7 +114,7 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
 
   const getDemandColor = (level: string) => {
     switch (level) {
-      case 'high': return 'text-green-500 bg-green-500/10';
+      case 'high': return 'text-[#10B981] bg-[#10B981]/20 font-bold';
       case 'medium': return 'text-yellow-500 bg-yellow-500/10';
       case 'low': return 'text-red-500 bg-red-500/10';
       default: return 'text-gray-500 bg-gray-500/10';
@@ -126,58 +126,58 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
       {/* Back Button */}
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+        className="flex items-center gap-2 text-teal-gold hover:text-teal-gold-dark transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         Back to Careers
       </button>
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-card via-card/95 to-card/80 border border-border rounded-2xl p-8 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10"></div>
+      <div className="teal-card-glass border-2 border-white/20 rounded-2xl p-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-primary/10 via-transparent to-teal-light/10"></div>
         <div className="relative z-10">
           <div className="flex items-start justify-between gap-4 mb-6">
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-3">
-                <h1 className="text-3xl lg:text-4xl font-bold text-foreground">{career.title}</h1>
+                <h1 className="text-3xl lg:text-4xl font-bold text-white">{career.title}</h1>
                 {career.trending && (
-                  <span className="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full font-medium flex items-center gap-1">
+                  <span className="px-3 py-1 bg-teal-gold/20 text-teal-gold text-sm rounded-full font-medium flex items-center gap-1 border border-teal-gold/30">
                     <TrendingUp className="w-4 h-4" />
                     Trending
                   </span>
                 )}
               </div>
-              <p className="text-lg text-muted-foreground mb-4">{career.sector}</p>
-              <p className="text-foreground leading-relaxed max-w-3xl">{career.overview}</p>
+              <p className="text-lg text-white/90 mb-4">{career.sector}</p>
+              <p className="text-white/80 leading-relaxed max-w-3xl">{career.overview}</p>
             </div>
           </div>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-background/50 backdrop-blur-sm rounded-lg p-4">
-              <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                <DollarSign className="w-4 h-4" />
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <div className="flex items-center gap-2 text-white/70 mb-2">
+                <DollarSign className="w-4 h-4 text-teal-gold" />
                 <span className="text-sm">Salary Range</span>
               </div>
-              <p className="text-lg font-bold text-foreground">{career.salaryRange}</p>
+              <p className="text-lg font-bold text-white">{career.salaryRange}</p>
             </div>
-            <div className="bg-background/50 backdrop-blur-sm rounded-lg p-4">
-              <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                <TrendingUp className="w-4 h-4" />
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <div className="flex items-center gap-2 text-white/70 mb-2">
+                <TrendingUp className="w-4 h-4 text-teal-gold" />
                 <span className="text-sm">Growth Rate</span>
               </div>
-              <p className="text-lg font-bold text-green-500">{career.growthRate}</p>
+              <p className="text-lg font-bold text-green-400">{career.growthRate}</p>
             </div>
-            <div className="bg-background/50 backdrop-blur-sm rounded-lg p-4">
-              <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                <GraduationCap className="w-4 h-4" />
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <div className="flex items-center gap-2 text-white/70 mb-2">
+                <GraduationCap className="w-4 h-4 text-teal-gold" />
                 <span className="text-sm">Education</span>
               </div>
-              <p className="text-lg font-bold text-foreground">{career.education}</p>
+              <p className="text-lg font-bold text-white">{career.education}</p>
             </div>
-            <div className="bg-background/50 backdrop-blur-sm rounded-lg p-4">
-              <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                <Target className="w-4 h-4" />
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <div className="flex items-center gap-2 text-white/70 mb-2">
+                <Target className="w-4 h-4 text-teal-gold" />
                 <span className="text-sm">Demand</span>
               </div>
               <p className={`text-lg font-bold ${getDemandColor(career.demandLevel)}`}>
@@ -193,61 +193,61 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
         {/* Left Column - Main Content */}
         <div className="lg:col-span-2 space-y-8">
           {/* Responsibilities */}
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
-              <Briefcase className="w-6 h-6 text-primary" />
+          <div className="bg-white/95 backdrop-blur-lg border-2 border-teal-primary/30 rounded-xl p-6 shadow-xl">
+            <h2 className="text-2xl font-bold text-[#0B5C9E] mb-4 flex items-center gap-2">
+              <Briefcase className="w-6 h-6 text-teal-primary" />
               Key Responsibilities
             </h2>
             <ul className="space-y-3">
               {career.responsibilities.map((resp, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground">{resp}</span>
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-[#1a1a1a] text-base leading-relaxed font-medium">{resp}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Requirements */}
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
-              <BookOpen className="w-6 h-6 text-primary" />
+          <div className="bg-white/95 backdrop-blur-lg border-2 border-teal-primary/30 rounded-xl p-6 shadow-xl">
+            <h2 className="text-2xl font-bold text-[#0B5C9E] mb-4 flex items-center gap-2">
+              <BookOpen className="w-6 h-6 text-teal-primary" />
               Requirements & Qualifications
             </h2>
             <ul className="space-y-3">
               {career.requirements.map((req, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground">{req}</span>
+                  <CheckCircle className="w-5 h-5 text-teal-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-[#1a1a1a] text-base leading-relaxed font-medium">{req}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Career Path */}
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <TrendingUp className="w-6 h-6 text-primary" />
+          <div className="bg-white/95 backdrop-blur-lg border-2 border-teal-primary/30 rounded-xl p-6 shadow-xl">
+            <h2 className="text-2xl font-bold text-[#0B5C9E] mb-6 flex items-center gap-2">
+              <TrendingUp className="w-6 h-6 text-teal-primary" />
               Career Progression Path
             </h2>
             <div className="space-y-4">
               {career.careerPath.map((stage, index) => (
                 <div key={index} className="relative pl-8 pb-6 last:pb-0">
                   {index < career.careerPath.length - 1 && (
-                    <div className="absolute left-2 top-8 bottom-0 w-0.5 bg-border"></div>
+                    <div className="absolute left-2 top-8 bottom-0 w-0.5 bg-teal-primary/50"></div>
                   )}
-                  <div className="absolute left-0 top-1 w-4 h-4 bg-primary rounded-full"></div>
-                  <div className="bg-secondary rounded-lg p-4">
+                  <div className="absolute left-0 top-1 w-4 h-4 bg-teal-gold rounded-full border-2 border-teal-primary"></div>
+                  <div className="bg-teal-light/10 border-2 border-teal-light/30 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-bold text-foreground">{stage.title}</h3>
-                      <span className="text-sm text-primary font-semibold">{stage.salary}</span>
+                      <h3 className="font-bold text-[#0B5C9E] text-lg">{stage.title}</h3>
+                      <span className="text-sm text-teal-primary font-semibold">{stage.salary}</span>
                     </div>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-4 text-sm text-[#4a4a4a] font-medium">
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
                         {stage.years}
                       </span>
-                      <span className="px-2 py-1 bg-primary/20 text-primary rounded-full text-xs">
+                      <span className="px-2 py-1 bg-teal-primary/20 text-teal-primary rounded-full text-xs border border-teal-primary/40 font-medium">
                         {stage.level}
                       </span>
                     </div>
@@ -261,13 +261,13 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
         {/* Right Column - Sidebar */}
         <div className="space-y-6">
           {/* Skills Required */}
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h3 className="text-xl font-bold text-foreground mb-4">Skills Required</h3>
+          <div className="bg-white/95 backdrop-blur-lg border-2 border-teal-primary/30 rounded-xl p-6 shadow-xl">
+            <h3 className="text-xl font-bold text-[#0B5C9E] mb-4">Skills Required</h3>
             <div className="flex flex-wrap gap-2">
               {career.skills.map((skill, index) => (
                 <span
                   key={index}
-                  className="px-3 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium"
+                  className="px-3 py-2 bg-teal-primary/15 text-[#0B5C9E] border-2 border-teal-primary/40 rounded-lg text-sm font-semibold hover:bg-teal-primary/25 transition-colors"
                 >
                   {skill}
                 </span>
@@ -276,30 +276,30 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
           </div>
 
           {/* Industry Insights */}
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h3 className="text-xl font-bold text-foreground mb-4">Industry Insights</h3>
+          <div className="bg-white/95 backdrop-blur-lg border-2 border-teal-primary/30 rounded-xl p-6 shadow-xl">
+            <h3 className="text-xl font-bold text-[#0B5C9E] mb-4">Industry Insights</h3>
             <div className="space-y-4">
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Current Job Openings</p>
-                <p className="text-2xl font-bold text-foreground">{career.industryInsights.jobOpenings}</p>
+                <p className="text-sm text-[#666666] font-medium mb-1">Current Job Openings</p>
+                <p className="text-2xl font-bold text-[#0B5C9E]">{career.industryInsights.jobOpenings}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Average Salary (UK)</p>
-                <p className="text-2xl font-bold text-foreground">{career.industryInsights.averageSalary}</p>
+                <p className="text-sm text-[#666666] font-medium mb-1">Average Salary (UK)</p>
+                <p className="text-2xl font-bold text-[#0B5C9E]">{career.industryInsights.averageSalary}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground mb-2">Top Employers</p>
+                <p className="text-sm text-[#666666] font-medium mb-2">Top Employers</p>
                 <div className="flex flex-wrap gap-2">
                   {career.industryInsights.topEmployers.map((employer, index) => (
-                    <span key={index} className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-full">
+                    <span key={index} className="px-2 py-1 bg-teal-light/20 text-teal-primary border border-teal-primary/40 text-xs rounded-full font-medium">
                       {employer}
                     </span>
                   ))}
                 </div>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground mb-2">Future Outlook</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-[#666666] font-medium mb-2">Future Outlook</p>
+                <p className="text-sm text-[#2a2a2a] leading-relaxed font-medium">
                   {career.industryInsights.futureOutlook}
                 </p>
               </div>
@@ -307,19 +307,19 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
           </div>
 
           {/* Related Courses */}
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h3 className="text-xl font-bold text-foreground mb-4">Related Courses</h3>
+          <div className="bg-white/95 backdrop-blur-lg border-2 border-teal-primary/30 rounded-xl p-6 shadow-xl">
+            <h3 className="text-xl font-bold text-[#0B5C9E] mb-4">Related Courses</h3>
             <div className="space-y-3">
               {career.relatedCourses.map((course) => (
                 <a
                   key={course.id}
                   href={`/courses/${course.id}`}
-                  className="block p-3 bg-secondary rounded-lg hover:bg-accent transition-colors group"
+                  className="block p-3 bg-teal-light/10 border-2 border-teal-light/30 rounded-lg hover:border-teal-gold hover:bg-teal-gold/10 transition-all group"
                 >
-                  <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                  <p className="font-semibold text-[#0B5C9E] group-hover:text-teal-primary transition-colors">
                     {course.title}
                   </p>
-                  <p className="text-sm text-muted-foreground">{course.subject}</p>
+                  <p className="text-sm text-[#666666] font-medium">{course.subject}</p>
                 </a>
               ))}
             </div>

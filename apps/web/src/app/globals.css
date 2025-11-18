@@ -8,7 +8,7 @@
   :root {
     /* Teal Theme - Gen Elevate */
     --background: 0 0% 100%; /* White for cards/content */
-    --foreground: 0 0% 100%; /* White text on gradient */
+    --foreground: 210 65% 10%; /* Dark text - FIXED for readability on light backgrounds */
 
     --card: 0 0% 100% / 0.95; /* Slightly transparent white cards */
     --card-foreground: 210 65% 10%; /* Dark text on cards */
@@ -22,8 +22,8 @@
     --secondary: 189 82% 45%; /* #0CB1A2 - teal */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 100% / 0.1; /* Subtle white overlay */
-    --muted-foreground: 0 0% 100% / 0.8; /* Light white text */
+    --muted: 0 0% 96%; /* Light gray background */
+    --muted-foreground: 210 65% 45%; /* Medium dark text */
 
     --accent: 40 100% 67%; /* #FFC857 - gold */
     --accent-foreground: 210 65% 10%;
@@ -31,8 +31,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 100% / 0.2; /* Subtle white borders */
-    --input: 0 0% 100% / 0.1; /* Slightly transparent inputs */
+    --border: 210 40% 80%; /* Subtle gray borders for cards */
+    --input: 0 0% 100% / 0.95; /* White inputs */
     --ring: 40 100% 67%; /* Gold focus ring */
 
     --radius: 1rem;
