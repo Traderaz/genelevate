@@ -17,34 +17,33 @@ export function LifeSkillsBanner() {
           {/* Content */}
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-3">
-              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Life Skills Development
+              <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
+                Essential Life Skills for UK Students
               </h1>
-              <TrendingUp className="w-6 h-6 text-blue-500 hidden sm:block" />
+              <TrendingUp className="w-6 h-6 text-teal-gold hidden sm:block" />
             </div>
 
-            <p className="text-lg text-foreground/80 mb-6 max-w-3xl">
-              Master essential life skills including financial literacy, ethical decision-making, 
-              effective communication, and professional development. Each module is designed to 
-              prepare you for real-world success.
+            <p className="text-lg text-white/95 mb-6 max-w-3xl drop-shadow">
+              Learn everything you need to know to thrive in the real world. From understanding UK taxes and mortgages 
+              to managing pensions and employment rights, we equip you with essential knowledge tailored to UK laws and regulations.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                <span className="text-2xl">💰</span>
-                <span className="text-sm font-medium text-foreground/90">Financial Literacy</span>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+                <span className="text-2xl">🏦</span>
+                <span className="text-sm font-medium text-white">UK Financial Literacy</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-purple-500/10 rounded-lg border border-purple-500/20">
-                <span className="text-2xl">🤝</span>
-                <span className="text-sm font-medium text-foreground/90">Ethics & Values</span>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+                <span className="text-2xl">🏠</span>
+                <span className="text-sm font-medium text-white">Housing & Living</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-pink-500/10 rounded-lg border border-pink-500/20">
-                <span className="text-2xl">💬</span>
-                <span className="text-sm font-medium text-foreground/90">Communication</span>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+                <span className="text-2xl">💼</span>
+                <span className="text-sm font-medium text-white">Employment & Career</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-green-500/10 rounded-lg border border-green-500/20">
-                <span className="text-2xl">🎯</span>
-                <span className="text-sm font-medium text-foreground/90">Professional Skills</span>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+                <span className="text-2xl">💪</span>
+                <span className="text-sm font-medium text-white">Wellbeing</span>
               </div>
             </div>
           </div>

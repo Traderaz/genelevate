@@ -3,13 +3,13 @@
 import { BookOpen, CheckCircle, Clock, Trophy } from 'lucide-react';
 
 export function LifeSkillsProgress() {
-  // Mock data - replace with real data from Firestore
+  // TODO: Replace with real data from Firestore user progress
   const stats = [
     {
       icon: BookOpen,
-      label: 'Modules Started',
-      value: '3',
-      total: '12',
+      label: 'Total Modules',
+      value: '24',
+      total: 'available',
       color: 'text-blue-500',
       bgColor: 'bg-blue-500/10',
       borderColor: 'border-blue-500/20'
@@ -17,8 +17,8 @@ export function LifeSkillsProgress() {
     {
       icon: CheckCircle,
       label: 'Modules Completed',
-      value: '1',
-      total: '12',
+      value: '0',
+      total: '24',
       color: 'text-green-500',
       bgColor: 'bg-green-500/10',
       borderColor: 'border-green-500/20'
@@ -26,7 +26,7 @@ export function LifeSkillsProgress() {
     {
       icon: Clock,
       label: 'Hours Learning',
-      value: '8.5',
+      value: '0',
       total: 'hrs',
       color: 'text-purple-500',
       bgColor: 'bg-purple-500/10',
@@ -35,7 +35,7 @@ export function LifeSkillsProgress() {
     {
       icon: Trophy,
       label: 'Skills Mastered',
-      value: '4',
+      value: '0',
       total: 'skills',
       color: 'text-yellow-500',
       bgColor: 'bg-yellow-500/10',
@@ -57,10 +57,10 @@ export function LifeSkillsProgress() {
                 <Icon className={`w-6 h-6 ${stat.color}`} />
               </div>
               <div>
-                <p className="text-sm text-foreground/60">{stat.label}</p>
-                <p className="text-2xl font-bold text-foreground">
+                <p className="text-sm !text-white/80">{stat.label}</p>
+                <p className="text-2xl font-bold !text-white">
                   {stat.value}
-                  <span className="text-sm text-foreground/40 ml-1">
+                  <span className="text-sm !text-white/70 ml-1">
                     {typeof stat.total === 'string' && !stat.total.includes('/') ? stat.total : `/ ${stat.total}`}
                   </span>
                 </p>
