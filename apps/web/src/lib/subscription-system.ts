@@ -1,9 +1,10 @@
 /**
  * Comprehensive Subscription System
  * Handles tier enforcement, feature access, and subscription management
+ * Updated to single all-access membership plan
  */
 
-export type SubscriptionPlan = 'basic' | 'premium' | 'pro';
+export type SubscriptionPlan = 'all-access' | 'free' | 'student' | 'institution' | 'basic' | 'premium' | 'pro'; // Keep legacy plans for backwards compatibility
 export type SubscriptionStatus = 'active' | 'inactive' | 'cancelled' | 'expired' | 'past_due';
 
 export interface SubscriptionDetails {
@@ -50,9 +51,54 @@ export interface PlanFeatures {
 
 // Define subscription plans and their features
 export const SUBSCRIPTION_PLANS: Record<SubscriptionPlan, PlanFeatures> = {
+  'all-access': {
+    name: 'All-Access Membership',
+    price: 29.99,
+    currency: 'GBP',
+    features: [
+      'Access to ALL courses (11+, GCSE, A-Level)',
+      'ALL webinars and live sessions',
+      'AI Assistant & unlimited AI questions',
+      'Download all resources',
+      'Progress tracking & advanced analytics',
+      'Mobile app access',
+      'Community access',
+      'Mentorship program access',
+      'Priority email support',
+      'Certificates of completion',
+      'Career explorer & guidance',
+      'Life skills modules',
+      'Premium content library',
+      'Study planner & tools',
+      'Exam preparation resources',
+    ],
+    limits: {
+      coursesPerMonth: -1, // Unlimited courses
+      aiQuestionsPerDay: -1, // Unlimited AI
+      downloadableResources: -1, // Unlimited downloads
+      liveWebinars: -1, // Unlimited webinars
+      personalTutoring: false,
+      prioritySupport: true,
+      advancedAnalytics: true,
+      customContent: false,
+      offlineAccess: true,
+      certificatesIncluded: true
+    },
+    access: {
+      allCourses: true,
+      premiumContent: true,
+      exclusiveWebinars: true,
+      aiAssistant: true,
+      progressTracking: true,
+      mobileApp: true,
+      communityAccess: true,
+      mentorshipProgram: true
+    }
+  },
+  // Legacy plans kept for backwards compatibility
   basic: {
-    name: 'Basic',
-    price: 9.99,
+    name: 'Basic (Legacy)',
+    price: 29.99, // Redirect to all-access price
     currency: 'GBP',
     features: [
       'Access to ALL courses',
@@ -64,31 +110,31 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionPlan, PlanFeatures> = {
       'Email support'
     ],
     limits: {
-      coursesPerMonth: -1, // Unlimited courses
-      aiQuestionsPerDay: 0, // No AI access
-      downloadableResources: -1, // Unlimited downloads
-      liveWebinars: -1, // Unlimited webinars
+      coursesPerMonth: -1,
+      aiQuestionsPerDay: -1, // Upgraded to unlimited
+      downloadableResources: -1,
+      liveWebinars: -1,
       personalTutoring: false,
-      prioritySupport: false,
-      advancedAnalytics: false,
+      prioritySupport: true, // Upgraded
+      advancedAnalytics: true, // Upgraded
       customContent: false,
       offlineAccess: true,
       certificatesIncluded: true
     },
     access: {
       allCourses: true,
-      premiumContent: false, // No premium content
+      premiumContent: true, // Upgraded
       exclusiveWebinars: true,
-      aiAssistant: false, // No AI tools
+      aiAssistant: true, // Upgraded
       progressTracking: true,
       mobileApp: true,
       communityAccess: true,
-      mentorshipProgram: false
+      mentorshipProgram: true // Upgraded
     }
   },
   premium: {
-    name: 'Premium',
-    price: 19.99,
+    name: 'Premium (Legacy)',
+    price: 29.99, // Redirect to all-access price
     currency: 'GBP',
     features: [
       'Everything in Basic',
@@ -100,7 +146,7 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionPlan, PlanFeatures> = {
     ],
     limits: {
       coursesPerMonth: -1,
-      aiQuestionsPerDay: -1, // Unlimited AI
+      aiQuestionsPerDay: -1,
       downloadableResources: -1,
       liveWebinars: -1,
       personalTutoring: false,
@@ -114,7 +160,7 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionPlan, PlanFeatures> = {
       allCourses: true,
       premiumContent: true,
       exclusiveWebinars: true,
-      aiAssistant: true, // AI tools included
+      aiAssistant: true,
       progressTracking: true,
       mobileApp: true,
       communityAccess: true,
@@ -122,8 +168,8 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionPlan, PlanFeatures> = {
     }
   },
   pro: {
-    name: 'Pro',
-    price: 39.99,
+    name: 'Pro (Legacy)',
+    price: 29.99, // Redirect to all-access price
     currency: 'GBP',
     features: [
       'Everything in Premium',
@@ -138,10 +184,10 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionPlan, PlanFeatures> = {
       aiQuestionsPerDay: -1,
       downloadableResources: -1,
       liveWebinars: -1,
-      personalTutoring: true,
+      personalTutoring: false, // Now requires separate add-on
       prioritySupport: true,
       advancedAnalytics: true,
-      customContent: true,
+      customContent: false, // Now requires separate add-on
       offlineAccess: true,
       certificatesIncluded: true
     },
@@ -157,6 +203,9 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionPlan, PlanFeatures> = {
     }
   }
 };
+
+// Default plan for new subscriptions
+export const DEFAULT_PLAN: SubscriptionPlan = 'all-access';
 
 /**
  * Check if a subscription is currently active

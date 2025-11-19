@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
 import { useSubscription } from '@/hooks/useSubscription';
 import { SubscriptionPlan } from '@/lib/subscription-system';
-import { Loader2, Lock, Crown, Star, Zap } from 'lucide-react';
+import { Loader2, Lock, Crown, Star, Zap, Check } from 'lucide-react';
 
 interface SubscriptionGuardProps {
   children: React.ReactNode;
@@ -15,12 +15,14 @@ interface SubscriptionGuardProps {
 }
 
 const planIcons = {
+  'all-access': Star,
   basic: Zap,
   premium: Star,
   pro: Crown
 };
 
 const planColors = {
+  'all-access': 'text-teal-600 bg-teal-100',
   basic: 'text-blue-600 bg-blue-100',
   premium: 'text-purple-600 bg-purple-100',
   pro: 'text-yellow-600 bg-yellow-100'
@@ -36,9 +38,16 @@ export function SubscriptionGuard({
   const router = useRouter();
   const [checking, setChecking] = useState(true);
   
-  // Temporarily bypass subscription checking for testing
-  const effectivePlan = userProfile?.subscription?.plan || 'pro'; // Default to pro for testing
-  const canAccessFeature = () => true; // Allow all features for testing
+  // STRICT SUBSCRIPTION ENFORCEMENT - No bypass
+  const effectivePlan = (userProfile?.subscription?.plan || 'free') as SubscriptionPlan; // Default to free (no access)
+  const subscriptionStatus = userProfile?.subscription?.status || 'inactive';
+  const expiresAt = userProfile?.subscription?.expiresAt;
+  
+  // Check if subscription is active
+  const isSubscriptionActive = subscriptionStatus === 'active' && (
+    !expiresAt || new Date(expiresAt) > new Date()
+  );
+  
   const subscriptionLoading = false;
   const upgradeSuggestions: Array<{ plan: keyof typeof planIcons; description: string; price: string; reason: string }> = [];
 
@@ -83,14 +92,56 @@ export function SubscriptionGuard({
     );
   }
 
-  // Temporarily allow all access for testing
-  let hasAccess = true;
+  // STRICT ACCESS CONTROL
+  let hasAccess = false;
   let accessReason = '';
 
-  // For testing: always allow access if user is logged in
+  // Must be logged in
   if (!user) {
     hasAccess = false;
     accessReason = 'Please log in to access this content';
+  }
+  // Parent accounts get free read-only access (they're linked to paid students)
+  else if (userProfile?.role === 'parent') {
+    hasAccess = true; // Parents always have access (read-only)
+  }
+  // Must have active subscription (not free)
+  else if (!isSubscriptionActive || effectivePlan === 'free') {
+    hasAccess = false;
+    accessReason = 'Active subscription required to access this content';
+  }
+  // Check if plan meets requirements
+  else if (requiredPlan) {
+    // all-access is accepted for any requirement
+    const hasValidPlan = effectivePlan === 'all-access' || 
+                          effectivePlan === requiredPlan ||
+                          (effectivePlan === 'pro' || effectivePlan === 'premium' || effectivePlan === 'basic');
+    if (!hasValidPlan) {
+      hasAccess = false;
+      accessReason = `This content requires an active subscription`;
+    } else {
+      hasAccess = true;
+    }
+  }
+  // Check specific feature access
+  else if (feature) {
+    // all-access and paid plans get all features
+    const hasPaidPlan = (effectivePlan as string) !== 'free' && isSubscriptionActive;
+    if (hasPaidPlan) {
+      hasAccess = true;
+    } else {
+      hasAccess = false;
+      accessReason = `This feature requires an active subscription`;
+    }
+  }
+  // If no specific requirements, still require paid subscription
+  else {
+    // Must have active subscription and NOT be on free plan
+    const isFree = (effectivePlan as string) === 'free';
+    hasAccess = isSubscriptionActive && !isFree;
+    if (!hasAccess) {
+      accessReason = 'Active paid subscription required to access the dashboard';
+    }
   }
 
   // If user has access, render children
@@ -98,113 +149,98 @@ export function SubscriptionGuard({
     return <>{children}</>;
   }
 
-  // Show subscription required page
-  const suggestedPlan = requiredPlan || upgradeSuggestions[0]?.plan;
-  const PlanIcon = suggestedPlan ? (planIcons[suggestedPlan as keyof typeof planIcons] || Lock) : Lock;
-  const planColor = suggestedPlan ? (planColors[suggestedPlan as keyof typeof planColors] || 'text-gray-600 bg-gray-100') : 'text-gray-600 bg-gray-100';
-
+  // Show subscription required page - redirect to pricing
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-6">
-      <div className="max-w-md mx-auto text-center space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-teal-primary via-teal-blue-medium to-[#0B5C9E] text-white flex items-center justify-center p-6">
+      <div className="max-w-lg mx-auto text-center space-y-8">
         {/* Lock Icon */}
         <div className="flex justify-center">
-          <div className={`p-6 rounded-full ${planColor}`}>
-            <PlanIcon className="w-12 h-12" />
+          <div className="p-8 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/20">
+            <Lock className="w-16 h-16" />
           </div>
         </div>
 
         {/* Title */}
         <div className="space-y-4">
-          <h1 className="text-3xl font-bold">Subscription Required</h1>
-          <p className="text-gray-400 text-lg">
+          <h1 className="text-4xl font-bold">Subscription Required</h1>
+          <p className="text-white/90 text-xl leading-relaxed">
             {accessReason}
+          </p>
+          <p className="text-white/70 text-base">
+            Get instant access to all courses, AI tools, webinars, and more with our All-Access Membership.
           </p>
         </div>
 
-        {/* Current Plan */}
-        {effectivePlan && (
-          <div className="p-4 bg-gray-900 rounded-lg border border-gray-800">
-            <p className="text-sm text-gray-400 mb-2">Your current plan:</p>
-            <div className="flex items-center justify-center gap-2">
-              {(() => {
-                const CurrentIcon = planIcons[effectivePlan as keyof typeof planIcons] || Lock;
-                return <CurrentIcon className="w-5 h-5" />;
-              })()}
-              <span className="font-semibold capitalize">{effectivePlan}</span>
-            </div>
+        {/* Current Status */}
+        <div className="p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+          <div className="flex items-center justify-center gap-3 mb-2">
+            {(() => {
+              const CurrentIcon = planIcons[effectivePlan as keyof typeof planIcons] || Lock;
+              return <CurrentIcon className="w-6 h-6" />;
+            })()}
+            <p className="text-xl font-bold capitalize">{effectivePlan} Plan</p>
           </div>
-        )}
-
-        {/* Upgrade Options */}
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold">Choose Your Plan</h3>
-          
-          <div className="space-y-3">
-            {upgradeSuggestions.slice(0, 2).map((suggestion) => {
-              const SuggestionIcon = planIcons[suggestion.plan] || Lock;
-              const suggestionColor = planColors[suggestion.plan] || 'text-gray-600 bg-gray-100';
-              
-              return (
-                <button
-                  key={suggestion.plan}
-                  onClick={() => router.push(`/pricing?plan=${suggestion.plan}`)}
-                  className={`w-full p-4 rounded-lg border-2 border-transparent hover:border-current transition-colors ${suggestionColor} text-black`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <SuggestionIcon className="w-5 h-5" />
-                      <div className="text-left">
-                        <div className="font-semibold">
-                          {suggestion.plan.charAt(0).toUpperCase() + suggestion.plan.slice(1)}
-                        </div>
-                        <div className="text-sm opacity-75">
-                          {suggestion.reason}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-bold">
-                        £{suggestion.plan === 'basic' ? '9.99' : suggestion.plan === 'premium' ? '19.99' : '39.99'}
-                      </div>
-                      <div className="text-xs opacity-75">/month</div>
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+          {effectivePlan === 'free' && (
+            <p className="text-white/70 text-sm">
+              Free accounts have limited access. Upgrade to unlock everything!
+            </p>
+          )}
+          {expiresAt && new Date(expiresAt) < new Date() && (
+            <p className="text-red-300 text-sm font-semibold mt-2">
+              ⚠️ Your subscription expired on {new Date(expiresAt).toLocaleDateString()}
+            </p>
+          )}
         </div>
 
-        {/* Action Buttons */}
-        <div className="space-y-3">
+        {/* Call to Action */}
+        <div className="space-y-4">
           <button
             onClick={() => router.push('/pricing')}
-            className="w-full px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+            className="w-full px-8 py-4 bg-gradient-to-r from-teal-gold to-yellow-500 hover:from-teal-gold hover:to-teal-gold text-brand-navy font-bold text-lg rounded-xl transition-all hover:scale-105 shadow-lg hover:shadow-xl"
           >
-            View All Plans
+            View Pricing & Subscribe
           </button>
           
           <button
             onClick={() => router.back()}
-            className="w-full px-6 py-3 bg-gray-800 text-gray-300 font-semibold rounded-lg hover:bg-gray-700 transition-colors"
+            className="w-full px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-all border border-white/20"
           >
             Go Back
           </button>
         </div>
 
-        {/* Help Text */}
-        <p className="text-sm text-gray-500">
-          Need help? <a href="/contact" className="text-red-400 hover:text-red-300">Contact support</a>
-        </p>
+        {/* Benefits Preview */}
+        <div className="pt-6 border-t border-white/20">
+          <p className="text-sm text-white/60 mb-4">With All-Access Membership (£29.99/month):</p>
+          <div className="grid grid-cols-2 gap-3 text-left">
+            <div className="flex items-start gap-2">
+              <Check className="w-4 h-4 text-teal-gold flex-shrink-0 mt-0.5" />
+              <span className="text-xs text-white/80">All courses</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <Check className="w-4 h-4 text-teal-gold flex-shrink-0 mt-0.5" />
+              <span className="text-xs text-white/80">AI Assistant</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <Check className="w-4 h-4 text-teal-gold flex-shrink-0 mt-0.5" />
+              <span className="text-xs text-white/80">Live webinars</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <Check className="w-4 h-4 text-teal-gold flex-shrink-0 mt-0.5" />
+              <span className="text-xs text-white/80">Career guidance</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
 // Convenience components for specific requirements
+// Note: With single all-access plan, all these guards behave the same
 export function BasicPlanGuard({ children, ...props }: Omit<SubscriptionGuardProps, 'requiredPlan'>) {
   return (
-    <SubscriptionGuard requiredPlan="basic" {...props}>
+    <SubscriptionGuard requiredPlan="all-access" {...props}>
       {children}
     </SubscriptionGuard>
   );
@@ -212,7 +248,7 @@ export function BasicPlanGuard({ children, ...props }: Omit<SubscriptionGuardPro
 
 export function PremiumPlanGuard({ children, ...props }: Omit<SubscriptionGuardProps, 'requiredPlan'>) {
   return (
-    <SubscriptionGuard requiredPlan="premium" {...props}>
+    <SubscriptionGuard requiredPlan="all-access" {...props}>
       {children}
     </SubscriptionGuard>
   );
@@ -220,7 +256,7 @@ export function PremiumPlanGuard({ children, ...props }: Omit<SubscriptionGuardP
 
 export function ProPlanGuard({ children, ...props }: Omit<SubscriptionGuardProps, 'requiredPlan'>) {
   return (
-    <SubscriptionGuard requiredPlan="pro" {...props}>
+    <SubscriptionGuard requiredPlan="all-access" {...props}>
       {children}
     </SubscriptionGuard>
   );

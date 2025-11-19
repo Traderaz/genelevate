@@ -184,17 +184,6 @@ export function NetflixLoginForm() {
         </svg>
         {isLoading ? 'Signing in...' : 'Continue with Google'}
       </button>
-
-      {/* Demo Account */}
-      <div className="text-center">
-        <p className="text-xs text-muted-foreground mb-3">
-          Want to try it out? Use our demo account:
-        </p>
-        <div className="text-xs text-muted-foreground space-y-1">
-          <p><strong>Email:</strong> demo@genelevate.com</p>
-          <p><strong>Password:</strong> demo123</p>
-        </div>
-      </div>
     </div>
   );
 }

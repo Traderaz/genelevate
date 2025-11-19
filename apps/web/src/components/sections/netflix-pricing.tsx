@@ -1,228 +1,189 @@
 'use client';
 
-import { useState } from 'react';
-import { Check, Star, Crown, Zap, Users } from 'lucide-react';
+import { Check, Star, Sparkles, Users } from 'lucide-react';
+import { useAuth } from '@/contexts/auth-context';
+import { useRouter } from 'next/navigation';
 
 export function NetflixPricing() {
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
-
-  const plans = [
-    {
-      name: 'Basic',
-      icon: Zap,
-      description: 'Perfect for dedicated learners',
-      monthlyPrice: 9.99,
-      yearlyPrice: 99.99,
-      yearlyDiscount: '17% off',
-      features: [
-        'Access to ALL courses',
-        'ALL webinars and live sessions',
-        'Download all resources',
-        'Progress tracking',
-        'Mobile app access',
-        'Community access',
-        'Email support',
-        'Certificates of completion',
-      ],
-      limitations: [
-        'No AI assistant or tools',
-        'No premium content access',
-      ],
-      popular: false,
-      cta: 'Get Started',
-    },
-    {
-      name: 'Premium',
-      icon: Star,
-      description: 'Most popular - includes AI tools',
-      monthlyPrice: 19.99,
-      yearlyPrice: 199.99,
-      yearlyDiscount: '17% off',
-      features: [
-        'Everything in Basic',
-        'AI Assistant & Tools',
-        'Unlimited AI questions',
-        'Premium content access',
-        'Advanced analytics',
-        'Priority support',
-        'Mentorship program access',
-      ],
-      limitations: [],
-      popular: true,
-      cta: 'Get Started',
-    },
-    {
-      name: 'Pro',
-      icon: Crown,
-      description: 'Ultimate plan with personal tutoring',
-      monthlyPrice: 39.99,
-      yearlyPrice: 399.99,
-      yearlyDiscount: '17% off',
-      features: [
-        'Everything in Premium',
-        '1 paid addon per month included',
-        '1-on-1 personal tutoring',
-        'Custom content creation',
-        'Dedicated support manager',
-        'API access',
-        'White-label features',
-      ],
-      limitations: [],
-      popular: false,
-      cta: 'Get Started',
-    },
-  ];
-
-  const getPrice = (plan: typeof plans[0]) => {
-    return billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice;
+  const { user } = useAuth();
+  const router = useRouter();
+  
+  const plan = {
+    name: 'All-Access Membership',
+    icon: Star,
+    description: 'Everything you need to excel in your studies',
+    price: 29.99,
+    currency: '£',
+    features: [
+      'Access to ALL courses (11+, GCSE, A-Level)',
+      'ALL webinars and live sessions',
+      'AI Assistant & unlimited AI questions',
+      'Download all resources',
+      'Progress tracking & advanced analytics',
+      'Mobile app access',
+      'Community access',
+      'Mentorship program access',
+      'Priority email support',
+      'Certificates of completion',
+      'Career explorer & guidance',
+      'Life skills modules',
+      'Premium content library',
+      'Study planner & tools',
+      'Exam preparation resources',
+    ],
+    cta: 'Start Your Journey',
   };
 
-  const getSavings = (plan: typeof plans[0]) => {
-    if (billingCycle === 'yearly') {
-      const monthlyCost = plan.monthlyPrice * 12;
-      const yearlyCost = plan.yearlyPrice;
-      return monthlyCost - yearlyCost;
+  const handleStartJourney = async () => {
+    if (user) {
+      try {
+        // Get Firebase ID token
+        const idToken = await user.getIdToken();
+        // User is logged in - redirect to Stripe checkout with auth token
+        window.location.href = `/api/stripe/create-checkout-session?token=${idToken}`;
+      } catch (error) {
+        console.error('Error getting auth token:', error);
+        router.push('/login?redirect=/pricing');
+      }
+    } else {
+      // User not logged in - redirect to sign in page
+      router.push('/login?redirect=/pricing');
     }
-    return 0;
   };
 
   return (
     <section id="pricing" className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-            Choose Your <span className="text-teal-gold font-black">Learning Plan</span>
+            Simple, <span className="text-teal-gold font-black">All-Inclusive</span> Pricing
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Unlock your potential with our flexible subscription plans. 
-            Choose the perfect plan for your learning journey.
+          <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+            One membership, unlimited access to everything. No tiers, no limits, no confusion.
           </p>
+        </div>
 
-          {/* Billing Toggle */}
-          <div className="inline-flex items-center teal-card rounded-xl p-1 shadow-lg">
-            <button
-              onClick={() => setBillingCycle('monthly')}
-              className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                billingCycle === 'monthly'
-                  ? 'teal-gradient text-white shadow-lg'
-                  : 'text-teal-card-text-muted hover:text-teal-card-text'
-              }`}
+        {/* Two Cards Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Individual Membership Card - Left */}
+          <div className="relative rounded-2xl p-8 teal-card border-2 border-teal-gold shadow-2xl">
+            {/* Popular Badge */}
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div className="gold-gradient text-brand-navy px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 shadow-gold-glow">
+                <Sparkles className="w-3 h-3" />
+                Everything Included
+              </div>
+            </div>
+
+            {/* Plan Header */}
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 bg-gradient-to-br from-teal-blue-medium to-teal-primary shadow-lg">
+                <plan.icon className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-teal-card-text mb-2">{plan.name}</h3>
+              <p className="text-base text-teal-card-text-muted">{plan.description}</p>
+            </div>
+
+            {/* Pricing */}
+            <div className="text-center mb-6">
+              <div className="flex items-baseline justify-center mb-1">
+                <span className="text-xl font-bold text-teal-card-text">{plan.currency}</span>
+                <span className="text-5xl font-bold text-teal-card-text mx-2">
+                  {plan.price.toFixed(2)}
+                </span>
+                <span className="text-lg text-teal-card-text-muted">
+                  /month
+                </span>
+              </div>
+              <p className="text-xs text-teal-card-text-muted">
+                Billed monthly • Cancel anytime
+              </p>
+            </div>
+
+            {/* Features - Compact */}
+            <div className="space-y-2 mb-6">
+              {plan.features.map((feature, index) => (
+                <div key={index} className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-brand-teal flex-shrink-0 mt-0.5" />
+                  <span className="text-brand-navy text-sm">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <button 
+              onClick={handleStartJourney}
+              className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-105 gold-gradient text-brand-navy shadow-gold-glow hover:shadow-gold-glow-hover"
             >
-              Monthly
+              {user ? 'Subscribe Now' : 'Start Your Journey'}
             </button>
-            <button
-              onClick={() => setBillingCycle('yearly')}
-              className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200 relative ${
-                billingCycle === 'yearly'
-                  ? 'teal-gradient text-white shadow-lg'
-                  : 'text-teal-card-text-muted hover:text-teal-card-text'
-              }`}
-            >
-              Yearly
-              <span className="absolute -top-2 -right-2 bg-teal-gold text-teal-card-text text-xs px-2 py-1 rounded-full font-bold shadow-lg">
-                Save 17%
-              </span>
+
+            {/* Plan Note */}
+            <div className="text-center mt-4">
+              <p className="text-xs text-brand-navy-light">
+                ✓ Instant access • No hidden fees • Cancel anytime
+              </p>
+            </div>
+          </div>
+
+          {/* Institution Card - Right */}
+          <div className="relative rounded-2xl p-8 teal-card border-2 border-teal-primary/30 hover:border-teal-primary shadow-lg transition-all">
+            {/* Icon */}
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 bg-gradient-to-br from-teal-primary/20 to-teal-blue-light/20">
+                <Users className="w-8 h-8 text-teal-primary" />
+              </div>
+              <h3 className="text-2xl font-bold text-teal-card-text mb-2">For Schools & Institutions</h3>
+              <p className="text-base text-teal-card-text-muted">
+                Custom solutions for educational organizations
+              </p>
+            </div>
+
+            {/* Features */}
+            <div className="space-y-3 mb-8">
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
+                <span className="text-brand-navy text-sm">Bulk student licenses</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
+                <span className="text-brand-navy text-sm">Dedicated account manager</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
+                <span className="text-brand-navy text-sm">Custom pricing & invoicing</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
+                <span className="text-brand-navy text-sm">School-wide analytics</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
+                <span className="text-brand-navy text-sm">Teacher training & support</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
+                <span className="text-brand-navy text-sm">Integration with school systems</span>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <button className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 hover:scale-105 bg-white border-2 border-teal-primary text-teal-primary hover:bg-teal-primary hover:text-white shadow-lg">
+              Contact Us
             </button>
+
+            <p className="text-center text-xs text-brand-navy-light mt-4">
+              Perfect for schools with 50+ students
+            </p>
           </div>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan, index) => (
-            <div
-              key={plan.name}
-              className={`relative rounded-2xl p-8 transition-all duration-300 hover:scale-105 ${
-                plan.popular
-                  ? 'teal-card border-2 border-teal-gold shadow-xl scale-105'
-                  : 'teal-card hover:border-teal-primary shadow-lg'
-              }`}
-            >
-              {/* Popular Badge */}
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="gold-gradient text-brand-navy px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-gold-glow">
-                    <Zap className="w-4 h-4" />
-                    Most Popular
-                  </div>
-                </div>
-              )}
-
-              {/* Plan Header */}
-              <div className="text-center mb-8">
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
-                  plan.popular 
-                    ? 'bg-gradient-to-br from-teal-blue-medium to-teal-primary shadow-lg' 
-                    : 'bg-teal-primary/10'
-                }`}>
-                  <plan.icon className={`w-8 h-8 ${plan.popular ? 'text-white' : 'text-teal-primary'}`} />
-                </div>
-                <h3 className="text-2xl font-bold text-teal-card-text mb-2">{plan.name}</h3>
-                <p className="text-teal-card-text-muted">{plan.description}</p>
-              </div>
-
-              {/* Pricing */}
-              <div className="text-center mb-8">
-                <div className="flex items-baseline justify-center mb-2">
-                  <span className="text-4xl font-bold text-teal-card-text">
-                    ${getPrice(plan).toFixed(0)}
-                  </span>
-                  <span className="text-teal-card-text-muted ml-2">
-                    /{billingCycle === 'monthly' ? 'month' : 'year'}
-                  </span>
-                </div>
-                {billingCycle === 'yearly' && getSavings(plan) > 0 && (
-                  <div className="text-sm text-brand-teal font-semibold">
-                    Save ${getSavings(plan).toFixed(0)} per year
-                  </div>
-                )}
-              </div>
-
-              {/* Features */}
-              <div className="space-y-4 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
-                    <span className="text-brand-navy">{feature}</span>
-                  </div>
-                ))}
-                {plan.limitations.map((limitation, limitationIndex) => (
-                  <div key={limitationIndex} className="flex items-start gap-3 opacity-60">
-                    <div className="w-5 h-5 flex-shrink-0 mt-0.5">
-                      <div className="w-3 h-3 border border-brand-navy-light rounded-full mx-auto mt-1"></div>
-                    </div>
-                    <span className="text-brand-navy-light">{limitation}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* CTA Button */}
-              <button
-                className={`w-full py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 ${
-                  plan.popular
-                    ? 'gold-gradient text-brand-navy shadow-gold-glow hover:shadow-gold-glow-hover'
-                    : 'bg-white border-2 border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white shadow-brand-sm'
-                }`}
-              >
-                {plan.cta}
-              </button>
-
-              {/* Plan Note */}
-              <p className="text-center text-sm text-brand-navy-light mt-4">
-                Cancel anytime • Instant access
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <p className="text-brand-navy-light mb-4 text-lg">
-            Need a custom plan for your organization?
+        {/* Value Proposition */}
+        <div className="text-center mt-12">
+          <p className="text-white/70 text-sm">
+            Trusted by students and schools across the UK 🇬🇧
           </p>
-          <button className="px-8 py-3 bg-white border-2 border-brand-teal text-brand-teal font-bold rounded-xl hover:bg-brand-teal hover:text-white transition-all duration-300 shadow-brand-sm hover:shadow-brand-md hover:scale-105">
-            Contact Enterprise Sales
-          </button>
         </div>
       </div>
     </section>

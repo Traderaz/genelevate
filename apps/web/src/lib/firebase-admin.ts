@@ -1,8 +1,10 @@
 import { initializeApp, getApps, cert, App, ServiceAccount } from 'firebase-admin/app';
 import { getFirestore, Firestore } from 'firebase-admin/firestore';
+import { getAuth, Auth } from 'firebase-admin/auth';
 
 let adminApp: App;
 let adminDb: Firestore;
+let adminAuth: Auth;
 
 // Initialize Firebase Admin SDK
 function initializeFirebaseAdmin() {
@@ -43,17 +45,19 @@ function initializeFirebaseAdmin() {
         }
       }
 
-      // Get Firestore instance and configure settings immediately
+      // Get Firestore and Auth instances
       adminDb = getFirestore(adminApp);
       adminDb.settings({
         ignoreUndefinedProperties: true,
       });
+      adminAuth = getAuth(adminApp);
 
       console.log('✅ Firebase Admin SDK initialized successfully');
     } else {
       // Already initialized, just get the existing instances
       adminApp = getApps()[0];
       adminDb = getFirestore(adminApp);
+      adminAuth = getAuth(adminApp);
     }
   } catch (error: any) {
     console.error('❌ Firebase Admin SDK initialization failed:', error);
@@ -68,5 +72,5 @@ function initializeFirebaseAdmin() {
 // Initialize immediately
 initializeFirebaseAdmin();
 
-export { adminApp, adminDb, initializeFirebaseAdmin };
+export { adminApp, adminDb, adminAuth, initializeFirebaseAdmin };
 

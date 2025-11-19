@@ -40,14 +40,16 @@ export interface UserProfile {
   subjects: string[];
   institutionId?: string;
   role: 'student' | 'parent' | 'institution' | 'admin' | 'content-creator';
+  linkedChildEmail?: string; // For parent accounts - links to student
+  linkedParentEmails?: string[]; // For student accounts - links to parents
   subscription: {
-    plan: 'free' | 'student' | 'premium' | 'institution';
+    plan: 'free' | 'all-access' | 'student' | 'premium' | 'institution' | 'basic' | 'pro';
     status: 'active' | 'inactive' | 'cancelled';
     expiresAt?: Date;
     stripeCustomerId?: string;
     stripeSubscriptionId?: string;
     pendingPlanChange?: {
-      newPlan: 'free' | 'student' | 'premium' | 'institution';
+      newPlan: 'free' | 'all-access' | 'student' | 'premium' | 'institution' | 'basic' | 'pro';
       effectiveDate: Date;
       type: 'upgrade' | 'downgrade' | 'cancel';
     };
