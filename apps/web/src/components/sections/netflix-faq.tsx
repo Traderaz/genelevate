@@ -103,9 +103,6 @@ export function NetflixFAQ() {
             <button className="teal-button-primary">
               Contact Support
             </button>
-            <button className="px-6 py-3 bg-white border-2 border-teal-primary text-teal-primary font-semibold rounded-lg hover:bg-teal-primary hover:text-white transition-all duration-300">
-              Schedule a Demo
-            </button>
           </div>
         </div>
       </div>

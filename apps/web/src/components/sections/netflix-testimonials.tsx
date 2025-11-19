@@ -159,38 +159,6 @@ export function NetflixTestimonials() {
             ))}
           </div>
         </div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center p-6 brand-card rounded-2xl hover:scale-105 transition-all duration-300 shadow-brand-md">
-            <div className="text-4xl font-bold text-brand-teal mb-2">Courses</div>
-            <div className="text-brand-navy font-semibold mb-1">GCSE & A-Level</div>
-            <div className="text-sm text-brand-navy-light">Complete curriculum coverage</div>
-          </div>
-          <div className="text-center p-6 brand-card rounded-2xl hover:scale-105 transition-all duration-300 shadow-brand-md">
-            <div className="text-4xl font-bold text-brand-teal mb-2">Hundreds</div>
-            <div className="text-brand-navy font-semibold mb-1">Career Pathways</div>
-            <div className="text-sm text-brand-navy-light">Explore all your options</div>
-          </div>
-          <div className="text-center p-6 brand-card rounded-2xl hover:scale-105 transition-all duration-300 shadow-brand-md">
-            <div className="text-4xl font-bold text-brand-teal mb-2">24/7</div>
-            <div className="text-brand-navy font-semibold mb-1">AI Tutor</div>
-            <div className="text-sm text-brand-navy-light">Always here to help</div>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-16">
-          <p className="text-brand-navy-light mb-6 text-lg">
-            Ready to elevate your learning?
-          </p>
-          <a 
-            href="/register"
-            className="inline-block px-8 py-4 gold-gradient text-brand-navy font-bold rounded-xl shadow-gold-glow hover:shadow-gold-glow-hover hover:scale-105 transition-all duration-300"
-          >
-            Get Started Today
-          </a>
-        </div>
       </div>
     </section>
   );

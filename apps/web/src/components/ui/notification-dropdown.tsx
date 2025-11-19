@@ -147,11 +147,11 @@ export function NotificationDropdown({ isOpen, onClose }: NotificationDropdownPr
               <p className="text-xs mt-1">We'll notify you when something important happens</p>
             </div>
           ) : (
-            <div className="py-2">
+            <div className="divide-y divide-white/30">
               {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`relative p-4 hover:bg-accent/50 transition-colors cursor-pointer border-l-2 ${
+                  className={`relative p-4 hover:bg-accent/50 transition-colors cursor-pointer border-l-4 ${
                     notification.read 
                       ? 'border-transparent opacity-75' 
                       : 'border-primary'
@@ -166,13 +166,13 @@ export function NotificationDropdown({ isOpen, onClose }: NotificationDropdownPr
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <h4 className={`text-sm font-medium ${
-                          notification.read ? 'text-muted-foreground' : 'text-foreground'
+                          notification.read ? 'text-black/60' : 'text-black'
                         }`}>
                           {notification.title}
                         </h4>
                         
                         <div className="flex items-center gap-1 flex-shrink-0">
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs text-black/50">
                             {getTimeAgo(notification.createdAt)}
                           </span>
                           <button
@@ -180,7 +180,7 @@ export function NotificationDropdown({ isOpen, onClose }: NotificationDropdownPr
                               e.stopPropagation();
                               deleteNotification(notification.id);
                             }}
-                            className="p-1 text-muted-foreground hover:text-destructive transition-colors rounded opacity-0 group-hover:opacity-100"
+                            className="p-1 text-black/50 hover:text-destructive transition-colors rounded opacity-0 group-hover:opacity-100"
                           >
                             <X className="w-3 h-3" />
                           </button>
@@ -188,7 +188,7 @@ export function NotificationDropdown({ isOpen, onClose }: NotificationDropdownPr
                       </div>
                       
                       <p className={`text-sm mt-1 ${
-                        notification.read ? 'text-muted-foreground' : 'text-foreground/80'
+                        notification.read ? 'text-black/60' : 'text-black/80'
                       }`}>
                         {notification.message}
                       </p>

@@ -174,6 +174,15 @@ export default function AdminDashboard() {
       available: true
     },
     {
+      title: 'Experts Management',
+      description: 'Manage expert profiles featured on homepage',
+      icon: Users,
+      href: '/admin/experts',
+      color: 'bg-teal-500',
+      stats: 'Industry experts',
+      available: true
+    },
+    {
       title: 'System Monitoring',
       description: 'Monitor system health, performance, and analytics',
       icon: Activity,

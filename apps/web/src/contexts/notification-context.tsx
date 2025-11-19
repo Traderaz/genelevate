@@ -39,79 +39,36 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
   const { user, userProfile } = useAuth();
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  // Generate sample notifications based on user role and subscription
+  // Load real notifications from localStorage on mount
   useEffect(() => {
-    if (user && userProfile) {
-      const sampleNotifications: Notification[] = [
-        {
-          id: '1',
-          title: 'Welcome to Gen Elevate!',
-          message: 'Complete your profile to get personalized course recommendations.',
-          type: 'info',
-          read: false,
-          createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
-          actionUrl: '/dashboard/profile',
-          actionText: 'Complete Profile',
-          icon: '👋'
-        },
-        {
-          id: '2',
-          title: 'New Course Available',
-          message: 'Advanced Mathematics for A-Level students is now live!',
-          type: 'course',
-          read: false,
-          createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
-          actionUrl: '/courses',
-          actionText: 'View Course',
-          icon: '📚'
-        },
-        {
-          id: '3',
-          title: 'Upcoming Webinar',
-          message: 'Join our live session on "Study Techniques" tomorrow at 3 PM.',
-          type: 'webinar',
-          read: true,
-          createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
-          actionUrl: '/webinars',
-          actionText: 'Join Webinar',
-          icon: '🎥'
+    if (user) {
+      // Load saved notifications from localStorage for this user
+      const savedNotifications = localStorage.getItem(`notifications_${user.uid}`);
+      if (savedNotifications) {
+        try {
+          const parsed = JSON.parse(savedNotifications);
+          // Convert date strings back to Date objects
+          const notifications = parsed.map((n: any) => ({
+            ...n,
+            createdAt: new Date(n.createdAt)
+          }));
+          setNotifications(notifications);
+        } catch (error) {
+          console.error('Error loading notifications:', error);
+          setNotifications([]);
         }
-      ];
-
-      // Add role-specific notifications
-      if (userProfile.role === 'content-creator') {
-        sampleNotifications.push({
-          id: '4',
-          title: 'Content Approval Status',
-          message: 'Your recent course submission is under review.',
-          type: 'info',
-          read: false,
-          createdAt: new Date(Date.now() - 6 * 60 * 60 * 1000), // 6 hours ago
-          actionUrl: '/creator-dashboard',
-          actionText: 'View Status',
-          icon: '⏳'
-        });
       }
-
-      if (userProfile.subscription?.plan === 'free') {
-        sampleNotifications.push({
-          id: '5',
-          title: 'Upgrade to Premium',
-          message: 'Unlock unlimited access to all courses and AI features.',
-          type: 'info',
-          read: false,
-          createdAt: new Date(Date.now() - 30 * 60 * 1000), // 30 minutes ago
-          actionUrl: '#pricing',
-          actionText: 'Upgrade Now',
-          icon: '⭐'
-        });
-      }
-
-      setNotifications(sampleNotifications);
     } else {
       setNotifications([]);
     }
-  }, [user, userProfile]);
+  }, [user]);
+
+  // Save notifications to localStorage whenever they change
+  useEffect(() => {
+    if (user && notifications.length >= 0) {
+      localStorage.setItem(`notifications_${user.uid}`, JSON.stringify(notifications));
+    }
+  }, [notifications, user]);
 
   const unreadCount = useMemo(() => {
     return notifications.filter(n => !n.read).length;

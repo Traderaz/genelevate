@@ -12,6 +12,14 @@ service firebase.storage {
                      request.resource.contentType.matches('image/.*'); // Only images
     }
     
+    // Expert images - authenticated users can upload, anyone can read
+    match /experts/{imageId} {
+      allow read: if true;
+      allow write: if request.auth != null &&
+                     request.resource.size < 5 * 1024 * 1024 && // Max 5MB
+                     request.resource.contentType.matches('image/.*'); // Only images
+    }
+    
     // User profile images
     match /profiles/{userId}/{imageId} {
       allow read: if true;
