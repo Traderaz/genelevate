@@ -290,38 +290,23 @@ export function CareerDetail({ careerId }: CareerDetailProps) {
               <div>
                 <p className="text-sm text-[#666666] font-medium mb-2">Top Employers</p>
                 <div className="flex flex-wrap gap-2">
-                  {career.industryInsights.topEmployers.map((employer, index) => (
-                    <span key={index} className="px-2 py-1 bg-teal-light/20 text-teal-primary border border-teal-primary/40 text-xs rounded-full font-medium">
-                      {employer}
-                    </span>
-                  ))}
+                  {career.industryInsights?.topEmployers?.length > 0 ? (
+                    career.industryInsights.topEmployers.map((employer, index) => (
+                      <span key={index} className="px-2 py-1 bg-teal-light/20 text-teal-primary border border-teal-primary/40 text-xs rounded-full font-medium">
+                        {employer}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-sm text-[#666666]">N/A</span>
+                  )}
                 </div>
               </div>
               <div>
                 <p className="text-sm text-[#666666] font-medium mb-2">Future Outlook</p>
                 <p className="text-sm text-[#2a2a2a] leading-relaxed font-medium">
-                  {career.industryInsights.futureOutlook}
+                  {career.industryInsights?.futureOutlook || 'N/A'}
                 </p>
               </div>
-            </div>
-          </div>
-
-          {/* Related Courses */}
-          <div className="bg-white/95 backdrop-blur-lg border-2 border-teal-primary/30 rounded-xl p-6 shadow-xl">
-            <h3 className="text-xl font-bold text-[#0B5C9E] mb-4">Related Courses</h3>
-            <div className="space-y-3">
-              {career.relatedCourses.map((course) => (
-                <a
-                  key={course.id}
-                  href={`/courses/${course.id}`}
-                  className="block p-3 bg-teal-light/10 border-2 border-teal-light/30 rounded-lg hover:border-teal-gold hover:bg-teal-gold/10 transition-all group"
-                >
-                  <p className="font-semibold text-[#0B5C9E] group-hover:text-teal-primary transition-colors">
-                    {course.title}
-                  </p>
-                  <p className="text-sm text-[#666666] font-medium">{course.subject}</p>
-                </a>
-              ))}
             </div>
           </div>
         </div>

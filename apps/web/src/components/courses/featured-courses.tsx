@@ -90,10 +90,18 @@ export function FeaturedCourses() {
 
               {/* Metadata */}
               <div className="flex items-center gap-4 text-sm text-teal-card-text-muted">
-                <div className="flex items-center gap-1">
-                  <BookOpen className="w-4 h-4" />
-                  <span>{course.chapters.length} chapters</span>
-                </div>
+                {course.chapters && course.chapters.length > 0 && (
+                  <div className="flex items-center gap-1">
+                    <BookOpen className="w-4 h-4" />
+                    <span>{course.chapters.length} chapters</span>
+                  </div>
+                )}
+                {course.moduleCount && (
+                  <div className="flex items-center gap-1">
+                    <BookOpen className="w-4 h-4" />
+                    <span>{course.moduleCount} modules</span>
+                  </div>
+                )}
                 {course.enrollmentCount !== undefined && course.enrollmentCount > 0 && (
                   <div className="flex items-center gap-1">
                     <Users className="w-4 h-4" />

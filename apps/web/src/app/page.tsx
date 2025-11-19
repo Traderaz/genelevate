@@ -18,6 +18,7 @@ const MeetTheFounder = dynamic(() => import('@/components/sections/meet-the-foun
 const MeetTheExperts = dynamic(() => import('@/components/sections/meet-the-experts').then(mod => ({ default: mod.MeetTheExperts })));
 const NetflixFeatures = dynamic(() => import('@/components/sections/netflix-features').then(mod => ({ default: mod.NetflixFeatures })));
 const NetflixPricing = dynamic(() => import('@/components/sections/netflix-pricing').then(mod => ({ default: mod.NetflixPricing })));
+const SuccessStories = dynamic(() => import('@/components/sections/success-stories').then(mod => ({ default: mod.SuccessStories })));
 const NetflixTestimonials = dynamic(() => import('@/components/sections/netflix-testimonials').then(mod => ({ default: mod.NetflixTestimonials })));
 const NetflixFAQ = dynamic(() => import('@/components/sections/netflix-faq').then(mod => ({ default: mod.NetflixFAQ })));
 
@@ -32,6 +33,7 @@ export default function HomePage() {
         <NetflixFeatures />
         <NetflixPricing />
         <MeetTheExperts />
+        <SuccessStories />
         <NetflixTestimonials />
         <NetflixFAQ />
       </main>

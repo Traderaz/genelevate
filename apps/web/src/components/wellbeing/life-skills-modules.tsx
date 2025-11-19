@@ -1,8 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { Coins, Shield, MessageCircle, Brain, Lock, CheckCircle, Play, Clock } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Coins, Shield, MessageCircle, Brain, Lock, CheckCircle, Play, Clock, Calendar } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/auth-context';
+import { getAllModuleProgress, checkModuleUnlock } from '@/lib/services/module-progress';
+import { ModuleProgress, ModuleUnlockInfo } from '@/types/module-progress';
 
 interface Module {
   id: string;
@@ -13,13 +16,53 @@ interface Module {
   lessons: number;
   completed: number;
   locked: boolean;
+  unlockInfo?: ModuleUnlockInfo;
   icon: any;
   color: string;
   bgColor: string;
 }
 
 export function LifeSkillsModules() {
+  const { user } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [moduleProgress, setModuleProgress] = useState<Map<string, ModuleProgress>>(new Map());
+  const [unlockInfoMap, setUnlockInfoMap] = useState<Map<string, ModuleUnlockInfo>>(new Map());
+  const [loading, setLoading] = useState(true);
+
+  // Load user progress and unlock status
+  useEffect(() => {
+    async function loadModuleData() {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Load all progress
+        const progress = await getAllModuleProgress(user.uid);
+        const progressMap = new Map<string, ModuleProgress>();
+        progress.forEach(p => progressMap.set(p.moduleId, p));
+        setModuleProgress(progressMap);
+
+        // Check unlock status for all modules
+        const unlockMap = new Map<string, ModuleUnlockInfo>();
+        const moduleIds = modules.map(m => m.id);
+        
+        for (const moduleId of moduleIds) {
+          const unlockInfo = await checkModuleUnlock(user.uid, moduleId);
+          unlockMap.set(moduleId, unlockInfo);
+        }
+        
+        setUnlockInfoMap(unlockMap);
+      } catch (error) {
+        console.error('Error loading module data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadModuleData();
+  }, [user]);
 
   const categories = [
     { id: 'all', label: 'All Modules', icon: null },
@@ -286,9 +329,22 @@ export function LifeSkillsModules() {
     }
   ];
 
+  // Enrich modules with progress and unlock info
+  const enrichedModules = modules.map(module => {
+    const progress = moduleProgress.get(module.id);
+    const unlockInfo = unlockInfoMap.get(module.id);
+    
+    return {
+      ...module,
+      completed: progress?.lessonsCompleted || 0,
+      locked: unlockInfo ? !unlockInfo.isUnlocked : true,
+      unlockInfo
+    };
+  });
+
   const filteredModules = selectedCategory === 'all'
-    ? modules
-    : modules.filter(m => m.category === selectedCategory);
+    ? enrichedModules
+    : enrichedModules.filter(m => m.category === selectedCategory);
 
   const getProgressPercentage = (completed: number, total: number) => {
     return Math.round((completed / total) * 100);
@@ -296,6 +352,14 @@ export function LifeSkillsModules() {
 
   const getStatusBadge = (module: Module) => {
     if (module.locked) {
+      if (module.unlockInfo?.daysUntilUnlock) {
+        return (
+          <span className="px-2 py-1 bg-gray-500/10 text-gray-500 text-xs rounded-full flex items-center gap-1">
+            <Lock className="w-3 h-3" />
+            {module.unlockInfo.daysUntilUnlock}d
+          </span>
+        );
+      }
       return (
         <span className="px-2 py-1 bg-gray-500/10 text-gray-500 text-xs rounded-full flex items-center gap-1">
           <Lock className="w-3 h-3" />
@@ -326,6 +390,14 @@ export function LifeSkillsModules() {
     );
   };
 
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="h-64 teal-card animate-pulse rounded-xl" />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -334,6 +406,15 @@ export function LifeSkillsModules() {
         <span className="text-sm text-white/80">
           {filteredModules.length} module{filteredModules.length !== 1 ? 's' : ''}
         </span>
+      </div>
+
+      {/* Info Banner */}
+      <div className="teal-card p-4 flex items-start gap-3">
+        <Calendar className="w-5 h-5 text-teal-primary flex-shrink-0 mt-0.5" />
+        <div className="text-sm text-teal-card-text-muted">
+          <strong className="text-teal-card-text">Sequential Learning:</strong> Complete modules in order. 
+          New modules unlock 7 days after completing the previous one.
+        </div>
       </div>
 
       {/* Category Filter */}
@@ -392,8 +473,8 @@ export function LifeSkillsModules() {
                 <span>{module.lessons} lessons</span>
               </div>
 
-              {/* Progress */}
-              {!module.locked && (
+              {/* Progress or Lock Info */}
+              {!module.locked ? (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-teal-card-text-muted">Progress</span>
@@ -411,6 +492,24 @@ export function LifeSkillsModules() {
                       style={{ width: `${getProgressPercentage(module.completed, module.lessons)}%` }}
                     ></div>
                   </div>
+                </div>
+              ) : (
+                <div className="space-y-2 p-3 bg-gray-500/5 rounded-lg border border-gray-500/10">
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <Lock className="w-4 h-4" />
+                    <span className="font-medium">
+                      {module.unlockInfo?.daysUntilUnlock 
+                        ? `Unlocks in ${module.unlockInfo.daysUntilUnlock} day${module.unlockInfo.daysUntilUnlock !== 1 ? 's' : ''}`
+                        : module.unlockInfo?.previousModuleId
+                          ? 'Complete previous module first'
+                          : 'Locked'}
+                    </span>
+                  </div>
+                  {module.unlockInfo?.previousCompletedAt && module.unlockInfo?.daysUntilUnlock && (
+                    <div className="text-xs text-gray-500">
+                      Available: {new Date(module.unlockInfo.previousCompletedAt.getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}
+                    </div>
+                  )}
                 </div>
               )}
             </div>

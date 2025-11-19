@@ -133,24 +133,6 @@ export function SimpleHomeHeader() {
                       >
                         My Profile
                       </button>
-                      <button
-                        onClick={() => {
-                          setIsProfileMenuOpen(false);
-                          router.push('/courses');
-                        }}
-                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
-                      >
-                        My Courses
-                      </button>
-                      <button
-                        onClick={() => {
-                          setIsProfileMenuOpen(false);
-                          router.push('/dashboard/progress');
-                        }}
-                        className="w-full text-left px-4 py-2 text-sm text-brand-navy hover:bg-brand-bg-light hover:text-brand-teal transition-colors"
-                      >
-                        Progress
-                      </button>
                       
                       <div className="border-t border-brand-blue-deep/10 my-2"></div>
                       

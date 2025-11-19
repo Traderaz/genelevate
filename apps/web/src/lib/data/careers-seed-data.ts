@@ -1076,6 +1076,529 @@ export const careersSeedData: Omit<CareerDetail, 'id' | 'createdAt' | 'updatedAt
       { title: 'Chartered Institute of Personnel and Development', url: 'https://www.cipd.co.uk/' },
       { title: 'ACAS - Advisory, Conciliation and Arbitration Service', url: 'https://www.acas.org.uk/' }
     ]
+  },
+
+  // Additional Technology Careers
+  {
+    title: 'Full Stack Developer',
+    sector: 'Technology',
+    description: 'Build complete web applications handling both front-end and back-end development',
+    salaryRange: '£35K - £70K',
+    growthRate: '+18%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide, Remote options',
+    skills: ['React', 'Node.js', 'MongoDB', 'REST APIs', 'Docker'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'Full stack developers have expertise in both client-side and server-side technologies.',
+    responsibilities: ['Develop front-end interfaces', 'Build backend APIs', 'Manage databases', 'Deploy applications'],
+    requirements: ['Degree in Computer Science', 'Experience with modern frameworks', 'Database knowledge'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Junior Full Stack Developer', years: '0-2 years', salary: '£28K - £40K' },
+      { level: 'Mid Level', title: 'Full Stack Developer', years: '2-5 years', salary: '£40K - £60K' },
+      { level: 'Senior Level', title: 'Senior Full Stack Developer', years: '5+ years', salary: '£60K - £85K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '1,500+', 
+      averageSalary: '£50K', 
+      topEmployers: ['Amazon', 'Google', 'Microsoft', 'Meta', 'Startups'], 
+      futureOutlook: 'Excellent growth expected with +18% increase. High demand for full stack developers across all industries.', 
+      jobSatisfaction: '85%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Write code, attend stand-ups, review PRs, fix bugs, collaborate with designers',
+    workEnvironment: 'Office or remote, collaborative team environment',
+    furtherReading: []
+  },
+  {
+    title: 'DevOps Engineer',
+    sector: 'Technology',
+    description: 'Automate and optimize development and deployment processes',
+    salaryRange: '£40K - £75K',
+    growthRate: '+20%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide, Remote options',
+    skills: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Linux'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'DevOps engineers bridge development and operations teams.',
+    responsibilities: ['Automate deployments', 'Manage cloud infrastructure', 'Monitor systems'],
+    requirements: ['Cloud platform experience', 'Scripting skills', 'System administration'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Junior DevOps Engineer', years: '0-2 years', salary: '£32K - £45K' },
+      { level: 'Senior Level', title: 'Senior DevOps Engineer', years: '5+ years', salary: '£60K - £90K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '2,000+', 
+      averageSalary: '£55K', 
+      topEmployers: ['AWS', 'Google Cloud', 'Microsoft Azure', 'Red Hat', 'HashiCorp'], 
+      futureOutlook: 'Exceptional growth of +20%. DevOps practices becoming standard across all tech companies.', 
+      jobSatisfaction: '82%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Configure pipelines, troubleshoot production issues, optimize infrastructure',
+    workEnvironment: 'Hybrid or remote work',
+    furtherReading: []
+  },
+  {
+    title: 'Cloud Architect',
+    sector: 'Technology',
+    description: 'Design and implement cloud computing solutions and strategies',
+    salaryRange: '£60K - £100K',
+    growthRate: '+22%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide, Remote options',
+    skills: ['AWS', 'Azure', 'GCP', 'Architecture Design', 'Security'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'Cloud architects design scalable and secure cloud infrastructure.',
+    responsibilities: ['Design cloud solutions', 'Plan migrations', 'Ensure security compliance'],
+    requirements: ['Senior cloud experience', 'Multiple cloud certifications', 'Architecture skills'],
+    careerPath: [
+      { level: 'Mid Level', title: 'Cloud Engineer', years: '3-5 years', salary: '£45K - £65K' },
+      { level: 'Senior Level', title: 'Cloud Architect', years: '7+ years', salary: '£70K - £110K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '1,200+', 
+      averageSalary: '£80K', 
+      topEmployers: ['AWS', 'Microsoft', 'Google', 'IBM', 'Tech Consultancies'], 
+      futureOutlook: 'Outstanding +22% growth as businesses migrate to cloud. Critical role for digital transformation.', 
+      jobSatisfaction: '88%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Design solutions, consult with teams, review architectures',
+    workEnvironment: 'Flexible, remote-friendly',
+    furtherReading: []
+  },
+  {
+    title: 'Mobile App Developer',
+    sector: 'Technology',
+    description: 'Create applications for iOS and Android platforms',
+    salaryRange: '£32K - £65K',
+    growthRate: '+16%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide, Remote options',
+    skills: ['Swift', 'Kotlin', 'React Native', 'Flutter', 'Mobile UI'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'Mobile developers build apps for smartphones and tablets.',
+    responsibilities: ['Develop mobile apps', 'Optimize performance', 'Test on devices'],
+    requirements: ['Mobile development experience', 'App store knowledge', 'UI/UX understanding'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Junior Mobile Developer', years: '0-2 years', salary: '£28K - £40K' },
+      { level: 'Senior Level', title: 'Senior Mobile Developer', years: '5+ years', salary: '£55K - £80K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '1,800+', 
+      averageSalary: '£48K', 
+      topEmployers: ['Apple', 'Google', 'Meta', 'Banking Apps', 'Gaming Studios'], 
+      futureOutlook: 'Strong +16% growth with mobile-first trend. iOS and Android platforms continue expanding.', 
+      jobSatisfaction: '83%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Code features, fix bugs, test apps, collaborate with designers',
+    workEnvironment: 'Office or remote',
+    furtherReading: []
+  },
+  {
+    title: 'AI/ML Engineer',
+    sector: 'Technology',
+    description: 'Develop artificial intelligence and machine learning models',
+    salaryRange: '£45K - £90K',
+    growthRate: '+25%',
+    education: 'Master\'s Degree',
+    location: 'UK-wide, London',
+    skills: ['Python', 'TensorFlow', 'PyTorch', 'Statistics', 'Neural Networks'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'AI engineers create intelligent systems and machine learning models.',
+    responsibilities: ['Build ML models', 'Train algorithms', 'Deploy AI systems'],
+    requirements: ['Advanced degree', 'Strong math skills', 'ML framework experience'],
+    careerPath: [
+      { level: 'Mid Level', title: 'ML Engineer', years: '2-5 years', salary: '£40K - £65K' },
+      { level: 'Senior Level', title: 'Senior AI Engineer', years: '5+ years', salary: '£70K - £110K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '3,500+', 
+      averageSalary: '£65K', 
+      topEmployers: ['DeepMind', 'OpenAI', 'Meta AI', 'Amazon AI', 'Research Labs'], 
+      futureOutlook: 'Explosive +25% growth. AI/ML transforming every industry. Highest demand in tech sector.', 
+      jobSatisfaction: '90%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Train models, analyze data, research algorithms, optimize performance',
+    workEnvironment: 'Tech companies, research labs',
+    furtherReading: []
+  },
+
+  // Healthcare Careers
+  {
+    title: 'General Practitioner (GP)',
+    sector: 'Healthcare',
+    description: 'Provide primary healthcare services and patient care',
+    salaryRange: '£60K - £100K',
+    growthRate: '+8%',
+    education: 'Medical Degree',
+    location: 'UK-wide',
+    skills: ['Diagnosis', 'Patient Care', 'Medical Knowledge', 'Communication'],
+    trending: false,
+    demandLevel: 'high',
+    overview: 'GPs are primary care physicians who treat a wide range of conditions.',
+    responsibilities: ['Diagnose illnesses', 'Prescribe treatments', 'Refer to specialists'],
+    requirements: ['Medical degree', 'GMC registration', 'GP training'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Foundation Doctor', years: '0-2 years', salary: '£32K - £45K' },
+      { level: 'Senior Level', title: 'GP Partner', years: '10+ years', salary: '£80K - £120K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '5,000+', 
+      averageSalary: '£75K', 
+      topEmployers: ['NHS', 'Private Practices', 'Bupa', 'Nuffield Health'], 
+      futureOutlook: 'Steady +8% growth. Ongoing NHS recruitment needs. Aging population driving demand.', 
+      jobSatisfaction: '75%', 
+      workLifeBalance: 'Moderate' 
+    },
+    typicalDay: 'See patients, diagnose conditions, write prescriptions, admin tasks',
+    workEnvironment: 'GP surgery or clinic',
+    furtherReading: []
+  },
+  {
+    title: 'Pharmacist',
+    sector: 'Healthcare',
+    description: 'Dispense medications and provide pharmaceutical care',
+    salaryRange: '£32K - £55K',
+    growthRate: '+6%',
+    education: 'Master\'s Degree',
+    location: 'UK-wide',
+    skills: ['Pharmacy Knowledge', 'Patient Consultation', 'Attention to Detail'],
+    trending: false,
+    demandLevel: 'medium',
+    overview: 'Pharmacists ensure safe and effective medication use.',
+    responsibilities: ['Dispense medicines', 'Advise patients', 'Check prescriptions'],
+    requirements: ['Pharmacy degree', 'GPhC registration', 'Clinical knowledge'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Pre-Registration Pharmacist', years: '0-1 years', salary: '£24K - £28K' },
+      { level: 'Senior Level', title: 'Lead Pharmacist', years: '7+ years', salary: '£45K - £65K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '3,200+', 
+      averageSalary: '£42K', 
+      topEmployers: ['Boots', 'Lloyds Pharmacy', 'NHS Hospitals', 'Superdrug'], 
+      futureOutlook: 'Moderate +6% growth. Community pharmacies expanding clinical services role.', 
+      jobSatisfaction: '78%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Dispense prescriptions, counsel patients, manage inventory',
+    workEnvironment: 'Community pharmacy or hospital',
+    furtherReading: []
+  },
+  {
+    title: 'Paramedic',
+    sector: 'Healthcare',
+    description: 'Provide emergency medical care and transportation',
+    salaryRange: '£28K - £45K',
+    growthRate: '+7%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide',
+    skills: ['Emergency Care', 'Quick Thinking', 'Medical Procedures', 'Driving'],
+    trending: false,
+    demandLevel: 'high',
+    overview: 'Paramedics respond to emergency calls and provide critical care.',
+    responsibilities: ['Respond to emergencies', 'Assess patients', 'Administer treatment'],
+    requirements: ['Paramedic degree', 'HCPC registration', 'Driving license'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Student Paramedic', years: '0-2 years', salary: '£24K - £30K' },
+      { level: 'Senior Level', title: 'Advanced Paramedic', years: '7+ years', salary: '£40K - £52K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '2,800+', 
+      averageSalary: '£38K', 
+      topEmployers: ['NHS Ambulance Trusts', 'St John Ambulance', 'Private Ambulance Services'], 
+      futureOutlook: 'Positive +7% growth. Essential emergency service with consistent demand.', 
+      jobSatisfaction: '80%', 
+      workLifeBalance: 'Challenging' 
+    },
+    typicalDay: 'Respond to 999 calls, provide emergency care, transport patients',
+    workEnvironment: 'Ambulance service, high-pressure situations',
+    furtherReading: []
+  },
+
+  // Education Careers
+  {
+    title: 'Primary School Teacher',
+    sector: 'Education',
+    description: 'Teach children aged 5-11 across multiple subjects',
+    salaryRange: '£28K - £45K',
+    growthRate: '+5%',
+    education: 'Bachelor\'s Degree + PGCE',
+    location: 'UK-wide',
+    skills: ['Teaching', 'Patience', 'Communication', 'Classroom Management'],
+    trending: false,
+    demandLevel: 'high',
+    overview: 'Primary teachers educate young children in core subjects.',
+    responsibilities: ['Plan lessons', 'Teach curriculum', 'Assess students', 'Parent communication'],
+    requirements: ['Teaching qualification', 'QTS status', 'DBS check'],
+    careerPath: [
+      { level: 'Entry Level', title: 'NQT', years: '0-1 years', salary: '£28K - £32K' },
+      { level: 'Senior Level', title: 'Headteacher', years: '15+ years', salary: '£50K - £80K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '8,500+', 
+      averageSalary: '£35K', 
+      topEmployers: ['Local Authorities', 'Academy Trusts', 'Private Schools'], 
+      futureOutlook: 'Stable +5% growth. High teacher shortages creating opportunities.', 
+      jobSatisfaction: '76%', 
+      workLifeBalance: 'Challenging' 
+    },
+    typicalDay: 'Teach classes, mark work, plan lessons, meetings',
+    workEnvironment: 'Primary school',
+    furtherReading: []
+  },
+  {
+    title: 'University Lecturer',
+    sector: 'Education',
+    description: 'Teach undergraduate and postgraduate students',
+    salaryRange: '£35K - £65K',
+    growthRate: '+4%',
+    education: 'PhD',
+    location: 'UK-wide',
+    skills: ['Subject Expertise', 'Research', 'Teaching', 'Public Speaking'],
+    trending: false,
+    demandLevel: 'medium',
+    overview: 'Lecturers teach at university level and conduct research.',
+    responsibilities: ['Deliver lectures', 'Conduct research', 'Supervise students', 'Publish papers'],
+    requirements: ['PhD', 'Research experience', 'Publications'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Lecturer', years: '0-5 years', salary: '£35K - £45K' },
+      { level: 'Senior Level', title: 'Professor', years: '15+ years', salary: '£60K - £95K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '2,500+', 
+      averageSalary: '£48K', 
+      topEmployers: ['Russell Group Universities', 'Red Brick Universities', 'Research Institutions'], 
+      futureOutlook: 'Steady +4% growth. Increasing student numbers supporting academic positions.', 
+      jobSatisfaction: '80%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Lecture, research, supervise students, write papers',
+    workEnvironment: 'University campus',
+    furtherReading: []
+  },
+
+  // Engineering Careers
+  {
+    title: 'Software Test Engineer',
+    sector: 'Technology',
+    description: 'Test software applications to ensure quality and functionality',
+    salaryRange: '£28K - £50K',
+    growthRate: '+12%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide',
+    skills: ['Testing', 'Automation', 'Bug Tracking', 'Attention to Detail'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'QA engineers ensure software meets quality standards.',
+    responsibilities: ['Write test cases', 'Execute tests', 'Report bugs', 'Automate testing'],
+    requirements: ['Testing experience', 'Programming knowledge', 'Analytical skills'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Junior QA', years: '0-2 years', salary: '£24K - £32K' },
+      { level: 'Senior Level', title: 'Lead QA Engineer', years: '5+ years', salary: '£45K - £65K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '1,700+', 
+      averageSalary: '£40K', 
+      topEmployers: ['Tech Companies', 'Financial Services', 'Consulting Firms', 'Startups'], 
+      futureOutlook: 'Strong +12% growth. Quality assurance becoming more critical in software development.', 
+      jobSatisfaction: '79%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Test software, write automated tests, report issues',
+    workEnvironment: 'Office or remote',
+    furtherReading: []
+  },
+  {
+    title: 'Architect',
+    sector: 'Engineering',
+    description: 'Design buildings and oversee construction projects',
+    salaryRange: '£35K - £65K',
+    growthRate: '+6%',
+    education: 'Master\'s Degree',
+    location: 'UK-wide, London',
+    skills: ['Design', 'CAD', 'Planning', 'Technical Drawing', 'Building Regulations'],
+    trending: false,
+    demandLevel: 'medium',
+    overview: 'Architects design functional and aesthetically pleasing buildings.',
+    responsibilities: ['Create designs', 'Plan layouts', 'Liaise with clients', 'Manage projects'],
+    requirements: ['Architecture degree', 'RIBA qualification', 'Design portfolio'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Part 1 Architectural Assistant', years: '0-2 years', salary: '£22K - £28K' },
+      { level: 'Senior Level', title: 'Senior Architect', years: '10+ years', salary: '£55K - £85K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '1,400+', 
+      averageSalary: '£50K', 
+      topEmployers: ['Foster + Partners', 'Zaha Hadid Architects', 'Regional Architecture Firms'], 
+      futureOutlook: 'Moderate +6% growth. Sustainable building design driving new opportunities.', 
+      jobSatisfaction: '82%', 
+      workLifeBalance: 'Moderate' 
+    },
+    typicalDay: 'Draw plans, meet clients, visit sites, collaborate with engineers',
+    workEnvironment: 'Architectural firm or self-employed',
+    furtherReading: []
+  },
+
+  // Business & Finance
+  {
+    title: 'Management Consultant',
+    sector: 'Business',
+    description: 'Advise organizations on improving performance and efficiency',
+    salaryRange: '£40K - £85K',
+    growthRate: '+10%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide, London',
+    skills: ['Analysis', 'Problem Solving', 'Communication', 'Strategy'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'Consultants help businesses solve problems and improve operations.',
+    responsibilities: ['Analyze business processes', 'Develop strategies', 'Present recommendations'],
+    requirements: ['Business degree', 'Analytical skills', 'Client management'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Analyst', years: '0-2 years', salary: '£32K - £45K' },
+      { level: 'Senior Level', title: 'Principal Consultant', years: '8+ years', salary: '£70K - £120K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '2,200+', 
+      averageSalary: '£60K', 
+      topEmployers: ['McKinsey', 'BCG', 'Deloitte', 'PwC', 'Accenture'], 
+      futureOutlook: 'Strong +10% growth. Digital transformation driving consulting demand.', 
+      jobSatisfaction: '81%', 
+      workLifeBalance: 'Challenging' 
+    },
+    typicalDay: 'Meet clients, analyze data, create presentations, solve problems',
+    workEnvironment: 'Consulting firm, client sites',
+    furtherReading: []
+  },
+  {
+    title: 'Investment Banker',
+    sector: 'Finance',
+    description: 'Provide financial advisory services for corporations and institutions',
+    salaryRange: '£45K - £150K+',
+    growthRate: '+8%',
+    education: 'Bachelor\'s Degree',
+    location: 'London',
+    skills: ['Financial Modeling', 'Analysis', 'Negotiation', 'Excel'],
+    trending: false,
+    demandLevel: 'medium',
+    overview: 'Investment bankers help clients raise capital and manage mergers.',
+    responsibilities: ['Financial analysis', 'Deal structuring', 'Client presentations'],
+    requirements: ['Finance degree', 'Financial modeling skills', 'Long hours tolerance'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Analyst', years: '0-3 years', salary: '£45K - £65K' },
+      { level: 'Senior Level', title: 'Managing Director', years: '12+ years', salary: '£150K+' }
+    ],
+    industryInsights: { 
+      jobOpenings: '800+', 
+      averageSalary: '£85K', 
+      topEmployers: ['Goldman Sachs', 'JP Morgan', 'Morgan Stanley', 'Barclays', 'HSBC'], 
+      futureOutlook: 'Moderate +8% growth. London remains major financial center with ongoing deal activity.', 
+      jobSatisfaction: '70%', 
+      workLifeBalance: 'Poor' 
+    },
+    typicalDay: 'Financial modeling, client meetings, pitch books, long hours',
+    workEnvironment: 'Investment bank, high-pressure',
+    furtherReading: []
+  },
+  {
+    title: 'Business Analyst',
+    sector: 'Business',
+    description: 'Analyze business processes and recommend improvements',
+    salaryRange: '£30K - £55K',
+    growthRate: '+11%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide',
+    skills: ['Analysis', 'Requirements Gathering', 'Process Mapping', 'Communication'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'Business analysts bridge business needs and IT solutions.',
+    responsibilities: ['Gather requirements', 'Analyze processes', 'Document workflows'],
+    requirements: ['Business degree', 'Analytical thinking', 'Stakeholder management'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Junior BA', years: '0-2 years', salary: '£25K - £35K' },
+      { level: 'Senior Level', title: 'Senior BA', years: '5+ years', salary: '£50K - £70K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '3,000+', 
+      averageSalary: '£42K', 
+      topEmployers: ['Financial Services', 'Tech Companies', 'Consulting', 'Retail'], 
+      futureOutlook: 'Strong +11% growth. Digital transformation creating high BA demand across sectors.', 
+      jobSatisfaction: '80%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Meet stakeholders, document requirements, analyze data',
+    workEnvironment: 'Office-based or hybrid',
+    furtherReading: []
+  },
+
+  // Creative & Media
+  {
+    title: 'Content Writer',
+    sector: 'Creative',
+    description: 'Create written content for websites, blogs, and marketing',
+    salaryRange: '£22K - £40K',
+    growthRate: '+14%',
+    education: 'Bachelor\'s Degree',
+    location: 'UK-wide, Remote',
+    skills: ['Writing', 'SEO', 'Research', 'Editing', 'Content Strategy'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'Content writers create engaging written material for various platforms.',
+    responsibilities: ['Write articles', 'Research topics', 'Optimize for SEO', 'Edit content'],
+    requirements: ['Strong writing skills', 'Portfolio', 'SEO knowledge'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Junior Writer', years: '0-2 years', salary: '£20K - £28K' },
+      { level: 'Senior Level', title: 'Content Lead', years: '5+ years', salary: '£35K - £50K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '4,500+', 
+      averageSalary: '£32K', 
+      topEmployers: ['Digital Agencies', 'Tech Companies', 'Marketing Firms', 'Media Companies'], 
+      futureOutlook: 'Excellent +14% growth. Content marketing essential for digital presence.', 
+      jobSatisfaction: '78%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Write articles, research topics, edit work, collaborate with team',
+    workEnvironment: 'Remote-friendly',
+    furtherReading: []
+  },
+  {
+    title: 'Video Editor',
+    sector: 'Creative',
+    description: 'Edit and produce video content for various media',
+    salaryRange: '£24K - £45K',
+    growthRate: '+13%',
+    education: 'Bachelor\'s Degree or Portfolio',
+    location: 'UK-wide, London',
+    skills: ['Premiere Pro', 'After Effects', 'Storytelling', 'Color Grading'],
+    trending: true,
+    demandLevel: 'high',
+    overview: 'Video editors craft compelling visual stories through editing.',
+    responsibilities: ['Edit footage', 'Add effects', 'Color correction', 'Audio mixing'],
+    requirements: ['Editing software proficiency', 'Creative eye', 'Portfolio'],
+    careerPath: [
+      { level: 'Entry Level', title: 'Junior Editor', years: '0-2 years', salary: '£20K - £28K' },
+      { level: 'Senior Level', title: 'Lead Editor', years: '5+ years', salary: '£40K - £60K' }
+    ],
+    industryInsights: { 
+      jobOpenings: '2,900+', 
+      averageSalary: '£35K', 
+      topEmployers: ['BBC', 'Sky', 'Production Companies', 'YouTube Creators', 'Agencies'], 
+      futureOutlook: 'Strong +13% growth. Video content explosion across social media and streaming.', 
+      jobSatisfaction: '84%', 
+      workLifeBalance: 'Good' 
+    },
+    typicalDay: 'Edit videos, review footage, add effects, collaborate with team',
+    workEnvironment: 'Production company or freelance',
+    furtherReading: []
   }
 ];
 

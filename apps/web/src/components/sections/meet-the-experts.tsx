@@ -146,14 +146,20 @@ export function MeetTheExperts() {
                       <div className="flex flex-col md:flex-row">
                         {/* Expert Image */}
                         <div className="relative w-full md:w-80 lg:w-96 h-[400px] md:h-[500px] bg-gradient-to-br from-white/10 to-white/5 flex-shrink-0">
-                          <Image
-                            src={expert.imageUrl}
-                            alt={expert.name}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 384px"
-                            priority={index === 0}
-                          />
+                          {expert.imageUrl ? (
+                            <Image
+                              src={expert.imageUrl}
+                              alt={expert.name}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 384px"
+                              priority={index === 0}
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-white/50">
+                              <span className="text-6xl">{expert.name.charAt(0)}</span>
+                            </div>
+                          )}
                         </div>
 
                         {/* Expert Info */}

@@ -183,6 +183,15 @@ export default function AdminDashboard() {
       available: true
     },
     {
+      title: 'Success Stories',
+      description: 'Manage student success stories on homepage',
+      icon: Users,
+      href: '/admin/success-stories',
+      color: 'bg-amber-500',
+      stats: 'Student achievements',
+      available: true
+    },
+    {
       title: 'System Monitoring',
       description: 'Monitor system health, performance, and analytics',
       icon: Activity,

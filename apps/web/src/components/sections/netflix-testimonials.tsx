@@ -75,10 +75,10 @@ export function NetflixTestimonials() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-            Loved by <span className="text-teal-gold font-black">Students & Educators</span>
+            Loved by <span className="text-teal-gold font-black">Current Students</span>
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            See how Gen Elevate is helping students excel in their GCSE & A-Level studies.
+            See how Gen Elevate is helping students excel in their 11+, GCSE & A-Level studies.
           </p>
         </div>
 

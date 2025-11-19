@@ -31,6 +31,12 @@ export interface Course {
   enrollmentCount?: number;
   rating?: number;
   featured?: boolean;
+  // Additional fields for 11+ and other course types
+  moduleCount?: number; // For courses without chapters
+  duration?: number; // Duration in weeks
+  estimatedHours?: number; // Estimated hours to complete
+  topics?: string[]; // List of topics covered (alternative to chapters)
+  objectives?: string[]; // Learning objectives
 }
 
 export interface Chapter {

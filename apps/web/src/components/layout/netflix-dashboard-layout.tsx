@@ -149,11 +149,9 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       icon: BookOpen,
       type: 'dropdown' as const,
       items: [
-        { name: 'My Courses', href: '/courses', icon: BookOpen },
         { name: 'Live Webinars', href: '/webinars', icon: Video },
         { name: 'Grade Tracker', href: '/dashboard/grades', icon: Award },
         { name: 'Weekly To Do', href: '/todo', icon: CheckSquare },
-        { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
         { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
         { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar },
       ]
@@ -264,11 +262,9 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       icon: BookOpen,
       type: 'dropdown' as const,
       items: [
-        { name: 'My Courses', href: '/courses', icon: BookOpen },
         { name: 'Live Webinars', href: '/webinars', icon: Video },
         { name: 'Grade Tracker', href: '/dashboard/grades', icon: Award },
         { name: 'Weekly Tasks', href: '/todo', icon: CheckSquare },
-        { name: 'Progress', href: '/dashboard/progress', icon: TrendingUp },
         { name: 'Achievements', href: '/dashboard/achievements', icon: Trophy },
         { name: 'Schedule', href: '/dashboard/schedule', icon: Calendar },
       ]

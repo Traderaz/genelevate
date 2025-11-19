@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { NetflixDashboardLayout } from '@/components/layout/netflix-dashboard-layout';
 import { BasicPlanGuard } from '@/components/auth/subscription-guard';
 import { CareerExplorer } from '@/components/careers/career-explorer';
-import { IndustryNewsFeed } from '@/components/careers/industry-news-feed';
 import { CareerBanner } from '@/components/careers/career-banner';
 import { CareerStats } from '@/components/careers/career-stats';
 import { Suspense } from 'react';
@@ -34,22 +33,10 @@ export default async function CareersPage({ searchParams }: CareersPageProps) {
         {/* Career Stats */}
         <CareerStats />
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Career Explorer - Takes 2 columns */}
-          <div className="lg:col-span-2">
-            <Suspense fallback={<div className="h-96 teal-card animate-pulse rounded-xl" />}>
-              <CareerExplorer searchParams={resolvedSearchParams} />
-            </Suspense>
-          </div>
-
-          {/* Industry News Feed - Takes 1 column */}
-          <div className="lg:col-span-1">
-            <Suspense fallback={<div className="h-96 teal-card animate-pulse rounded-xl" />}>
-              <IndustryNewsFeed />
-            </Suspense>
-          </div>
-        </div>
+        {/* Career Explorer */}
+        <Suspense fallback={<div className="h-96 teal-card animate-pulse rounded-xl" />}>
+          <CareerExplorer searchParams={resolvedSearchParams} />
+        </Suspense>
       </div>
       </NetflixDashboardLayout>
     </BasicPlanGuard>
