@@ -19,7 +19,7 @@ export interface CareerDetail extends Career {
   responsibilities: string[];
   requirements: string[];
   careerPath: CareerPathStage[];
-  relatedCourses: RelatedCourse[];
+  relatedCourses?: RelatedCourse[]; // Optional - we removed this feature
   industryInsights: IndustryInsights;
   typicalDay: string;
   workEnvironment: string;

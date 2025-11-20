@@ -51,6 +51,105 @@ export interface PlanFeatures {
 
 // Define subscription plans and their features
 export const SUBSCRIPTION_PLANS: Record<SubscriptionPlan, PlanFeatures> = {
+  free: {
+    name: 'Free Plan',
+    price: 0,
+    currency: 'GBP',
+    features: [
+      'Browse course catalog',
+      'View sample lessons',
+      'Access to free resources'
+    ],
+    limits: {
+      coursesPerMonth: 0,
+      aiQuestionsPerDay: 0,
+      downloadableResources: 0,
+      liveWebinars: 0,
+      personalTutoring: false,
+      prioritySupport: false,
+      advancedAnalytics: false,
+      customContent: false,
+      offlineAccess: false,
+      certificatesIncluded: false
+    },
+    access: {
+      allCourses: false,
+      premiumContent: false,
+      exclusiveWebinars: false,
+      aiAssistant: false,
+      progressTracking: false,
+      mobileApp: false,
+      communityAccess: false,
+      mentorshipProgram: false
+    }
+  },
+  student: {
+    name: 'Student Plan (Legacy)',
+    price: 29.99, // Redirect to all-access
+    currency: 'GBP',
+    features: [
+      'Access to ALL courses',
+      'Progress tracking',
+      'Community access'
+    ],
+    limits: {
+      coursesPerMonth: -1,
+      aiQuestionsPerDay: -1,
+      downloadableResources: -1,
+      liveWebinars: -1,
+      personalTutoring: false,
+      prioritySupport: false,
+      advancedAnalytics: false,
+      customContent: false,
+      offlineAccess: true,
+      certificatesIncluded: true
+    },
+    access: {
+      allCourses: true,
+      premiumContent: true,
+      exclusiveWebinars: true,
+      aiAssistant: true,
+      progressTracking: true,
+      mobileApp: true,
+      communityAccess: true,
+      mentorshipProgram: false
+    }
+  },
+  institution: {
+    name: 'Institution Plan',
+    price: 0, // Custom pricing
+    currency: 'GBP',
+    features: [
+      'Bulk student licenses',
+      'Dedicated account manager',
+      'Custom pricing & invoicing',
+      'School-wide analytics',
+      'Teacher training & support',
+      'Integration with school systems'
+    ],
+    limits: {
+      coursesPerMonth: -1,
+      aiQuestionsPerDay: -1,
+      downloadableResources: -1,
+      liveWebinars: -1,
+      personalTutoring: true,
+      prioritySupport: true,
+      advancedAnalytics: true,
+      customContent: true,
+      offlineAccess: true,
+      certificatesIncluded: true
+    },
+    access: {
+      allCourses: true,
+      premiumContent: true,
+      exclusiveWebinars: true,
+      aiAssistant: true,
+      progressTracking: true,
+      mobileApp: true,
+      communityAccess: true,
+      mentorshipProgram: true
+    }
+  },
   'all-access': {
     name: 'All-Access Membership',
     price: 29.99,

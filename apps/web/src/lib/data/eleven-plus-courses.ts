@@ -1,4 +1,4 @@
-import { Course } from '@/types/course';
+import { Course } from '@/lib/services/courses';
 
 /**
  * 11+ Exam Preparation Courses
@@ -11,11 +11,9 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
   {
     title: '11+ Verbal Reasoning Essentials',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'Master all verbal reasoning question types for 11+ exams including synonyms, antonyms, analogies, and word relationships.',
-    category: 'exam_prep',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'intermediate',
     duration: 12, // weeks
     moduleCount: 12,
@@ -29,7 +27,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Develop logic and reasoning skills',
       'Build advanced vocabulary for exam success'
     ],
-    prerequisites: ['Basic reading comprehension', 'Year 4 English level'],
     topics: [
       'Synonyms and Antonyms',
       'Analogies and Word Relationships',
@@ -44,35 +41,22 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Timed Practice Papers',
       'Exam Technique and Strategy'
     ],
-    syllabus: 'GL Assessment, CEM, ISEB',
-    examBoard: 'All Major Exam Boards',
     tags: ['11+', 'Verbal Reasoning', 'Grammar School', 'Entrance Exam', 'Critical Thinking'],
     featured: true,
-    pricing: {
-      isFree: false,
-      requiredTier: 'basic'
-    },
-    instructor: {
-      name: 'Expert 11+ Tutors',
-      bio: 'Specialist tutors with proven track record in 11+ preparation',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   },
 
   // ==================== NON-VERBAL REASONING ====================
   {
     title: '11+ Non-Verbal Reasoning Mastery',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'Complete non-verbal reasoning training covering shapes, patterns, sequences, and spatial reasoning for 11+ success.',
-    category: 'exam_prep',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'intermediate',
     duration: 10,
     moduleCount: 10,
@@ -86,7 +70,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Develop visual logic skills',
       'Build speed and accuracy'
     ],
-    prerequisites: ['Basic shape recognition', 'Year 4 Maths level'],
     topics: [
       'Shape Patterns and Sequences',
       'Odd One Out',
@@ -101,35 +84,22 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Timed Practice Tests',
       'Speed and Accuracy Training'
     ],
-    syllabus: 'GL Assessment, CEM, ISEB',
-    examBoard: 'All Major Exam Boards',
     tags: ['11+', 'Non-Verbal Reasoning', 'Spatial Awareness', 'Pattern Recognition'],
     featured: true,
-    pricing: {
-      isFree: false,
-      requiredTier: 'basic'
-    },
-    instructor: {
-      name: 'Expert 11+ Tutors',
-      bio: 'Specialist tutors with proven track record in 11+ preparation',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   },
 
   // ==================== ENGLISH ====================
   {
     title: '11+ English Comprehension & Writing',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'Comprehensive English training covering reading comprehension, creative writing, and grammar for 11+ exams.',
-    category: 'exam_prep',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'intermediate',
     duration: 14,
     moduleCount: 14,
@@ -143,7 +113,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Build extensive vocabulary',
       'Practice exam-style questions'
     ],
-    prerequisites: ['Year 4 English', 'Basic writing skills'],
     topics: [
       'Reading Comprehension Strategies',
       'Fiction Text Analysis',
@@ -160,35 +129,22 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Vocabulary Building',
       'Exam Practice Papers'
     ],
-    syllabus: 'GL Assessment, CEM, ISEB',
-    examBoard: 'All Major Exam Boards',
     tags: ['11+', 'English', 'Comprehension', 'Creative Writing', 'Grammar'],
     featured: true,
-    pricing: {
-      isFree: false,
-      requiredTier: 'basic'
-    },
-    instructor: {
-      name: 'Expert 11+ English Tutors',
-      bio: 'Experienced English teachers specializing in 11+ preparation',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   },
 
   // ==================== MATHEMATICS ====================
   {
     title: '11+ Mathematics Complete Course',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'Complete maths curriculum covering arithmetic, problem-solving, and reasoning for 11+ entrance exams.',
-    category: 'exam_prep',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'intermediate',
     duration: 14,
     moduleCount: 14,
@@ -202,7 +158,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Master geometry and shapes',
       'Develop problem-solving strategies'
     ],
-    prerequisites: ['Year 4 Maths', 'Times tables knowledge'],
     topics: [
       'Number and Place Value',
       'Four Operations (+-×÷)',
@@ -219,35 +174,22 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Problem-Solving Techniques',
       'Exam Practice Papers'
     ],
-    syllabus: 'GL Assessment, CEM, ISEB',
-    examBoard: 'All Major Exam Boards',
     tags: ['11+', 'Mathematics', 'Problem Solving', 'Arithmetic'],
     featured: true,
-    pricing: {
-      isFree: false,
-      requiredTier: 'basic'
-    },
-    instructor: {
-      name: 'Expert 11+ Maths Tutors',
-      bio: 'Specialist maths teachers with extensive 11+ experience',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   },
 
   // ==================== INTENSIVE COURSES ====================
   {
     title: '11+ Complete Intensive Programme',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'All-inclusive intensive course covering all four 11+ subjects with regular mock exams and personalized feedback.',
-    category: 'exam_prep',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'advanced',
     duration: 20,
     moduleCount: 20,
@@ -261,7 +203,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Identify and address weak areas',
       'Achieve target school requirements'
     ],
-    prerequisites: ['Year 5 level in all subjects', 'Commitment to intensive study'],
     topics: [
       'Verbal Reasoning - All Question Types',
       'Non-Verbal Reasoning - Complete Coverage',
@@ -284,35 +225,22 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Final Countdown Preparation',
       'Post-Exam Support'
     ],
-    syllabus: 'All Exam Boards',
-    examBoard: 'GL Assessment, CEM, ISEB',
     tags: ['11+', 'Intensive', 'Complete Course', 'All Subjects', 'Mock Exams'],
     featured: true,
-    pricing: {
-      isFree: false,
-      requiredTier: 'pro'
-    },
-    instructor: {
-      name: 'Elite 11+ Team',
-      bio: 'Award-winning team of 11+ specialists with 95%+ success rate',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   },
 
   // ==================== TARGETED SKILLS ====================
   {
     title: '11+ Speed and Accuracy Training',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'Specialized course to improve processing speed, accuracy, and time management under exam conditions.',
-    category: 'exam_prep',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'intermediate',
     duration: 8,
     moduleCount: 8,
@@ -325,7 +253,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Improve focus and concentration',
       'Develop quick checking techniques'
     ],
-    prerequisites: ['Basic knowledge of 11+ question types'],
     topics: [
       'Speed Reading Techniques',
       'Quick Calculation Methods',
@@ -338,35 +265,22 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Practice Under Pressure',
       'Quick Review Strategies'
     ],
-    syllabus: 'All Exam Boards',
-    examBoard: 'Universal Skills',
     tags: ['11+', 'Speed', 'Accuracy', 'Time Management', 'Exam Technique'],
     featured: false,
-    pricing: {
-      isFree: false,
-      requiredTier: 'basic'
-    },
-    instructor: {
-      name: 'Performance Coach Team',
-      bio: 'Specialists in exam technique and performance optimization',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   },
 
   // ==================== SCHOOL-SPECIFIC ====================
   {
     title: '11+ Grammar School Mock Exams',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'Regular full-length mock exams replicating real 11+ test conditions with detailed marking and feedback.',
-    category: 'exam_prep',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'intermediate',
     duration: 12,
     moduleCount: 12,
@@ -380,7 +294,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Receive detailed performance reports',
       'Get personalized improvement plans'
     ],
-    prerequisites: ['Basic preparation in all 11+ subjects'],
     topics: [
       'Baseline Assessment Mock',
       'Verbal Reasoning Mock 1',
@@ -395,35 +308,22 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Performance Analysis',
       'Results Discussion and Action Plan'
     ],
-    syllabus: 'All Exam Boards',
-    examBoard: 'GL Assessment, CEM, ISEB',
     tags: ['11+', 'Mock Exams', 'Practice Tests', 'Assessment', 'Progress Tracking'],
     featured: true,
-    pricing: {
-      isFree: false,
-      requiredTier: 'basic'
-    },
-    instructor: {
-      name: 'Assessment Team',
-      bio: 'Qualified examiners and former grammar school teachers',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   },
 
   // ==================== VOCABULARY & COMPREHENSION ====================
   {
     title: '11+ Vocabulary Building Programme',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'Systematic vocabulary expansion course covering 1000+ essential words for verbal reasoning and comprehension.',
-    category: 'exam_prep',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'beginner',
     duration: 16,
     moduleCount: 16,
@@ -436,7 +336,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Practice with mnemonics',
       'Apply vocabulary in context'
     ],
-    prerequisites: ['Basic reading ability'],
     topics: [
       'Word Roots and Etymology',
       'Prefixes and Suffixes',
@@ -455,35 +354,22 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Using New Words',
       'Vocabulary Assessments'
     ],
-    syllabus: 'Supporting All Exam Boards',
-    examBoard: 'Universal',
     tags: ['11+', 'Vocabulary', 'Word Power', 'English', 'Reading'],
     featured: false,
-    pricing: {
-      isFree: false,
-      requiredTier: 'basic'
-    },
-    instructor: {
-      name: 'English Specialists',
-      bio: 'Expert English teachers focused on vocabulary development',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   },
 
   // ==================== CONFIDENCE & WELLBEING ====================
   {
     title: '11+ Confidence & Exam Mindset',
     subject: '11+ Preparation',
-    level: 'Year 5-6',
     yearGroups: ['Year 5', 'Year 6'],
     description: 'Build confidence, manage exam stress, and develop the right mindset for 11+ success.',
-    category: 'skills',
-    thumbnailUrl: '',
+    thumbnail: '',
     difficulty: 'beginner',
     duration: 6,
     moduleCount: 6,
@@ -496,7 +382,6 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Handle pressure effectively',
       'Stay motivated throughout preparation'
     ],
-    prerequisites: ['None - open to all students'],
     topics: [
       'Understanding Exam Stress',
       'Breathing and Relaxation Techniques',
@@ -511,24 +396,25 @@ export const elevenPlusCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[]
       'Dealing with Setbacks',
       'Celebrating Progress'
     ],
-    syllabus: 'Wellbeing Support',
-    examBoard: 'Universal',
     tags: ['11+', 'Confidence', 'Mindset', 'Wellbeing', 'Stress Management'],
     featured: false,
-    pricing: {
-      isFree: true,
-      requiredTier: 'free'
-    },
-    instructor: {
-      name: 'Wellbeing Specialists',
-      bio: 'Educational psychologists and wellbeing coaches',
-      credentials: []
-    },
     enrollmentCount: 0,
     rating: 0,
     published: true,
-    isPublished: true,
-    isActive: true
+    chapters: [],
+    createdBy: 'Gen Elevate Team'
   }
 ];
+
+
+
+
+
+
+
+
+
+
+
+
 
