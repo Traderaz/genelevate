@@ -56,9 +56,12 @@ export function NetflixPricing() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
             Simple, <span className="text-teal-gold font-black">All-Inclusive</span> Pricing
           </h2>
+          <p className="text-4xl md:text-6xl font-bold text-green-400 mb-4">
+            <span className="text-2xl md:text-3xl">c.</span>98p PER DAY!
+          </p>
           <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
             One membership, unlimited access to everything. No tiers, no limits, no confusion.
           </p>

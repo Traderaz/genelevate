@@ -78,7 +78,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Mathematics', 'Pure Maths', 'AQA', 'Edexcel', 'OCR', 'WJEC', 'All Boards'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // 20 modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -121,7 +121,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Mathematics', 'Statistics', 'AQA', 'Edexcel', 'OCR', 'WJEC'],
     featured: false,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -164,7 +164,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Further Maths', 'Advanced Mathematics', 'Complex Numbers', 'Matrices'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -224,7 +224,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Biology', 'AQA', 'Edexcel', 'OCR', 'WJEC', 'Practicals'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -294,7 +294,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Chemistry', 'AQA', 'Edexcel', 'OCR', 'WJEC', 'Organic', 'Physical'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -357,7 +357,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Physics', 'AQA', 'Edexcel', 'OCR', 'WJEC', 'Mechanics', 'Quantum'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -398,7 +398,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'History', 'British History', 'World History', 'Essay Writing'],
     featured: false,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -457,7 +457,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Psychology', 'AQA', 'Edexcel', 'OCR', 'WJEC', 'Mental Health'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -522,7 +522,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Economics', 'AQA', 'Edexcel', 'OCR', 'WJEC', 'Macro', 'Micro'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -563,7 +563,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'English Literature', 'Poetry', 'Drama', 'Critical Analysis'],
     featured: false,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -607,7 +607,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Computer Science', 'Programming', 'Algorithms', 'Software'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -674,7 +674,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['A-Level', 'Business', 'AQA', 'Edexcel', 'OCR', 'WJEC', 'Finance', 'Marketing'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -720,7 +720,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['GCSE', 'Mathematics', 'Foundation', 'AQA', 'Edexcel', 'OCR', 'WJEC'],
     featured: false,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   },
@@ -768,7 +768,7 @@ export const aLevelCourses: Omit<Course, 'id' | 'createdAt' | 'updatedAt'>[] = [
     tags: ['GCSE', 'Mathematics', 'Higher', 'AQA', 'Edexcel', 'OCR', 'WJEC', 'Grade 9'],
     featured: true,
     rating: 0,
-    published: true,
+    published: true, // Content modules complete!
     chapters: [],
     createdBy: 'Gen Elevate Team'
   }

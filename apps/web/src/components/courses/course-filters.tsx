@@ -14,6 +14,8 @@ export function CourseFilters() {
     } else {
       params.delete(key);
     }
+    // Reset to page 1 when filters change
+    params.delete('page');
     router.push(`/courses?${params.toString()}`);
   };
 
@@ -31,10 +33,13 @@ export function CourseFilters() {
           >
             <option value="">All Subjects</option>
             <option value="Mathematics">Mathematics</option>
-            <option value="English Language">English Language</option>
-            <option value="Biology">Biology</option>
-            <option value="Chemistry">Chemistry</option>
-            <option value="Physics">Physics</option>
+            <option value="English">English</option>
+            <option value="Science">Science</option>
+            <option value="History">History</option>
+            <option value="Geography">Geography</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Modern Languages">Modern Languages</option>
+            <option value="Life Skills">Life Skills</option>
           </select>
         </div>
         

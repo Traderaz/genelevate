@@ -6610,56 +6610,589 @@ export const entrepreneurialCreativityModule: ModuleData = {
       title: 'The Entrepreneurial Mindset',
       description: 'Core traits of entrepreneurial thinkers: opportunity recognition, resilience, action orientation',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'What is the Entrepreneurial Mindset?',
+            content: 'Entrepreneurship isn\'t just about starting businesses—it\'s a way of thinking that helps you identify opportunities, solve problems creatively, and create value in any context. Whether you want to start a company, work in a startup, or simply think more innovatively in your career, developing an entrepreneurial mindset is one of the most valuable skills you can build.\n\nThe entrepreneurial mindset is fundamentally different from how most people approach problems. Where others see obstacles, entrepreneurs see opportunities. Where others wait for perfect conditions, entrepreneurs take action with what they have. Where others avoid failure, entrepreneurs embrace it as the fastest way to learn.\n\nThis isn\'t something you\'re born with—it\'s a skill that can be learned and developed through practice. Think of it like building a muscle: the more you exercise entrepreneurial thinking, the stronger it becomes. You don\'t need money, connections, or a business degree to start thinking like an entrepreneur. You just need curiosity, willingness to learn, and the courage to try.\n\nAt its core, the entrepreneurial mindset is about creating value for others while building something meaningful for yourself. It\'s about noticing problems that frustrate people and thinking, "I could solve that." It\'s about taking responsibility for your outcomes instead of waiting for someone else to create opportunities for you.',
+            bullets: [
+              'View problems as opportunities for innovation—every frustration is a potential business',
+              'Take action before feeling "ready"—perfectionism kills more dreams than failure ever will',
+              'Embrace calculated risks—not reckless gambling, but informed decision-making despite uncertainty',
+              'Learn rapidly from failures—treat every setback as data that makes you smarter',
+              'Focus on creating value for others—solve real problems and money will follow'
+            ]
+          },
+          {
+            heading: 'Core Trait 1: Opportunity Recognition',
+            content: 'Successful entrepreneurs see opportunities where others see problems. They notice gaps in the market, frustrations people experience, and inefficient processes that could be improved. This is perhaps the most trainable skill in entrepreneurship—you can literally practice seeing opportunities every single day.\n\nHere\'s the secret: every frustration you experience is a potential business opportunity. That moment when you think "Why isn\'t there a better way to do this?" or "This is so annoying, someone should fix it"—that\'s your brain identifying a market need. Most people stop there. Entrepreneurs write it down and ask: "Could I be the one to fix it? Who else has this problem? Would they pay for a solution?"\n\nThe best business ideas don\'t come from trying to think of business ideas—they come from living your life and noticing what\'s broken. Brian Chesky and Joe Gebbia couldn\'t afford their San Francisco rent. They noticed hotels were fully booked during a design conference. Instead of just complaining, they bought three air mattresses and created a simple website offering people a place to crash. That weekend experiment became Airbnb, now worth over $75 billion.\n\nStart training your opportunity recognition muscle today. Carry a notebook or use your phone to record every frustration you experience for one week. By the end, you\'ll have a list of potential business ideas. The best part? You\'re now solving problems you personally understand, which means you already know your first customer: you.',
+            bullets: [
+              'Notice your own frustrations—they\'re potential business ideas. If something annoys you regularly, thousands of others likely feel the same',
+              'Ask "What if?" and "Why not?" questions constantly. Challenge assumptions about why things are done certain ways',
+              'Observe patterns in what people complain about—repetition signals genuine pain points worth solving',
+              'Look for problems that many people experience but everyone just accepts as "the way it is"',
+              'Pay attention to changing trends and technologies—new tech often creates new problems that need solving'
+            ],
+            examples: [
+              {
+                title: 'Airbnb Example',
+                description: 'Brian Chesky couldn\'t afford rent and noticed hotels were fully booked during a conference. He rented out air mattresses in his apartment. This frustration became a $75 billion company.'
+              },
+              {
+                title: 'Student Example',
+                description: 'A 16-year-old noticed classmates struggled to find study groups. Created a free Discord server organizing sessions by subject. Now has 500+ members and monetizes through premium features.'
+              }
+            ]
+          },
+          {
+            heading: 'Core Trait 2: Growth Mindset & Resilience',
+            content: 'Entrepreneurs view failures as learning experiences, not permanent setbacks. They believe skills can be developed through effort and persistence. This mindset—coined "growth mindset" by psychologist Carol Dweck—is perhaps the single most important predictor of entrepreneurial success.\n\nHere\'s what most people don\'t understand about successful entrepreneurs: they don\'t fail less than everyone else. They fail MORE. But they don\'t see it as failure—they see it as data collection. When Thomas Edison\'s team asked him about failing 10,000 times while inventing the lightbulb, he replied: "I have not failed. I\'ve just found 10,000 ways that won\'t work."\n\nThe difference between entrepreneurs and others isn\'t talent or luck—it\'s how they interpret setbacks. When someone with a fixed mindset fails, they think "I\'m not good at this, I should quit." When someone with a growth mindset fails, they think "This approach didn\'t work. What can I learn? What will I try next?" That small shift in thinking makes all the difference.\n\nResilience isn\'t about being tough or emotionless. It\'s about bouncing back, learning the lesson, and trying again with new wisdom. Every successful entrepreneur has a graveyard of failed projects behind them. Sara Blakely (Spanx) sold fax machines door-to-door for years before her billion-dollar idea. Steve Jobs was fired from Apple before returning to save it. Your failures aren\'t ending your entrepreneurial journey—they\'re the beginning of it.',
+            bullets: [
+              'Replace "I can\'t" with "I can\'t YET"—that one word transforms impossibility into possibility requiring time and effort',
+              'View obstacles as opportunities to grow—every problem you overcome makes you stronger for the next challenge',
+              'Celebrate effort, not just results—you control your actions, not always the outcomes. Reward yourself for trying',
+              'Learn from criticism and feedback—people pointing out flaws are giving you free consulting to improve',
+              'Study how successful people overcame failure—read their stories and realize they failed more than you have'
+            ],
+            tipBox: {
+              type: 'tip',
+              title: 'Reframing Failure',
+              content: 'Instead of "I failed," say "I ran an experiment that didn\'t work. What did I learn?" This subtle shift changes failure from permanent to temporary and transforms it into valuable data.'
+            }
+          },
+          {
+            heading: 'Core Trait 3: Bias Toward Action',
+            content: 'Entrepreneurs don\'t wait for perfect conditions. They start before they feel ready, learn by doing, and iterate based on feedback. This "bias toward action" separates dreamers from doers. Everyone has ideas—entrepreneurs are the ones who actually test them.\n\nHere\'s a harsh truth: you will never feel fully ready. If you wait until you\'re confident, skilled, and have all the resources, you\'ll wait forever. Successful entrepreneurs feel the same fear and doubt you do—they just act anyway. They launch imperfect products, make mistakes publicly, and learn faster than people who wait for perfection.\n\nReid Hoffman, founder of LinkedIn, has a famous quote: "If you\'re not embarrassed by the first version of your product, you\'ve launched too late." Version 1.0 of LinkedIn was basic, buggy, and missing features users wanted. But by launching early, they got real user feedback that shaped what LinkedIn became. If they\'d spent another year perfecting it, a competitor would have beaten them to market.\n\nThe military has a principle: make decisions with 70% of the information you wish you had. Waiting for 100% certainty means the moment has passed. In entrepreneurship, speed often matters more than perfection. You can always improve a launched product based on feedback. You can\'t improve an idea sitting in your head.\n\nStart thinking "test to learn" instead of "plan to perfection." Launch a simple landing page to see if people sign up. Post your idea on social media and see if anyone cares. Offer your service to one customer before building your whole business. Action creates information—and information beats assumptions every time.',
+            bullets: [
+              'Launch MVPs quickly rather than perfecting products—your first version will be wrong anyway, so get feedback fast',
+              'Start with what you have, not what you wish you had—resourcefulness beats resources every time',
+              'Make decisions quickly with 70% of information—waiting for certainty means opportunity has passed',
+              'Test ideas in the real world, not just in your head—actual customer behavior beats your assumptions',
+              '"Done is better than perfect" becomes your mantra—shipped and imperfect beats perfect and invisible'
+            ]
+          },
+          {
+            heading: 'Core Trait 4: Resourcefulness',
+            content: 'Entrepreneurs find creative solutions to constraints. They bootstrap, barter, build partnerships, and make the most of limited resources. This is where creativity truly shines—not in having everything you need, but in making do with what you have.\n\nThe best entrepreneurs thrive under constraints. When you have unlimited money, it\'s easy to throw cash at problems. When you have £100 and a dream, you get creative. You learn skills on YouTube instead of hiring. You trade services instead of paying cash. You partner with people who have what you lack. Constraints force innovation.\n\nSara Blakely started Spanx with $5,000 she saved from selling fax machines. She couldn\'t afford a patent attorney, so she bought a textbook and wrote the patent herself. She couldn\'t afford models, so she demonstrated the product herself in department store bathrooms. She couldn\'t afford advertising, so she personally pitched Oprah\'s stylist. Today, she\'s a billionaire. Not because she had resources—because she was resourceful.\n\nResourcefulness is about mindset: "How can I make this work with what I have?" Instead of "I can\'t start because I don\'t have X," ask "What CAN I do right now?" The answer is always something. And that something leads to the next thing, which leads to momentum, which leads to success.\n\nRemember: every successful business you admire started with someone who had fewer resources than you think. They just refused to let that stop them.',
+            bullets: [
+              'Focus on solutions, not problems—asking "how might I?" opens possibilities that "I can\'t because..." closes',
+              'Use free tools and platforms when starting—Canva for design, Notion for organization, social media for marketing',
+              'Trade skills instead of paying cash—offer your services in exchange for legal help, design work, or mentorship',
+              'Build strategic partnerships—find people whose strengths complement your weaknesses',
+              'Learn new skills yourself (YouTube, online courses)—every skill you learn saves money and makes you more valuable'
+            ],
+            examples: [
+              {
+                title: 'Sara Blakely - Spanx',
+                description: 'Started with $5,000. Wrote her own patent to save legal fees. Sold from her apartment. Cut deals by demonstrating products in bathrooms. Now worth over $1 billion.'
+              }
+            ]
+          },
+          {
+            heading: 'Core Trait 5: Value Creation Focus',
+            content: 'The best entrepreneurs focus on solving real problems and helping people, not just making money. Money follows value creation. This is the most important lesson in entrepreneurship, and the one most beginners get wrong.\n\nHere\'s the mistake: people start with "How can I make money?" The right question is: "What problem can I solve so effectively that people will happily pay me?" See the difference? One is about taking value, the other about creating it. Money is simply a measure of value you\'ve created for others.\n\nThink about the apps and services you pay for. You don\'t pay because you love spending money—you pay because they solve a problem that\'s worth more to you than the price. Spotify solves "I want unlimited music everywhere" better than buying individual songs. Netflix solves "I want entertainment without ads or DVD rentals." The money follows the value.\n\nThe businesses that last are the ones obsessed with customer success. Amazon\'s success isn\'t because Jeff Bezos wanted to be rich—it\'s because he was obsessed with customer convenience. "What can we do to make this even better for customers?" That obsession led to Prime, one-click ordering, and same-day delivery. The money came because customers got so much value they kept coming back.\n\nWhen you focus on creating genuine value—solving real problems, making people\'s lives easier, delivering more than promised—profit becomes inevitable. Not guaranteed, but inevitable if you persist. Because word spreads about businesses that actually help people. Start with value creation, and money will follow.',
+            bullets: [
+              'Ask: "What problem am I solving?"—if you can\'t answer this clearly, you don\'t have a business yet',
+              'Focus on customer needs, not your assumptions—talk to customers constantly, let them guide product development',
+              'Create win-win situations—best businesses benefit both you and customers, not one at expense of other',
+              'Think long-term relationships, not quick profits—repeat customers and referrals are more valuable than one-time sales',
+              'Measure success by impact, not just revenue—how many lives did you improve? That\'s the real metric'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Entrepreneurial mindset can be learned—you\'re not born with it',
+          'Opportunity recognition: see problems as potential solutions',
+          'Growth mindset: view failures as learning experiences',
+          'Action orientation: start before you feel ready',
+          'Resourcefulness: work creatively with what you have',
+          'Value creation: focus on helping others to build sustainable success'
+        ],
+        exercises: [
+          {
+            question: 'List 5 frustrations or problems you\'ve experienced this week. For each one, ask: "How many other people have this problem?" and "What would a solution look like?"',
+            type: 'short-answer'
+          },
+          {
+            question: 'Think of a time you failed at something. Write down 3 specific lessons you learned from that experience. How did that failure make you better?',
+            type: 'short-answer'
+          }
+        ]
+      }
     },
     {
       id: 'entre-2',
       title: 'Creative Idea Generation Techniques',
       description: 'Master brainstorming, SCAMPER method, problem-solution fit, and cross-industry innovation',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Brainstorming Rules',
+            content: 'Innovation comes from systematic creative thinking. Use these proven brainstorming rules to generate breakthrough ideas.\n\nMost people think creativity is a mystical gift—you either have it or you don\'t. That\'s completely wrong. Creativity is a skill, and like any skill, it improves with practice and the right techniques. The problem is most people\'s "brainstorming" is actually just sitting around hoping for inspiration. Real brainstorming follows specific rules that unlock your brain\'s creative potential.\n\nThe most important rule: quantity over quality. This sounds counterintuitive, but research proves it works. Your first 10 ideas will be obvious and probably bad. Ideas 11-30 start getting interesting. Ideas 31-100 is where magic happens—because you\'ve exhausted the obvious and your brain starts making unusual connections.\n\nAlex Osborn, who invented brainstorming, discovered that separating idea generation from idea evaluation dramatically increases creativity. When you judge ideas as you create them ("that\'s stupid," "that won\'t work"), you shut down your creative flow. Instead: generate wildly first, evaluate later.',
+            bullets: [
+              'Quantity over quality—aim for 100 ideas to find 1 great one. First 20 ideas are obvious, ideas 21-100 is where breakthrough thinking happens',
+              'No judgment during generation phase—save criticism for later. "Yes, and..." builds ideas, "No, but..." kills them',
+              'Build on others\' ideas with "Yes, and..."—combine concepts to create something entirely new',
+              'Encourage wild and ambitious ideas—absurd ideas often contain seeds of brilliant practical solutions',
+              'Use visuals—sketches, mind maps, diagrams unlock different parts of your brain than words alone'
+            ]
+          },
+          {
+            heading: 'SCAMPER Method',
+            content: 'SCAMPER is a checklist for improving existing products/services by asking 7 key questions. This technique is incredibly powerful because most successful innovations aren\'t completely new inventions—they\'re clever adaptations of existing ideas.\n\nThink about it: Uber didn\'t invent taxis or smartphones or GPS. They combined existing technologies in a new way. Instagram didn\'t invent photography or social networks—they adapted and simplified them. Netflix didn\'t invent TV shows or streaming—they substituted physical DVDs with internet delivery.\n\nSCAMPER gives you a systematic way to look at any product or service and ask: "How could this be better?" Each letter is a different lens for innovation. Let\'s break it down:\n\n**S - Substitute:** What materials, processes, or features could you replace? Spotify substituted physical music ownership with streaming access.\n\n**C - Combine:** What products or features could you merge? The iPhone combined phone + camera + MP3 player + internet browser.\n\n**A - Adapt:** What can you borrow from other industries? Airbnb adapted the hotel booking model to private homes.\n\n**M - Modify:** How could you change appearance, size, or form? Red Bull modified energy drinks into a smaller, premium format.\n\n**P - Put to other uses:** What new applications exist? Baking soda was adapted from baking to teeth whitening to fridge deodorizing.\n\n**E - Eliminate:** What can you remove to simplify? Google\'s homepage eliminated everything except a search box.\n\n**R - Reverse:** What if you did the opposite? Reverse mentoring: young employees teach older executives about technology.',
+            bullets: [
+              'S - Substitute: What can you replace? (materials, processes, people, places)',
+              'C - Combine: What can you merge together? (products, features, ideas)',
+              'A - Adapt: What can you adjust or copy from elsewhere? (other industries, nature, history)',
+              'M - Modify: What can you change? (size, shape, color, smell, sound, form)',
+              'P - Put to other uses: What new applications exist? (different markets, different problems)',
+              'E - Eliminate: What can you remove? (simplification often beats addition)',
+              'R - Reverse: What if you did the opposite? (reverse processes, swap roles, flip assumptions)'
+            ],
+            examples: [{
+              title: 'Instagram Stories',
+              description: 'Adapted Snapchat\'s disappearing photos (SCAMPER: Adapt) and combined with Instagram\'s photo-sharing platform (Combine). Result: More popular than the original Snapchat feature.'
+            }]
+          },
+          {
+            heading: 'Problem-Solution Fit Framework',
+            bullets: [
+              '1. Identify a specific, painful problem',
+              '2. Define who experiences this problem',
+              '3. How do they currently solve it?',
+              '4. What\'s wrong with current solutions?',
+              '5. How could you solve it 10x better?'
+            ]
+          },
+          {
+            heading: 'Cross-Industry Innovation',
+            content: 'Take solutions from one industry and apply them to another. This creates breakthrough innovations.',
+            examples: [
+              {title: 'Uber Eats', description: 'Applied Uber\'s taxi model to food delivery'},
+              {title: 'Airbnb', description: 'Applied sharing economy from rides to accommodation'},
+              {title: 'Spotify', description: 'Applied Netflix\'s subscription model to music'}
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Generate 30+ ideas minimum—quantity breeds quality',
+          'SCAMPER helps improve existing products systematically',
+          'Problem-solution fit ensures you solve real needs',
+          'Cross-industry innovation creates category-defining businesses',
+          'Defer judgment until after idea generation'
+        ]
+      }
     },
     {
       id: 'entre-3',
       title: 'Design Thinking Process',
       description: 'Five stages: Empathize, Define, Ideate, Prototype, Test - human-centered innovation',
       duration: '25 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Stage 1: EMPATHIZE',
+            content: 'Understand your users deeply through observation and interviews.',
+            bullets: [
+              'Talk to potential customers (not just friends/family)',
+              'Observe how they currently solve the problem',
+              'Experience the problem yourself',
+              'Create empathy maps (what they think, feel, say, do)',
+              'Ask "What frustrates you about...?" not "Would you buy...?"'
+            ]
+          },
+          {
+            heading: 'Stage 2: DEFINE',
+            content: 'Synthesize research into a clear problem statement. This is where you take all the messy, qualitative data from your empathy work and distill it into one crisp sentence that guides your entire project.\n\nThe format is simple but powerful: "[User] needs [need] because [insight]". This forces you to be specific about WHO you\'re helping, WHAT they need, and WHY they need it. That "why" is crucial—it reveals the underlying motivation, not just the surface-level symptom.\n\nFor example: "Busy students need a faster way to find reliable study notes because they waste hours searching multiple sources and can\'t verify quality." Notice how specific that is? Not "students need better notes"—that\'s too vague. The problem statement captures the exact pain point: time wasted searching and quality uncertainty.\n\nYour problem statement becomes your North Star. Every feature you consider, every design decision, every pivot—you test it against: "Does this solve the problem in our statement?" If not, it\'s a distraction.',
+            examples: [{
+              title: 'Example Problem Statement',
+              description: '"Busy students need a faster way to find reliable study notes because they waste hours searching multiple sources and can\'t verify quality." Notice: specific user (busy students), clear need (faster way to find reliable notes), and the insight reveals the pain (time wasted + quality uncertainty).'
+            }]
+          },
+          {
+            heading: 'Stage 3: IDEATE',
+            content: 'Generate many possible solutions using brainstorming techniques.',
+            bullets: [
+              'Use SCAMPER, brainstorming, crazy 8s method',
+              'Generate 50-100 ideas minimum',
+              'Don\'t judge yet—quantity first',
+              'Involve diverse perspectives',
+              'Think wild and ambitious'
+            ]
+          },
+          {
+            heading: 'Stage 4: PROTOTYPE',
+            content: 'Build quick, cheap prototypes to test your ideas.',
+            bullets: [
+              'Paper sketches for apps before coding',
+              'Cardboard models for physical products',
+              'Role-play scenarios for services',
+              'Landing pages for validating demand',
+              'Doesn\'t need to be perfect—just testable'
+            ],
+            examples: [{
+              title: 'Dropbox MVP',
+              description: 'Before building the product, founder made a simple video showing how it would work. Video went viral. Got 75,000 signups overnight. Validated demand before writing code.'
+            }]
+          },
+          {
+            heading: 'Stage 5: TEST',
+            content: 'Get real feedback and iterate based on what you learn.',
+            bullets: [
+              'Show prototype to 5-10 target users',
+              'Watch them use it (observation > opinion)',
+              'Ask: "What\'s confusing?" "What would you change?"',
+              'Iterate based on feedback',
+              'Repeat: Prototype → Test → Improve'
+            ],
+            tipBox: {
+              type: 'success',
+              title: 'The Golden Rule',
+              content: 'Fall in love with the problem, not your solution. Be ready to change your idea based on user feedback. The problem is what matters—your solution is just one possible approach.'
+            }
+          }
+        ],
+        keyTakeaways: [
+          'Design Thinking ensures you build what people actually want',
+          'Empathize: Understand users deeply through interviews and observation',
+          'Define: Write clear problem statement before jumping to solutions',
+          'Ideate: Generate many solutions, defer judgment',
+          'Prototype: Build cheap, fast versions to test',
+          'Test: Get real feedback and iterate rapidly'
+        ]
+      }
     },
     {
       id: 'entre-4',
       title: 'Building Your MVP (Minimum Viable Product)',
       description: 'Launch quickly with MVP strategy: build-measure-learn loop and rapid validation',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'What is an MVP?',
+            content: 'The simplest version of your idea that delivers core value and allows you to learn from real users. NOT a half-baked product, but the MINIMUM features needed to solve the problem and test your hypothesis.\n\nLet\'s clear up the biggest misconception about MVPs: minimum doesn\'t mean "bad" or "broken." It means "focused." An MVP solves ONE problem really well, rather than solving ten problems poorly.\n\nThink of it this way: if you\'re building a car, the MVP isn\'t a car missing wheels—that\'s just a broken car. The MVP is a skateboard: it gets you from A to B (solves the transportation problem), you can build it quickly, and you can learn if people even want this solution before investing months building a full car.\n\nThe entire point of an MVP is learning, not launching perfectly. You have assumptions about what users want. An MVP tests those assumptions with real people using real money. Facebook\'s first version only worked at Harvard. Airbnb\'s first version was three air mattresses in the founders\' apartment. These weren\'t billion-dollar products—they were learning experiments that provided crucial insights.\n\nMost entrepreneurs waste months building features nobody wants. MVP flips that: build the bare minimum, launch fast, and let real customer feedback guide what you build next. This approach is scary because you\'re showing something imperfect to the world. But it\'s also smart—because shipping something people hate teaches you more than planning something they might love.',
+            bullets: [
+              'Focuses on ONE core problem—not ten features solving ten problems, but one feature solving one problem exceptionally',
+              'Includes only essential features—if removing a feature doesn\'t stop solving the core problem, it\'s not essential',
+              'Can be built quickly (weeks, not months)—if your MVP takes 6 months, it\'s not minimum',
+              'Allows you to test with real users—actual behavior beats surveys and focus groups every time',
+              'Enables rapid learning and iteration—each version gets better based on real data, not assumptions'
+            ]
+          },
+          {
+            heading: 'Why MVP Matters',
+            bullets: [
+              'Speed to Market: Launch in weeks, beat competitors',
+              'Learn Before You Invest: Test if people want it',
+              'Resource Efficiency: Minimal investment, reduced risk',
+              'Iterative Improvement: Each version better than last',
+              'Customer feedback guides development'
+            ]
+          },
+          {
+            heading: 'Types of MVPs',
+            bullets: [
+              'Landing Page MVP: Single webpage + email signup ($0-50, 1 day)',
+              'Explainer Video MVP: Show how it works via video ($0, 1-2 days)',
+              'Concierge MVP: Manually deliver service before automating ($0)',
+              'Wizard of Oz MVP: Appears automated but manual backend ($0-100)',
+              'Basic Feature MVP: Core features only, basic design'
+            ],
+            examples: [
+              {
+                title: 'Buffer\'s Landing Page MVP',
+                description: 'Just a landing page with pricing plans. No actual product. When people clicked "Buy", saw "Not ready yet, enter email". Got 100+ signups. THEN built the product. Now $20M+ company.'
+              },
+              {
+                title: 'Zappos\' Wizard of Oz',
+                description: 'Website showed shoes for sale. When someone ordered, founder went to local shoe store, bought them, and shipped. No inventory. Validated demand before investing in stock.'
+              }
+            ]
+          },
+          {
+            heading: 'Build-Measure-Learn Loop',
+            bullets: [
+              '1. BUILD a minimum viable product',
+              '2. MEASURE how customers respond (data + feedback)',
+              '3. LEARN what works and what doesn\'t',
+              '4. DECIDE: Persevere (continue) or Pivot (change)',
+              '5. Repeat—each cycle should be 1-2 weeks max'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'MVP = simplest version that solves problem and enables learning',
+          'Launch in weeks, not months—speed is competitive advantage',
+          'Test with real users before investing heavily',
+          'Many MVP types: landing page, video, manual service, basic features',
+          'Build-Measure-Learn loop drives rapid iteration',
+          'Instagram started as Burbn (check-in app), stripped to photo-sharing'
+        ]
+      }
     },
     {
       id: 'entre-5',
       title: 'Customer Discovery & Validation',
       description: 'Interview techniques, finding product-market fit, and validating willingness to pay',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Why Customer Discovery Matters',
+            content: 'The #1 reason startups fail: building something nobody wants. Customer discovery prevents this by ensuring you understand your market BEFORE investing time and money.\n\nHere\'s a harsh reality: 42% of startups fail not because of bad execution, lack of funding, or strong competition. They fail because they built something nobody wanted. They spent months creating a product based on assumptions, launched it with excitement, and heard crickets. That\'s devastating—and completely preventable.\n\nCustomer discovery is the antidote. It\'s the process of talking to potential customers BEFORE you build anything. You\'re not pitching your idea—you\'re learning about their problems, current solutions, and whether your proposed solution would actually improve their lives.\n\nThink of customer discovery like a doctor diagnosing a patient. A bad doctor decides your treatment before examining you. A good doctor asks questions, runs tests, and only then prescribes treatment. Similarly, bad entrepreneurs decide what to build, then try to convince people to buy it. Good entrepreneurs diagnose the problem first, then build the cure.\n\nThe beautiful part: customer discovery is free. It costs nothing but time to have conversations. Yet most entrepreneurs skip this step because they\'re excited about their idea and assume everyone will love it. Don\'t make that mistake. Your assumption about what people want is probably wrong. Customer discovery reveals the truth before you waste months building the wrong thing.',
+            bullets: [
+              '42% of startups fail because no market need—not because of execution, funding, or competition, but because nobody wanted what they built',
+              'Talk to customers before building anything—conversations are free, building the wrong product is expensive',
+              'Validate assumptions, don\'t rely on guesses—what you think people want vs what they actually want are usually different',
+              'Understand problems deeply, not just surface-level—dig into why they have this problem and how it impacts their life',
+              'Find out if people will actually pay—interest is nice, but willingness to pay is the real validation'
+            ]
+          },
+          {
+            heading: 'Great Interview Questions',
+            content: 'The goal: Understand their life and problems (NOT to pitch your solution).',
+            bullets: [
+              '"Tell me about the last time you experienced [problem]"',
+              '"What have you tried to solve this?"',
+              '"What\'s frustrating about current solutions?"',
+              '"How much time/money does this problem cost you?"',
+              '"If you had a magic wand, what would you change?"',
+              '"What else have you tried?"'
+            ],
+            tipBox: {
+              type: 'warning',
+              title: 'Questions to AVOID',
+              content: 'Don\'t ask "Would you use my solution?" People lie to be polite. Instead, ask about their current behavior and problems. Actions speak louder than hypotheticals.'
+            }
+          },
+          {
+            heading: 'Identifying Patterns',
+            content: 'After 20+ interviews, look for consistent signals:',
+            bullets: [
+              'Common problems mentioned by multiple people',
+              'Emotional pain points (frustration, anger, desperation)',
+              'Current solutions and their limitations',
+              'Willingness to pay (do they pay for solutions now?)',
+              'Urgency: Is this "nice to have" or "must have"?'
+            ]
+          },
+          {
+            heading: 'Validating Willingness to Pay',
+            content: 'The ultimate test: Will they pay for your solution?',
+            bullets: [
+              'Strongest: They pay you money NOW (pre-orders, deposits)',
+              'Strong: They commit time/effort (beta testing, detailed surveys)',
+              'Weak: They express interest ("sounds cool")',
+              'Red flag: Hesitation when you mention price'
+            ],
+            examples: [{
+              title: 'How to Ask',
+              description: '"I\'m planning to launch this at £X. If I gave you early access for £Y, would you be interested in securing a spot?" Watch their reaction carefully—hesitation tells you everything.'
+            }]
+          },
+          {
+            heading: 'Product-Market Fit Score',
+            content: 'Ask users: "How would you feel if you could no longer use this product?"\n\nThis simple question, pioneered by Sean Ellis, is the gold standard for measuring product-market fit. Give users three options:\n\nTarget: 40%+ saying "Very disappointed" = Strong product-market fit. Less than 40% = Keep iterating and improving until you hit that threshold.',
+            bullets: [
+              'Very disappointed (this is what you want!)',
+              'Somewhat disappointed (you\'re close but not there yet)',
+              'Not disappointed (back to the drawing board—you haven\'t solved a real problem)'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Interview 20-50 people before building anything',
+          'Ask about their problems, not about your solution',
+          'Look for patterns across multiple interviews',
+          'Validate willingness to pay—actions > words',
+          '40%+ "very disappointed" = product-market fit achieved',
+          'Pivot if nobody has the problem you assumed'
+        ]
+      }
     },
     {
       id: 'entre-6',
       title: 'Resilience & Pivoting',
       description: 'Building entrepreneurial resilience, learning from failure, and when/how to pivot',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'The Entrepreneurial Reality',
+            bullets: [
+              '90% of startups fail',
+              '50% of businesses fail within 5 years',
+              'Average successful entrepreneur failed 3.8 times before success',
+              'Successful entrepreneurs try more times, not lucky'
+            ],
+            content: 'Each "failure" teaches lessons that increase odds of future success. The difference? Resilient entrepreneurs learn and persist.'
+          },
+          {
+            heading: 'Building Resilience',
+            bullets: [
+              'Reframe: It\'s not failure, it\'s a "failed experiment"',
+              'Separate idea from self-worth: Bad idea ≠ You\'re bad',
+              'Build support network: mentors, entrepreneur communities',
+              'Practice self-compassion: Talk to yourself like a friend',
+              'Focus on controllables: effort, learning, improvement',
+              'Maintain perspective: Will this matter in 5 years?'
+            ]
+          },
+          {
+            heading: 'When to Pivot',
+            content: 'Pivot = structured course correction to test new hypothesis',
+            bullets: [
+              'PIVOT IF: After 6+ months, little traction',
+              'PIVOT IF: Customers don\'t use key features',
+              'PIVOT IF: Can\'t achieve product-market fit',
+              'PIVOT IF: Market too small',
+              'DON\'T PIVOT: After one bad week or one complaint',
+              'DON\'T PIVOT: Haven\'t given proper time (6+ months)'
+            ]
+          },
+          {
+            heading: 'Types of Pivots',
+            bullets: [
+              'Customer Segment: Same product, different target',
+              'Problem Pivot: Same customer, different problem',
+              'Feature Pivot: One feature becomes whole product',
+              'Business Model: Same product, different revenue model',
+              'Platform Pivot: App to website or vice versa'
+            ],
+            examples: [
+              {title: 'Instagram', description: 'Started as Burbn (check-in app with many features). Nobody used it. Noticed users only shared photos. Stripped everything except photo sharing + filters. Became Instagram. Sold to Facebook for $1B.'},
+              {title: 'Twitter', description: 'Started as podcasting platform. Pivoted to microblogging. Now 300M+ users.'},
+              {title: 'YouTube', description: 'Started as video dating site. Pivoted to general video sharing when dating didn\'t work.'}
+            ]
+          }
+        ],
+        keyTakeaways: [
+          '90% of startups fail—resilience is essential',
+          'Reframe failure as experiments that provide data',
+          'Build support network and practice self-compassion',
+          'Pivot after 6+ months if no traction',
+          'Instagram, Twitter, YouTube all pivoted successfully',
+          'Each failure increases odds of future success through learning'
+        ]
+      }
     },
     {
       id: 'entre-7',
       title: 'Creative Problem-Solving Frameworks',
       description: '5 Whys, First Principles, Lateral Thinking, and Blue Ocean Strategy',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Framework 1: The 5 Whys',
+            content: 'Find root cause by asking "Why?" five times.',
+            examples: [{
+              title: 'Example',
+              description: 'Problem: No sales → Why? No website visits → Why? No marketing → Why? Don\'t know where customers are → Why? Haven\'t researched target market → Why? Started building before validating. ROOT CAUSE: Skipped customer discovery.'
+            }]
+          },
+          {
+            heading: 'Framework 2: First Principles Thinking',
+            content: 'Break problems to fundamental truths, rebuild from there. Used by Elon Musk.',
+            examples: [{
+              title: 'SpaceX Example',
+              description: 'Conventional: "Rockets expensive, space travel only for governments" | First Principles: What are rockets made of? Aluminum, titanium, copper. How much do materials cost? ~2% of rocket price. Why expensive? Because buying complete rockets. Solution: Build own rockets from raw materials. Result: Reduced cost 10x.'
+            }]
+          },
+          {
+            heading: 'Framework 3: Lateral Thinking',
+            content: 'Solve problems through indirect, creative approaches.',
+            bullets: [
+              'Random Entry: Pick random word, force-connect to problem',
+              'Challenge Assumptions: List assumptions, ask "What if opposite?"',
+              'Reversal: Instead of "How to increase sales?" ask "How to guarantee zero sales?" then avoid those things'
+            ]
+          },
+          {
+            heading: 'Framework 4: Blue Ocean Strategy',
+            content: 'Create uncontested market space instead of competing.',
+            bullets: [
+              'ELIMINATE: What factors can you remove?',
+              'REDUCE: What can you reduce below industry standard?',
+              'RAISE: What can you raise above standard?',
+              'CREATE: What new factors can you create?'
+            ],
+            examples: [{
+              title: 'Cirque du Soleil',
+              description: 'Eliminated: Animals, star performers. Reduced: Humor. Raised: Artistic music/dance, unique venues. Created: Theatrical themes. Result: New category (artistic circus), premium prices, no competitors.'
+            }]
+          }
+        ],
+        keyTakeaways: [
+          '5 Whys reveals root causes beyond surface symptoms',
+          'First Principles breaks problems to fundamentals',
+          'Lateral Thinking uses indirect, creative approaches',
+          'Blue Ocean creates new markets vs competing in existing',
+          'Practice all frameworks on real problems'
+        ]
+      }
     },
     {
       id: 'entre-8',
       title: 'Entrepreneurship in Action',
       description: 'Apply everything: develop your idea, validate it, and create action plan',
       duration: '20 min',
-      type: 'exercise'
+      type: 'exercise',
+      content: {
+        sections: [
+          {
+            heading: 'Final Project: Build Your Entrepreneurial Plan',
+            content: 'Time to apply everything you\'ve learned. Complete this comprehensive exercise to turn your idea into an actionable plan.'
+          }
+        ],
+        keyTakeaways: [
+          'You now have all the tools to start your entrepreneurial journey',
+          'Start with customer discovery before building anything',
+          'Launch your MVP in 2-4 weeks maximum',
+          'Iterate based on real user feedback',
+          'Build resilience—expect setbacks and learn from them',
+          'Take action today, not tomorrow'
+        ],
+        exercises: [
+          {
+            question: 'STEP 1: Identify 3 problems you could solve. For each, write: (1) The problem, (2) Who experiences it, (3) How they currently solve it, (4) What\'s wrong with current solutions',
+            type: 'short-answer'
+          },
+          {
+            question: 'STEP 2: Choose your best idea. Write a problem statement: "[User] needs [need] because [insight]"',
+            type: 'short-answer'
+          },
+          {
+            question: 'STEP 3: Using SCAMPER or brainstorming, generate 20 possible solutions to your chosen problem',
+            type: 'short-answer'
+          },
+          {
+            question: 'STEP 4: Design your MVP. What\'s the simplest version you could build to test your idea? Landing page? Manual service? Basic prototype? Describe it.',
+            type: 'short-answer'
+          },
+          {
+            question: 'STEP 5: List 10 people you will interview this week. Write 5 customer discovery questions you\'ll ask them.',
+            type: 'short-answer'
+          },
+          {
+            question: 'STEP 6: Create your 90-day action plan. Week 1-2: Customer interviews. Week 3-4: Build MVP. Week 5-12: Test, iterate, grow. Be specific about what you\'ll do each week.',
+            type: 'short-answer'
+          },
+          {
+            question: 'STEP 7: What\'s your first action TODAY? Commit to one specific task you\'ll complete in the next 24 hours to move forward.',
+            type: 'short-answer'
+          }
+        ]
+      }
     }
   ],
   skills: [
@@ -6694,56 +7227,623 @@ export const culturalCapitalModule: ModuleData = {
       title: 'Understanding Cultural Capital',
       description: 'What cultural capital is, why it matters, and how to build it regardless of background',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'What is Cultural Capital?',
+            content: 'Cultural capital refers to the knowledge, behaviors, skills, and mannerisms that signal you "belong" in professional and elite circles. It includes understanding unwritten social rules, professional etiquette, cultural references, and ways of communicating that open doors to opportunities.\n\nHere\'s what most people don\'t talk about: there\'s a hidden curriculum in success. Wealthy, well-connected students often learn these "soft skills" at home—how to network at dinner parties, when to wear a suit vs business casual, how to make small talk with executives, which topics are appropriate in professional settings. Schools rarely teach this. Yet these skills dramatically impact career success.\n\nSociologist Pierre Bourdieu studied this phenomenon and found that cultural capital works like financial capital—it compounds over time and opens doors. Two equally qualified candidates interview for a job. One knows how to dress, makes confident eye contact, asks intelligent questions, and follows up professionally. The other is equally smart but fumbles the social dynamics. Guess who gets hired?\n\nThe unfair part: if you grew up in a working-class family, you might not have learned these rules. But here\'s the empowering part: cultural capital can be learned. You don\'t need to be born into privilege to develop these skills. You just need awareness, intentional practice, and willingness to observe and adapt.\n\nThis module teaches you the unwritten rules. Not to make you fake or inauthentic, but to give you choice. You can navigate professional environments confidently while staying true to yourself. Knowledge is power—and understanding these social dynamics gives you power to succeed on your own terms.',
+            bullets: [
+              'Knowledge: Awareness of business customs, social etiquette, cultural literacy—knowing which fork to use matters in some circles',
+              'Behaviors: Professional mannerisms, networking skills, communication styles—how you present yourself creates opportunities',
+              'Social Skills: Ability to connect across different social classes—comfort talking to executives, investors, and decision-makers',
+              'Confidence: Comfort navigating elite professional environments—feeling like you belong, even if it\'s your first time there'
+            ]
+          },
+          {
+            heading: 'Why Cultural Capital Matters',
+            content: 'The uncomfortable truth is that cultural capital significantly impacts career opportunities and earning potential. Research shows that job interviews are 70% based on "cultural fit" and communication style—not just qualifications. Two candidates with identical resumes will have vastly different outcomes based on how they present themselves.\n\nNetworking provides the clearest example. Wealthy students often have family connections—they can email a friend\'s parent who works at Goldman Sachs for an internship referral. That\'s cultural capital in action. But you don\'t need family connections if you learn how to network effectively, communicate professionally, and build genuine relationships.\n\nPromotions tell the same story. Research consistently shows that promotions go not just to top performers, but to performers who "fit" company culture—meaning they know how to navigate social dynamics, communicate up the hierarchy, and make senior leaders comfortable. Skills matter, but social intelligence accelerates career growth.\n\nThis isn\'t about abandoning your identity or becoming someone you\'re not. It\'s about code-switching—the ability to adapt your communication style to different contexts while maintaining authenticity. You can be yourself AND understand when to wear a suit, how to network at conferences, and how to communicate in ways that build trust with decision-makers.',
+            bullets: [
+              'Job interviews: 70% based on "fit" and communication—technical skills get you the interview, cultural capital gets you the job',
+              'Networking: Opens doors to mentors and opportunities—knowing how to build professional relationships creates career momentum',
+              'Career advancement: Promotions often go to those who "fit in"—social intelligence accelerates growth beyond technical skills alone',
+              'Business deals: Built on trust and social connection—people do business with people they trust and feel comfortable with',
+              'Access to elite circles: Universities, firms, investors—cultural fluency signals credibility and competence'
+            ],
+            tipBox: {
+              type: 'info',
+              title: 'The Hidden Curriculum',
+              content: 'Wealthy students often learn these skills at home—how to network, dress professionally, dine formally, communicate confidently. Schools rarely teach this. But cultural capital can be learned by anyone, regardless of background.'
+            }
+          },
+          {
+            heading: 'How to Build Cultural Capital (Starting from Zero)',
+            bullets: [
+              'READ: Financial Times, The Economist (know current events)',
+              'WATCH: TED talks, business interviews, professional panels',
+              'PRACTICE: Attend professional events, networking sessions',
+              'LEARN: Business etiquette books, online courses',
+              'OBSERVE: How successful people talk, dress, behave',
+              'MENTOR: Seek mentors from backgrounds you want to access'
+            ]
+          },
+          {
+            heading: 'Common Mistakes to Avoid',
+            bullets: [
+              'DON\'T: Pretend to know things you don\'t',
+              'DON\'T: Use slang or informal language in professional settings',
+              'DON\'T: Interrupt or dominate conversations',
+              'DON\'T: Check your phone during conversations',
+              'DON\'T: Dress too casually for professional events',
+              'DO: Ask thoughtful questions when you don\'t know something'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Cultural capital = unwritten social rules that open doors',
+          'It can be learned by anyone, regardless of background',
+          'Includes professional behavior, etiquette, communication, and confidence',
+          'Essential for career success, networking, and accessing opportunities',
+          'Build through reading, observation, practice, and mentorship',
+          'Authenticity matters—adapt without losing yourself'
+        ]
+      }
     },
     {
       id: 'prof-1-2',
       title: 'Communicating with High Net Worth Individuals',
       description: 'Confidence without arrogance, respecting time, asking intelligent questions',
       duration: '25 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'The Golden Rules',
+            bullets: [
+              'Be CONFIDENT but not arrogant—know your value',
+              'RESPECT their time—be concise and purposeful',
+              'LISTEN more than you talk (70/30 rule)',
+              'Ask INTELLIGENT questions—show you did research',
+              'GIVE VALUE first before asking for anything',
+              'Follow up promptly and professionally'
+            ]
+          },
+          {
+            heading: 'Confidence Without Arrogance',
+            content: 'High net worth individuals (HNWI) respect confidence backed by competence. They can spot insecurity and arrogance immediately.',
+            bullets: [
+              'Confident: "I\'ve worked on similar projects and learned X"',
+              'Arrogant: "I\'m the best at this"',
+              'Confident: Admits gaps in knowledge, asks to learn',
+              'Arrogant: Pretends to know everything',
+              'Confident: Makes eye contact, speaks clearly',
+              'Insecure: Looks down, mumbles, over-apologizes'
+            ],
+            tipBox: {
+              type: 'success',
+              title: 'The Mindset Shift',
+              content: 'You\'re not asking for handouts—you\'re offering your unique perspective, work ethic, and potential. Wealthy people invest in people who add value. Position yourself as someone who brings value, not someone who needs charity.'
+            }
+          },
+          {
+            heading: 'Respecting Their Time',
+            bullets: [
+              'Get to the point quickly (2-minute max intro)',
+              'Have a clear purpose: "I\'d love 15 minutes to ask about X"',
+              'End on time (they\'ll extend if interested)',
+              'Send brief emails (5 sentences max)',
+              'Never say "I know you\'re busy BUT..." (assume they are)'
+            ]
+          },
+          {
+            heading: 'Asking Intelligent Questions',
+            content: 'Research before meeting. Ask questions that show you\'ve done homework.',
+            bullets: [
+              'WEAK: "What do you do?" (Google exists)',
+              'STRONG: "I read your Forbes article on X. How did you..."',
+              'WEAK: "Any advice for young entrepreneurs?"',
+              'STRONG: "I\'m working on X problem. What would you try?"',
+              'WEAK: "Can you mentor me?"',
+              'STRONG: "I\'d love 20 minutes to learn about your approach to Y"'
+            ]
+          },
+          {
+            heading: 'What to Talk About',
+            bullets: [
+              'Their work and interests (research first)',
+              'Current business trends and news',
+              'Challenges you\'re working through (not complaints)',
+              'Shared connections or experiences',
+              'Books, podcasts, events they\'ve mentioned'
+            ]
+          },
+          {
+            heading: 'What to AVOID',
+            bullets: [
+              'Asking for money in first meeting',
+              'Talking only about yourself',
+              'Complaining about your situation',
+              'Political or controversial topics (unless they bring it up)',
+              'Gossip or speaking negatively about others',
+              'Being overly familiar or casual too quickly'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Confidence backed by competence, not arrogance',
+          'Respect their time—be concise and prepared',
+          'Ask intelligent questions showing you researched them',
+          'Give value first, build relationship before asking',
+          'Treat them as equals (not pedestals or charity cases)',
+          'Follow up promptly and add value in every interaction'
+        ]
+      }
     },
     {
       id: 'prof-1-3',
       title: 'Dining Etiquette & Business Meals',
       description: 'Table manners, ordering protocol, conversation during meals, handling the bill',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Why Dining Etiquette Matters',
+            content: 'Business deals happen over meals. Poor table manners can cost you opportunities—interviewers and clients notice. Confidence at business meals signals professionalism and social intelligence.',
+          },
+          {
+            heading: 'Place Setting Basics',
+            bullets: [
+              'Bread plate: Top left (your LEFT)',
+              'Drinks: Top right (your RIGHT)',
+              'Memory trick: "BMW" - Bread (left), Meal (center), Water (right)',
+              'Utensils: Work outside-in as courses progress',
+              'Fork left hand, knife right hand (UK style)'
+            ]
+          },
+          {
+            heading: 'Ordering Protocol',
+            bullets: [
+              'Wait for host to suggest ordering (never first)',
+              'Match price range of host\'s order (observe their price point)',
+              'AVOID: Messiest foods (spaghetti, ribs), most expensive item, alcohol if host doesn\'t',
+              'SAFE CHOICES: Mid-priced main course, similar formality to host',
+              'Ask server for recommendations if unsure'
+            ]
+          },
+          {
+            heading: 'Essential Table Manners',
+            bullets: [
+              'Napkin in lap immediately when seated',
+              'Wait for everyone served before eating',
+              'Small bites, chew with mouth closed',
+              'Put utensils down between bites (don\'t shovel)',
+              'No elbows on table while eating',
+              'Pass items to the right',
+              'If you drop utensil, ask server for new one (don\'t pick up)'
+            ]
+          },
+          {
+            heading: 'Conversation During Meals',
+            bullets: [
+              'Business talk usually after ordering (let host guide)',
+              'Never talk with food in mouth',
+              'Silence phone (don\'t even place on table)',
+              'Include everyone at table in conversation',
+              'Safe topics: Work, industry news, travel, recommendations',
+              'Avoid: Politics, religion, controversial topics, personal problems'
+            ],
+            tipBox: {
+              type: 'tip',
+              title: 'The Fork Position',
+              content: 'Finished: Fork and knife parallel, 4 o\'clock position on plate. Still eating: Fork and knife crossed in X on plate. This signals servers when to clear without asking.'
+            }
+          },
+          {
+            heading: 'Handling the Bill',
+            bullets: [
+              'RULE: Whoever invited pays (usually)',
+              'If you invited for networking, YOU pay',
+              'If unclear who\'s paying, offer: "May I contribute?"',
+              'Don\'t grab bill aggressively or make scene',
+              'NEVER split bill at business meal (looks cheap)',
+              'If interviewing, company always pays',
+              'Say "Thank you" sincerely, follow up with thank-you email'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'BMW: Bread left, Meal center, Water right',
+          'Order mid-range item matching host\'s price point',
+          'Essential: Napkin in lap, wait for everyone, small bites',
+          'Fork position signals finished vs still eating',
+          'Let host guide when business talk begins',
+          'Whoever invites generally pays—offer politely if unclear'
+        ]
+      }
     },
     {
       id: 'prof-1-4',
       title: 'Professional Image & Dress Code',
       description: 'Business professional, business casual, grooming, wardrobe building on budget',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Why Professional Image Matters',
+            content: 'You have 7 seconds to make a first impression—55% based on appearance. Dressing professionally signals respect, competence, and attention to detail. It\'s not about expensive clothes; it\'s about appropriate, well-maintained attire.',
+          },
+          {
+            heading: 'Dress Codes Decoded',
+            bullets: [
+              'BUSINESS PROFESSIONAL: Suit + tie (men), suit/dress (women). Banking, law, interviews.',
+              'BUSINESS CASUAL: Trousers + button-shirt, no tie. Most office environments.',
+              'SMART CASUAL: Chinos + polo/smart shirt. Friday attire, creative industries.',
+              'CASUAL: Jeans allowed. Startups, tech companies.',
+              'RULE: When in doubt, dress one level UP'
+            ]
+          },
+          {
+            heading: 'For Men: Business Professional',
+            bullets: [
+              'Suit: Navy or charcoal (black for funerals only)',
+              'Shirt: White or light blue, pressed, collar stays',
+              'Tie: Conservative pattern, reaches belt buckle',
+              'Shoes: Black or brown leather, polished',
+              'Belt: Matches shoes',
+              'Socks: Match trousers, cover legs when sitting',
+              'Watch: Simple, not flashy'
+            ]
+          },
+          {
+            heading: 'For Women: Business Professional',
+            bullets: [
+              'Suit: Blazer + trousers or skirt (knee-length min)',
+              'Blouse: Professional neckline, pressed',
+              'Shoes: Closed-toe, modest heel (optional)',
+              'Accessories: Minimal jewelry, professional bag',
+              'Makeup: Natural, professional (optional)',
+              'Hair: Neat, pulled back if long'
+            ]
+          },
+          {
+            heading: 'Building Professional Wardrobe on Budget',
+            bullets: [
+              'Start with 2 suits (navy, grey) - £100-200 each (Uniqlo, Next, M&S)',
+              '5 white/blue shirts - £15-30 each',
+              '2 pairs professional shoes - £50-80 (polish regularly)',
+              '3 ties (men) or accessories (women) - £10-20 each',
+              'TOTAL INVESTMENT: £300-500 opens 95% of opportunities',
+              'Charity shops for blazers and accessories',
+              'Tailor cheap suits (£20) for perfect fit'
+            ]
+          },
+          {
+            heading: 'Grooming Essentials',
+            bullets: [
+              'Hair: Clean, styled, natural colors',
+              'Facial hair (men): Shaved or neatly trimmed',
+              'Nails: Clean, trimmed, no chipped polish',
+              'Hygiene: Shower, deodorant, light/no cologne',
+              'Teeth: Brushed, breath mints',
+              'Clothes: Pressed, no wrinkles, no stains',
+              'Shoes: Polished, heels in good condition'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Professional image = respect, competence, attention to detail',
+          'Business Professional: Suits. Business Casual: No tie/jacket.',
+          'When in doubt, dress one level up',
+          'Navy or grey suits (NOT black—that\'s for funerals)',
+          'Build wardrobe for £300-500 using budget retailers',
+          'Perfect fit matters more than price—tailor cheap suits',
+          'Grooming equally important: clean, neat, professional'
+        ]
+      }
     },
     {
       id: 'prof-1-5',
       title: 'Strategic Networking',
       description: 'Give before asking, quality over quantity, follow-up strategies, working a room',
       duration: '25 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Networking Mindset Shift',
+            content: 'Networking isn\'t about collecting business cards. It\'s about building genuine relationships by helping others before asking for anything.',
+            bullets: [
+              'OLD: "What can I get from this person?"',
+              'NEW: "How can I help this person?"',
+              'Give value first: introductions, resources, insights',
+              'Think long-term relationships, not transactional exchanges',
+              'Quality over quantity: 5 real connections > 50 business cards'
+            ]
+          },
+          {
+            heading: 'Before the Event: Preparation',
+            bullets: [
+              'Research attendees if possible (LinkedIn, event page)',
+              'Prepare 2-minute introduction about yourself',
+              'Have clear goals: 3 people I want to meet',
+              'Bring business cards or have LinkedIn ready',
+              'Dress appropriately for the event type',
+              'Arrive early (less intimidating, meet organizers)'
+            ]
+          },
+          {
+            heading: 'Your Professional Introduction (30-60 seconds)',
+            content: 'Structure: Name → What you do → Why it matters → Conversation starter',
+            examples: [{
+              title: 'Example',
+              description: '"I\'m Sarah, I help small businesses automate their admin through AI tools. I\'m passionate about giving entrepreneurs time back to focus on growth. What brings you here tonight?"'
+            }],
+            bullets: [
+              'Keep it conversational, not rehearsed',
+              'Focus on value you provide, not job title',
+              'End with question to engage them',
+              'Adapt based on who you\'re talking to'
+            ]
+          },
+          {
+            heading: 'Working a Room',
+            bullets: [
+              'Approach people standing alone or small groups (2-3)',
+              'Open: "Hi, I\'m [name]. How do you know [host/organization]?"',
+              'Listen actively: Eye contact, ask follow-ups, show interest',
+              'Share spotlight: "You should meet X, they work on Y too"',
+              'Graceful exit: "Been great talking, let me grab your card. I want to say hi to a few others."',
+              'DON\'T: Dominate conversations, scan room while talking, hard sell'
+            ]
+          },
+          {
+            heading: 'The Follow-Up (Where Real Networking Happens)',
+            content: 'Most people collect cards and never follow up. That\'s where you differentiate.',
+            bullets: [
+              'WITHIN 24-48 HOURS: Send personalized email',
+              'Reference specific conversation detail',
+              'Provide value: Article, intro, resource they mentioned',
+              'Suggest low-pressure next step: Coffee, call, event',
+              'NEVER: Generic "Nice to meet you" with no value'
+            ],
+            examples: [{
+              title: 'Strong Follow-Up Email',
+              description: 'Subject: Re: Marketing automation for cafés\n\nHi John,\n\nGreat meeting you at the startup mixer yesterday! I loved hearing about your café chain expansion.\n\nYou mentioned struggling with customer retention emails. I came across this article on automated loyalty programs that might be helpful: [link]\n\nWould you be open to a 20-minute call next week? I\'d love to hear more about your marketing challenges and share some ideas.\n\nBest,\nSarah'
+            }]
+          },
+          {
+            heading: 'Building Your Network Long-Term',
+            bullets: [
+              'Stay in touch: Share relevant articles, congrats on achievements',
+              'Offer value regularly without asking for anything',
+              'Make introductions: Connect people who should meet',
+              'Attend events consistently (recurring faces build trust)',
+              'Join communities: Industry groups, LinkedIn groups, meetups',
+              'When you DO ask for help, make it specific and easy'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Networking = helping others, not collecting cards',
+          'Give value first before asking for anything',
+          'Quality over quantity: 5 real connections > 50 cards',
+          'Follow up within 24-48 hours with specific value',
+          'Stay in touch long-term by sharing relevant content',
+          'Best ask: Make it specific, easy, and after giving value'
+        ]
+      }
     },
     {
       id: 'prof-1-6',
       title: 'Professional Email & Written Communication',
       description: 'Email structure, subject lines, cold outreach templates, LinkedIn messaging',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Professional Email Structure',
+            bullets: [
+              '1. Subject Line: Clear, specific (not "Hi" or "Quick question")',
+              '2. Greeting: "Hi [Name]," or "Dear [Name]," (NOT "Hey")',
+              '3. Context: Why you\'re emailing (1 sentence)',
+              '4. Purpose: What you need (2-3 sentences)',
+              '5. Call to Action: Specific next step',
+              '6. Sign Off: "Best," "Kind regards," or "Sincerely"',
+              '7. Signature: Full name, title, contact info'
+            ]
+          },
+          {
+            heading: 'Subject Line Rules',
+            bullets: [
+              'BAD: "Quick question" (vague, everyone says this)',
+              'GOOD: "Partnership opportunity for your podcast"',
+              'BAD: "Meeting" (no context)',
+              'GOOD: "Following up from Tech Summit - 15min call?"',
+              'BAD: All caps or excessive punctuation (looks unprofessional)',
+              'GOOD: Clear, specific, under 50 characters'
+            ]
+          },
+          {
+            heading: 'Cold Outreach Email Template',
+            examples: [{
+              title: 'Template',
+              description: 'Subject: [Specific value proposition]\n\nHi [Name],\n\nI came across your [article/podcast/company] on [topic]. Your insights on [specific thing] really resonated.\n\nI\'m reaching out because [connection to them + why you\'re emailing].\n\n[One paragraph: Specific value you can provide or specific ask]\n\nWould you be open to a 15-minute call next week? [Specific date/time options]\n\nBest,\n[Your name]'
+            }]
+          },
+          {
+            heading: 'LinkedIn Messaging',
+            bullets: [
+              'Connection request: Personalize! Reference shared connection/interest',
+              'Keep initial message under 300 characters',
+              'DON\'T: Immediately pitch product/service',
+              'DO: Start conversation, ask question, provide value',
+              'Follow-up if no response after 1 week (polite, adds value)'
+            ]
+          },
+          {
+            heading: 'Common Email Mistakes',
+            bullets: [
+              'Too long (keep under 5 sentences)',
+              'No clear ask or purpose',
+              'Generic ("To whom it may concern")',
+              'Typos and grammar errors (use Grammarly)',
+              'Overly casual language in professional context',
+              'Following up too aggressively (wait 3-5 days)'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Structure: Clear subject → Brief context → Specific purpose → CTA',
+          'Subject line: Specific, under 50 characters, provides context',
+          'Cold email: Reference their work, provide value, specific ask',
+          'Keep emails under 5 sentences when possible',
+          'Personalize every message (NO templates without customizing)',
+          'Proofread everything—typos kill credibility'
+        ]
+      }
     },
     {
       id: 'prof-1-7',
       title: 'Conversation Skills & Small Talk',
       description: 'Breaking ice, active listening, asking better questions, safe topics',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Why Small Talk Matters',
+            content: 'Small talk isn\'t meaningless—it\'s the foundation for building rapport and trust. Professional relationships begin with casual conversations that establish common ground.',
+          },
+          {
+            heading: 'Breaking the Ice: Conversation Starters',
+            bullets: [
+              '"How do you know [host/organization]?"',
+              '"What brings you here tonight?"',
+              '"I love your [item they\'re wearing]. Where\'s it from?"',
+              '"Have you been to one of these before?"',
+              '"What do you do?" (after some rapport established)',
+              'Comment on event/venue: "Great turnout tonight!"'
+            ]
+          },
+          {
+            heading: 'Active Listening Skills',
+            bullets: [
+              'Eye contact (not staring, natural breaks)',
+              'Put phone away (never check during conversation)',
+              'Don\'t interrupt—let them finish thoughts',
+              'Nod and show engagement ("mm-hmm," "I see")',
+              'Ask follow-up questions about what THEY said',
+              'Remember details (write them down after)'
+            ],
+            tipBox: {
+              type: 'success',
+              title: 'The 70/30 Rule',
+              content: 'Let them talk 70% of the time, you talk 30%. Most people remember conversations where they talked more favorably. Make them feel heard.'
+            }
+          },
+          {
+            heading: 'Asking Better Questions',
+            content: 'Move beyond surface-level with these question types:',
+            bullets: [
+              'OPEN-ENDED: "What\'s the most exciting project you\'re working on?"',
+              'FOLLOW-UP: "Tell me more about that" or "How did that happen?"',
+              'OPINION: "What do you think about [recent industry news]?"',
+              'STORY: "How did you get into [their field]?"',
+              'AVOID: Yes/no questions that end conversations quickly'
+            ]
+          },
+          {
+            heading: 'Safe Topics',
+            bullets: [
+              '✅ Work and career paths',
+              '✅ Industry trends and news',
+              '✅ Travel and places they\'ve been',
+              '✅ Books, podcasts, recommendations',
+              '✅ Hobbies and interests',
+              '✅ Local events and culture',
+              '❌ Politics and religion',
+              '❌ Personal finances or money',
+              '❌ Health issues and complaints',
+              '❌ Controversial social topics',
+              '❌ Gossip about others'
+            ]
+          },
+          {
+            heading: 'Gracefully Exiting Conversations',
+            bullets: [
+              '"It\'s been great talking with you. I want to say hello to a few others. Let\'s exchange contact info."',
+              '"I don\'t want to monopolize your time. Can I grab your card before I head out?"',
+              '"I see someone I need to catch before they leave. Let\'s connect on LinkedIn!"',
+              'NEVER: Ghost or walk away without acknowledgment',
+              'ALWAYS: Thank them for their time'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Small talk builds rapport and trust for deeper relationships',
+          'Break ice with event-related questions',
+          '70/30 Rule: Let them talk more than you',
+          'Ask open-ended questions and follow-ups',
+          'Safe topics: Work, travel, recommendations, hobbies',
+          'Avoid: Politics, religion, money, health complaints, gossip',
+          'Exit gracefully: Thank them, exchange info, open to reconnect'
+        ]
+      }
     },
     {
       id: 'prof-1-8',
       title: 'Practice Networking & Communication',
       description: 'Draft professional emails, practice introductions, plan networking strategy',
       duration: '20 min',
-      type: 'exercise'
+      type: 'exercise',
+      content: {
+        sections: [
+          {
+            heading: 'Final Project: Cultural Capital Action Plan',
+            content: 'Apply everything you\'ve learned to build your professional communication skills.'
+          }
+        ],
+        keyTakeaways: [
+          'Cultural capital can be learned through practice and intentionality',
+          'Professional communication opens doors to opportunities',
+          'Confidence + preparation = professional presence',
+          'Networking is about giving value, not taking',
+          'Small, consistent actions build professional network over time'
+        ],
+        exercises: [
+          {
+            question: 'Write your 60-second professional introduction following the format: Name → What you do → Why it matters → Conversation starter. Make it natural and conversational.',
+            type: 'short-answer'
+          },
+          {
+            question: 'Draft a cold outreach email to someone you\'d like to connect with (mentor, industry professional, potential collaborator). Use the template from Lesson 6. Make it specific and valuable.',
+            type: 'short-answer'
+          },
+          {
+            question: 'List 3 upcoming networking events you can attend in the next month (professional conferences, industry meetups, LinkedIn events, university career fairs). Commit to attending at least one.',
+            type: 'short-answer'
+          },
+          {
+            question: 'Practice active listening: Have a 10-minute conversation with someone where you apply the 70/30 rule (let them talk 70% of time). Write what you learned about them and 3 follow-up questions you could ask next time.',
+            type: 'short-answer'
+          },
+          {
+            question: 'Build your professional wardrobe plan: List what you already have and what you need to acquire. Set a budget (£300-500 recommended) and identify stores you\'ll shop at.',
+            type: 'short-answer'
+          },
+          {
+            question: 'Create your networking follow-up system: How will you remember to follow up within 24-48 hours? What app/method will you use to track new connections and their details?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Identify ONE action you\'ll take THIS WEEK to build your cultural capital (attend an event, send a networking email, practice your introduction, upgrade one wardrobe item). Commit to it.',
+            type: 'short-answer'
+          }
+        ]
+      }
     }
   ],
   skills: [
@@ -6778,56 +7878,563 @@ export const socialMediaMarketingModule: ModuleData = {
       title: 'Personal Branding Fundamentals',
       description: 'Defining your niche, unique value proposition, and authentic voice',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'What is Personal Branding?',
+            content: 'Your personal brand is how people perceive you online—your reputation, expertise, and unique voice. It\'s what makes people follow YOU instead of competitors.',
+            bullets: [
+              'Not fake persona—it\'s authentic amplification of who you are',
+              'Combines expertise, personality, and values',
+              'Consistent across all platforms',
+              'Builds trust and attracts opportunities'
+            ]
+          },
+          {
+            heading: 'Finding Your Niche',
+            content: 'The riches are in the niches. Specific audiences engage more than broad ones. This is the single most important decision in building your personal brand, yet most people get it wrong by trying to appeal to everyone.\n\nHere\'s why being specific works better than being general: when you try to reach "everyone interested in fitness," you\'re competing with millions of creators. When you focus on "fitness for busy mums who want to work out at home in under 30 minutes," suddenly you\'re speaking directly to a specific person with specific problems. That specificity creates connection.\n\nThink about the creators you follow. Do they talk about "everything"? No—they have a clear focus. Ali Abdaal: productivity for students and young professionals. Gary Vee: entrepreneurship and marketing. Dr. Julie: skincare science. Their specificity is their strength—you know exactly what you\'ll get, so you keep coming back.\n\nThe formula is simple: [Your Expertise] for [Target Audience] to [Outcome]. For example: "Budgeting tips for uni students to save £500/month" is infinitely more compelling than "Financial advice." The specificity tells people immediately if this content is for them. And that\'s the point—you want to attract the right people, not all people.\n\nStart narrow. You can always expand later once you\'ve built an engaged audience. But starting broad means you\'ll struggle to stand out in a sea of generic content.',
+            bullets: [
+              'Formula: [Expertise] for [Target Audience] to [Outcome]—this three-part structure ensures specificity',
+              'Example: "Fitness for busy professionals to stay healthy without gym"—clear who, what, and why',
+              'Example: "Study tips for GCSE students to get top grades"—specific age group and specific goal',
+              'TOO BROAD: "Helping everyone with everything"—when you speak to everyone, you speak to no one',
+              'JUST RIGHT: "Helping Gen Z find remote work opportunities"—specific generation, specific goal'
+            ]
+          },
+          {
+            heading: 'Your Unique Value Proposition (UVP)',
+            content: 'What makes YOU different from everyone else in your niche?',
+            bullets: [
+              'Your story and perspective',
+              'Your specific approach or method',
+              'Your personality and communication style',
+              'Your unique combination of skills/experiences'
+            ],
+            examples: [{
+              title: 'Example UVP',
+              description: '"I teach exam techniques using memory palaces and visual learning—not boring textbook methods—because I went from failing to straight A\'s using these strategies."'
+            }]
+          },
+          {
+            heading: 'Developing Your Voice',
+            bullets: [
+              'Authentic: Sounds like how you actually talk',
+              'Consistent: Same tone across content',
+              'Valuable: Helps audience solve problems',
+              'Engaging: Makes people want to keep reading/watching',
+              'Options: Motivational, educational, humorous, controversial, storytelling'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Personal brand = your reputation and unique voice online',
+          'Niche formula: [Expertise] for [Audience] to [Outcome]',
+          'UVP = what makes YOU uniquely valuable',
+          'Voice = authentic, consistent, valuable, engaging',
+          'Riches in niches—specific beats broad'
+        ]
+      }
     },
     {
       id: 'smm-2',
       title: 'Content Creation Mastery',
       description: 'Hook-Content-CTA framework, storytelling, video editing basics, trending audio',
       duration: '25 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'The Hook-Content-CTA Framework',
+            bullets: [
+              'HOOK (First 3 seconds): Stop the scroll',
+              'CONTENT (Middle): Deliver value',
+              'CTA (End): Tell them what to do next'
+            ]
+          },
+          {
+            heading: 'Writing Scroll-Stopping Hooks',
+            content: 'You have 1-3 seconds before people scroll. Make it count.',
+            bullets: [
+              'Pattern Interrupt: "Stop scrolling if..."',
+              'Big Promise: "This changed my life in 30 days"',
+              'Curiosity Gap: "The one thing nobody tells you about..."',
+              'Relatability: "If you\'re tired of [pain point]..."',
+              'Controversy: "Unpopular opinion: [bold statement]"',
+              'Numbers: "5 mistakes 99% of people make..."'
+            ]
+          },
+          {
+            heading: 'Storytelling Structure',
+            bullets: [
+              'Before/After: Where I was → What changed → Where I am now',
+              'Problem/Solution: Frustration → Discovery → Result',
+              'Day in Life: Show behind-scenes of your process',
+              'Lesson Learned: Mistake → What happened → Insight',
+              'ALWAYS: Make it relatable, show vulnerability, provide takeaway'
+            ]
+          },
+          {
+            heading: 'Video Editing Basics (Free Tools)',
+            bullets: [
+              'CapCut (Free, mobile + desktop): Best for TikTok/Reels',
+              'Canva (Free tier): Great for thumbnails and graphics',
+              'InShot (Free, mobile): Quick edits on phone',
+              'Key edits: Jump cuts (remove pauses), captions, B-roll, trending audio',
+              'Keep videos under 60 seconds for best engagement'
+            ]
+          },
+          {
+            heading: 'Using Trending Audio',
+            bullets: [
+              'Find: TikTok "Discover" page, Instagram Reels trending section',
+              'Timing: Use audio within first 3-7 days for max reach',
+              'Adaptation: Add your own voiceover or twist to trend',
+              'DON\'T: Copy exactly—add unique angle to stand out'
+            ]
+          },
+          {
+            heading: 'Call-to-Action (CTA) Options',
+            bullets: [
+              'Engagement: "Comment YES if you want part 2"',
+              'Save: "Save this for later so you don\'t forget"',
+              'Share: "Send this to someone who needs to hear it"',
+              'Follow: "Follow for daily [niche] tips"',
+              'Link: "Link in bio for free guide"'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Hook-Content-CTA structure for all content',
+          'Hook has 1-3 seconds to stop scroll—make it count',
+          'Storytelling beats facts—make it relatable and vulnerable',
+          'Free tools: CapCut for editing, Canva for thumbnails',
+          'Use trending audio within first week of trending',
+          'Every post needs clear CTA—tell people what to do'
+        ]
+      }
     },
     {
       id: 'smm-3',
       title: 'Instagram & TikTok Strategy',
       description: 'Algorithm secrets, Reels vs TikTok, posting times, hashtag strategy, engagement tactics',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'How the Algorithm Works',
+            bullets: [
+              'Watch Time: How long people watch matters most',
+              'Engagement: Likes, comments, shares, saves',
+              'Completion Rate: People watching to end',
+              'Rewatches: Viewers replaying content',
+              'First Hour: Performance in first 60 min predicts viral potential'
+            ]
+          },
+          {
+            heading: 'Instagram Reels Strategy',
+            bullets: [
+              'Length: 7-15 seconds performs best (keep it short!)',
+              'Cover: Eye-catching thumbnail with text',
+              'Audio: Use trending sounds for discoverability',
+              'Captions: Always add—80% watch without sound',
+              'Hashtags: 3-5 relevant, mix of big/small (NOT 30)',
+              'Post: 10am, 2pm, or 7pm GMT (test your audience)'
+            ]
+          },
+          {
+            heading: 'TikTok Strategy',
+            bullets: [
+              'First 3 Seconds: Hook or people scroll',
+              'Length: 15-30 seconds sweet spot',
+              'Trends: Jump on trends within first week',
+              'Duets/Stitches: Engage with bigger creators',
+              'Niche: FYP rewards consistency in one topic',
+              'Post: 7-9am, 12-1pm, 7-9pm GMT'
+            ]
+          },
+          {
+            heading: 'Hashtag Strategy',
+            bullets: [
+              'Mix: 1-2 big (1M+ posts), 2-3 medium (100K-1M), 1-2 niche (<100K)',
+              'Instagram: 3-5 hashtags (not 30—looks spammy now)',
+              'TikTok: 3-5 descriptive hashtags',
+              'DON\'T: #like4like, #follow4follow (kills reach)',
+              'DO: #[niche]tips, #[audience]problems, branded tags'
+            ]
+          },
+          {
+            heading: 'Engagement Tactics',
+            bullets: [
+              'Respond to ALL comments within first hour',
+              'Ask questions in captions to encourage comments',
+              'Reply to comments with video responses',
+              'DM responses to story replies (builds relationships)',
+              'Engage with 10 accounts in your niche daily (genuine comments)',
+              'Share others\' content to your story (they\'ll reciprocate)'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Algorithm rewards watch time, engagement, completion rate',
+          'Instagram Reels: 7-15 seconds, 3-5 hashtags, trending audio',
+          'TikTok: Hook in 3 seconds, 15-30 seconds, jump on trends early',
+          'Hashtags: Mix of big/medium/niche, 3-5 max',
+          'Best posting: 7-9am, 12-1pm, 7-9pm GMT (test your audience)',
+          'Engage in first hour: Reply to all comments, boost reach'
+        ]
+      }
     },
     {
       id: 'smm-4',
       title: 'LinkedIn Professional Presence',
       description: 'Profile optimization, thought leadership, B2B networking, content strategy',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'LinkedIn Profile Optimization',
+            bullets: [
+              'Headline: NOT job title. Value you provide + who you help',
+              'Example: "Helping students land tech internships | 500+ placed"',
+              'Photo: Professional, smiling, clear background',
+              'Banner: Custom graphic showing your expertise',
+              'About: Tell your story, what you do, how to contact',
+              'Featured: Pin best posts, projects, media',
+              'Skills: Top 3 should be your expertise areas'
+            ]
+          },
+          {
+            heading: 'LinkedIn Content Strategy',
+            content: 'LinkedIn rewards educational, professional content—not memes.',
+            bullets: [
+              'Formats: Text posts, PDFs/carousels, videos, polls',
+              'Best: Personal stories with professional lessons',
+              'Length: 1,300 characters+ (longer = better reach)',
+              'Hook: First 2 lines determine if people click "see more"',
+              'Frequency: 3-5x per week minimum',
+              'Timing: Tuesday-Thursday, 8-10am or 12-2pm GMT'
+            ]
+          },
+          {
+            heading: 'Thought Leadership Content Ideas',
+            bullets: [
+              'Career lessons: "What I wish I knew at 18..."',
+              'Industry insights: "Here\'s what\'s changing in [field]..."',
+              'How-tos: "How I landed my internship in 3 steps..."',
+              'Mistakes: "5 CV mistakes that cost me interviews..."',
+              'Behind-scenes: "What a day in [role] really looks like..."',
+              'Hot takes: "Unpopular opinion about [industry trend]..."'
+            ]
+          },
+          {
+            heading: 'Networking on LinkedIn',
+            bullets: [
+              'Connection requests: Personalize with shared interest',
+              'Engage before connecting: Comment on their posts first',
+              'After connecting: Send helpful resource, not pitch',
+              'Recommendations: Give them first (reciprocity)',
+              'Join groups: Engage in industry discussions',
+              'Comment strategy: Add value, not just "Great post!"'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Headline: Value you provide + who you help (NOT job title)',
+          'Content: Personal stories with professional lessons',
+          'Post 3-5x per week, Tuesday-Thursday, mornings',
+          'Longer posts (1,300+ characters) get better reach',
+          'Personalize all connection requests',
+          'Give value before asking—recommendations, comments, resources'
+        ]
+      }
     },
     {
       id: 'smm-5',
       title: 'Twitter/X & YouTube Strategies',
       description: 'Thread writing, viral tweets, YouTube SEO, thumbnail optimization, monetization',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Twitter/X Strategy',
+            bullets: [
+              'Profile: Clear bio (who you help + what you do), professional photo',
+              'Content mix: 40% educational, 30% engaging, 20% personal, 10% promotional',
+              'Frequency: 3-10 tweets per day (consistency matters)',
+              'Best times: 8-10am, 12-2pm, 6-9pm GMT',
+              'Engage: Reply to bigger accounts (quality comments)'
+            ]
+          },
+          {
+            heading: 'Writing Viral Tweets',
+            bullets: [
+              'Hooks: Start with number, question, or bold statement',
+              'Formatting: Line breaks make tweets readable',
+              'Thread starters: "10 lessons I learned..." "Here\'s why..."',
+              'Engagement bait: "Reply with YES if..." (use sparingly)',
+              'Quote tweets: Add perspective to trending topics',
+              'Timing: Tweet during trending topics/news'
+            ]
+          },
+          {
+            heading: 'Thread Writing Formula',
+            bullets: [
+              'Tweet 1: Hook + promise ("10 things about X you need to know")',
+              'Tweets 2-10: Deliver on promise (one point per tweet)',
+              'Final tweet: Summary + CTA ("Retweet if helpful, follow for more")',
+              'Use numbering: "1/10", "2/10" to show progress'
+            ]
+          },
+          {
+            heading: 'YouTube SEO Basics',
+            bullets: [
+              'Title: Keyword + hook (under 60 characters)',
+              'Description: Keywords in first 150 characters',
+              'Tags: 5-8 relevant keywords',
+              'Thumbnail: Bright colors, readable text, faces',
+              'First 48 hours: CTR (click-through rate) determines reach',
+              'Playlists: Organize content, increases watch time'
+            ]
+          },
+          {
+            heading: 'YouTube Thumbnail Formula',
+            bullets: [
+              'Face: Close-up, expressive reaction',
+              'Text: 3-5 words MAX, high contrast',
+              'Colors: Bright, stands out in feed',
+              'Consistency: Similar style across videos',
+              'Tools: Canva (free), Photopea (free), Photoshop'
+            ]
+          },
+          {
+            heading: 'YouTube Monetization',
+            bullets: [
+              'Partner Program: 1,000 subs + 4,000 watch hours',
+              'Sponsorships: Even with 5K subs (reach out to brands)',
+              'Affiliate links: Amazon Associates, niche products',
+              'Digital products: Courses, templates, guides',
+              'Memberships: Channel memberships, Patreon'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Twitter: 3-10 tweets daily, engage with bigger accounts',
+          'Threads: Hook + numbered points + CTA at end',
+          'YouTube: First 48 hours CTR determines video reach',
+          'Thumbnails: Face + 3-5 words + bright colors',
+          'Monetize before 1K subs: Sponsorships, affiliates, products',
+          'SEO: Keywords in title, description, tags'
+        ]
+      }
     },
     {
       id: 'smm-6',
       title: 'Growing Your Audience Organically',
       description: 'Consistency, engagement loops, collaborations, cross-promotion, community building',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Consistency Beats Everything',
+            bullets: [
+              'Post 1x daily minimum (across platforms)',
+              'Same time daily (trains audience when to expect content)',
+              '90-day rule: Most quit before 90 days—persist past this',
+              'Batch create: Film 10 videos in one day, post over 2 weeks',
+              'Quality matters but consistency matters MORE early on'
+            ]
+          },
+          {
+            heading: 'Creating Engagement Loops',
+            bullets: [
+              'Ask questions: "What would you add to this list?"',
+              'Series content: "Part 1 of 3" encourages follows',
+              'Tease next post: "Tomorrow I\'ll share how..."',
+              'Respond to ALL comments (first hour critical)',
+              'Story replies: DM conversations build stronger connections',
+              'Polls and quizzes: Easy engagement'
+            ]
+          },
+          {
+            heading: 'Collaboration Strategy',
+            bullets: [
+              'Find: Creators with similar audience size (not much bigger)',
+              'Reach out: DM with specific collab idea (not vague)',
+              'Formats: Duets, stitches, co-hosted lives, guest posts',
+              'Benefits: Tap into each other\'s audiences',
+              'Start small: Comment exchange, shoutouts, then bigger collabs'
+            ]
+          },
+          {
+            heading: 'Cross-Promotion Tactics',
+            bullets: [
+              'Repurpose: 1 video → TikTok + Reels + YouTube Shorts',
+              'Drive traffic: "Full version on YouTube" (link in bio)',
+              'Teasers: Share clips on Twitter/X with link to full content',
+              'Email list: Offer free resource to capture emails',
+              'Link in bio: Use Linktree/Stan to share multiple links'
+            ]
+          },
+          {
+            heading: 'Building Community',
+            bullets: [
+              'Respond genuinely: Not "thanks!" but thoughtful replies',
+              'Remember names: Note details about engaged followers',
+              'Feature followers: Reshare their content, give shoutouts',
+              'Create spaces: Discord, WhatsApp group, private community',
+              'Ask for input: "What content do you want to see?"',
+              'Show behind-scenes: Make them feel like insiders'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Post 1x daily minimum, consistency beats perfection',
+          '90-day rule: Most quit before 90 days—persist',
+          'Engagement loops: Questions, series, tease next post',
+          'Collabs with similar-sized creators grow both audiences',
+          'Cross-promote: Repurpose content across all platforms',
+          'Community: Respond genuinely, feature followers, create spaces'
+        ]
+      }
     },
     {
       id: 'smm-7',
       title: 'Monetization Strategies',
       description: 'Sponsored posts, affiliate marketing, digital products, coaching, brand deals',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'When to Start Monetizing',
+            bullets: [
+              'DON\'T wait: Can monetize with 1,000+ engaged followers',
+              'Focus: Engagement rate > follower count',
+              '1,000 engaged followers > 100,000 ghost followers',
+              'Niche audiences pay more (specific > broad)'
+            ]
+          },
+          {
+            heading: 'Sponsored Posts & Brand Deals',
+            bullets: [
+              'Rates: £10-100 per 1,000 followers (varies by niche)',
+              'Find brands: DM companies, sign up for creator platforms',
+              'Platforms: AspireIQ, #paid, Collabstr, Brand Collabs (Meta)',
+              'Pitch: "I create [content] for [audience]. My engagement is [%]. Here\'s how I can help..."',
+              'Disclose: Always use #ad or #sponsored (legal requirement)'
+            ]
+          },
+          {
+            heading: 'Affiliate Marketing',
+            bullets: [
+              'How it works: Promote products, earn commission on sales',
+              'Best programs: Amazon Associates (4-10%), ShareASale, ClickBank',
+              'Strategy: Only promote products you genuinely use',
+              'Where: Link in bio, product reviews, comparison videos',
+              'Disclosure: "This contains affiliate links" (builds trust)'
+            ]
+          },
+          {
+            heading: 'Digital Products',
+            bullets: [
+              'Ebooks/Guides: £5-50, easiest to create',
+              'Templates: Notion templates, spreadsheets, designs (£10-30)',
+              'Online courses: £50-500+ (most profitable)',
+              'Sell on: Gumroad, Teachable, Stan Store, Etsy',
+              'Create: Solve specific problem your audience has'
+            ]
+          },
+          {
+            heading: 'Coaching & Consulting',
+            bullets: [
+              'Group coaching: £50-200/person per program',
+              '1-on-1 coaching: £50-500/hour (based on expertise)',
+              'Strategy calls: £100-300 per session',
+              'Book: Calendly, Stan Store, or DM for inquiries',
+              'Deliver: Zoom calls, recorded modules, weekly accountability'
+            ]
+          },
+          {
+            heading: 'Subscription Income',
+            bullets: [
+              'Patreon: Exclusive content for monthly supporters (£5-50/month)',
+              'YouTube Memberships: 1,000+ subs required',
+              'Substack/Newsletter: Paid subscribers (£5-10/month)',
+              'Discord: Premium tiers for exclusive community access'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Start monetizing at 1,000+ engaged followers',
+          'Sponsored posts: £10-100 per 1,000 followers',
+          'Affiliate marketing: Promote products you actually use',
+          'Digital products: Ebooks, templates, courses (most scalable)',
+          'Coaching: £50-500/hour depending on expertise',
+          'Multiple streams: Combine 3-4 monetization methods'
+        ]
+      }
     },
     {
       id: 'smm-8',
       title: 'Build Your Content Strategy',
       description: 'Create 30-day content calendar, optimize profiles, record first pieces of content',
       duration: '20 min',
-      type: 'exercise'
+      type: 'exercise',
+      content: {
+        sections: [
+          {
+            heading: 'Final Project: Launch Your Social Media Presence',
+            content: 'Time to put everything into action and create your content strategy.'
+          }
+        ],
+        keyTakeaways: [
+          'Start TODAY—not tomorrow, not next week',
+          'Consistency for 90 days minimum before evaluating results',
+          'Focus on one platform until you have system, then expand',
+          'Engagement rate matters more than follower count',
+          'Monetize once you hit 1,000 engaged followers',
+          'Your first content will be bad—post it anyway and improve'
+        ],
+        exercises: [
+          {
+            question: 'Define your personal brand: Complete this sentence: "I help [target audience] with [expertise] so they can [outcome]"',
+            type: 'short-answer'
+          },
+          {
+            question: 'Choose your primary platform (pick ONE to start): TikTok, Instagram, LinkedIn, Twitter/X, or YouTube. Why did you choose this one?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Optimize your profile: Update your bio, profile picture, and banner on your chosen platform. What did you write in your bio?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Create 30-day content calendar: List 30 content ideas following the formats you learned. Aim for mix: educational, entertaining, personal stories.',
+            type: 'short-answer'
+          },
+          {
+            question: 'Record your first 3 pieces of content TODAY. What are the topics? (Don\'t overthink—just start)',
+            type: 'short-answer'
+          },
+          {
+            question: 'Set your posting schedule: What time will you post daily? How will you stay consistent? (Set phone reminders, batch create, etc.)',
+            type: 'short-answer'
+          },
+          {
+            question: 'Engagement plan: Commit to engaging with 10 accounts in your niche daily. Which accounts will you engage with this week?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Monetization goal: What\'s your 90-day goal? (Followers, engagement rate, revenue) How will you track progress?',
+            type: 'short-answer'
+          }
+        ]
+      }
     }
   ],
   skills: [
@@ -6862,56 +8469,627 @@ export const businessFundamentalsModule: ModuleData = {
       title: 'UK Business Structures Explained',
       description: 'Sole Trader vs Limited Company: tax, liability, setup, costs, which to choose',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'The Two Main Structures',
+            bullets: [
+              'Sole Trader: You ARE the business (simple, low cost)',
+              'Limited Company: Separate legal entity from you (complex, tax efficient)'
+            ]
+          },
+          {
+            heading: 'Sole Trader',
+            bullets: [
+              'Setup: Register with HMRC (free, online, 10 min)',
+              'Tax: Pay Income Tax + National Insurance on profits',
+              'Liability: UNLIMITED—personal assets at risk if business fails',
+              'Admin: Simple bookkeeping, Self Assessment tax return',
+              'Profit: All profit is yours (after tax)',
+              'Costs: £0 to register, ~£100-200/year accountant',
+              'Best for: Testing ideas, side hustles, low-risk businesses'
+            ]
+          },
+          {
+            heading: 'Limited Company',
+            bullets: [
+              'Setup: Register with Companies House (£50 online)',
+              'Tax: Pay Corporation Tax (19-25%) on profits',
+              'Liability: LIMITED—company assets separate from personal',
+              'Admin: More complex—Companies House filing, VAT, PAYE',
+              'Profit: Pay yourself salary + dividends (tax efficient)',
+              'Costs: £50 setup + £500-1,500/year accountant',
+              'Best for: Serious businesses, high income, multiple partners'
+            ]
+          },
+          {
+            heading: 'Tax Comparison (on £50K profit)',
+            bullets: [
+              'Sole Trader: ~£12,570 tax + NI = ~£10,000',
+              'Limited Company: ~£7,500 Corp Tax + dividend tax = ~£8,500',
+              'Limited Company saves ~£1,500/year at £50K profit',
+              'Break-even: Usually £25-30K profit makes Ltd worthwhile'
+            ]
+          },
+          {
+            heading: 'Which Should YOU Choose?',
+            bullets: [
+              'Choose SOLE TRADER if: Testing idea, under £25K profit, want simple admin',
+              'Choose LIMITED if: Serious business, £30K+ profit, want tax efficiency',
+              'PRO TIP: Start as Sole Trader, switch to Ltd when profitable',
+              'Can switch structures later (easy process)'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Sole Trader: Simple, low cost, unlimited liability',
+          'Limited Company: Tax efficient, limited liability, more admin',
+          'Break-even: £25-30K profit makes Ltd worthwhile',
+          'Start as Sole Trader, switch later if needed',
+          'Sole Trader = £0 setup, Ltd = £50 + accountant fees',
+          'Both require HMRC registration and annual tax returns'
+        ]
+      }
     },
     {
       id: 'biz-2',
       title: 'Registering Your UK Business',
       description: 'Companies House, HMRC registration, business bank account, legal requirements',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Step 1: Register as Sole Trader',
+            bullets: [
+              'Go to: gov.uk/set-up-sole-trader',
+              'Register for Self Assessment (free)',
+              'Deadline: By 5 October after your first year',
+              'What you need: National Insurance number, contact details',
+              'Time: 10 minutes',
+              'Cost: FREE'
+            ]
+          },
+          {
+            heading: 'Step 1 (Alternative): Register Limited Company',
+            bullets: [
+              'Go to: gov.uk/register-a-company-online',
+              'Choose company name (check availability first)',
+              'Appoint director(s) and shareholder(s)',
+              'Register address (can be home address)',
+              'What you need: Director details, share structure, SIC code',
+              'Time: 24 hours approval',
+              'Cost: £50 online (£12 with formation agents like CompaniesHQ)'
+            ]
+          },
+          {
+            heading: 'Step 2: Register for VAT (If Needed)',
+            bullets: [
+              'Required: When turnover exceeds £90,000/year',
+              'Optional: Can register voluntarily (reclaim VAT on expenses)',
+              'Register at: gov.uk/vat-registration',
+              'Timeline: Register within 30 days of hitting threshold',
+              'Cost: FREE'
+            ]
+          },
+          {
+            heading: 'Step 3: Open Business Bank Account',
+            bullets: [
+              'Sole Trader: Optional but recommended',
+              'Limited Company: REQUIRED by law',
+              'Options: Tide (£0), Starling (£0), Monzo (£5/mo), traditional banks',
+              'What you need: Business registration proof, ID, proof of address',
+              'Benefits: Separates personal/business, looks professional',
+              'Time: 1-7 days approval'
+            ]
+          },
+          {
+            heading: 'Step 4: Get Business Insurance',
+            bullets: [
+              'Professional Indemnity: Covers mistakes in your work',
+              'Public Liability: Covers injury/damage to third parties',
+              'Required: Some industries legally require it',
+              'Cost: £100-500/year depending on industry',
+              'Providers: Simply Business, Hiscox, AXA'
+            ]
+          },
+          {
+            heading: 'Step 5: Register Business Name (Optional)',
+            bullets: [
+              'Trademark: Protects your brand (£170 for 10 years)',
+              'Register at: gov.uk/how-to-register-a-trade-mark',
+              'Domain: Buy .co.uk or .com (£10/year)',
+              'Social handles: Claim @yourbusiness on all platforms'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Sole Trader: Register with HMRC (free, 10 min)',
+          'Limited Company: Companies House (£50, 24 hours)',
+          'VAT registration required at £90K+ turnover',
+          'Business bank account: Required for Ltd, recommended for sole traders',
+          'Business insurance: £100-500/year, required for some industries',
+          'Trademark your name: £170 for 10-year protection'
+        ]
+      }
     },
     {
       id: 'biz-3',
       title: 'Business Finance & Accounting Basics',
       description: 'P&L statements, balance sheets, cash flow, accounting software (Xero, QuickBooks)',
       duration: '25 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'The 3 Key Financial Statements',
+            bullets: [
+              'Profit & Loss (P&L): Revenue - Expenses = Profit',
+              'Balance Sheet: Assets vs Liabilities (what you own vs owe)',
+              'Cash Flow Statement: Money in vs money out (actual cash)',
+              'All three tell different stories about business health'
+            ]
+          },
+          {
+            heading: 'Profit & Loss Statement',
+            content: 'Shows if you\'re making money over a period (month, quarter, year).',
+            bullets: [
+              'REVENUE: Total sales',
+              'Cost of Goods Sold (COGS): Direct costs to deliver product/service',
+              'GROSS PROFIT: Revenue - COGS',
+              'OPERATING EXPENSES: Rent, salaries, marketing, software',
+              'NET PROFIT: Gross Profit - Operating Expenses',
+              'Example: £100K revenue - £30K COGS - £50K expenses = £20K profit'
+            ]
+          },
+          {
+            heading: 'Balance Sheet',
+            content: 'Snapshot of what you own vs what you owe at a point in time.',
+            bullets: [
+              'ASSETS: Cash, inventory, equipment, money owed to you',
+              'LIABILITIES: Loans, unpaid bills, money you owe',
+              'EQUITY: Assets - Liabilities (your ownership value)',
+              'Must always balance: Assets = Liabilities + Equity'
+            ]
+          },
+          {
+            heading: 'Cash Flow Statement',
+            content: 'The most important: tracks actual money movement.',
+            bullets: [
+              'CASH IN: Customer payments received',
+              'CASH OUT: Bills paid, salaries, expenses',
+              'NET CASH FLOW: Cash In - Cash Out',
+              'WARNING: Can be profitable on paper but run out of cash!',
+              'Example: £50K sale invoiced but payment in 60 days = £0 cash today'
+            ],
+            tipBox: {
+              type: 'warning',
+              title: 'Cash Flow > Profit',
+              content: 'More businesses fail from cash flow problems than lack of profit. You can be "profitable" on paper but go bankrupt if you can\'t pay bills this month.'
+            }
+          },
+          {
+            heading: 'Accounting Software (UK)',
+            bullets: [
+              'Xero: £12-30/month (most popular, user-friendly)',
+              'QuickBooks: £10-35/month (powerful features)',
+              'FreeAgent: £14-29/month (great for sole traders)',
+              'Wave: FREE (basic features, good for starting)',
+              'Features: Invoicing, expense tracking, bank sync, tax calculations',
+              'All integrate with banks for automatic transaction import'
+            ]
+          },
+          {
+            heading: 'Basic Bookkeeping Tasks',
+            bullets: [
+              'Track all income (invoices, sales)',
+              'Record all expenses (receipts, bills)',
+              'Reconcile bank accounts monthly',
+              'Invoice promptly (within 24 hours of delivery)',
+              'Chase late payments (follow up after 7 days overdue)',
+              'Save 25-30% of profit for tax',
+              'Review P&L monthly to spot trends'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'P&L: Revenue - Expenses = Profit (are you making money?)',
+          'Balance Sheet: Assets vs Liabilities (what you own vs owe)',
+          'Cash Flow: Money in vs out (MOST IMPORTANT)',
+          'Profitable ≠ positive cash flow—can be profitable and bankrupt',
+          'Software: Xero (£12+/mo), QuickBooks (£10+/mo), Wave (free)',
+          'Save 25-30% of profit for tax payments'
+        ]
+      }
     },
     {
       id: 'biz-4',
       title: 'Pricing for Profitability',
       description: 'Cost-plus, value-based, competitive pricing, profit margins, pricing psychology',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'The 3 Pricing Strategies',
+            bullets: [
+              'Cost-Plus: Calculate costs + add markup %',
+              'Value-Based: Price based on value to customer',
+              'Competitive: Match or undercut competitors'
+            ]
+          },
+          {
+            heading: 'Cost-Plus Pricing',
+            content: 'Formula: (Direct Costs + Overhead) × (1 + Markup %)',
+            bullets: [
+              'Direct Costs: Materials, labor directly for product',
+              'Overhead: Rent, utilities, marketing (divided across products)',
+              'Markup: 30-50% for products, 100-300% for services',
+              'Example: £20 costs + £10 overhead = £30 × 1.5 = £45 price',
+              'Pros: Simple, guarantees profit',
+              'Cons: Ignores what customers will pay'
+            ]
+          },
+          {
+            heading: 'Value-Based Pricing',
+            content: 'Price based on value delivered, not costs.',
+            bullets: [
+              'Question: "What\'s it worth to the customer?"',
+              'Example: £500 website saves client £5K/year → charge £2K',
+              'Works for: Services, B2B, transformational outcomes',
+              'Higher profit margins than cost-plus',
+              'Best strategy: Once you prove results'
+            ]
+          },
+          {
+            heading: 'Competitive Pricing',
+            bullets: [
+              'Research: What do competitors charge?',
+              'Positioning: Match (similar), undercut (10-20% less), premium (30%+ more)',
+              'Undercut: Attracts price-sensitive customers (lower margins)',
+              'Premium: Requires superior quality/branding',
+              'Best for: Established markets with clear competitors'
+            ]
+          },
+          {
+            heading: 'Pricing Psychology Tactics',
+            bullets: [
+              'Charm Pricing: £19.99 vs £20 (looks cheaper)',
+              'Anchoring: Show higher price first, then discount',
+              'Tiering: 3 options (cheap, mid, premium)—most pick middle',
+              'Decoy: Add expensive option to make mid-tier look reasonable',
+              'Bundle: 3 items together for less than buying separate',
+              'Scarcity: "Only 5 spots left" increases urgency'
+            ]
+          },
+          {
+            heading: 'Understanding Profit Margins',
+            bullets: [
+              'Gross Margin: (Revenue - COGS) / Revenue × 100',
+              'Net Margin: (Net Profit / Revenue) × 100',
+              'Target: 30-50% gross margin minimum',
+              'Services: 50-80% gross margin typical',
+              'Products: 30-50% gross margin typical',
+              'Example: £100 sale - £40 COGS = 60% gross margin'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Cost-Plus: Safe but leaves money on table',
+          'Value-Based: Highest margins, price on outcomes not costs',
+          'Competitive: Research competitors, position strategically',
+          'Psychology: £19.99 vs £20, 3 tiers, anchoring, scarcity',
+          'Target margins: 50%+ services, 30-50% products',
+          'Don\'t compete on price alone—differentiate on value'
+        ]
+      }
     },
     {
       id: 'biz-5',
       title: 'Marketing Your Business',
       description: 'Finding customers, digital marketing basics, sales funnels, customer acquisition',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Marketing Fundamentals',
+            content: 'Marketing = attracting customers who need what you sell.',
+            bullets: [
+              'Know your customer: Who? Problem? Where do they hang out?',
+              'Clear message: What you do + who you help + outcome',
+              'Multiple channels: Don\'t rely on one source',
+              'Track everything: What works? What doesn\'t?',
+              'Focus on ROI: £1 spent should generate £3+ back'
+            ]
+          },
+          {
+            heading: 'Digital Marketing Channels',
+            bullets: [
+              'Social Media: Organic posts + paid ads (Instagram, TikTok, LinkedIn)',
+              'Content Marketing: Blog, YouTube, podcast (free, long-term)',
+              'Email Marketing: Build list, nurture leads (Mailchimp, ConvertKit)',
+              'SEO: Rank on Google for keywords (free traffic, takes time)',
+              'Paid Ads: Google Ads, Meta Ads (fast, costs money)',
+              'Partnerships: Collaborate with complementary businesses'
+            ]
+          },
+          {
+            heading: 'The Customer Acquisition Funnel',
+            bullets: [
+              'AWARENESS: People discover you exist',
+              'INTEREST: They learn what you offer',
+              'CONSIDERATION: They compare you to alternatives',
+              'CONVERSION: They buy!',
+              'LOYALTY: They come back and refer others'
+            ]
+          },
+          {
+            heading: 'Building Your Sales Funnel',
+            bullets: [
+              'Top: Free content (social, blog, ads) → Awareness',
+              'Middle: Lead magnet (free guide, checklist) → Email capture',
+              'Bottom: Nurture emails → Offer product/service',
+              'Example: TikTok video → "Free guide in bio" → Email series → Paid course',
+              'Track: Conversion rate at each stage'
+            ]
+          },
+          {
+            heading: 'Quick Win Marketing Tactics',
+            bullets: [
+              'Launch offer: 20% off first 10 customers (urgency + social proof)',
+              'Referral program: Existing customer refers new = both get discount',
+              'Local partnerships: Coffee shop displays your flyers → you promote them',
+              'Google My Business: FREE listing for local businesses',
+              'Content SEO: Write blogs answering customer questions',
+              'Email list: Start building from day 1 (most valuable asset)'
+            ]
+          },
+          {
+            heading: 'Measuring Marketing Success',
+            bullets: [
+              'CAC (Customer Acquisition Cost): Marketing spend / New customers',
+              'LTV (Lifetime Value): Average customer spends over lifetime',
+              'ROI: (Revenue - Marketing Cost) / Marketing Cost × 100',
+              'Target: LTV should be 3x CAC minimum',
+              'Example: Spend £100 marketing → 5 customers = £20 CAC',
+              'Track: Use Google Analytics, social media insights, CRM'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Know your customer deeply—who, problem, where they are',
+          'Multi-channel approach: Social + content + email + SEO',
+          'Sales funnel: Awareness → Interest → Consideration → Purchase',
+          'Quick wins: Launch offer, referrals, partnerships, Google Business',
+          'Measure: CAC < LTV (lifetime value should be 3x+ acquisition cost)',
+          'Build email list from day 1—most valuable marketing asset'
+        ]
+      }
     },
     {
       id: 'biz-6',
       title: 'Cash Flow Management',
       description: 'Invoice management, payment terms, managing expenses, avoiding cash flow crises',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Why Cash Flow Kills Businesses',
+            content: '82% of businesses fail due to cash flow mismanagement—not lack of customers, not bad products, but simply running out of money to pay bills. This is the most preventable cause of business failure, yet it kills more companies than any other factor.\n\nHere\'s the brutal truth: you can be profitable on paper and still go bankrupt. How? You invoice a client £10,000 for work completed. On your profit and loss statement, that\'s revenue today. But the client has 30-day payment terms. Meanwhile, you need to pay your supplier £5,000 this week. You have £10,000 in "revenue" but £0 in your bank account. This is how profitable businesses die.\n\nCash flow is about timing: when money comes in vs when it goes out. Imagine you run a subscription business. Customers pay £10/month, you spend £5/month on costs. You\'re profitable! But what if you need to pay £10,000 upfront for software annually while customers pay monthly? In month one, you\'re £9,900 in the hole despite being "profitable."\n\nThis is why mature businesses obsess over cash flow more than profit. Profit is theoretical—it appears on statements. Cash is real—it\'s what pays salaries, rent, and suppliers. Understanding the difference between these two concepts will save your business when others fail.',
+            bullets: [
+              '82% of businesses fail due to cash flow mismanagement—most common cause of business death, yet most preventable',
+              'Can be profitable but can\'t pay bills = bankrupt—profit on paper doesn\'t pay today\'s rent',
+              'Problem: Money tied up in unpaid invoices, inventory, deposits—you\'re "rich" on paper, broke in reality',
+              'Solution: Manage timing of money in vs money out—cash flow is about timing, not just amounts'
+            ]
+          },
+          {
+            heading: 'Invoice Best Practices',
+            bullets: [
+              'Send IMMEDIATELY after delivery (within 24 hours)',
+              'Payment terms: "Due in 7 days" or "Due in 14 days" (NOT 30)',
+              'Include: Clear description, amount, due date, payment methods',
+              'Make it easy: Accept card, bank transfer, PayPal',
+              'Professional: Use software (Xero, QuickBooks, Wave)',
+              'Deposit: Request 50% upfront for large projects'
+            ]
+          },
+          {
+            heading: 'Chasing Late Payments',
+            bullets: [
+              'Day 1 overdue: Polite email reminder',
+              'Day 7: Phone call + second email',
+              'Day 14: Final notice + late fee warning',
+              'Day 30: Formal letter + consider small claims court',
+              'Prevention: Get deposit upfront, shorter payment terms',
+              'Late fees: Charge 1-2% per week overdue (state upfront)'
+            ]
+          },
+          {
+            heading: 'Managing Expenses',
+            bullets: [
+              'Fixed expenses: Rent, software, salaries (predictable)',
+              'Variable expenses: Materials, ads, shipping (fluctuates)',
+              'Rule: Keep fixed expenses under 40% of revenue',
+              'Cut: Cancel unused subscriptions, negotiate with suppliers',
+              'Track: Every expense in accounting software',
+              'Receipt policy: Photo receipts immediately (Expensify, Xero app)'
+            ]
+          },
+          {
+            heading: 'Cash Flow Forecasting',
+            bullets: [
+              'Project: Next 90 days of expected income and expenses',
+              'Weekly review: Update forecast with actual numbers',
+              'Buffer: Keep 3-6 months expenses in business savings',
+              'Warning signs: Forecasting negative cash in next 30-60 days',
+              'Action: Speed up collections, delay non-essential expenses, line of credit'
+            ]
+          },
+          {
+            heading: 'Avoiding Cash Flow Crises',
+            bullets: [
+              'Profit first: Pay yourself % of revenue, save for tax, then spend rest',
+              'Cash buffer: 3-6 months operating expenses saved',
+              'Multiple revenue streams: Don\'t rely on one client',
+              'Pricing: Charge more to have cushion',
+              'Payment plans: Monthly subscriptions > one-time payments',
+              'Credit line: Set up before you need it (emergency fund)'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          '82% of business failures due to poor cash flow',
+          'Invoice immediately, payment terms 7-14 days (NOT 30)',
+          'Chase overdue: Day 1, day 7, day 14, day 30 escalation',
+          'Track every expense, keep fixed costs under 40% revenue',
+          'Forecast 90 days ahead, review weekly',
+          'Buffer: Save 3-6 months expenses as emergency fund'
+        ]
+      }
     },
     {
       id: 'biz-7',
       title: 'Scaling Your Business',
       description: 'Hiring first employee, outsourcing, systems and processes, sustainable growth',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'When to Scale',
+            bullets: [
+              'Consistent revenue for 6+ months',
+              'Turning down opportunities due to capacity',
+              'Profitable (not just breaking even)',
+              'Systems documented (not just in your head)',
+              'Cash buffer: 6-12 months expenses saved'
+            ]
+          },
+          {
+            heading: 'Build Systems First',
+            content: 'Document everything BEFORE hiring. If you can\'t explain it, you can\'t delegate it.',
+            bullets: [
+              'Standard Operating Procedures (SOPs): Step-by-step guides',
+              'Tools: Notion, Google Docs, Loom videos',
+              'Document: Client onboarding, delivery process, admin tasks',
+              'Templates: Emails, proposals, invoices',
+              'Automation: Zapier, email sequences, scheduling tools'
+            ]
+          },
+          {
+            heading: 'Outsourcing vs Hiring',
+            bullets: [
+              'Freelancers: Project-based, no employment costs, flexible',
+              'Virtual Assistants: £8-20/hour, admin tasks, Philippines/UK',
+              'Part-time employees: Fixed hours, more commitment',
+              'Full-time employees: Expensive, long-term, benefits required',
+              'Start: Outsource first, hire when work is consistent and ongoing'
+            ]
+          },
+          {
+            heading: 'What to Outsource First',
+            bullets: [
+              'Admin: Scheduling, email management, data entry (VA)',
+              'Specialized: Graphic design, web development, accounting',
+              'Marketing: Social media management, content creation',
+              'DON\'T outsource: Core competency, customer relationships',
+              'Rule: Outsource tasks that free you for revenue-generating work'
+            ]
+          },
+          {
+            heading: 'Hiring Your First Employee (UK)',
+            bullets: [
+              'Setup: Register as employer with HMRC (free)',
+              'PAYE: Pay As You Earn tax system for salaries',
+              'Costs: Salary + 13.8% Employer National Insurance + pension',
+              'Example: £25K salary = £28,450 total cost to you',
+              'Contracts: Written employment contract required',
+              'Payroll: Use software (Xero, QuickBooks) or accountant',
+              'Probation: 3-6 months trial period standard'
+            ]
+          },
+          {
+            heading: 'Sustainable Growth Principles',
+            bullets: [
+              'Grow profits faster than revenue (efficiency)',
+              'Invest 10-20% of profit back into business',
+              'Don\'t overextend: Slow and steady beats fast and broke',
+              'Multiple revenue streams reduce risk',
+              'Keep learning: Mentor, courses, books, podcasts',
+              'Review metrics monthly: Revenue, profit, cash, CAC, LTV'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Scale when: Consistent revenue, profitable, documented systems',
+          'Systems first: Document processes before hiring',
+          'Start with freelancers/VAs before full-time employees',
+          'Outsource: Admin, specialized skills that free your time',
+          'Hiring costs: Salary + 13.8% NI + pension + PAYE',
+          'Grow sustainably: Invest 10-20% profit, don\'t overextend'
+        ]
+      }
     },
     {
       id: 'biz-8',
       title: 'Your Business Plan',
       description: 'Create lean business plan, financial projections, define your business model',
       duration: '20 min',
-      type: 'exercise'
+      type: 'exercise',
+      content: {
+        sections: [
+          {
+            heading: 'Final Project: Build Your Business Plan',
+            content: 'Create a lean, actionable business plan to launch or grow your UK business.'
+          }
+        ],
+        keyTakeaways: [
+          'Business plan is roadmap, not rigid document—adapt as you learn',
+          'Start simple: Sole trader → switch to limited when profitable',
+          'Cash flow is king—track it weekly',
+          'Price for value, not just costs',
+          'Market systematically across multiple channels',
+          'Scale when profitable with documented systems'
+        ],
+        exercises: [
+          {
+            question: 'Business Structure: Will you start as Sole Trader or Limited Company? Why? (Consider your expected profit, risk tolerance, admin capacity)',
+            type: 'short-answer'
+          },
+          {
+            question: 'Product/Service Description: What exactly are you selling? Who is your target customer? What problem do you solve?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Pricing Strategy: How will you price your product/service? Calculate your costs, desired profit margin, and final price.',
+            type: 'short-answer'
+          },
+          {
+            question: 'Marketing Plan: List 3 channels you\'ll use to find customers. How will you measure success? What\'s your monthly marketing budget?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Financial Projections: Project your first year: Monthly revenue goal, monthly expenses, expected profit. When will you break even?',
+            type: 'short-answer'
+          },
+          {
+            question: 'First 90 Days Action Plan: What are your specific tasks for months 1, 2, and 3? Include: registration, first customers, marketing, product development.',
+            type: 'short-answer'
+          },
+          {
+            question: 'Cash Flow Plan: How will you manage cash flow? When will you invoice? What payment terms? How much buffer will you maintain?',
+            type: 'short-answer'
+          },
+          {
+            question: 'First Action TODAY: What is the ONE thing you\'ll do in the next 24 hours to move your business forward? Commit to it.',
+            type: 'short-answer'
+          }
+        ]
+      }
     }
   ],
   skills: [
@@ -6934,6 +9112,1354 @@ export const businessFundamentalsModule: ModuleData = {
   ]
 };
 
+// ============================================================================
+// UTILITIES & COUNCIL TAX MODULE
+// ============================================================================
+
+export const utilitiesCouncilTaxModule: ModuleData = {
+  id: 'eth-4',
+  title: 'Utilities & Council Tax',
+  category: 'Life Skills',
+  description: 'Setting up utilities, understanding council tax, and household bills',
+  overview: 'Master the essentials of managing household utilities and council tax in the UK. Learn how to set up gas, electricity, water, and internet when moving home, understand council tax bands and discounts, compare energy suppliers to save money, read utility bills correctly, and handle disputes. This practical module covers everything from switching suppliers to understanding your rights as a consumer.',
+  duration: '30 min',
+  lessons: [
+    {
+      id: 'util-1',
+      title: 'Setting Up Utilities When Moving',
+      description: 'Gas, electricity, water, internet - what you need to do',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Essential Utilities Checklist',
+            content: 'When moving to a new home, you need to set up several essential services. Don\'t wait until moving day—start this process 2-3 weeks before to avoid being without power, water, or internet.',
+            bullets: [
+              'Gas & Electricity: Contact suppliers to transfer accounts or set up new ones',
+              'Water: Usually automatic, but inform your water company of the move',
+              'Internet & Phone: Book installation 2-3 weeks ahead (can take time)',
+              'Council Tax: Inform both old and new councils of your move date',
+              'TV License: Update your address or transfer to new property'
+            ]
+          },
+          {
+            heading: 'Taking Meter Readings',
+            content: 'Always take meter readings on your move-in date. This ensures you only pay for energy you actually use, not what the previous tenant consumed.',
+            bullets: [
+              'Gas meter: Usually outside or in a cupboard, record all numbers',
+              'Electricity meter: May have two readings (day/night rates)',
+              'Photo the meters: Visual proof of readings on move-in date',
+              'Submit immediately: Send readings to suppliers within 48 hours'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Start utility setup 2-3 weeks before moving',
+          'Take meter readings on move-in day',
+          'Internet installation can take 2+ weeks to arrange',
+          'Keep records of all meter readings and communications'
+        ]
+      }
+    },
+    {
+      id: 'util-2',
+      title: 'Understanding Council Tax',
+      description: 'Bands, discounts, exemptions, and how to pay',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'What is Council Tax?',
+            content: 'Council tax is a local tax that funds services like rubbish collection, street lighting, libraries, and local schools. The amount you pay depends on your property\'s value band and your local council\'s rates.',
+            bullets: [
+              'Based on property value in 1991 (England/Scotland) or 2003 (Wales)',
+              'Eight bands: A (lowest) to H (highest)',
+              'Average Band D property: £1,500-2,000 per year',
+              'Paid monthly or annually (10% discount for annual payment)'
+            ]
+          },
+          {
+            heading: 'Council Tax Discounts',
+            bullets: [
+              'Single Person Discount: 25% off if you live alone',
+              'Student Discount: Full-time students are exempt',
+              'Disability Reduction: If home adapted for disabled person',
+              'Empty Property: Discounts for uninhabitable properties',
+              'Low Income Support: Council Tax Support for those on benefits'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Council tax funds local services like bins and libraries',
+          'Amount based on 1991 property values, not current prices',
+          'Single people get 25% discount automatically',
+          'Students and some disabled people may be exempt'
+        ]
+      }
+    },
+    {
+      id: 'util-3',
+      title: 'Comparing Energy Suppliers',
+      description: 'How to switch and save money on gas and electricity',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Why Switch Energy Suppliers?',
+            content: 'The UK energy market is competitive, with dozens of suppliers offering different tariffs. Switching can save £200-400 per year for the average household. It\'s free, takes 15 minutes online, and your new supplier handles everything.',
+            bullets: [
+              'Average saving: £200-400 per year by switching',
+              'Process: 15 minutes online, new supplier does the work',
+              'No interruption: Your supply continues during the switch',
+              'Cooling-off period: 14 days to change your mind'
+            ]
+          },
+          {
+            heading: 'How to Compare Tariffs',
+            bullets: [
+              'Use Ofgem-approved comparison sites: Uswitch, Compare the Market, MoneySuperMarket',
+              'Need: Recent bill, postcode, current supplier details',
+              'Fixed vs Variable: Fixed rates protect against price rises',
+              'Green energy: Many suppliers offer renewable energy options',
+              'Exit fees: Check if your current tariff has early exit penalties'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Switching energy suppliers can save £200-400 annually',
+          'Use official comparison websites for accurate quotes',
+          'Fixed-rate tariffs protect against price increases',
+          'Switching is free and takes about 3 weeks to complete'
+        ]
+      }
+    },
+    {
+      id: 'util-4',
+      title: 'Reading Bills and Handling Disputes',
+      description: 'Understanding your bills and what to do when things go wrong',
+      duration: '6 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Understanding Your Energy Bill',
+            bullets: [
+              'Standing charge: Daily fee for being connected (£0.20-0.60/day)',
+              'Unit rate: Cost per kWh of energy used (15-35p per kWh)',
+              'Estimated vs Actual: Bills based on estimates until you submit readings',
+              'Payment methods: Direct debit usually cheapest (5-10% discount)'
+            ]
+          },
+          {
+            heading: 'When Bills Go Wrong',
+            bullets: [
+              'Submit regular meter readings to avoid estimated bills',
+              'Contact supplier first: Most issues resolved at this level',
+              'Ombudsman: Free service if supplier won\'t resolve complaint',
+              'Never ignore bills: Contact supplier if you can\'t pay',
+              'Keep records: Save all bills, emails, and phone call notes'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Submit monthly meter readings for accurate bills',
+          'Direct debit payments usually offer discounts',
+          'Contact supplier first for any billing disputes',
+          'Energy Ombudsman provides free complaint resolution'
+        ]
+      }
+    }
+  ],
+  skills: [
+    'Utility Management',
+    'Council Tax Understanding',
+    'Supplier Comparison',
+    'Bill Reading',
+    'Consumer Rights',
+    'Money Saving',
+    'Administrative Skills'
+  ],
+  objectives: [
+    'Set up all utilities efficiently when moving home',
+    'Understand council tax bands, discounts, and payment options',
+    'Compare energy suppliers and switch to save money',
+    'Read utility bills accurately and spot errors',
+    'Handle billing disputes and know your consumer rights',
+    'Manage household bills and avoid overpaying'
+  ]
+};
+
+// ============================================================================
+// COMMUNICATION & PROFESSIONAL SKILLS MODULES
+// ============================================================================
+
+export const cvWritingModule: ModuleData = {
+  id: 'com-1',
+  title: 'CV Writing & Job Applications',
+  category: 'Professional Skills',
+  description: 'Create professional CVs and compelling cover letters for UK employers',
+  overview: 'Master the art of CV writing and job applications for the UK market. Learn the standard UK CV format, write compelling personal statements, showcase achievements with quantified results, tailor applications for specific roles, and write cover letters that get interviews. This module includes templates, examples, and insider tips from recruiters.',
+  duration: '40 min',
+  lessons: [
+    {
+      id: 'cv-1',
+      title: 'UK CV Format and Structure',
+      description: 'Standard layout, sections, and what to include/exclude',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'UK CV Essentials',
+            content: 'UK CVs follow a specific format that differs from other countries. Keep it to 2 pages maximum, use clear headings, and focus on achievements rather than just duties.',
+            bullets: [
+              'Length: 2 pages maximum (1 page for graduates)',
+              'Photo: Never include a photo (illegal for employers to request)',
+              'Personal details: Name, phone, email, LinkedIn, city (not full address)',
+              'No age/DOB: Age discrimination is illegal in UK',
+              'References: "Available on request" is sufficient'
+            ]
+          },
+          {
+            heading: 'CV Section Order',
+            bullets: [
+              '1. Personal Details (name, contact info)',
+              '2. Personal Statement (2-3 sentences)',
+              '3. Work Experience (reverse chronological)',
+              '4. Education & Qualifications',
+              '5. Skills (technical and soft skills)',
+              '6. Additional Sections (languages, volunteering, interests)'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'UK CVs: 2 pages max, no photo, no age',
+          'Focus on achievements, not just job duties',
+          'Reverse chronological order for experience',
+          'Tailor each CV to the specific job role'
+        ]
+      }
+    },
+    {
+      id: 'cv-2',
+      title: 'Writing Compelling Personal Statements',
+      description: 'Hook employers with a powerful opening summary',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'What Makes a Great Personal Statement',
+            content: 'Your personal statement is the first thing employers read, so it needs to grab attention immediately. In 2-3 sentences, you need to communicate who you are professionally, what you bring to the role, and what you\'re looking for. Think of it as your elevator pitch in written form.',
+            bullets: [
+              'Length: 2-3 sentences maximum (50-80 words)',
+              'Focus: Your key strengths and career goals',
+              'Tone: Professional but personable',
+              'Specificity: Mention your industry/role type',
+              'Value: What you bring to employers'
+            ]
+          },
+          {
+            heading: 'Personal Statement Formula',
+            content: 'Follow this proven structure: [Your profession/level] + [Key skills/experience] + [What you\'re seeking] + [Value you bring]',
+            examples: [
+              {
+                title: 'Marketing Graduate Example',
+                description: '"Recent Marketing graduate with internship experience in digital campaigns and social media management. Seeking an entry-level marketing role where I can apply my analytical skills and creative thinking to drive brand growth and customer engagement."'
+              },
+              {
+                title: 'Career Changer Example', 
+                description: '"Experienced teacher transitioning to corporate training, bringing 8 years of curriculum development and presentation skills. Looking to leverage my expertise in adult learning and communication to enhance employee development programs."'
+              }
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Personal statement should be 2-3 sentences maximum',
+          'Lead with your profession and key strengths',
+          'Mention what type of role you\'re seeking',
+          'End with the value you bring to employers',
+          'Tailor it for each application'
+        ]
+      }
+    },
+    {
+      id: 'cv-3',
+      title: 'Showcasing Work Experience',
+      description: 'Quantify achievements and demonstrate impact',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Achievement-Focused Experience Descriptions',
+            content: 'Don\'t just list job duties—show the impact you made. Use the CAR method: Challenge/Context, Action you took, Results you achieved. Quantify everything possible with numbers, percentages, or timeframes.',
+            bullets: [
+              'Start with action verbs: "Increased", "Developed", "Led", "Implemented"',
+              'Quantify results: "Increased sales by 15%", "Managed team of 8"',
+              'Show progression: Promotions, increased responsibilities',
+              'Include relevant achievements: Awards, recognition, targets exceeded',
+              'Use present tense for current role, past tense for previous roles'
+            ]
+          },
+          {
+            heading: 'Before and After Examples',
+            examples: [
+              {
+                title: 'BEFORE (Job Duty Focus)',
+                description: '"Responsible for customer service and handling complaints. Worked in a team environment and used computer systems."'
+              },
+              {
+                title: 'AFTER (Achievement Focus)',
+                description: '"Resolved 95% of customer complaints within 24 hours, improving customer satisfaction scores by 18%. Collaborated with 6-person team to implement new CRM system, reducing response times by 30%."'
+              }
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Focus on achievements, not just job duties',
+          'Use numbers and percentages wherever possible',
+          'Start bullet points with strong action verbs',
+          'Show progression and increased responsibility',
+          'Tailor experience descriptions to match job requirements'
+        ]
+      }
+    },
+    {
+      id: 'cv-4',
+      title: 'Skills and Education Sections',
+      description: 'Highlight relevant qualifications and abilities',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Skills Section Strategy',
+            content: 'Your skills section should be tailored to each job application. Include a mix of technical (hard) skills and soft skills, but focus on what\'s most relevant to the role. Use the exact keywords from the job description.',
+            bullets: [
+              'Technical Skills: Software, programming languages, certifications',
+              'Soft Skills: Leadership, communication, problem-solving',
+              'Language Skills: Specify proficiency level (Native, Fluent, Conversational)',
+              'Industry Skills: Specific to your field (e.g., SEO, financial modeling)',
+              'Avoid: Basic skills everyone has (Microsoft Word, email)'
+            ]
+          },
+          {
+            heading: 'Education Section Guidelines',
+            bullets: [
+              'Recent graduates: Education near the top, include GPA if 3.5+',
+              'Experienced professionals: Education at bottom, brief details',
+              'Include: Institution, degree, graduation year, relevant coursework',
+              'Omit: High school (unless recent graduate with no higher education)',
+              'Add: Honors, relevant projects, thesis topics if impressive'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Tailor skills section to match job requirements',
+          'Use exact keywords from job descriptions',
+          'Balance technical and soft skills',
+          'Education placement depends on career stage',
+          'Include relevant coursework and projects for recent graduates'
+        ]
+      }
+    },
+    {
+      id: 'cv-5',
+      title: 'Cover Letters That Get Interviews',
+      description: 'Structure, content, and personalization strategies',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Cover Letter Structure',
+            content: 'A great cover letter tells a story that your CV can\'t. It should be one page, three paragraphs, and highly personalized to the role and company.',
+            bullets: [
+              'Paragraph 1: Hook + why you\'re applying + brief qualification summary',
+              'Paragraph 2: Specific examples of relevant achievements',
+              'Paragraph 3: Why you want to work for THIS company + call to action',
+              'Length: 250-400 words maximum',
+              'Tone: Professional but enthusiastic'
+            ]
+          },
+          {
+            heading: 'Personalization is Key',
+            bullets: [
+              'Research: Company values, recent news, hiring manager name',
+              'Specific role: Reference exact job title and requirements',
+              'Company connection: Mention why you want to work there specifically',
+              'Avoid: Generic templates that could apply to any company',
+              'Proofread: Spelling errors are application killers'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Cover letters should tell a story your CV cannot',
+          'Keep to one page, three paragraphs maximum',
+          'Personalize for each company and role',
+          'Research the company and mention specific details',
+          'End with a clear call to action'
+        ]
+      }
+    }
+  ],
+  skills: [
+    'CV Writing',
+    'Cover Letter Writing',
+    'Personal Branding',
+    'Achievement Quantification',
+    'Job Application Strategy',
+    'Professional Communication',
+    'Self-Marketing'
+  ],
+  objectives: [
+    'Create a professional UK-format CV that stands out',
+    'Write compelling personal statements that hook employers',
+    'Quantify achievements to demonstrate impact',
+    'Tailor applications for specific job roles',
+    'Write cover letters that secure interviews',
+    'Understand what UK employers want to see'
+  ]
+};
+
+export const interviewSkillsModule: ModuleData = {
+  id: 'com-2',
+  title: 'Interview Skills & Techniques',
+  category: 'Professional Skills',
+  description: 'Master interview techniques and make great first impressions',
+  overview: 'Ace your job interviews with proven techniques and strategies. Learn how to research companies effectively, prepare compelling answers using the STAR method, handle difficult questions confidently, ask intelligent questions, and follow up professionally. This module covers phone, video, and in-person interviews with practical exercises.',
+  duration: '45 min',
+  lessons: [
+    {
+      id: 'int-1',
+      title: 'Pre-Interview Research and Preparation',
+      description: 'Company research, role analysis, and preparation strategies',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Essential Company Research',
+            content: 'Thorough preparation is what separates good candidates from great ones. Spend at least 2 hours researching before any interview. This shows genuine interest and helps you ask intelligent questions.',
+            bullets: [
+              'Company website: Mission, values, recent news, leadership team',
+              'LinkedIn: Company page, employee profiles, recent updates',
+              'Industry news: Recent developments affecting the company',
+              'Glassdoor: Employee reviews, salary ranges, interview experiences',
+              'Google News: Recent press coverage, achievements, challenges'
+            ]
+          },
+          {
+            heading: 'Role Analysis and Preparation',
+            bullets: [
+              'Job description: Identify key requirements and responsibilities',
+              'Skills mapping: Match your experience to their needs',
+              'Questions preparation: Prepare 5-8 thoughtful questions',
+              'Examples ready: Have STAR method stories for key competencies',
+              'Logistics: Confirm time, location, interviewer names, format'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Spend at least 2 hours researching before interviews',
+          'Research company, role, industry, and interviewers',
+          'Prepare specific examples using STAR method',
+          'Have 5-8 intelligent questions ready to ask',
+          'Confirm all logistics 24 hours before interview'
+        ]
+      }
+    },
+    {
+      id: 'int-2', 
+      title: 'The STAR Method for Answering Questions',
+      description: 'Structure compelling answers with Situation, Task, Action, Result',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'What is the STAR Method?',
+            content: 'STAR is a structured way to answer behavioral interview questions that ask for specific examples. It ensures you give complete, compelling answers that demonstrate your capabilities with concrete evidence.',
+            bullets: [
+              'Situation: Set the context - where, when, what was happening',
+              'Task: Explain your responsibility or challenge you faced',
+              'Action: Describe specific steps you took to address it',
+              'Result: Share the outcome and what you learned'
+            ]
+          },
+          {
+            heading: 'STAR Method Example',
+            content: 'Question: "Tell me about a time you had to work under pressure."',
+            examples: [
+              {
+                title: 'STAR Response',
+                description: 'Situation: "During my internship at a marketing agency, our biggest client requested a complete campaign redesign just 3 days before launch." Task: "As the junior team member, I was responsible for updating all social media assets and coordinating with the design team." Action: "I created a detailed timeline, worked late to redesign 15 social posts, and set up hourly check-ins with stakeholders to ensure we stayed on track." Result: "We delivered the campaign on time, the client was thrilled, and it generated 40% more engagement than their previous campaign. I learned to stay calm under pressure and the importance of clear communication during crises."'
+              }
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'STAR method: Situation, Task, Action, Result',
+          'Use specific examples with quantifiable results',
+          'Prepare 5-8 STAR stories covering different competencies',
+          'Keep answers 2-3 minutes maximum',
+          'Always end with what you learned or achieved'
+        ]
+      }
+    },
+    {
+      id: 'int-3',
+      title: 'Common Interview Questions and Answers',
+      description: 'Prepare for the most frequently asked interview questions',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'int-4',
+      title: 'Handling Difficult Questions',
+      description: 'Weakness questions, salary negotiations, and tricky scenarios',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'int-5',
+      title: 'Questions to Ask the Interviewer',
+      description: 'Intelligent questions that show genuine interest',
+      duration: '7 min',
+      type: 'reading'
+    },
+    {
+      id: 'int-6',
+      title: 'Interview Day Success and Follow-Up',
+      description: 'What to wear, arrive early, body language, and post-interview etiquette',
+      duration: '6 min',
+      type: 'reading'
+    }
+  ],
+  skills: ['Interview Techniques', 'STAR Method', 'Communication', 'Research Skills', 'Professional Etiquette', 'Confidence Building'],
+  objectives: [
+    'Research companies and roles effectively before interviews',
+    'Use the STAR method to structure compelling answers',
+    'Handle difficult questions with confidence',
+    'Ask intelligent questions that impress interviewers',
+    'Follow up professionally after interviews',
+    'Present yourself confidently in any interview format'
+  ]
+};
+
+export const professionalNetworkingModule: ModuleData = {
+  id: 'com-3',
+  title: 'Professional Networking',
+  category: 'Professional Skills', 
+  description: 'Build professional relationships and networking skills',
+  overview: 'Build a powerful professional network that accelerates your career. Learn networking strategies for introverts and extroverts, master LinkedIn optimization, attend networking events effectively, maintain relationships long-term, and leverage your network for opportunities without being pushy.',
+  duration: '35 min',
+  lessons: [
+    {
+      id: 'net-1',
+      title: 'Networking Fundamentals and Mindset',
+      description: 'What networking really is and why it matters',
+      duration: '7 min',
+      type: 'reading'
+    },
+    {
+      id: 'net-2',
+      title: 'LinkedIn Optimization and Strategy', 
+      description: 'Build a professional LinkedIn presence that attracts opportunities',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'net-3',
+      title: 'Networking Events and Conferences',
+      description: 'How to work a room and make meaningful connections',
+      duration: '7 min', 
+      type: 'reading'
+    },
+    {
+      id: 'net-4',
+      title: 'Maintaining Professional Relationships',
+      description: 'Keep in touch without being annoying',
+      duration: '7 min',
+      type: 'reading'
+    },
+    {
+      id: 'net-5',
+      title: 'Leveraging Your Network Ethically',
+      description: 'Ask for help, referrals, and opportunities the right way',
+      duration: '6 min',
+      type: 'reading'
+    }
+  ],
+  skills: ['Networking', 'LinkedIn', 'Relationship Building', 'Professional Communication', 'Social Intelligence'],
+  objectives: [
+    'Build authentic professional relationships',
+    'Optimize LinkedIn for networking success', 
+    'Navigate networking events confidently',
+    'Maintain long-term professional relationships',
+    'Leverage network for career opportunities ethically'
+  ]
+};
+
+export const workplaceCommunicationModule: ModuleData = {
+  id: 'com-4',
+  title: 'Workplace Communication',
+  category: 'Professional Skills',
+  description: 'Professional emails, meetings, and workplace etiquette', 
+  overview: 'Communicate effectively in professional environments. Master email etiquette, run productive meetings, give presentations confidently, handle workplace conflicts diplomatically, and build strong working relationships with colleagues and managers.',
+  duration: '30 min',
+  lessons: [
+    {
+      id: 'work-1',
+      title: 'Professional Email Etiquette',
+      description: 'Write clear, professional emails that get results',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Email Structure and Format',
+            content: 'Professional emails follow a clear structure that makes them easy to read and act upon. A well-structured email shows respect for the recipient\'s time and increases the likelihood of getting the response you need.',
+            bullets: [
+              'Subject line: Clear, specific, and actionable (e.g., "Meeting request: Q4 budget review - 15 Nov")',
+              'Greeting: Use appropriate salutation (Dear, Hi, Hello) based on relationship',
+              'Opening: State purpose clearly in first sentence',
+              'Body: Keep paragraphs short, use bullet points for lists',
+              'Closing: Clear next steps or call to action',
+              'Sign-off: Professional closing (Best regards, Kind regards, Thanks)'
+            ]
+          },
+          {
+            heading: 'Professional Tone and Language',
+            content: 'Your email tone should match your workplace culture while remaining professional. Avoid being too casual or overly formal.',
+            bullets: [
+              'Be concise: Respect the reader\'s time with clear, brief messages',
+              'Use active voice: "I will complete this by Friday" vs "This will be completed"',
+              'Avoid jargon: Use clear language everyone can understand',
+              'Be polite: Use "please" and "thank you" appropriately',
+              'Stay positive: Frame requests and feedback constructively',
+              'Proofread: Check spelling, grammar, and tone before sending'
+            ]
+          },
+          {
+            heading: 'Email Best Practices',
+            bullets: [
+              'Reply promptly: Respond within 24-48 hours, even if just to acknowledge',
+              'Use CC/BCC appropriately: Only include people who need the information',
+              'One topic per email: Makes filing and follow-up easier',
+              'Clear action items: Highlight what you need from recipients',
+              'Appropriate urgency: Don\'t mark everything as high priority',
+              'Professional signature: Include name, title, contact information'
+            ]
+          },
+          {
+            heading: 'Common Email Mistakes to Avoid',
+            bullets: [
+              'Reply All abuse: Only use when everyone needs to see your response',
+              'Unclear subject lines: "Quick question" tells recipients nothing',
+              'Wall of text: Break up long emails with paragraphs and bullet points',
+              'Emotional responses: Wait before sending when upset or frustrated',
+              'Missing attachments: Double-check before hitting send',
+              'Inappropriate humor: What\'s funny to you might not be to others'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Clear subject lines and structure make emails more effective',
+          'Professional tone should match your workplace culture',
+          'Be concise and respectful of recipients\' time',
+          'Proofread everything before sending',
+          'Use CC/BCC and Reply All appropriately'
+        ]
+      }
+    },
+    {
+      id: 'work-2',
+      title: 'Effective Meeting Participation',
+      description: 'Contribute meaningfully to meetings and discussions',
+      duration: '7 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Preparing for Meetings',
+            content: 'Effective meeting participation starts before the meeting begins. Preparation shows professionalism and helps you contribute meaningfully to discussions.',
+            bullets: [
+              'Read the agenda: Understand the purpose and topics to be covered',
+              'Review materials: Study any documents sent in advance',
+              'Prepare questions: Think about what you need to know or clarify',
+              'Bring materials: Notebook, pen, laptop if needed',
+              'Set objectives: Know what you want to achieve from the meeting'
+            ]
+          },
+          {
+            heading: 'During the Meeting',
+            content: 'Active participation means being engaged, respectful, and contributing value to the discussion.',
+            bullets: [
+              'Arrive on time: Shows respect for others and the process',
+              'Listen actively: Pay attention to what others are saying',
+              'Take notes: Capture key points, decisions, and action items',
+              'Speak up appropriately: Contribute when you have something valuable to add',
+              'Ask clarifying questions: Ensure you understand decisions and next steps',
+              'Stay focused: Avoid checking phone or doing other work'
+            ]
+          },
+          {
+            heading: 'Contributing Effectively',
+            bullets: [
+              'Be concise: Make your points clearly and briefly',
+              'Stay on topic: Keep contributions relevant to the agenda',
+              'Build on others\' ideas: "Yes, and..." rather than "No, but..."',
+              'Provide evidence: Support your points with data or examples',
+              'Respect different viewpoints: Listen to and consider other perspectives',
+              'Volunteer for action items: Show initiative when appropriate'
+            ]
+          },
+          {
+            heading: 'Meeting Etiquette',
+            bullets: [
+              'Mute when not speaking (virtual meetings)',
+              'Don\'t interrupt: Wait for natural pauses to contribute',
+              'Use inclusive language: Ensure everyone feels welcome to participate',
+              'Follow up: Complete any action items you committed to',
+              'Thank the organizer: Acknowledge their effort in organizing',
+              'Provide feedback: Share suggestions for improving future meetings'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Preparation is key to effective meeting participation',
+          'Active listening is as important as speaking',
+          'Contribute meaningfully and stay on topic',
+          'Respect others\' time and viewpoints',
+          'Follow through on commitments made during meetings'
+        ]
+      }
+    },
+    {
+      id: 'work-3',
+      title: 'Presentation Skills Basics',
+      description: 'Present ideas clearly and confidently',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Planning Your Presentation',
+            content: 'Great presentations start with clear planning. Know your audience, define your objective, and structure your content logically.',
+            bullets: [
+              'Define your objective: What do you want the audience to know, feel, or do?',
+              'Know your audience: Their background, interests, and what they need',
+              'Structure content: Introduction, main points (3-5 max), conclusion',
+              'Time management: Plan for Q&A and allow buffer time',
+              'Prepare for questions: Anticipate what people might ask'
+            ]
+          },
+          {
+            heading: 'Creating Effective Slides',
+            content: 'Slides should support your presentation, not replace it. Keep them simple, visual, and easy to read.',
+            bullets: [
+              'One main idea per slide: Don\'t overcrowd with information',
+              'Use large, readable fonts: Minimum 24pt for body text',
+              'Limit text: Use bullet points, not paragraphs',
+              'Include visuals: Charts, images, and diagrams engage audiences',
+              'Consistent design: Use the same fonts, colors, and layout',
+              'Have a backup plan: Save slides in multiple formats'
+            ]
+          },
+          {
+            heading: 'Delivery Techniques',
+            bullets: [
+              'Practice out loud: Rehearse your presentation multiple times',
+              'Make eye contact: Connect with individuals throughout the room',
+              'Use gestures naturally: Let your hands support your words',
+              'Vary your voice: Change pace, volume, and tone for emphasis',
+              'Move with purpose: Don\'t pace aimlessly, but don\'t stand rigid',
+              'Handle nerves: Deep breathing, preparation, and practice help'
+            ]
+          },
+          {
+            heading: 'Engaging Your Audience',
+            bullets: [
+              'Start strong: Open with a question, story, or surprising fact',
+              'Tell stories: People remember narratives better than facts',
+              'Ask questions: Keep audience involved and thinking',
+              'Use examples: Make abstract concepts concrete and relatable',
+              'Watch body language: Adjust if you see confusion or disengagement',
+              'End with action: Clear next steps or call to action'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Plan presentations with clear objectives and audience in mind',
+          'Keep slides simple, visual, and supportive of your message',
+          'Practice delivery techniques to build confidence',
+          'Engage audiences with stories, questions, and examples',
+          'End with clear next steps or calls to action'
+        ]
+      }
+    },
+    {
+      id: 'work-4',
+      title: 'Workplace Conflict Resolution',
+      description: 'Handle disagreements and difficult conversations',
+      duration: '7 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Understanding Workplace Conflict',
+            content: 'Conflict is normal in any workplace where people have different opinions, working styles, and priorities. The key is addressing it constructively before it escalates.',
+            bullets: [
+              'Common causes: Miscommunication, competing priorities, personality clashes',
+              'Early signs: Tension in meetings, avoided conversations, decreased collaboration',
+              'Types: Task conflicts (what to do), process conflicts (how to do it), relationship conflicts (personal issues)',
+              'Impact: Unresolved conflict reduces productivity and team morale',
+              'Opportunity: Well-handled conflict can lead to better solutions and stronger relationships'
+            ]
+          },
+          {
+            heading: 'Approaching Difficult Conversations',
+            content: 'Address conflicts early and directly, but with empathy and professionalism.',
+            bullets: [
+              'Choose the right time and place: Private setting, when both parties are calm',
+              'Focus on behavior, not personality: "When you interrupt in meetings" vs "You\'re rude"',
+              'Use "I" statements: "I felt confused when..." rather than "You always..."',
+              'Listen actively: Try to understand their perspective before defending yours',
+              'Stay calm: Keep emotions in check, even if the other person doesn\'t',
+              'Seek solutions: Focus on moving forward, not rehashing past grievances'
+            ]
+          },
+          {
+            heading: 'De-escalation Techniques',
+            bullets: [
+              'Lower your voice: Speaking softly often makes others do the same',
+              'Acknowledge emotions: "I can see you\'re frustrated about this"',
+              'Find common ground: Identify shared goals or interests',
+              'Take breaks: "Let\'s both think about this and talk again tomorrow"',
+              'Ask questions: "Help me understand your perspective on this"',
+              'Apologize when appropriate: Take responsibility for your part'
+            ]
+          },
+          {
+            heading: 'When to Involve Others',
+            content: 'Sometimes conflicts require external help to resolve effectively.',
+            bullets: [
+              'HR involvement: When conflicts involve harassment, discrimination, or policy violations',
+              'Manager escalation: When you can\'t resolve it directly and it affects work',
+              'Mediation: When both parties want to resolve it but need neutral help',
+              'Documentation: Keep records of serious conflicts and resolution attempts',
+              'Know your limits: Some conflicts require professional intervention'
+            ]
+          },
+          {
+            heading: 'Preventing Future Conflicts',
+            bullets: [
+              'Clear communication: Be explicit about expectations and deadlines',
+              'Regular check-ins: Address small issues before they become big problems',
+              'Respect differences: Appreciate diverse working styles and perspectives',
+              'Build relationships: Stronger relationships weather conflicts better',
+              'Learn from conflicts: Identify patterns and improve processes'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Address conflicts early before they escalate',
+          'Focus on behaviors and solutions, not personalities',
+          'Use active listening and "I" statements',
+          'Know when to involve HR or management',
+          'Build strong relationships to prevent future conflicts'
+        ]
+      }
+    }
+  ],
+  skills: ['Email Communication', 'Meeting Skills', 'Presentation', 'Conflict Resolution', 'Professional Etiquette'],
+  objectives: [
+    'Write professional emails that achieve objectives',
+    'Participate effectively in workplace meetings',
+    'Present ideas clearly and persuasively', 
+    'Handle workplace conflicts diplomatically',
+    'Build positive working relationships'
+  ]
+};
+
+export const mentalHealthAwarenessModule: ModuleData = {
+  id: 'mh-1',
+  title: 'Mental Health Awareness',
+  category: 'Mental Health & Wellbeing',
+  description: 'Understanding mental health, recognizing signs, and seeking support',
+  overview: 'Develop mental health literacy and self-awareness. Learn to recognize signs of common mental health conditions, understand the difference between normal stress and mental health concerns, know where to seek help, support friends and family, and reduce stigma around mental health.',
+  duration: '35 min',
+  lessons: [
+    {
+      id: 'mh-1-1',
+      title: 'What is Mental Health?',
+      description: 'Understanding mental health vs mental illness',
+      duration: '7 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Defining Mental Health',
+            content: 'Mental health isn\'t just the absence of mental illness—it\'s a state of wellbeing where you can cope with life\'s normal stresses, work productively, and contribute to your community. Just like physical health, mental health exists on a spectrum and can change throughout your life.',
+            bullets: [
+              'Mental health affects how we think, feel, and act',
+              'It influences how we handle stress, relate to others, and make choices',
+              'Good mental health doesn\'t mean being happy all the time',
+              'It\'s about having the tools to cope with life\'s ups and downs',
+              'Mental health is just as important as physical health'
+            ]
+          },
+          {
+            heading: 'Mental Health vs Mental Illness',
+            content: 'It\'s important to understand the difference between mental health (which we all have) and mental illness (which affects some people at certain times).',
+            bullets: [
+              'Mental Health: Everyone has mental health, just like physical health',
+              'Mental Illness: Diagnosable conditions that significantly impact daily life',
+              'You can have poor mental health without having a mental illness',
+              'You can have a mental illness and still have good mental health overall',
+              'Both can be improved with the right support and strategies'
+            ]
+          },
+          {
+            heading: 'Factors That Affect Mental Health',
+            bullets: [
+              'Biological factors: Genetics, brain chemistry, hormones',
+              'Life experiences: Trauma, abuse, significant life changes',
+              'Family history: Mental health conditions can run in families',
+              'Lifestyle factors: Sleep, exercise, diet, substance use',
+              'Social factors: Relationships, work stress, financial pressure',
+              'Environmental factors: Where you live, access to services'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Mental health is a spectrum that affects everyone',
+          'Good mental health means coping well with life\'s challenges',
+          'Mental health and mental illness are different concepts',
+          'Many factors influence our mental wellbeing',
+          'Mental health can be improved with the right support'
+        ]
+      }
+    },
+    {
+      id: 'mh-1-2',
+      title: 'Common Mental Health Conditions',
+      description: 'Anxiety, depression, and other common conditions',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Understanding Common Conditions',
+            content: 'Mental health conditions are more common than you might think. In the UK, 1 in 4 people experience a mental health problem each year. Understanding these conditions helps reduce stigma and encourages people to seek help when needed.',
+            bullets: [
+              '1 in 4 people in the UK experience mental health problems annually',
+              'Most conditions are treatable with proper support',
+              'Early intervention leads to better outcomes',
+              'Mental health conditions affect people of all ages and backgrounds',
+              'Having a mental health condition doesn\'t define who you are'
+            ]
+          },
+          {
+            heading: 'Anxiety Disorders',
+            content: 'Anxiety is the most common mental health condition, affecting millions of people. While everyone feels anxious sometimes, anxiety disorders involve persistent, excessive worry that interferes with daily life.',
+            bullets: [
+              'Generalized Anxiety Disorder: Persistent worry about many things',
+              'Panic Disorder: Sudden, intense episodes of fear (panic attacks)',
+              'Social Anxiety: Fear of social situations and being judged',
+              'Phobias: Intense fear of specific objects or situations',
+              'Physical symptoms: Racing heart, sweating, difficulty breathing'
+            ]
+          },
+          {
+            heading: 'Depression',
+            content: 'Depression is more than just feeling sad—it\'s a persistent low mood that affects how you think, feel, and function in daily life.',
+            bullets: [
+              'Persistent sadness or low mood lasting weeks or months',
+              'Loss of interest in activities you used to enjoy',
+              'Changes in sleep, appetite, and energy levels',
+              'Difficulty concentrating or making decisions',
+              'Feelings of worthlessness or excessive guilt',
+              'In severe cases, thoughts of self-harm or suicide'
+            ]
+          },
+          {
+            heading: 'Other Common Conditions',
+            bullets: [
+              'Bipolar Disorder: Extreme mood swings between highs and lows',
+              'OCD: Unwanted thoughts (obsessions) and repetitive behaviors (compulsions)',
+              'PTSD: Following traumatic experiences, causing flashbacks and avoidance',
+              'Eating Disorders: Unhealthy relationships with food and body image',
+              'ADHD: Difficulty with attention, hyperactivity, and impulse control'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          '1 in 4 people experience mental health problems each year',
+          'Anxiety and depression are the most common conditions',
+          'Mental health conditions have both emotional and physical symptoms',
+          'Early recognition and treatment improve outcomes',
+          'Mental health conditions are medical conditions, not personal failings'
+        ]
+      }
+    },
+    {
+      id: 'mh-1-3',
+      title: 'Recognizing Warning Signs',
+      description: 'In yourself and others - when to be concerned',
+      duration: '7 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Warning Signs in Yourself',
+            content: 'It\'s important to recognize when your mental health might need attention. These signs don\'t necessarily mean you have a mental illness, but they suggest it\'s time to seek support or make some changes.',
+            bullets: [
+              'Persistent changes in mood lasting more than 2 weeks',
+              'Difficulty sleeping or sleeping too much',
+              'Loss of appetite or overeating',
+              'Withdrawing from friends, family, or activities',
+              'Feeling overwhelmed by daily tasks',
+              'Increased use of alcohol or drugs',
+              'Difficulty concentrating at work or school',
+              'Physical symptoms with no clear cause (headaches, stomach issues)'
+            ]
+          },
+          {
+            heading: 'Warning Signs in Others',
+            content: 'Friends and family often notice changes before the person experiencing them does. Look out for these signs in people you care about.',
+            bullets: [
+              'Significant changes in personality or behavior',
+              'Withdrawal from social activities or relationships',
+              'Decline in work or academic performance',
+              'Neglecting personal hygiene or appearance',
+              'Expressing hopelessness or talking about death',
+              'Giving away possessions or saying goodbye',
+              'Increased risk-taking or reckless behavior',
+              'Extreme mood swings or emotional outbursts'
+            ]
+          },
+          {
+            heading: 'When to Seek Immediate Help',
+            content: 'Some situations require immediate professional intervention. Don\'t wait if you or someone you know is experiencing:',
+            bullets: [
+              'Thoughts of suicide or self-harm',
+              'Plans to hurt yourself or others',
+              'Hearing voices or seeing things others don\'t',
+              'Severe confusion or inability to function',
+              'Substance abuse that\'s out of control',
+              'Psychotic episodes or complete break from reality'
+            ],
+            tipBox: {
+              type: 'emergency',
+              title: 'Crisis Support',
+              content: 'If you or someone you know is in immediate danger, call 999. For mental health crisis support, contact Samaritans: 116 123 (free, 24/7)'
+            }
+          }
+        ],
+        keyTakeaways: [
+          'Changes lasting more than 2 weeks may need attention',
+          'Physical symptoms can be signs of mental health issues',
+          'Friends and family often notice changes first',
+          'Some situations require immediate professional help',
+          'Trust your instincts - if you\'re concerned, seek support'
+        ]
+      }
+    },
+    {
+      id: 'mh-1-4',
+      title: 'Seeking Help and Support',
+      description: 'NHS services, private options, and crisis support',
+      duration: '8 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'NHS Mental Health Services',
+            content: 'The NHS provides free mental health support, though waiting times can vary. Start with your GP, who can refer you to specialist services or provide initial support.',
+            bullets: [
+              'GP: First point of contact, can prescribe medication and make referrals',
+              'IAPT Services: Improving Access to Psychological Therapies (talking therapies)',
+              'Community Mental Health Teams: For ongoing support and specialist care',
+              'Crisis Teams: 24/7 support for mental health emergencies',
+              'Inpatient Services: Hospital care for severe mental health crises'
+            ]
+          },
+          {
+            heading: 'Self-Referral Options',
+            content: 'You don\'t always need to go through your GP. Many NHS services accept self-referrals for faster access.',
+            bullets: [
+              'NHS Talking Therapies: Self-refer online for anxiety and depression',
+              'NHS 111: Call for urgent mental health support and advice',
+              'Local Crisis Teams: Many accept direct contact during crises',
+              'Online NHS services: Apps and online therapy programs',
+              'Wellbeing services: Local councils often provide mental health support'
+            ]
+          },
+          {
+            heading: 'Private and Charity Support',
+            bullets: [
+              'Private therapy: Faster access but costs £40-150+ per session',
+              'Employee Assistance Programs: Free counseling through many employers',
+              'Mind: Local branches provide support groups and services',
+              'Samaritans: 24/7 emotional support (116 123)',
+              'CALM: Campaign Against Living Miserably (men\'s mental health)',
+              'Young Minds: Support for children and young people',
+              'Online platforms: BetterHelp, Headspace, Calm apps'
+            ]
+          },
+          {
+            heading: 'How to Access Help',
+            bullets: [
+              'Book GP appointment: Explain your concerns honestly',
+              'Self-refer to NHS Talking Therapies online',
+              'Contact local Mind branch for community support',
+              'Use NHS 111 for urgent but non-emergency situations',
+              'Call 999 or go to A&E for immediate safety concerns',
+              'Speak to trusted friends, family, or colleagues'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'NHS provides free mental health services, start with your GP',
+          'Many services accept self-referrals for faster access',
+          'Private options available if you can afford them',
+          'Crisis support is available 24/7 through multiple channels',
+          'Don\'t wait for a crisis - early help is more effective'
+        ]
+      }
+    },
+    {
+      id: 'mh-1-5',
+      title: 'Supporting Others',
+      description: 'How to help friends and family with mental health struggles',
+      duration: '5 min',
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'How to Be a Good Mental Health Ally',
+            content: 'Supporting someone with mental health challenges requires patience, understanding, and knowing your limits. You can\'t fix someone, but you can be a valuable source of support.',
+            bullets: [
+              'Listen without judgment: Let them talk without trying to fix everything',
+              'Validate their feelings: "That sounds really difficult" rather than "Just think positive"',
+              'Offer practical help: Cooking, cleaning, or accompanying them to appointments',
+              'Stay connected: Regular check-ins, even just a text message',
+              'Learn about their condition: Understanding helps you provide better support'
+            ]
+          },
+          {
+            heading: 'What NOT to Say',
+            bullets: [
+              'Avoid: "Just think positive" or "Snap out of it"',
+              'Avoid: "Others have it worse" or comparing their struggles',
+              'Avoid: "Have you tried yoga/exercise?" (unless they ask for suggestions)',
+              'Avoid: Taking their mood personally or making it about you',
+              'Avoid: Promising to keep secrets about self-harm or suicide plans'
+            ]
+          },
+          {
+            heading: 'When to Seek Additional Help',
+            content: 'Sometimes supporting someone requires professional intervention. Know when to involve others.',
+            bullets: [
+              'If they mention suicide or self-harm plans',
+              'If their behavior becomes dangerous to themselves or others',
+              'If you feel overwhelmed or out of your depth',
+              'If they refuse all help and their condition is worsening',
+              'Remember: You\'re not responsible for fixing them or keeping them alive'
+            ]
+          },
+          {
+            heading: 'Looking After Yourself',
+            bullets: [
+              'Set boundaries: You can\'t be available 24/7',
+              'Seek your own support: Talk to someone about how you\'re coping',
+              'Take breaks: It\'s okay to step back sometimes',
+              'Don\'t neglect your own mental health',
+              'Remember: You can\'t pour from an empty cup'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Listen without judgment and validate their feelings',
+          'Offer practical support rather than advice',
+          'Avoid dismissive phrases like "just think positive"',
+          'Know when to involve professional help',
+          'Take care of your own mental health while supporting others'
+        ]
+      }
+    }
+  ],
+  skills: ['Mental Health Literacy', 'Self-Awareness', 'Empathy', 'Support Skills', 'Crisis Recognition'],
+  objectives: [
+    'Understand the difference between mental health and mental illness',
+    'Recognize signs of common mental health conditions',
+    'Know where and how to seek professional help',
+    'Support friends and family with mental health challenges',
+    'Reduce stigma and promote mental health awareness'
+  ]
+};
+
+export const stressManagementModule: ModuleData = {
+  id: 'mh-2',
+  title: 'Stress Management & Work-Life Balance',
+  category: 'Mental Health & Wellbeing',
+  description: 'Practical techniques to manage stress and maintain wellbeing',
+  overview: 'Learn evidence-based stress management techniques and create sustainable work-life balance. Understand the physiology of stress, practice mindfulness and relaxation techniques, set healthy boundaries, manage workload effectively, and build resilience for long-term wellbeing.',
+  duration: '40 min',
+  lessons: [
+    {
+      id: 'stress-1',
+      title: 'Understanding Stress and Its Effects',
+      description: 'What happens in your body and mind during stress',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'stress-2',
+      title: 'Mindfulness and Relaxation Techniques',
+      description: 'Practical exercises for immediate stress relief',
+      duration: '10 min',
+      type: 'exercise'
+    },
+    {
+      id: 'stress-3',
+      title: 'Setting Boundaries and Saying No',
+      description: 'Protect your time and energy',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'stress-4',
+      title: 'Work-Life Balance Strategies',
+      description: 'Create sustainable balance between work and personal life',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'stress-5',
+      title: 'Building Long-Term Resilience',
+      description: 'Develop coping strategies for ongoing challenges',
+      duration: '6 min',
+      type: 'reading'
+    }
+  ],
+  skills: ['Stress Management', 'Mindfulness', 'Boundary Setting', 'Work-Life Balance', 'Resilience Building'],
+  objectives: [
+    'Understand how stress affects your body and mind',
+    'Practice effective relaxation and mindfulness techniques',
+    'Set healthy boundaries in work and personal life',
+    'Create sustainable work-life balance',
+    'Build resilience for long-term wellbeing'
+  ]
+};
+
+export const timeManagementModule: ModuleData = {
+  id: 'mh-3',
+  title: 'Time Management & Productivity',
+  category: 'Mental Health & Wellbeing',
+  description: 'Organize your time effectively and boost productivity',
+  overview: 'Master time management and productivity systems that reduce stress and increase achievement. Learn prioritization frameworks, overcome procrastination, use digital tools effectively, batch similar tasks, and create systems that work for your lifestyle.',
+  duration: '35 min',
+  lessons: [
+    {
+      id: 'time-1',
+      title: 'Prioritization Frameworks',
+      description: 'Eisenhower Matrix, ABC method, and other systems',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'time-2',
+      title: 'Overcoming Procrastination',
+      description: 'Understand why we procrastinate and how to beat it',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'time-3',
+      title: 'Digital Tools and Systems',
+      description: 'Apps, calendars, and tools that actually help',
+      duration: '7 min',
+      type: 'reading'
+    },
+    {
+      id: 'time-4',
+      title: 'Energy Management',
+      description: 'Work with your natural rhythms for peak performance',
+      duration: '7 min',
+      type: 'reading'
+    },
+    {
+      id: 'time-5',
+      title: 'Creating Sustainable Systems',
+      description: 'Build habits and routines that stick',
+      duration: '5 min',
+      type: 'reading'
+    }
+  ],
+  skills: ['Time Management', 'Prioritization', 'Productivity Systems', 'Procrastination Management', 'Energy Management'],
+  objectives: [
+    'Use prioritization frameworks to focus on what matters',
+    'Overcome procrastination with proven techniques',
+    'Implement digital tools that enhance productivity',
+    'Manage energy levels for optimal performance',
+    'Create sustainable productivity systems'
+  ]
+};
+
+export const personalFinanceWellbeingModule: ModuleData = {
+  id: 'mh-4',
+  title: 'Personal Finance & Wellbeing',
+  category: 'Mental Health & Wellbeing',
+  description: 'Managing financial stress and building healthy money habits',
+  overview: 'Understand the connection between money and mental health. Learn to manage financial anxiety, build healthy money habits, communicate about finances in relationships, set realistic financial goals, and develop a positive money mindset that supports overall wellbeing.',
+  duration: '30 min',
+  lessons: [
+    {
+      id: 'finwell-1',
+      title: 'Money and Mental Health Connection',
+      description: 'How finances impact wellbeing and vice versa',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'finwell-2',
+      title: 'Managing Financial Anxiety',
+      description: 'Cope with money worries and financial stress',
+      duration: '8 min',
+      type: 'reading'
+    },
+    {
+      id: 'finwell-3',
+      title: 'Building Healthy Money Habits',
+      description: 'Create positive financial behaviors that stick',
+      duration: '7 min',
+      type: 'reading'
+    },
+    {
+      id: 'finwell-4',
+      title: 'Financial Communication in Relationships',
+      description: 'Talk about money with partners, family, and friends',
+      duration: '7 min',
+      type: 'reading'
+    }
+  ],
+  skills: ['Financial Wellness', 'Anxiety Management', 'Habit Formation', 'Communication', 'Money Mindset'],
+  objectives: [
+    'Understand how finances affect mental health',
+    'Manage financial anxiety and stress effectively',
+    'Build sustainable healthy money habits',
+    'Communicate about finances in relationships',
+    'Develop a positive money mindset'
+  ]
+};
+
 export const travelOrganizationModule: ModuleData = {
   id: 'life-4',
   title: 'Travel Organization & Global Awareness',
@@ -6947,56 +10473,643 @@ export const travelOrganizationModule: ModuleData = {
       title: 'Travel Documents & Preparation',
       description: 'Passports, visas, EHIC/GHIC, travel insurance, essential documents',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'UK Passport',
+            content: 'Your passport is your gateway to the world—without it, you\'re not going anywhere international. Yet many people underestimate how long it takes to get one or realize too late that their passport expired.\n\nHere\'s what you need to know: applying for your first adult passport costs £88.50 online (£100 if you insist on using paper forms, though why would you?). Processing normally takes 3 weeks, but during peak travel season (May-August), it can stretch to 6-8 weeks. If you\'re in a rush, fast-track service costs £142 and gets it done in 1 week—but that\'s an expensive lesson in poor planning.\n\nThe 6-month validity rule catches people constantly: many countries won\'t let you enter if your passport expires within 6 months of your arrival date. So even if your passport is technically valid, you might be turned away at the airport. Check expiry dates at least 8 months before any international trip.\n\nPro tip: Set a reminder on your phone for 10 months before your passport expires. That gives you plenty of time to renew before it becomes urgent. Nothing ruins a trip like realizing your passport expired and scrambling to renew it.',
+            bullets: [
+              'First adult passport: £88.50 (online), £100 (paper)—always apply online, it\'s cheaper and faster',
+              'Renewal: £82.50 (online), £93 (paper)—renew 10 months before expiry to avoid last-minute stress',
+              'Processing: 3 weeks standard, 1 week fast-track (£142)—don\'t pay for fast-track due to poor planning',
+              'Validity: Check 6+ months remaining for most countries—many countries won\'t admit you with less than 6 months validity',
+              'Apply: gov.uk/apply-renew-passport—have your previous passport, photos ready, and expect 3-8 week wait',
+              'Photo requirements: Specific size, neutral expression, plain background—pharmacies like Boots offer passport photo services'
+            ]
+          },
+          {
+            heading: 'Visas',
+            bullets: [
+              'UK citizens visa-free: EU (90 days), USA (90 days), Australia (eVisitor), many others',
+              'Visa required: China, Russia, India, Brazil, some African countries',
+              'Check requirements: gov.uk/foreign-travel-advice',
+              'Application: 4-8 weeks before travel',
+              'Cost: £50-200 depending on country',
+              'Documents: Passport, photos, proof of funds, return ticket'
+            ]
+          },
+          {
+            heading: 'EHIC/GHIC (Health Card)',
+            bullets: [
+              'GHIC: Global Health Insurance Card (replaced EHIC post-Brexit)',
+              'Covers: Emergency healthcare in EU at reduced/no cost',
+              'Apply: FREE at gov.uk/global-health-insurance-card',
+              'NOT travel insurance: Doesn\'t cover repatriation, lost items',
+              'Duration: 5 years validity',
+              'Carry: Physical card + photo on phone'
+            ]
+          },
+          {
+            heading: 'Travel Insurance',
+            bullets: [
+              'Essential: Medical emergencies, trip cancellation, lost luggage',
+              'Cost: £20-50 for 2-week trip, £100-200 annual multi-trip',
+              'Coverage: Medical (£1M+ minimum), repatriation, personal liability',
+              'Providers: Compare at MoneySuperMarket, Compare the Market',
+              'Read policy: Know what\'s covered (sports, pre-existing conditions)',
+              'Keep: Policy number, emergency contact saved in phone'
+            ]
+          },
+          {
+            heading: 'Essential Documents Checklist',
+            bullets: [
+              'Passport (6+ months validity)',
+              'Visa (if required)',
+              'GHIC/EHIC',
+              'Travel insurance policy',
+              'Flight/train tickets (print + digital)',
+              'Accommodation bookings',
+              'Driver\'s license (if renting car)',
+              'Copy of all documents (email to yourself, cloud storage)'
+            ]
+          },
+          {
+            heading: 'Pre-Travel Checklist',
+            bullets: [
+              'Check Foreign Office travel advice (gov.uk)',
+              'Register trip with embassy (if long-term)',
+              'Tell bank you\'re traveling (avoid card blocks)',
+              'Check phone roaming costs or buy local SIM',
+              'Vaccinations (if required for destination)',
+              'Download offline maps (Google Maps)',
+              'Learn basic phrases in local language'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'UK passport: £82.50 renewal, apply 3+ months before travel',
+          'Check visa requirements at gov.uk/foreign-travel-advice',
+          'GHIC: FREE, covers EU emergency healthcare (but get insurance too)',
+          'Travel insurance: £20-50 per trip, essential for medical emergencies',
+          'Copy all documents digitally and physically',
+          'Register trip with embassy for long-term stays'
+        ]
+      }
     },
     {
       id: 'travel-2',
       title: 'Booking Flights & Accommodation',
       description: 'Finding deals, best booking times, Airbnb vs hotels, budget travel tactics',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Finding Cheap Flights',
+            content: 'Flight prices can vary by hundreds of pounds depending on when and how you book. Understanding the patterns saves you serious money—money you can spend actually enjoying your trip instead of giving to airlines.\n\nThe sweet spot for booking domestic flights is 6-8 weeks before departure. For international flights, push that to 3-4 months ahead. Book too early (6+ months) and prices are high because airlines haven\'t started competing yet. Book too late (within 2 weeks) and you\'re paying premium prices for the few remaining seats. That middle window is where airlines are actively competing for passengers.\n\nTuesday and Wednesday departures are typically 15-25% cheaper than Friday-Sunday flights. Why? Business travelers fly Monday and Friday, leisure travelers fly Friday-Sunday. Tuesday/Wednesday flights have less demand, so airlines discount them. Similarly, midday flights (10am-2pm) are cheaper than convenient morning/evening times.\n\nThe biggest money-saver: flexible dates. If your travel dates are fixed, you\'re at the mercy of whatever prices exist those specific days. But if you can shift by ±3 days, you open up potentially massive savings. A £200 flight on Friday might be £120 on Tuesday. Use Google Flights\' calendar view to spot these patterns.',
+            bullets: [
+              'Comparison sites: Skyscanner, Google Flights, Kayak, Momondo—check all, prices sometimes differ',
+              'Best booking time: 6-8 weeks before travel (domestic), 3-4 months (international)—the "Goldilocks zone"',
+              'Cheapest days: Tuesday/Wednesday departures, midday flights—avoid Friday/Sunday and peak times',
+              'Flexible dates: ±3 days can save £50-200—biggest single factor in finding cheap flights',
+              'Budget airlines: Ryanair, easyJet (watch baggage fees)—add bag fees before comparing to full-service airlines',
+              'Price alerts: Set on Google Flights, Skyscanner—let technology track prices while you wait',
+              'Incognito mode: Clear cookies to avoid price increases—airlines allegedly track searches and raise prices'
+            ]
+          },
+          {
+            heading: 'Flight Booking Tips',
+            bullets: [
+              'Compare: Budget airline + bags vs full-service airline',
+              'Connecting flights: Cheaper but allow 3+ hours layover',
+              'Student discounts: StudentUniverse, STA Travel',
+              'Error fares: Follow @SecretFlying on Twitter',
+              'Book direct: Sometimes cheaper on airline website after comparing',
+              'Check baggage: Often cheaper to pre-book than pay at airport'
+            ]
+          },
+          {
+            heading: 'Hotels vs Airbnb vs Hostels',
+            bullets: [
+              'Hotels: Safe, consistent, breakfast included often',
+              'Airbnb: Cheaper, local experience, kitchen to cook',
+              'Hostels: £10-30/night, social, dorm or private rooms',
+              'Best for solo: Hostels (meet people)',
+              'Best for groups: Airbnb (split cost)',
+              'Best for business: Hotels (reliability, location)'
+            ]
+          },
+          {
+            heading: 'Accommodation Booking Strategy',
+            bullets: [
+              'Compare: Booking.com, Hotels.com, Airbnb, Hostelworld',
+              'Location: Near public transport > tourist areas (cheaper)',
+              'Reviews: Read recent reviews, 8.0+ rating minimum',
+              'Flexible cancellation: Worth extra cost for uncertainty',
+              'Book direct: Sometimes cheaper calling hotel directly',
+              'Timing: Book 2-4 weeks ahead for good balance of price/choice'
+            ]
+          },
+          {
+            heading: 'Budget Travel Hacks',
+            bullets: [
+              'Overnight trains/buses: Save on accommodation + transport',
+              'Stay outside city center: 20-30 min commute = 50% cheaper',
+              'Free walking tours: Pay what you want, great for orientation',
+              'Supermarket meals: Cook breakfast/lunch, eat out for dinner only',
+              'City passes: Save on attractions if visiting 3+ sites',
+              'Student discounts: Always ask, carry student ID'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Book flights 6-8 weeks ahead, use Skyscanner/Google Flights',
+          'Tuesday/Wednesday departures + midday = cheapest',
+          'Hotels for reliability, Airbnb for value, hostels for social',
+          'Stay outside city center to save 50%+ on accommodation',
+          'Free walking tours, supermarket meals, student discounts',
+          'Set price alerts and book with flexible cancellation'
+        ]
+      }
     },
     {
       id: 'travel-3',
       title: 'Travel Budgeting & Money Management',
       description: 'Daily budgets, currency exchange, travel cards (Wise, Revolut), avoiding fees',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Daily Budget by Destination',
+            content: 'Travel budgets vary dramatically by destination. Southeast Asia offers incredible value—you can live comfortably on £20-40/day, experiencing amazing food, decent accommodation, and activities. Meanwhile, Australia or Scandinavia will cost you £80-130/day for a similar experience.\n\nThese aren\'t backpacker-poverty budgets—they\'re comfortable mid-range travel. You\'re staying in hostels or budget hotels (not luxury, but clean and safe), eating a mix of street food and casual restaurants, using public transport, and doing a couple paid activities per week plus lots of free exploration.\n\nUnderstanding these differences helps you choose destinations that fit your budget. £1,000 could give you 3 weeks exploring Thailand or 1 week in London. Neither is better—they\'re different experiences. But knowing the numbers helps you make informed choices about where your money goes furthest.',
+            bullets: [
+              'Southeast Asia: £20-40/day (Thailand, Vietnam, Indonesia)—amazing value, stretch your money furthest here',
+              'Eastern Europe: £30-50/day (Poland, Hungary, Czech Republic)—beautiful cities, rich history, great value',
+              'Western Europe: £50-80/day (Spain, Portugal, Germany)—more expensive but still manageable with planning',
+              'UK cities: £60-100/day (London higher)—home advantage: no flights, know the language, familiar culture',
+              'USA: £70-120/day—tipping culture and car rentals push costs up',
+              'Australia: £80-130/day—gorgeous but expensive, distances require internal flights',
+              'Japan: £60-100/day—surprisingly affordable if you avoid tourist traps and eat like locals'
+            ]
+          },
+          {
+            heading: 'Budget Breakdown (Typical £50/day)',
+            bullets: [
+              'Accommodation: £20 (hostel/budget hotel)',
+              'Food: £15 (breakfast £3, lunch £5, dinner £7)',
+              'Transport: £5 (metro, local buses)',
+              'Activities: £8 (1 paid attraction or tour)',
+              'Misc: £2 (snacks, tips, small items)',
+              'Buffer: Always add 20% for unexpected costs'
+            ]
+          },
+          {
+            heading: 'Best Travel Cards (UK)',
+            bullets: [
+              'Wise: No monthly fees, best exchange rates, multi-currency',
+              'Revolut: Free basic, great rates, budgeting features',
+              'Monzo: £0 fees abroad, instant notifications',
+              'Starling: Free abroad, no fees, cashback',
+              'AVOID: High street banks (2-3% foreign transaction fees)',
+              'Keep 2 cards: Backup if one lost/stolen'
+            ]
+          },
+          {
+            heading: 'Currency Exchange Tips',
+            bullets: [
+              'NEVER exchange at airport (worst rates + high fees)',
+              'Use ATMs abroad (best rates with Wise/Revolut/Monzo)',
+              'Decline "conversion" at ATM (use card\'s own rate)',
+              'Cash vs card: Carry £50-100 cash, use card for rest',
+              'Notify bank: Tell them you\'re traveling (avoid blocks)',
+              'Emergency cash: Keep £50 USD/EUR separate for emergencies'
+            ]
+          },
+          {
+            heading: 'Avoiding Hidden Fees',
+            bullets: [
+              'Dynamic currency conversion: ALWAYS decline, choose local currency',
+              'ATM fees: Use bank ATMs, not standalone machines (high fees)',
+              'Card fees: Use Wise/Revolut/Monzo (zero fees)',
+              'Restaurant tips: Check if service included before tipping',
+              'Tourist traps: Airport taxis, tourist exchange booths, hotel restaurants',
+              'Free alternatives: Walk instead of taxi, supermarket meals, free museums'
+            ]
+          },
+          {
+            heading: 'Budgeting Tools',
+            bullets: [
+              'Track spending: Trail Wallet app (best for travel)',
+              'Daily budget: Set £50/day limit, track each expense',
+              'Splitwise: If traveling with friends, split costs fairly',
+              'Google Sheets: Simple daily expense tracker',
+              'Review weekly: Adjust budget if overspending'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Southeast Asia £20-40/day, Europe £50-80/day, USA/Australia £80-120/day',
+          'Use Wise, Revolut, or Monzo (ZERO foreign transaction fees)',
+          'NEVER exchange at airport, use ATMs abroad',
+          'Decline dynamic currency conversion (choose local currency)',
+          'Carry 2 cards as backup, keep emergency £50 cash separate',
+          'Track spending daily with Trail Wallet app, adjust as needed'
+        ]
+      }
     },
     {
       id: 'travel-4',
       title: 'Staying Safe Abroad',
       description: 'Embassy registration, common scams, safe neighborhoods, emergency contacts',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Before You Go',
+            bullets: [
+              'Check travel advice: gov.uk/foreign-travel-advice',
+              'Register trip: UK embassy if staying 4+ weeks',
+              'Share itinerary: With family/friends',
+              'Emergency contacts: Save embassy number, local emergency services',
+              'Travel insurance: With emergency medical coverage',
+              'Copy documents: Email yourself passport, insurance, bookings'
+            ]
+          },
+          {
+            heading: 'Common Travel Scams',
+            content: 'Travel scams are frustratingly common, but they follow predictable patterns. Once you know what to watch for, you can spot them immediately and avoid becoming a victim.\n\nThe fake taxi scam is everywhere: someone approaches you at the airport claiming to be a taxi driver, offering great prices. Then they take a circuitous route and charge 3-4x the normal fare. Solution: use official ride apps like Uber or Bolt, or pre-book airport transfers through your hotel.\n\nDistraction theft is an art form in tourist areas. One person "accidentally" spills something on you, apologizing profusely while cleaning you off. Meanwhile, their partner is lifting your wallet or bag. The moment someone unexpectedly touches you or creates chaos, immediately check your valuables.\n\nThe "free bracelet" scam is classic: someone ties a friendship bracelet on your wrist, then demands £20 for it. They\'re counting on you being too polite to refuse payment. Practice saying "No thank you" firmly and walking away without guilt. You don\'t owe anyone money for "gifts" you didn\'t request.',
+            bullets: [
+              'Fake taxi: Use official apps (Uber, Bolt) or pre-book—never trust random touts at airports',
+              'Overcharge scam: Agree price before service (taxis, tours)—get it in writing if possible',
+              'Distraction theft: Someone spills on you while partner steals—protect valuables when chaos starts',
+              'Fake police: Real police won\'t ask for wallet, go to station—scammers dress as police to steal',
+              'Free bracelet: Then demand payment, walk away firmly—"free" gifts that aren\'t free',
+              'ATM skimming: Cover PIN, use ATMs inside banks—outdoor standalone ATMs more likely compromised',
+              'WiFi hacking: Don\'t access bank on public WiFi—use mobile data for sensitive transactions'
+            ]
+          },
+          {
+            heading: 'Protecting Your Belongings',
+            bullets: [
+              'Split money: Wallet in front pocket, backup cash in shoe/hidden pocket',
+              'Anti-theft bag: Slash-proof, lockable zippers',
+              'Hotel safe: Use for passport, extra cash, electronics',
+              'Copies: Leave passport in safe, carry photocopy',
+              'Phone security: PIN/fingerprint lock, Find My Phone enabled',
+              'Valuables: Don\'t flash expensive jewelry, camera, phone',
+              'Bag awareness: Keep in front on public transport'
+            ]
+          },
+          {
+            heading: 'Safe Neighborhood Research',
+            bullets: [
+              'Google Maps reviews: Check area around accommodation',
+              'Ask locals: Hotel staff, hostel workers for safe areas',
+              'Avoid: Deserted streets at night, run-down areas',
+              'Night safety: Uber > walking alone at night',
+              'Trust instinct: If it feels unsafe, it probably is',
+              'Solo travelers: Share live location with friend when exploring'
+            ]
+          },
+          {
+            heading: 'Emergency Contacts',
+            bullets: [
+              'Save in phone: Local emergency (e.g., 112 EU, 911 USA)',
+              'UK Embassy: Find at gov.uk/world/embassies',
+              'Insurance: 24/7 emergency assistance number',
+              'Hotel address: In local language (show taxi driver)',
+              'Embassy registration: gov.uk/living-abroad if long-term',
+              'Emergency cash: Keep £50-100 separate from main money'
+            ]
+          },
+          {
+            heading: 'Health & Safety Tips',
+            bullets: [
+              'Water: Bottled only in developing countries',
+              'Food: Avoid street food first day (adjust to bacteria)',
+              'Sun: SPF 30+, drink 2-3L water daily',
+              'Medications: Bring enough + prescription copy',
+              'Altitude: Acclimatize slowly (Himalayas, Andes)',
+              'Insurance: Covers adventure activities if doing them'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Check gov.uk/foreign-travel-advice before every trip',
+          'Common scams: Fake taxis, overcharging, distraction theft',
+          'Protect valuables: Anti-theft bag, hotel safe, copies of documents',
+          'Save emergency contacts: Local emergency number, embassy, insurance',
+          'Safe neighborhoods: Google reviews, ask locals, trust instinct',
+          'Split money: Wallet + backup cash in different locations'
+        ]
+      }
     },
     {
       id: 'travel-5',
       title: 'Cultural Norms by Region',
       description: 'Europe, Asia, Middle East, Americas, Africa - customs, etiquette, do\'s and don\'ts',
       duration: '20 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Western Europe (UK, France, Germany, Spain)',
+            bullets: [
+              'Greetings: Handshake, some cultures kiss on cheeks (2-3 times)',
+              'Punctuality: Germans very punctual, Spanish more relaxed',
+              'Dining: Keep hands on table (not lap), finish plate',
+              'Tipping: 10% typical, service often included',
+              'Don\'ts: Don\'t snap fingers for waiter, no loud talking',
+              'Dress: Smart casual for restaurants, churches require covered shoulders'
+            ]
+          },
+          {
+            heading: 'Eastern Europe (Poland, Hungary, Czech Republic)',
+            bullets: [
+              'Greetings: Firm handshake, maintain eye contact',
+              'Hospitality: Very welcoming, generous hosts',
+              'Drinking: Toasts common, maintain eye contact during toast',
+              'Gifts: Bring wine/flowers if invited to home',
+              'Religion: Respect churches, dress modestly',
+              'Cash: Many places still cash-only, carry local currency'
+            ]
+          },
+          {
+            heading: 'Asia (China, Japan, Thailand, India)',
+            bullets: [
+              'Greetings: Bow (Japan), wai/prayer hands (Thailand), namaste (India)',
+              'Shoes: Remove before entering homes, temples',
+              'Elders: Show respect, let them go first',
+              'Head/feet: Don\'t touch someone\'s head, don\'t point feet at people',
+              'Chopsticks: Don\'t stick upright in rice (funeral ritual)',
+              'Temples: Dress modestly, remove shoes, ask before photos',
+              'Business cards: Present with both hands, study it before putting away'
+            ]
+          },
+          {
+            heading: 'Middle East (UAE, Turkey, Jordan)',
+            bullets: [
+              'Greetings: Right hand only (left considered unclean)',
+              'Dress: Modest, cover shoulders/knees (especially women)',
+              'Alcohol: Limited/banned in some countries, respect local laws',
+              'Public affection: Holding hands max, no kissing',
+              'Photography: Ask permission, especially for women',
+              'Prayer times: Shops close 5x daily, plan around it',
+              'Hospitality: Tea/coffee offered, refusing is rude',
+              'Ramadan: Don\'t eat/drink in public during fasting hours'
+            ]
+          },
+          {
+            heading: 'Americas (USA, Canada, Latin America)',
+            bullets: [
+              'USA/Canada: Direct communication, casual, personal space valued',
+              'Tipping: 15-20% expected (USA/Canada)',
+              'Latin America: Warmer greetings, less personal space',
+              'Punctuality: Flexible in Latin America ("mañana culture")',
+              'Relationships: Take time to build rapport before business',
+              'Language: Learn basic Spanish/Portuguese (appreciated)'
+            ]
+          },
+          {
+            heading: 'Africa (Morocco, Kenya, South Africa)',
+            bullets: [
+              'Greetings: Handshake, right hand only',
+              'Pace: Slower pace, relationship-focused',
+              'Bargaining: Expected in markets, start at 50% asking price',
+              'Photography: Always ask permission, especially rural areas',
+              'Dress: Conservative, especially outside cities',
+              'Time: Flexible ("African time"), build buffer into plans'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Research customs before visiting any country',
+          'Asia: Remove shoes, bow/wai, respect elders',
+          'Middle East: Dress modestly, no public affection, right hand only',
+          'Europe: Punctuality matters (especially Germany), tipping 10%',
+          'Americas: USA tips 15-20%, Latin America more flexible time',
+          'Africa: Always ask before photos, bargaining expected',
+          'When in doubt: Observe locals and follow their lead'
+        ]
+      }
     },
     {
       id: 'travel-6',
       title: 'International Business Etiquette',
       description: 'Meeting protocols, gift giving, dining customs, communication styles by country',
       duration: '15 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'Meeting Protocols',
+            bullets: [
+              'USA/UK: First name basis quickly, casual, direct',
+              'Germany/Japan: Formal titles, surnames, punctual',
+              'China: Senior person greeted first, exchange business cards formally',
+              'India: Namaste greeting, respect hierarchy',
+              'Middle East: Small talk important before business',
+              'Latin America: Build relationship first, business second'
+            ]
+          },
+          {
+            heading: 'Business Card Exchange',
+            bullets: [
+              'USA/UK: Casual exchange, can put in pocket',
+              'Japan/China: Present with both hands, study card before putting away',
+              'Korea: Use both hands, bow slightly',
+              'Middle East: Right hand only',
+              'Have cards: Translated to local language on reverse',
+              'Quality matters: Professional design, good paper stock'
+            ]
+          },
+          {
+            heading: 'Gift Giving in Business',
+            bullets: [
+              'Japan: Essential, wrap beautifully, give/receive with both hands',
+              'China: Give gifts, avoid clocks/sharp objects (bad luck)',
+              'Middle East: Avoid alcohol, give after meeting',
+              'USA/UK: Not expected, small token appreciated',
+              'Safe gifts: Quality chocolates, local specialties, branded items',
+              'Research: Colors/numbers have different meanings (e.g., white = mourning in Asia)'
+            ]
+          },
+          {
+            heading: 'Dining Etiquette',
+            bullets: [
+              'China: Host chooses, rotate lazy Susan clockwise, toast important',
+              'Japan: Say "itadakimasu" before eating, slurp noodles okay',
+              'India: Eat with right hand only, finish plate = want more',
+              'Middle East: Right hand, may eat communally',
+              'France: Keep hands on table, bread on table not plate',
+              'USA: Left hand in lap okay, split bills common'
+            ]
+          },
+          {
+            heading: 'Communication Styles',
+            bullets: [
+              'Direct (USA, Germany, Netherlands): Say what you mean',
+              'Indirect (Japan, China, Thailand): Read between lines, saving face important',
+              'High-context (Middle East, Asia): Relationships matter, unspoken understood',
+              'Low-context (USA, UK): Explicit communication, written agreements',
+              'Silence: Comfortable in Japan/Nordic, awkward in USA/Latin America',
+              'Negotiation: Germans decide fast, Asians need time for consensus'
+            ]
+          },
+          {
+            heading: 'Dress Code',
+            bullets: [
+              'Conservative: Dark suit, tie (Japan, Middle East, China)',
+              'Business casual: No tie needed (USA tech, UK creative)',
+              'Women: Covered shoulders/knees (Middle East, conservative Asia)',
+              'Shoes: Quality matters (people notice)',
+              'When in doubt: Overdress rather than underdress'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Business cards: Both hands in Asia, casual in USA/UK',
+          'Gift giving: Essential in Japan/China, avoid alcohol in Middle East',
+          'Communication: Direct (USA/Germany), indirect (Asia), relationship-focused (Middle East)',
+          'Dining: Right hand only (India/Middle East), slurp noodles okay (Japan)',
+          'Dress: Conservative suit (Asia/Middle East), business casual okay (USA)',
+          'Research specific country customs before business meetings'
+        ]
+      }
     },
     {
       id: 'travel-7',
       title: 'Building Global Awareness',
       description: 'Understanding different perspectives, avoiding stereotypes, cultural intelligence',
       duration: '10 min',
-      type: 'reading'
+      type: 'reading',
+      content: {
+        sections: [
+          {
+            heading: 'What is Cultural Intelligence?',
+            bullets: [
+              'Ability to relate and work effectively across cultures',
+              'Understanding: Why people behave differently',
+              'Adaptation: Adjusting your behavior appropriately',
+              'Empathy: Seeing from their perspective',
+              'Not about: Knowing every custom, being fluent in language',
+              'Is about: Openness, curiosity, willingness to learn'
+            ]
+          },
+          {
+            heading: 'Avoiding Stereotypes',
+            bullets: [
+              'Stereotypes harm: Reduce complex cultures to oversimplifications',
+              'Individuals vary: Not everyone fits cultural norms',
+              'Context matters: Urban vs rural, young vs old, educated vs not',
+              'Ask questions: "In your experience..." not "You people..."',
+              'Stay curious: Genuine interest beats assumptions',
+              'Learn from mistakes: Apologize, adjust, move forward'
+            ]
+          },
+          {
+            heading: 'Building Cultural Awareness',
+            bullets: [
+              'Read: Fiction from different cultures, travel blogs',
+              'Watch: Films, documentaries from various countries',
+              'Listen: Podcasts about different cultures',
+              'Travel: Immerse yourself, stay with locals',
+              'Friendships: Build genuine relationships across cultures',
+              'University: International students offer valuable perspectives'
+            ]
+          },
+          {
+            heading: 'Respectful Travel',
+            bullets: [
+              'Research: Learn basics before visiting',
+              'Dress appropriately: Respect local norms',
+              'Learn phrases: Hello, thank you, sorry in local language',
+              'Support local: Local restaurants, shops, guides',
+              'Ask permission: Before photos, entering homes/temples',
+              'Leave no trace: Respect environment, wildlife, heritage sites'
+            ]
+          },
+          {
+            heading: 'Growth Mindset for Travel',
+            bullets: [
+              'Embrace discomfort: Growth happens outside comfort zone',
+              'Mistakes will happen: Laugh, learn, apologize',
+              'Stay humble: You\'re a guest, not an expert',
+              'Challenge assumptions: Why do I think this?',
+              'Practice empathy: What would it feel like to be them?',
+              'Continuous learning: Every interaction teaches something'
+            ]
+          }
+        ],
+        keyTakeaways: [
+          'Cultural intelligence = openness + curiosity + adaptability',
+          'Avoid stereotypes: Individuals vary within cultures',
+          'Build awareness: Read, watch films, travel, make international friends',
+          'Respectful travel: Research customs, dress appropriately, support local',
+          'Embrace discomfort: Mistakes are learning opportunities',
+          'Stay humble: You\'re a guest learning, not an expert'
+        ]
+      }
     },
     {
       id: 'travel-8',
       title: 'Plan Your Trip',
       description: 'Create detailed travel plan, budget, packing list, and cultural research',
       duration: '15 min',
-      type: 'exercise'
+      type: 'exercise',
+      content: {
+        sections: [
+          {
+            heading: 'Final Project: Plan Your International Trip',
+            content: 'Apply everything you\'ve learned to plan a real or hypothetical international trip.'
+          }
+        ],
+        keyTakeaways: [
+          'Thorough planning prevents problems and saves money',
+          'Research cultural norms before visiting any country',
+          'Budget 20% more than expected for surprises',
+          'Copy all documents and share itinerary with family',
+          'Stay open, curious, and respectful wherever you go',
+          'Travel is education—embrace every experience'
+        ],
+        exercises: [
+          {
+            question: 'Choose Your Destination: Where do you want to travel? Why? How long will you go for?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Documents Checklist: Do you need passport renewal? Visa? Travel insurance? GHIC? List what you need and deadlines.',
+            type: 'short-answer'
+          },
+          {
+            question: 'Budget Breakdown: Research daily costs for your destination. Create budget: accommodation, food, transport, activities, buffer (20%). Total cost?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Flight & Accommodation Plan: Compare 3 flight options (dates, prices, airlines). Where will you stay? (hostel/hotel/Airbnb) Why?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Money Management: Which travel card will you use? How much cash will you carry? Where will you exchange it?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Cultural Research: List 5 cultural norms or etiquette rules for your destination. What should you absolutely NOT do?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Safety Plan: List emergency contacts (embassy, insurance, local emergency services). What safety precautions will you take?',
+            type: 'short-answer'
+          },
+          {
+            question: 'Packing List: Create comprehensive packing list. Don\'t forget: adapters, medications, copies of documents, appropriate clothing for customs.',
+            type: 'short-answer'
+          }
+        ]
+      }
     }
   ],
   skills: [
@@ -7035,6 +11148,15 @@ export const UK_LIFE_SKILLS_MODULES: Record<string, ModuleData> = {
   'life-2': employmentRightsModule,
   'life-3': nhsHealthcareModule,
   'life-4': travelOrganizationModule,
+  'eth-4': utilitiesCouncilTaxModule,
+  'com-1': cvWritingModule,
+  'com-2': interviewSkillsModule,
+  'com-3': professionalNetworkingModule,
+  'com-4': workplaceCommunicationModule,
+  'mh-1': mentalHealthAwarenessModule,
+  'mh-2': stressManagementModule,
+  'mh-3': timeManagementModule,
+  'mh-4': personalFinanceWellbeingModule,
   'bus-1': entrepreneurialCreativityModule,
   'bus-2': businessFundamentalsModule,
   'prof-1': culturalCapitalModule,

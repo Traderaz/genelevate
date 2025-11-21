@@ -109,8 +109,17 @@ export async function getCourses(filters?: {
     let filteredCourses = courses;
 
     if (filters?.yearGroup) {
+      // Map year group IDs to actual year group strings in courses
+      const yearGroupMapping: Record<string, string[]> = {
+        'year-6': ['Year 6'],
+        'year-9-11': ['Year 9', 'Year 10', 'Year 11'],
+        'year-12-13': ['Year 12', 'Year 13']
+      };
+      
+      const targetYears = yearGroupMapping[filters.yearGroup] || [filters.yearGroup];
+      
       filteredCourses = filteredCourses.filter(course =>
-        course.yearGroups.includes(filters.yearGroup!)
+        course.yearGroups.some(yearGroup => targetYears.includes(yearGroup))
       );
     }
 
