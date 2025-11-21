@@ -16,6 +16,8 @@ import { elevenPlusMathsContent } from '@/lib/data/eleven-plus-content/maths-con
 import mockExamsContent from '@/lib/data/eleven-plus-content/mock-exams-content';
 import confidenceMindsetContent from '@/lib/data/eleven-plus-content/confidence-mindset-content';
 import vocabularyBuildingContent from '@/lib/data/eleven-plus-content/vocabulary-building-content';
+import { gcseMathsFoundationContent } from '@/lib/data/gcse-content/maths-foundation-content';
+import { gcseMathsHigherContent } from '@/lib/data/gcse-content/maths-higher-content';
 
 export default function CourseLearnPage() {
   const params = useParams();
@@ -91,7 +93,14 @@ export default function CourseLearnPage() {
   const currentTopic = topics[selectedTopicIndex];
   
   // Get lesson content if available
-  const lessonContent: LessonContent | undefined = course.title.includes('Verbal Reasoning') && !course.title.includes('Vocabulary')
+  const lessonContent: LessonContent | undefined = 
+    // GCSE Courses
+    course.title.includes('GCSE') && course.title.includes('Foundation')
+    ? gcseMathsFoundationContent[selectedTopicIndex]
+    : course.title.includes('GCSE') && course.title.includes('Higher')
+    ? gcseMathsHigherContent[selectedTopicIndex]
+    // 11+ Courses
+    : course.title.includes('Verbal Reasoning') && !course.title.includes('Vocabulary')
     ? verbalReasoningContent[selectedTopicIndex]
     : course.title.includes('Non-Verbal Reasoning')
     ? nonVerbalReasoningContent[selectedTopicIndex]
