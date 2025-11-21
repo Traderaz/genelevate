@@ -17,7 +17,24 @@ import mockExamsContent from '@/lib/data/eleven-plus-content/mock-exams-content'
 import confidenceMindsetContent from '@/lib/data/eleven-plus-content/confidence-mindset-content';
 import vocabularyBuildingContent from '@/lib/data/eleven-plus-content/vocabulary-building-content';
 import { gcseMathsFoundationContent } from '@/lib/data/gcse-content/maths-foundation-content';
-import { gcseMathsHigherContent } from '@/lib/data/gcse-content/maths-higher-content';
+import gcseMathsHigherContent from '@/lib/data/gcse-content/maths-higher-content';
+import aLevelPureMathsContent from '@/lib/data/a-level-content/pure-maths-content';
+import aLevelBiologyContent from '@/lib/data/a-level-content/biology-content';
+import aLevelChemistryContent from '@/lib/data/a-level-content/chemistry-content';
+import aLevelPhysicsContent from '@/lib/data/a-level-content/physics-content';
+import aLevelHistoryContent from '@/lib/data/a-level-content/history-content';
+import aLevelPsychologyContent from '@/lib/data/a-level-content/psychology-content';
+import aLevelEconomicsContent from '@/lib/data/a-level-content/economics-content';
+import aLevelComputerScienceContent from '@/lib/data/a-level-content/computer-science-content';
+import aLevelBusinessContent from '@/lib/data/a-level-content/business-content';
+import gcseHistoryContent from '@/lib/data/gcse-content/history-content';
+import gcseGeographyContent from '@/lib/data/gcse-content/geography-content';
+import gcseComputerScienceContent from '@/lib/data/gcse-content/computer-science-content';
+import gcseBiologyContent from '@/lib/data/gcse-content/biology-content';
+import gcseChemistryContent from '@/lib/data/gcse-content/chemistry-content';
+import gcsePhysicsContent from '@/lib/data/gcse-content/physics-content';
+import gcseEnglishLanguageContent from '@/lib/data/gcse-content/english-language-content';
+import gcseEnglishLiteratureContent from '@/lib/data/gcse-content/english-literature-content';
 
 export default function CourseLearnPage() {
   const params = useParams();
@@ -94,11 +111,46 @@ export default function CourseLearnPage() {
   
   // Get lesson content if available
   const lessonContent: LessonContent | undefined = 
+    // A-Level Courses
+    course.title.includes('A-Level Mathematics (Pure)')
+    ? aLevelPureMathsContent[selectedTopicIndex]
+    : course.title.includes('A-Level Biology')
+    ? aLevelBiologyContent[selectedTopicIndex]
+    : course.title.includes('A-Level Chemistry')
+    ? aLevelChemistryContent[selectedTopicIndex]
+    : course.title.includes('A-Level Physics')
+    ? aLevelPhysicsContent[selectedTopicIndex]
+    : course.title.includes('A-Level History')
+    ? aLevelHistoryContent[selectedTopicIndex]
+    : course.title.includes('A-Level Psychology')
+    ? aLevelPsychologyContent[selectedTopicIndex]
+    : course.title.includes('A-Level Economics')
+    ? aLevelEconomicsContent[selectedTopicIndex]
+    : course.title.includes('A-Level Computer Science')
+    ? aLevelComputerScienceContent[selectedTopicIndex]
+    : course.title.includes('A-Level Business')
+    ? aLevelBusinessContent[selectedTopicIndex]
     // GCSE Courses
-    course.title.includes('GCSE') && course.title.includes('Foundation')
+    : course.title.includes('GCSE') && course.title.includes('Foundation')
     ? gcseMathsFoundationContent[selectedTopicIndex]
     : course.title.includes('GCSE') && course.title.includes('Higher')
     ? gcseMathsHigherContent[selectedTopicIndex]
+    : course.title.includes('GCSE Biology')
+    ? gcseBiologyContent[selectedTopicIndex]
+    : course.title.includes('GCSE Chemistry')
+    ? gcseChemistryContent[selectedTopicIndex]
+    : course.title.includes('GCSE Physics')
+    ? gcsePhysicsContent[selectedTopicIndex]
+    : course.title.includes('GCSE English Language')
+    ? gcseEnglishLanguageContent[selectedTopicIndex]
+    : course.title.includes('GCSE English Literature')
+    ? gcseEnglishLiteratureContent[selectedTopicIndex]
+    : course.title.includes('GCSE History')
+    ? gcseHistoryContent[selectedTopicIndex]
+    : course.title.includes('GCSE Geography')
+    ? gcseGeographyContent[selectedTopicIndex]
+    : course.title.includes('GCSE Computer Science')
+    ? gcseComputerScienceContent[selectedTopicIndex]
     // 11+ Courses
     : course.title.includes('Verbal Reasoning') && !course.title.includes('Vocabulary')
     ? verbalReasoningContent[selectedTopicIndex]
