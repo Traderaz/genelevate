@@ -27,6 +27,11 @@ const MODULE_SEQUENCE: string[] = [
   'life-2',
   'life-1',
   'life-3',
+  'life-4', // Travel Organization
+  'bus-1', // Entrepreneurial Creativity
+  'prof-1', // Cultural Capital
+  'mark-1', // Social Media Marketing
+  'bus-2', // Business Fundamentals
   'eth-4',
   'com-1',
   'com-2',
@@ -103,8 +108,30 @@ export async function getAllModuleProgress(userId: string): Promise<ModuleProgre
 
 /**
  * Check if a module is unlocked for a user
+ * Admins bypass all locking restrictions
  */
 export async function checkModuleUnlock(userId: string, moduleId: string): Promise<ModuleUnlockInfo> {
+  // Check if user is admin - admins have access to all modules
+  try {
+    const userDoc = await getDoc(doc(db, 'users', userId));
+    const userData = userDoc.data();
+    const isAdmin = userData?.role === 'admin';
+    
+    console.log('🔐 Module unlock check:', { userId, moduleId, role: userData?.role, isAdmin });
+    
+    if (isAdmin) {
+      console.log('✅ Admin access granted for module:', moduleId);
+      return {
+        moduleId,
+        isUnlocked: true,
+        reason: 'admin_access'
+      };
+    }
+  } catch (error) {
+    console.error('Error checking admin status:', error);
+    // Continue with normal logic if admin check fails
+  }
+
   const moduleIndex = MODULE_SEQUENCE.indexOf(moduleId);
   
   // Module not in sequence

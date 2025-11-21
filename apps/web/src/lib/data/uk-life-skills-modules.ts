@@ -6594,6 +6594,432 @@ export const nhsHealthcareModule: ModuleData = {
 };
 
 // ============================================================================
+// ENTREPRENEURSHIP & BUSINESS MODULES
+// ============================================================================
+
+export const entrepreneurialCreativityModule: ModuleData = {
+  id: 'bus-1',
+  title: 'Entrepreneurial Creativity & Innovation',
+  category: 'Business & Entrepreneurship',
+  description: 'Learn to think like an entrepreneur: identify opportunities, generate innovative ideas, and turn concepts into reality',
+  overview: 'Master entrepreneurial thinking and creative problem-solving. This comprehensive module teaches you how to spot opportunities, generate breakthrough ideas using proven frameworks (Design Thinking, SCAMPER, First Principles), build MVPs, validate ideas with customers, and develop the resilience to persist through challenges. Whether starting a business or thinking more innovatively, gain the tools and mindset for entrepreneurial success.',
+  duration: '120 min',
+  lessons: [
+    {
+      id: 'entre-1',
+      title: 'The Entrepreneurial Mindset',
+      description: 'Core traits of entrepreneurial thinkers: opportunity recognition, resilience, action orientation',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'entre-2',
+      title: 'Creative Idea Generation Techniques',
+      description: 'Master brainstorming, SCAMPER method, problem-solution fit, and cross-industry innovation',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'entre-3',
+      title: 'Design Thinking Process',
+      description: 'Five stages: Empathize, Define, Ideate, Prototype, Test - human-centered innovation',
+      duration: '25 min',
+      type: 'reading'
+    },
+    {
+      id: 'entre-4',
+      title: 'Building Your MVP (Minimum Viable Product)',
+      description: 'Launch quickly with MVP strategy: build-measure-learn loop and rapid validation',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'entre-5',
+      title: 'Customer Discovery & Validation',
+      description: 'Interview techniques, finding product-market fit, and validating willingness to pay',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'entre-6',
+      title: 'Resilience & Pivoting',
+      description: 'Building entrepreneurial resilience, learning from failure, and when/how to pivot',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'entre-7',
+      title: 'Creative Problem-Solving Frameworks',
+      description: '5 Whys, First Principles, Lateral Thinking, and Blue Ocean Strategy',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'entre-8',
+      title: 'Entrepreneurship in Action',
+      description: 'Apply everything: develop your idea, validate it, and create action plan',
+      duration: '20 min',
+      type: 'exercise'
+    }
+  ],
+  skills: [
+    'Opportunity Recognition',
+    'Creative Thinking',
+    'Design Thinking',
+    'MVP Development',
+    'Customer Discovery',
+    'Resilience & Adaptability',
+    'Problem Solving'
+  ],
+  objectives: [
+    'Develop an entrepreneurial mindset and spot opportunities in everyday problems',
+    'Generate innovative ideas using proven frameworks (SCAMPER, Design Thinking)',
+    'Build and test MVPs to validate ideas quickly and cost-effectively',
+    'Conduct customer discovery interviews and achieve product-market fit',
+    'Build resilience to persist through failure and pivot when necessary',
+    'Apply creative problem-solving frameworks to any challenge'
+  ]
+};
+
+export const culturalCapitalModule: ModuleData = {
+  id: 'prof-1',
+  title: 'Cultural Capital & Professional Communication',
+  category: 'Professional Skills',
+  description: 'Master the unwritten rules of professional environments: communicate confidently, network effectively, and build social intelligence',
+  overview: 'Learn cultural capital - the knowledge, behaviors, and social skills that open doors to opportunities. This module teaches you how to communicate confidently with high net worth individuals and executives, understand dining etiquette, dress professionally, network strategically, master business email communication, and develop social intelligence to succeed in any professional environment.',
+  duration: '150 min',
+  lessons: [
+    {
+      id: 'prof-1-1',
+      title: 'Understanding Cultural Capital',
+      description: 'What cultural capital is, why it matters, and how to build it regardless of background',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'prof-1-2',
+      title: 'Communicating with High Net Worth Individuals',
+      description: 'Confidence without arrogance, respecting time, asking intelligent questions',
+      duration: '25 min',
+      type: 'reading'
+    },
+    {
+      id: 'prof-1-3',
+      title: 'Dining Etiquette & Business Meals',
+      description: 'Table manners, ordering protocol, conversation during meals, handling the bill',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'prof-1-4',
+      title: 'Professional Image & Dress Code',
+      description: 'Business professional, business casual, grooming, wardrobe building on budget',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'prof-1-5',
+      title: 'Strategic Networking',
+      description: 'Give before asking, quality over quantity, follow-up strategies, working a room',
+      duration: '25 min',
+      type: 'reading'
+    },
+    {
+      id: 'prof-1-6',
+      title: 'Professional Email & Written Communication',
+      description: 'Email structure, subject lines, cold outreach templates, LinkedIn messaging',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'prof-1-7',
+      title: 'Conversation Skills & Small Talk',
+      description: 'Breaking ice, active listening, asking better questions, safe topics',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'prof-1-8',
+      title: 'Practice Networking & Communication',
+      description: 'Draft professional emails, practice introductions, plan networking strategy',
+      duration: '20 min',
+      type: 'exercise'
+    }
+  ],
+  skills: [
+    'Professional Communication',
+    'Business Etiquette',
+    'Networking',
+    'Social Intelligence',
+    'Executive Presence',
+    'Relationship Building',
+    'Cultural Awareness'
+  ],
+  objectives: [
+    'Understand and build cultural capital to access elite opportunities',
+    'Communicate confidently with high net worth individuals and executives',
+    'Master dining etiquette and business meal protocols',
+    'Build a professional wardrobe and image on any budget',
+    'Network strategically to build powerful, genuine relationships',
+    'Write professional emails that get responses and open doors'
+  ]
+};
+
+export const socialMediaMarketingModule: ModuleData = {
+  id: 'mark-1',
+  title: 'Social Media Marketing & Personal Brand',
+  category: 'Marketing & Digital Skills',
+  description: 'Build your personal brand and master social media marketing across all major platforms',
+  overview: 'Learn to build a powerful personal brand and market effectively on social media. Master content creation for Instagram, TikTok, LinkedIn, Twitter/X, and YouTube. Understand algorithms, create viral content, grow your audience organically, leverage influencer marketing, and monetize your following. Perfect for aspiring creators, entrepreneurs, or anyone building their professional presence online.',
+  duration: '135 min',
+  lessons: [
+    {
+      id: 'smm-1',
+      title: 'Personal Branding Fundamentals',
+      description: 'Defining your niche, unique value proposition, and authentic voice',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'smm-2',
+      title: 'Content Creation Mastery',
+      description: 'Hook-Content-CTA framework, storytelling, video editing basics, trending audio',
+      duration: '25 min',
+      type: 'reading'
+    },
+    {
+      id: 'smm-3',
+      title: 'Instagram & TikTok Strategy',
+      description: 'Algorithm secrets, Reels vs TikTok, posting times, hashtag strategy, engagement tactics',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'smm-4',
+      title: 'LinkedIn Professional Presence',
+      description: 'Profile optimization, thought leadership, B2B networking, content strategy',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'smm-5',
+      title: 'Twitter/X & YouTube Strategies',
+      description: 'Thread writing, viral tweets, YouTube SEO, thumbnail optimization, monetization',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'smm-6',
+      title: 'Growing Your Audience Organically',
+      description: 'Consistency, engagement loops, collaborations, cross-promotion, community building',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'smm-7',
+      title: 'Monetization Strategies',
+      description: 'Sponsored posts, affiliate marketing, digital products, coaching, brand deals',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'smm-8',
+      title: 'Build Your Content Strategy',
+      description: 'Create 30-day content calendar, optimize profiles, record first pieces of content',
+      duration: '20 min',
+      type: 'exercise'
+    }
+  ],
+  skills: [
+    'Personal Branding',
+    'Content Creation',
+    'Social Media Strategy',
+    'Audience Growth',
+    'Video Editing',
+    'Community Management',
+    'Monetization'
+  ],
+  objectives: [
+    'Define your personal brand and unique value proposition',
+    'Create engaging content optimized for each platform\'s algorithm',
+    'Grow your following organically using proven strategies',
+    'Build professional presence on LinkedIn for career opportunities',
+    'Understand monetization pathways from sponsorships to products',
+    'Develop consistent content strategy and posting schedule'
+  ]
+};
+
+export const businessFundamentalsModule: ModuleData = {
+  id: 'bus-2',
+  title: 'Starting & Running a Profitable Business',
+  category: 'Business & Entrepreneurship',
+  description: 'Complete guide to starting a business in the UK: from setup to profitability, legal structure to accounting',
+  overview: 'Master everything needed to start and run a profitable business in the UK. Learn business structure options (Sole Trader vs Limited Company), UK business registration with Companies House and HMRC, business banking and accounting, pricing strategies for profitability, basic bookkeeping, marketing your business, managing cash flow, and scaling sustainably. Includes UK-specific legal and tax requirements for 2025/26.',
+  duration: '140 min',
+  lessons: [
+    {
+      id: 'biz-1',
+      title: 'UK Business Structures Explained',
+      description: 'Sole Trader vs Limited Company: tax, liability, setup, costs, which to choose',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'biz-2',
+      title: 'Registering Your UK Business',
+      description: 'Companies House, HMRC registration, business bank account, legal requirements',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'biz-3',
+      title: 'Business Finance & Accounting Basics',
+      description: 'P&L statements, balance sheets, cash flow, accounting software (Xero, QuickBooks)',
+      duration: '25 min',
+      type: 'reading'
+    },
+    {
+      id: 'biz-4',
+      title: 'Pricing for Profitability',
+      description: 'Cost-plus, value-based, competitive pricing, profit margins, pricing psychology',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'biz-5',
+      title: 'Marketing Your Business',
+      description: 'Finding customers, digital marketing basics, sales funnels, customer acquisition',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'biz-6',
+      title: 'Cash Flow Management',
+      description: 'Invoice management, payment terms, managing expenses, avoiding cash flow crises',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'biz-7',
+      title: 'Scaling Your Business',
+      description: 'Hiring first employee, outsourcing, systems and processes, sustainable growth',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'biz-8',
+      title: 'Your Business Plan',
+      description: 'Create lean business plan, financial projections, define your business model',
+      duration: '20 min',
+      type: 'exercise'
+    }
+  ],
+  skills: [
+    'Business Planning',
+    'Financial Management',
+    'Accounting Basics',
+    'Pricing Strategy',
+    'Marketing',
+    'Cash Flow Management',
+    'Legal Compliance'
+  ],
+  objectives: [
+    'Choose correct business structure (Sole Trader vs Limited Company) for your situation',
+    'Register business correctly with Companies House and HMRC',
+    'Understand P&L, balance sheets, and manage business finances',
+    'Price products/services for profitability using proven strategies',
+    'Market business effectively and acquire customers',
+    'Manage cash flow to avoid running out of money',
+    'Scale business sustainably through systems and smart hiring'
+  ]
+};
+
+export const travelOrganizationModule: ModuleData = {
+  id: 'life-4',
+  title: 'Travel Organization & Global Awareness',
+  category: 'Life Skills',
+  description: 'Master travel planning, international etiquette, cultural awareness, and navigate the world confidently',
+  overview: 'Learn to plan and execute international travel confidently. This module covers obtaining passports and visas, booking flights and accommodation strategically, travel budgeting, staying safe abroad, understanding cultural norms across regions, international business etiquette, handling emergencies, travel insurance, and building global cultural awareness. Perfect for students planning gap years, international university, or anyone wanting to explore the world.',
+  duration: '110 min',
+  lessons: [
+    {
+      id: 'travel-1',
+      title: 'Travel Documents & Preparation',
+      description: 'Passports, visas, EHIC/GHIC, travel insurance, essential documents',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'travel-2',
+      title: 'Booking Flights & Accommodation',
+      description: 'Finding deals, best booking times, Airbnb vs hotels, budget travel tactics',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'travel-3',
+      title: 'Travel Budgeting & Money Management',
+      description: 'Daily budgets, currency exchange, travel cards (Wise, Revolut), avoiding fees',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'travel-4',
+      title: 'Staying Safe Abroad',
+      description: 'Embassy registration, common scams, safe neighborhoods, emergency contacts',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'travel-5',
+      title: 'Cultural Norms by Region',
+      description: 'Europe, Asia, Middle East, Americas, Africa - customs, etiquette, do\'s and don\'ts',
+      duration: '20 min',
+      type: 'reading'
+    },
+    {
+      id: 'travel-6',
+      title: 'International Business Etiquette',
+      description: 'Meeting protocols, gift giving, dining customs, communication styles by country',
+      duration: '15 min',
+      type: 'reading'
+    },
+    {
+      id: 'travel-7',
+      title: 'Building Global Awareness',
+      description: 'Understanding different perspectives, avoiding stereotypes, cultural intelligence',
+      duration: '10 min',
+      type: 'reading'
+    },
+    {
+      id: 'travel-8',
+      title: 'Plan Your Trip',
+      description: 'Create detailed travel plan, budget, packing list, and cultural research',
+      duration: '15 min',
+      type: 'exercise'
+    }
+  ],
+  skills: [
+    'Travel Planning',
+    'Budgeting',
+    'Cultural Awareness',
+    'International Etiquette',
+    'Risk Management',
+    'Global Navigation',
+    'Cross-Cultural Communication'
+  ],
+  objectives: [
+    'Obtain necessary travel documents (passport, visas, insurance)',
+    'Book flights and accommodation strategically to save money',
+    'Budget for international travel and manage money abroad safely',
+    'Stay safe in foreign countries and handle emergencies',
+    'Understand cultural norms and avoid offensive behavior',
+    'Navigate international business settings with cultural intelligence',
+    'Develop global awareness and cross-cultural communication skills'
+  ]
+};
+
+// ============================================================================
 // MODULE REGISTRY
 // ============================================================================
 
@@ -6608,7 +7034,11 @@ export const UK_LIFE_SKILLS_MODULES: Record<string, ModuleData> = {
   'life-1': rentingHousingModule,
   'life-2': employmentRightsModule,
   'life-3': nhsHealthcareModule,
-  // More modules will be added here
+  'life-4': travelOrganizationModule,
+  'bus-1': entrepreneurialCreativityModule,
+  'bus-2': businessFundamentalsModule,
+  'prof-1': culturalCapitalModule,
+  'mark-1': socialMediaMarketingModule,
 };
 
 // Helper function to get module by ID

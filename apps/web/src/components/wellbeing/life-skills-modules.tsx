@@ -326,6 +326,79 @@ export function LifeSkillsModules() {
       icon: Brain,
       color: 'text-green-500',
       bgColor: 'bg-green-500/10'
+    },
+
+    // NEW: Travel & Global Awareness
+    {
+      id: 'life-4',
+      title: 'Travel Organization & Global Awareness',
+      category: 'ethics',
+      description: 'Master travel planning, international etiquette, cultural awareness, and navigate the world confidently',
+      duration: '110 min',
+      lessons: 8,
+      completed: 0,
+      locked: false,
+      icon: Shield,
+      color: 'text-blue-500',
+      bgColor: 'bg-blue-500/10'
+    },
+
+    // NEW: Business & Entrepreneurship
+    {
+      id: 'bus-1',
+      title: 'Entrepreneurial Creativity & Innovation',
+      category: 'communication',
+      description: 'Learn to think like an entrepreneur: identify opportunities, generate innovative ideas, and turn concepts into reality',
+      duration: '120 min',
+      lessons: 8,
+      completed: 0,
+      locked: false,
+      icon: MessageCircle,
+      color: 'text-purple-500',
+      bgColor: 'bg-purple-500/10'
+    },
+    {
+      id: 'bus-2',
+      title: 'Starting & Running a Profitable Business',
+      category: 'communication',
+      description: 'Complete guide to starting a business in the UK: from setup to profitability, legal structure to accounting',
+      duration: '140 min',
+      lessons: 8,
+      completed: 0,
+      locked: false,
+      icon: MessageCircle,
+      color: 'text-purple-500',
+      bgColor: 'bg-purple-500/10'
+    },
+
+    // NEW: Professional Skills
+    {
+      id: 'prof-1',
+      title: 'Cultural Capital & Professional Communication',
+      category: 'communication',
+      description: 'Master the unwritten rules of professional environments: communicate confidently, network effectively, and build social intelligence',
+      duration: '150 min',
+      lessons: 8,
+      completed: 0,
+      locked: false,
+      icon: MessageCircle,
+      color: 'text-purple-500',
+      bgColor: 'bg-purple-500/10'
+    },
+
+    // NEW: Marketing & Digital Skills
+    {
+      id: 'mark-1',
+      title: 'Social Media Marketing & Personal Brand',
+      category: 'communication',
+      description: 'Build your personal brand and master social media marketing across all major platforms',
+      duration: '135 min',
+      lessons: 8,
+      completed: 0,
+      locked: false,
+      icon: MessageCircle,
+      color: 'text-purple-500',
+      bgColor: 'bg-purple-500/10'
     }
   ];
 
