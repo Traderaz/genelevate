@@ -279,6 +279,44 @@ Alternative method:
 Answer: 9`,
         answer: '9',
         explanation: 'Fractional power a^(m/n): denominator (n) = root, numerator (m) = power. So 27^(2/3) = (³√27)² = 3² = 9. Two methods: root then power, OR power then root (both work!). Common mistake: multiplying 27 by 2/3 instead of using power rules.'
+      },
+      {
+        question: 'Prove (2+√3)(2-√3)=1',
+        workingOut: `Difference of two squares!
+(a+b)(a-b) = a² - b²
+
+Step 1: Expand
+(2+√3)(2-√3) = 2² - (√3)²
+
+Step 2: Calculate
+= 4 - 3 = 1 ✓
+
+Proven!`,
+        answer: '1',
+        explanation: 'Difference of squares: (a+b)(a-b)=a²-b². Here: 2²-(√3)²=4-3=1. Grade 8/9 skill!'
+      },
+      {
+        question: 'Rationalise 1/(3+√2)',
+        workingOut: `Multiply top & bottom by conjugate:
+
+Step 1: (1/(3+√2)) × ((3-√2)/(3-√2))
+Step 2: = (3-√2)/((3+√2)(3-√2))
+Step 3: = (3-√2)/(9-2)
+Step 4: = (3-√2)/7
+
+Answer: (3-√2)/7`,
+        answer: '(3-√2)/7',
+        explanation: 'Rationalise denominator: multiply by conjugate. (3+√2)×(3-√2)=9-2=7. Answer: (3-√2)/7.'
+      },
+      {
+        question: 'Simplify (8^(1/3))^2',
+        workingOut: `Step 1: (8^(1/3))² = 8^(2/3)
+Step 2: = (³√8)²
+Step 3: = 2²  = 4
+
+Answer: 4`,
+        answer: '4',
+        explanation: 'Power of power: multiply indices. (8^(1/3))²=8^(2/3)=(³√8)²=2²=4.'
       }
     ],
     
@@ -748,6 +786,34 @@ Alternative method:
 Check: 0.0025 = 2.5 × 10⁻³ ✓`,
         answer: '0.0025',
         explanation: 'Negative power means small number: move decimal LEFT. 2.5 × 10⁻³: move decimal 3 places left → 0.0025. Or calculate: 2.5 × (1/1000) = 2.5 × 0.001 = 0.0025.'
+      },
+      {
+        question: 'Divide (8×10⁷) ÷ (2×10³)',
+        workingOut: `A parts: 8÷2=4
+Powers: 10⁷÷10³=10⁴
+Answer: 4×10⁴`,
+        answer: '4×10⁴',
+        explanation: 'Divide A values, subtract powers: 8÷2=4, 10⁷⁻³=10⁴. Answer: 4×10⁴.'
+      },
+      {
+        question: 'Add (3×10⁴)+(7×10⁴)',
+        workingOut: `Same power! Add A values:
+3+7=10
+10×10⁴=1×10⁵
+
+Answer: 1×10⁵`,
+        answer: '1×10⁵',
+        explanation: 'Same powers: add front numbers. 3+7=10, so 10×10⁴=1×10⁵ (adjust format).'
+      },
+      {
+        question: 'Speed of light 3×10⁸m/s. Distance in 5 seconds?',
+        workingOut: `Distance = speed × time
+= (3×10⁸) × 5
+= 15×10⁸ = 1.5×10⁹m
+
+Answer: 1.5×10⁹m`,
+        answer: '1.5×10⁹m',
+        explanation: 'Multiply: 3×5=15, so 15×10⁸=1.5×10⁹m. Real-world application!'
       }
     ],
     
@@ -1288,6 +1354,31 @@ x = 5: 5² = 25, 7(5) - 10 = 25 ✓
 Answer: x = 2 or x = 5`,
         answer: 'x = 2 or x = 5',
         explanation: 'FIRST rearrange to = 0: x² - 7x + 10 = 0. Then factorize: (x-2)(x-5) = 0. Solve: x = 2 or x = 5. Never skip the rearranging step - must equal zero to use zero product rule!'
+      },
+      {
+        question: 'Factorize 3x²+7x+2',
+        workingOut: `ac method: a=3, c=2, ac=6
+Find: multiply to 6, add to 7 → 6,1
+Split: 3x²+6x+x+2
+Group: 3x(x+2)+1(x+2)
+Factor: (3x+1)(x+2)`,
+        answer: '(3x+1)(x+2)',
+        explanation: 'When a≠1, use ac method. Split middle term, group, factor.'
+      },
+      {
+        question: 'Factorize x²-6x+9',
+        workingOut: `Perfect square: (x-3)²
+Check: x²-2(3)x+3²=x²-6x+9 ✓`,
+        answer: '(x-3)²',
+        explanation: 'Perfect square trinomial: a²-2ab+b²=(a-b)². Here: (x-3)².'
+      },
+      {
+        question: 'Solve x²+4x-21=0',
+        workingOut: `Factors of -21 that add to 4: -3,7
+(x-3)(x+7)=0
+x=3 or x=-7`,
+        answer: 'x=3 or x=-7',
+        explanation: 'Factorize then solve: (x-3)(x+7)=0 gives x=3 or x=-7.'
       }
     ],
     
@@ -1893,6 +1984,33 @@ Answer: x = 3, y = 4/3
 **Key:** Coefficients already equal - straight to subtraction!`,
         answer: 'x = 3, y = 4/3',
         explanation: 'y coefficients already equal (both 3y), no multiplication needed! Subtract directly: 5x+3y-(2x+3y)=9, gives 3x=9, x=3. Then y=4/3. Spotting equal coefficients saves time!'
+      },
+      {
+        question: 'Solve 3x+2y=13, 4x-y=5 by elimination',
+        workingOut: `Multiply ② by 2: 8x-2y=10
+Add to ①: 11x=23, x=23/11
+Substitute: y=7/11`,
+        answer: 'x=23/11, y=7/11',
+        explanation: 'Make y coefficients opposite: multiply by 2, then add equations.'
+      },
+      {
+        question: 'Solve graphically: y=2x+1, y=-x+4',
+        workingOut: `Intersection point:
+2x+1=-x+4
+3x=3, x=1
+y=3
+Solution: (1,3)`,
+        answer: 'x=1, y=3',
+        explanation: 'Graphs intersect at solution. Set equations equal to find x, then y.'
+      },
+      {
+        question: 'Word problem: 3 apples + 2 oranges = £5, 2 apples + 3 oranges = £5.50. Find prices.',
+        workingOut: `Let a=apple, o=orange
+3a+2o=5  ①
+2a+3o=5.5 ②
+Solve: a=£1, o=£1`,
+        answer: 'Apple=£1, Orange=£1',
+        explanation: 'Set up equations from problem, solve simultaneously.'
       }
     ],
     
@@ -2481,6 +2599,27 @@ Step 4: Check each
 Remember: ≤ includes endpoint, < does not!`,
         answer: '-1, 0, 1, 2',
         explanation: 'Integers in range -1 ≤ x < 3 are: -1, 0, 1, 2. Include -1 (because ≤), exclude 3 (because <). Common mistake: forgetting that < doesn\'t include the endpoint, or missing -1!'
+      },
+      {
+        question: 'Solve -3x+7≤1',
+        workingOut: `-3x≤-6
+Divide by -3, FLIP: x≥2`,
+        answer: 'x≥2',
+        explanation: 'Dividing by negative? FLIP the inequality sign!'
+      },
+      {
+        question: 'Solve 2<x+1≤5',
+        workingOut: `Subtract 1 from all:
+1<x≤4`,
+        answer: '1<x≤4',
+        explanation: 'Double inequality: same operation to all three parts.'
+      },
+      {
+        question: 'Show x²>4 on number line',
+        workingOut: `x²>4 means x>2 OR x<-2
+Two regions: x<-2 and x>2`,
+        answer: 'x<-2 or x>2',
+        explanation: 'Quadratic inequality gives TWO solution regions.'
       }
     ],
     
@@ -3171,6 +3310,30 @@ nth term = n²
 Answer: Quadratic (specifically, square numbers)`,
         answer: 'Quadratic (n²)',
         explanation: 'First differences not constant (3,5,7,9) → not arithmetic. Ratios not constant → not geometric. Second differences constant (2,2,2) → quadratic! Actually square numbers: 1², 2², 3²... nth term = n².'
+      },
+      {
+        question: 'Sum of geometric series: 2+6+18+54 (4 terms)',
+        workingOut: `a=2, r=3, n=4
+S_n = a(rⁿ-1)/(r-1)
+S_4 = 2(3⁴-1)/(3-1) = 2(80)/2 = 80`,
+        answer: '80',
+        explanation: 'Geometric sum formula: S_n=a(rⁿ-1)/(r-1). Here: 2(81-1)/2=80.'
+      },
+      {
+        question: 'Fibonacci sequence: 1,1,2,3,5,8... Find 10th term',
+        workingOut: `Each term = sum of previous two:
+1,1,2,3,5,8,13,21,34,55
+10th term = 55`,
+        answer: '55',
+        explanation: 'Fibonacci: add previous two terms. Continue: 13,21,34,55.'
+      },
+      {
+        question: 'Quadratic nth term: 3,8,15,24... Find formula',
+        workingOut: `2nd differences = 2, so an²
+Try n²+2n: Works!
+Check: 1²+2(1)=3 ✓`,
+        answer: 'n²+2n',
+        explanation: '2nd diff=2 → coefficient=1. Trial: n²+2n works for all terms.'
       }
     ],
     
@@ -3825,6 +3988,30 @@ x = 1 or x = 4 ✓
 Answer: x = 1 and x = 4`,
         answer: 'x = 1 and x = 4',
         explanation: 'To solve graphically: sketch y = x² - 5x + 4, find where it crosses x-axis (y=0). Find turning point (2.5, -2.25), plot points, draw U-curve. Crosses at x=1 and x=4. These are the solutions! Can verify by factorizing.'
+      },
+      {
+        question: 'Sketch y=1/x, identify asymptotes',
+        workingOut: `Asymptotes: x=0 (y-axis) and y=0 (x-axis)
+Two curves in quadrants 1 & 3
+Never touch axes`,
+        answer: 'x=0, y=0 asymptotes',
+        explanation: 'Reciprocal graph: hyperbola with axis asymptotes in Q1 & Q3.'
+      },
+      {
+        question: 'y=-x²+4x-3: turning point?',
+        workingOut: `x=-b/(2a)=-4/(2×-1)=2
+y=-(2)²+4(2)-3=1
+Turning point: (2,1) maximum`,
+        answer: '(2,1) max',
+        explanation: 'Negative a → maximum. Use x=-b/(2a) then substitute for y.'
+      },
+      {
+        question: 'Cubic y=x³-4x: how many roots?',
+        workingOut: `Factor: x(x²-4)=x(x+2)(x-2)
+Roots: x=0, x=-2, x=2
+3 roots`,
+        answer: '3 roots',
+        explanation: 'This cubic has 3 real roots: -2, 0, 2. Cubics can have 1, 2, or 3.'
       }
     ],
     
@@ -4100,6 +4287,698 @@ Graphs appear in EVERY Higher paper!
 
 Master graph shapes = visual understanding of functions!
 `
+  },
+
+  // ==================== MODULE 8: CIRCLE THEOREMS ====================
+  {
+    moduleNumber: 8,
+    title: 'Circle Theorems',
+    duration: '90 minutes',
+    introduction: 'Master the 8 essential circle theorems - appears in every Higher paper! Learn to prove angle properties, identify theorem applications, and solve complex problems. Worth 4-8 marks per paper - Grade 7-9 essential!',
+    
+    keyPoints: [
+      'Angle in semicircle = 90° (angle subtended by diameter)',
+      'Angles at circumference from same arc are equal',
+      'Angle at center = 2 × angle at circumference (from same arc)',
+      'Opposite angles in cyclic quadrilateral sum to 180°',
+      'Tangent perpendicular to radius at point of contact',
+      'Two tangents from external point are equal length',
+      'Alternate segment theorem: angle between tangent and chord = angle in alternate segment',
+      'ALWAYS state which theorem you\'re using for full marks!'
+    ],
+    
+    explanation: `**THE 8 CIRCLE THEOREMS**
+
+**1. ANGLE IN A SEMICIRCLE = 90°**
+Any triangle drawn with diameter as base has 90° at circumference.
+Works for ANY diameter position!
+
+**2. ANGLES AT CIRCUMFERENCE (SAME ARC)**
+Angles subtended by same arc at circumference are equal.
+All angles "standing on" same arc = same size.
+
+**3. ANGLE AT CENTER = 2 × CIRCUMFERENCE**
+Angle at center is twice angle at circumference (from same arc).
+Center angle = 2 × any circumference angle on that arc.
+
+**4. CYCLIC QUADRILATERAL**
+Opposite angles sum to 180° (supplementary).
+If all 4 vertices on circumference: a + c = 180°, b + d = 180°.
+
+**5. TANGENT PERPENDICULAR TO RADIUS**
+Tangent makes 90° with radius at point of contact.
+Always creates right angle!
+
+**6. TWO TANGENTS FROM POINT**
+Two tangents from external point have equal length.
+Also: angles at center are equal.
+
+**7. ALTERNATE SEGMENT THEOREM**
+Angle between tangent and chord = angle in alternate segment.
+Most complex theorem - draw carefully!
+
+**8. ANGLE IN SAME SEGMENT**
+Extension of theorem 2 - angles in same segment equal.
+
+**PROBLEM-SOLVING STEPS:**
+1. Mark known angles clearly
+2. Identify relevant theorem
+3. STATE the theorem used
+4. Calculate unknown angle
+5. Show ALL working`,
+    
+    examples: [
+      {
+        question: 'Triangle ABC inscribed in circle, AC is diameter. Find angle ABC.',
+        workingOut: `Given: AC is a diameter
+Find: Angle ABC
+
+Theorem: Angle in semicircle = 90°
+
+Since AC is a diameter, any angle subtended at the circumference (point B) = 90°
+
+Therefore: Angle ABC = 90°
+
+Answer: 90° (angle in semicircle)`,
+        answer: '90°',
+        explanation: 'Any angle subtended by a diameter at the circumference is 90°. This is the "angle in semicircle" theorem - one of the most common! Always true regardless of where point B is on the circle.'
+      },
+      {
+        question: 'Angle at center = 80°. Find angle at circumference from same arc.',
+        workingOut: `Given: Angle at center = 80°
+Find: Angle at circumference
+
+Theorem: Angle at center = 2 × angle at circumference
+
+Let angle at circumference = x
+Then: 80° = 2x
+x = 80° ÷ 2
+x = 40°
+
+Answer: 40°`,
+        answer: '40°',
+        explanation: 'Angle at center is TWICE the angle at circumference when both subtend the same arc. So if center = 80°, circumference = 40°. Remember to state the theorem used!'
+      },
+      {
+        question: 'Cyclic quadrilateral ABCD. Angle A = 75°. Find angle C.',
+        workingOut: `Given: ABCD is cyclic quadrilateral, angle A = 75°
+Find: Angle C
+
+Theorem: Opposite angles in cyclic quadrilateral sum to 180°
+
+Angle A + Angle C = 180°
+75° + Angle C = 180°
+Angle C = 180° - 75°
+Angle C = 105°
+
+Answer: 105°`,
+        answer: '105°',
+        explanation: 'In cyclic quadrilateral (all vertices on circle), opposite angles are supplementary (sum to 180°). A and C are opposite, so C = 180° - 75° = 105°.'
+      },
+      {
+        question: 'Tangent meets radius. What is the angle between them?',
+        workingOut: `Theorem: Tangent perpendicular to radius at point of contact
+
+The angle between a tangent and radius at the point where they meet is ALWAYS 90°.
+
+This is true for ANY tangent to ANY circle.
+
+Answer: 90°`,
+        answer: '90°',
+        explanation: 'Tangent is ALWAYS perpendicular (90°) to radius at point of contact. This creates right angles - very useful for calculations! Remember to mark these right angles on diagrams.'
+      },
+      {
+        question: 'Two tangents from point P to circle. PA = 8cm. Find PB.',
+        workingOut: `Given: Two tangents PA and PB from external point P
+PA = 8cm
+
+Theorem: Two tangents from external point are equal length
+
+Since both are tangents from same point P:
+PA = PB
+
+Therefore: PB = 8cm
+
+Answer: 8cm`,
+        answer: '8cm',
+        explanation: 'Two tangents drawn from the same external point to a circle are ALWAYS equal in length. If PA = 8cm, then PB must also = 8cm. Very common exam question!'
+      },
+      {
+        question: 'Angles at circumference 40° and 40° from same arc. Why?',
+        workingOut: `Theorem: Angles from same arc at circumference are equal
+Both standing on same arc → both 40°`,
+        answer: 'Same arc theorem',
+        explanation: 'Angles subtended by same arc at circumference are equal.'
+      },
+      {
+        question: 'Alternate segment: tangent-chord angle 65°. Find angle in segment.',
+        workingOut: `Theorem: Alternate segment
+Angle between tangent & chord = angle in alternate segment
+Answer: 65°`,
+        answer: '65°',
+        explanation: 'Alternate segment theorem: these angles are equal.'
+      },
+      {
+        question: 'Cyclic quad PQRS: P=85°, Q=110°. Find R and S.',
+        workingOut: `Opposite angles sum to 180°:
+R = 180°-85° = 95°
+S = 180°-110° = 70°`,
+        answer: 'R=95°, S=70°',
+        explanation: 'Cyclic quadrilateral: opposite pairs both sum to 180°.'
+      }
+    ],
+    
+    practiceQuestions: [
+      {
+        question: 'Angle in semicircle equals?',
+        options: ['90°', '180°', '45°', '60°'],
+        answer: '90°',
+        explanation: 'Angle subtended by diameter at circumference = 90° always',
+        difficulty: 'easy'
+      },
+      {
+        question: 'Center angle = 100°. Circumference angle?',
+        options: ['50°', '100°', '200°', '25°'],
+        answer: '50°',
+        explanation: 'Circumference = center ÷ 2 = 100° ÷ 2 = 50°',
+        difficulty: 'easy'
+      },
+      {
+        question: 'Cyclic quad: angle A = 70°. Opposite angle C?',
+        options: ['110°', '70°', '90°', '140°'],
+        answer: '110°',
+        explanation: 'Opposite angles sum to 180°: C = 180° - 70° = 110°',
+        difficulty: 'medium'
+      },
+      {
+        question: 'Tangent meets radius at what angle?',
+        options: ['90°', '180°', '45°', '0°'],
+        answer: '90°',
+        explanation: 'Tangent always perpendicular to radius = 90°',
+        difficulty: 'easy'
+      },
+      {
+        question: 'Two tangents from point: one is 5cm. Other?',
+        options: ['5cm', '10cm', '2.5cm', 'Cannot tell'],
+        answer: '5cm',
+        explanation: 'Two tangents from same point are equal length',
+        difficulty: 'easy'
+      },
+      {
+        question: 'How many main circle theorems?',
+        options: ['8', '5', '10', '6'],
+        answer: '8',
+        explanation: 'There are 8 essential circle theorems for GCSE',
+        difficulty: 'easy'
+      },
+      {
+        question: 'Angle at circumference = 35°. Center angle?',
+        options: ['70°', '35°', '17.5°', '140°'],
+        answer: '70°',
+        explanation: 'Center = 2 × circumference = 2 × 35° = 70°',
+        difficulty: 'medium'
+      },
+      {
+        question: 'What makes a quadrilateral cyclic?',
+        options: ['All vertices on circle', 'All sides equal', 'All angles 90°', 'Opposite sides parallel'],
+        answer: 'All vertices on circle',
+        explanation: 'Cyclic = all four vertices lie on the circumference',
+        difficulty: 'medium'
+      },
+      {
+        question: 'Alternate segment theorem involves?',
+        options: ['Tangent and chord', 'Two radii', 'Two tangents', 'Two chords'],
+        answer: 'Tangent and chord',
+        explanation: 'Alternate segment: angle between tangent and chord',
+        difficulty: 'hard'
+      },
+      {
+        question: 'Most marks lost in circle theorems for?',
+        options: ['Not stating theorem', 'Wrong calculation', 'Wrong diagram', 'All equal'],
+        answer: 'Not stating theorem',
+        explanation: 'Always STATE which theorem you use - essential for marks!',
+        difficulty: 'medium'
+      }
+    ],
+    
+    tips: [
+      '⭐ ALWAYS state which theorem you\'re using - essential for marks!',
+      '⭐ Mark all equal angles with matching symbols on diagram',
+      '⭐ Look for semicircles first (diameter → 90°)',
+      '⭐ Check if quadrilateral is cyclic (all on circle → opposite angles sum to 180°)',
+      '⭐ Mark tangents and radii meeting at 90°',
+      '⭐ Draw clear diagrams - add construction lines if needed',
+      '⭐ For alternate segment: draw the alternate segment to see the angle',
+      '⭐ Practice identifying theorems from diagrams'
+    ],
+    
+    commonMistakes: [
+      '❌ Not stating which theorem used (lose marks!)',
+      '❌ Confusing center and circumference angles',
+      '❌ Forgetting tangent perpendicular to radius',
+      '❌ Not checking if quadrilateral is cyclic before using theorem',
+      '❌ Missing that diameter creates semicircle (90°)',
+      '❌ Assuming all angles on circle are equal (they\'re not!)',
+      '❌ Poor diagram - can\'t identify relevant theorem',
+      '❌ Not showing all working steps'
+    ],
+    
+    examStrategy: `**Always state theorem used!**
+
+**Question Types:**
+- Find missing angle (3-4 marks)
+- Prove angle relationship (4-5 marks)
+- Multi-step problems (5-6 marks)
+
+**Approach:**
+1. Mark diagram clearly
+2. Identify theorem
+3. STATE theorem
+4. Calculate
+5. Check answer sensible
+
+**Grade 7-9 essential topic!**
+
+Circle theorems worth 4-8 marks every paper - master all 8 theorems!`
+  },
+
+  // ==================== MODULE 9: VECTORS ====================
+  {
+    moduleNumber: 9,
+    title: 'Vectors',
+    duration: '75 minutes',
+    introduction: 'Master vectors - magnitude and direction! Essential Grade 8-9 skill. Learn column vectors, addition, scalar multiplication, and parallel vectors. Appears in most Higher papers.',
+    
+    keyPoints: [
+      'Vector = magnitude (size) AND direction',
+      'Column vector: (x) where x = horizontal, y = vertical',
+      '                (y)',
+      'Add vectors: add components separately',
+      'Scalar multiplication: multiply both components',
+      'Parallel vectors: one is scalar multiple of other',
+      'Magnitude: |v| = √(x² + y²)',
+      'Position vectors: from origin to point'
+    ],
+    
+    explanation: `**VECTORS**
+
+Vector = quantity with magnitude and direction
+Examples: velocity, force, displacement
+
+**Column Vector Notation:**
+(x) = x units horizontal, y units vertical
+(y)
+
+**Adding Vectors:**
+(a) + (c) = (a+c)
+(b)   (d)   (b+d)
+
+**Scalar Multiplication:**
+k(a) = (ka)
+ (b)   (kb)
+
+**Parallel Vectors:**
+Vectors parallel if one = k × other
+
+**Magnitude:**
+|(a)| = √(a² + b²)
+ (b)`,
+    
+    examples: [
+      {question: 'Find (3) + (1)', workingOut: '(3+1) = (4)\n(2+4)   (6)', answer: '(4,6)', explanation: 'Add components: 3+1=4, 2+4=6'},
+      {question: 'Find 3(2)', workingOut: '3(2) = (6)\n     (1)   (3)', answer: '(6,3)', explanation: 'Multiply both by 3'},
+      {question: 'Are (4) and (2) parallel?', workingOut: '(4) = 2(2), Yes!', answer: 'Yes', explanation: 'First is 2× second → parallel'},
+      {question: 'Find |(3)|', workingOut: '√(3²+4²) = √25 = 5', answer: '5', explanation: 'Magnitude = √(x²+y²)'},
+      {question: '(2) - (1) = ?', workingOut: '(2-1) = (1)', answer: '(1,2)', explanation: 'Subtract components'},
+      {question: 'If AB = 2a+3b and BC = a-b, find AC', workingOut: 'AC = AB + BC = (2a+3b)+(a-b) = 3a+2b', answer: '3a+2b', explanation: 'Add vectors end-to-end to find resultant'},
+      {question: 'Prove ABCD is parallelogram if AB=DC', workingOut: 'If AB=DC (same magnitude and direction)\nThen AB parallel to DC and equal\nABCD is parallelogram', answer: 'Parallel sides equal', explanation: 'Equal vectors → parallel and equal length'},
+      {question: 'Find unit vector in direction of (5,12)', workingOut: 'Magnitude = √(25+144) = 13\nUnit = (5/13, 12/13)', answer: '(5/13, 12/13)', explanation: 'Divide by magnitude to get unit vector (length 1)'}
+    ],
+    
+    practiceQuestions: [
+      {question: '(1)+(2)=?', options: ['(3,4)', '(1,2)', '(2,1)', '(3,3)'], answer: '(3,4)', explanation: '1+2=3, 1+3=4', difficulty: 'easy'},
+      {question: '2(3)=?', options: ['(6,8)', '(5,7)', '(3,4)', '(9,12)'], answer: '(6,8)', explanation: 'Multiply both: 2×3=6, 2×4=8', difficulty: 'easy'},
+      {question: '|(3)| = ?', options: ['5', '3', '4', '7'], answer: '5', explanation: '√(9+16) = √25 = 5', difficulty: 'medium'},
+      {question: 'Parallel to (6)?', options: ['(3,6)', '(4,8)', '(12,18)', '(5,7)'], answer: '(3,6)', explanation: '(6,12) = 2(3,6)', difficulty: 'medium'},
+      {question: 'Zero vector?', options: ['(0,0)', '(1,1)', '(0,1)', '(1,0)'], answer: '(0,0)', explanation: 'Zero vector has no magnitude', difficulty: 'easy'},
+      {question: '(5)-(3)=?', options: ['(2,1)', '(8,5)', '(2,4)', '(-2,-1)'], answer: '(2,1)', explanation: '5-3=2, 2-1=1', difficulty: 'easy'},
+      {question: '-1(4)=?', options: ['(-4,-3)', '(4,3)', '(-4,3)', '(4,-3)'], answer: '(-4,-3)', explanation: 'Multiply by -1: flip signs', difficulty: 'medium'},
+      {question: 'Unit vector magnitude?', options: ['1', '0', '2', 'Varies'], answer: '1', explanation: 'Unit vector has magnitude 1', difficulty: 'medium'},
+      {question: 'Position vector from?', options: ['Origin', 'Any point', 'Center', 'Endpoint'], answer: 'Origin', explanation: 'Position vector starts at origin', difficulty: 'easy'},
+      {question: 'Collinear means?', options: ['On same line', 'Parallel', 'Perpendicular', 'Equal'], answer: 'On same line', explanation: 'Collinear = on same straight line', difficulty: 'hard'}
+    ],
+    
+    tips: ['⭐ Add vectors: add components separately', '⭐ Scalar multiply: multiply both components', '⭐ Parallel: check if one is multiple of other', '⭐ Magnitude: use Pythagoras √(x²+y²)', '⭐ Draw diagrams to visualize', '⭐ Subtract = add negative', '⭐ Position vectors start at origin', '⭐ Show all working clearly'],
+    commonMistakes: ['❌ Adding when should scalar multiply', '❌ Not checking both components for parallel', '❌ Forgetting square root in magnitude', '❌ Wrong signs when subtracting', '❌ Mixing up horizontal/vertical', '❌ Not simplifying final answer', '❌ Poor notation (not using columns)', '❌ Not showing working'],
+    examStrategy: `**Vectors appear in most Higher papers - worth 4-6 marks**
+
+Master addition, scalar multiplication, parallel vectors, and magnitude.
+Always show working in column form. Grade 8-9 essential!`
+  },
+
+  // ==================== MODULE 10: ADVANCED TRIGONOMETRY ====================
+  {
+    moduleNumber: 10,
+    title: 'Advanced Trigonometry (Sine & Cosine Rules)',
+    duration: '95 minutes',
+    introduction: 'Master sine and cosine rules for NON-right-angled triangles! Essential Grade 7-9. Use when SOH CAH TOA doesn\'t work. Appears in every Higher paper worth 5-8 marks!',
+    
+    keyPoints: [
+      'Sine Rule: a/sin(A) = b/sin(B) = c/sin(C)',
+      'Use sine rule: know 2 angles & 1 side, OR 2 sides & non-included angle',
+      'Cosine Rule: a² = b² + c² - 2bc×cos(A)',
+      'Use cosine rule: know 3 sides, OR 2 sides & included angle',
+      'Always check if right-angled first (use SOH CAH TOA if so!)',
+      'Label triangle clearly: sides a,b,c opposite angles A,B,C',
+      'Calculator in DEGREES mode!',
+      'Show which rule you\'re using for method marks'
+    ],
+    
+    explanation: `**FOR NON-RIGHT-ANGLED TRIANGLES**
+
+**SINE RULE:**
+a/sin(A) = b/sin(B) = c/sin(C)
+
+**When to use:**
+- 2 angles + 1 side (AAS)
+- 2 sides + non-included angle (SSA)
+
+**COSINE RULE:**
+a² = b² + c² - 2bc×cos(A)
+OR rearranged:
+cos(A) = (b²+c²-a²)/(2bc)
+
+**When to use:**
+- 3 sides (SSS) - to find angle
+- 2 sides + included angle (SAS) - to find third side
+
+**DECISION TREE:**
+1. Right-angled? → SOH CAH TOA
+2. 2 angles + 1 side? → Sine rule
+3. 3 sides? → Cosine rule
+4. 2 sides + angle between? → Cosine rule
+5. 2 sides + angle not between? → Sine rule`,
+    
+    examples: [
+      {question: 'Triangle: A=50°, B=60°, a=8cm. Find b', workingOut: 'Sine rule: a/sin(A) = b/sin(B)\n8/sin(50°) = b/sin(60°)\nb = 8×sin(60°)/sin(50°) = 9.1cm', answer: '9.1cm', explanation: '2 angles + 1 side → sine rule'},
+      {question: 'Triangle: a=7, b=5, c=8. Find angle A', workingOut: 'Cosine rule: cos(A) = (b²+c²-a²)/(2bc)\n= (25+64-49)/(2×5×8) = 40/80 = 0.5\nA = cos⁻¹(0.5) = 60°', answer: '60°', explanation: '3 sides → cosine rule for angle'},
+      {question: 'Triangle: b=6, c=8, A=50°. Find a', workingOut: 'Cosine rule: a² = b²+c²-2bc×cos(A)\n= 36+64-2×6×8×cos(50°)\n= 100-61.7 = 38.3\na = √38.3 = 6.2cm', answer: '6.2cm', explanation: '2 sides + included angle → cosine rule'},
+      {question: 'When use sine rule?', workingOut: 'Use sine rule when:\n1. Know 2 angles + 1 side\n2. Know 2 sides + non-included angle\nNOT for 3 sides or 2 sides + angle between!', answer: '2 angles+1 side OR 2 sides+angle not between', explanation: 'Sine rule for AAS or SSA'},
+      {question: 'Triangle: angles 40°, 60°, side=10. Which side?', workingOut: 'Need to know WHICH side is 10cm\nIs it opposite 40°, 60°, or 80° (third angle)?\nMust specify for sine rule!\nAssume opposite 40°:\n10/sin(40°) = b/sin(60°)', answer: 'Must specify which side', explanation: 'Label matters - must know which side opposite which angle!'},
+      {question: 'Triangle ABC: AB=12cm, AC=15cm, angle BAC=70°. Find BC', workingOut: 'Cosine rule (SAS): a²=b²+c²-2bc×cos(A)\nBC²=15²+12²-2×15×12×cos(70°)\n=225+144-360×0.342=369-123=246\nBC=√246=15.7cm', answer: '15.7cm', explanation: '2 sides + angle between → cosine rule'},
+      {question: 'Triangle PQR: angle P=35°, angle Q=80°, PR=20cm. Find QR', workingOut: 'Find angle R=180°-35°-80°=65°\nSine rule: PR/sin(Q)=QR/sin(P)\n20/sin(80°)=QR/sin(35°)\nQR=20×sin(35°)/sin(80°)=11.6cm', answer: '11.6cm', explanation: 'Find third angle first, then sine rule'},
+      {question: 'Area of triangle: two sides 8,10 with included angle 50°', workingOut: 'Area = ½ab×sin(C)\n= ½×8×10×sin(50°)\n= 40×0.766\n= 30.6cm²', answer: '30.6cm²', explanation: 'Area formula with sine: ½ab×sin(C)'}
+    ],
+    
+    practiceQuestions: [
+      {question: 'Which rule: 3 sides given?', options: ['Cosine', 'Sine', 'SOH CAH TOA', 'Pythagoras'], answer: 'Cosine', explanation: '3 sides = cosine rule to find angle', difficulty: 'easy'},
+      {question: 'Which rule: 2 angles + 1 side?', options: ['Sine', 'Cosine', 'SOH CAH TOA', 'Pythagoras'], answer: 'Sine', explanation: '2 angles + 1 side = sine rule', difficulty: 'easy'},
+      {question: 'Cosine rule starts with?', options: ['a² = ...', 'a/sin(A) = ...', 'sin(A) = ...', 'cos(A) = ...'], answer: 'a² = ...', explanation: 'Cosine rule: a² = b²+c²-2bc×cos(A)', difficulty: 'medium'},
+      {question: 'Calculator mode for trig?', options: ['Degrees', 'Radians', 'Gradians', 'Auto'], answer: 'Degrees', explanation: 'GCSE always uses degrees mode', difficulty: 'easy'},
+      {question: 'Right-angled triangle, use?', options: ['SOH CAH TOA', 'Sine rule', 'Cosine rule', 'All three'], answer: 'SOH CAH TOA', explanation: 'Right-angled → use SOH CAH TOA first!', difficulty: 'easy'},
+      {question: 'Sine rule involves?', options: ['Ratios of sides to sines', 'Squared sides', 'Sum of angles', 'Area'], answer: 'Ratios of sides to sines', explanation: 'Sine rule: a/sin(A) = b/sin(B)', difficulty: 'medium'},
+      {question: 'What does SAS mean?', options: ['Side-Angle-Side', 'Side-Angle-Angle', 'Side-Side-Angle', 'Angle-Side-Angle'], answer: 'Side-Angle-Side', explanation: 'SAS = 2 sides + included angle', difficulty: 'medium'},
+      {question: 'For angle from 3 sides?', options: ['cos(A)=(b²+c²-a²)/(2bc)', 'a²=b²+c²', 'a/sin(A)=b/sin(B)', 'sin(A)=a/c'], answer: 'cos(A)=(b²+c²-a²)/(2bc)', explanation: 'Cosine rule rearranged for angle', difficulty: 'hard'},
+      {question: 'SSA means use?', options: ['Sine rule', 'Cosine rule', 'Both', 'Neither'], answer: 'Sine rule', explanation: 'SSA = 2 sides + angle not between = sine rule', difficulty: 'medium'},
+      {question: 'Most marks lost for?', options: ['Calculator in radians', 'Wrong formula', 'Poor diagram', 'All equal'], answer: 'Calculator in radians', explanation: 'Wrong mode gives wrong answer!', difficulty: 'hard'}
+    ],
+    
+    tips: ['⭐ Check right-angled FIRST (use SOH CAH TOA!)', '⭐ Label triangle: sides a,b,c opposite A,B,C', '⭐ DEGREES mode on calculator!', '⭐ State which rule for method marks', '⭐ 3 sides → cosine for angle', '⭐ 2 angles + side → sine', '⭐ 2 sides + angle between → cosine', '⭐ Show all working clearly'],
+    commonMistakes: ['❌ Calculator in radians (most common!)', '❌ Using sine when should use cosine', '❌ Not labeling triangle properly', '❌ Forgetting -2bc in cosine rule', '❌ Using rules on right-angled triangles', '❌ Not showing which rule used', '❌ Wrong rearrangement of formulas', '❌ Not checking answer sensible'],
+    examStrategy: `**Appears EVERY Higher paper - worth 5-8 marks!**
+
+**Decision:**
+1. Right-angled? SOH CAH TOA
+2. 3 sides? Cosine for angle
+3. 2 sides + angle between? Cosine for side
+4. 2 angles + side? Sine
+5. 2 sides + angle not between? Sine
+
+**MUST check calculator in DEGREES!**
+State which rule. Show all working.
+Grade 7-9 essential - master both rules!`
+  },
+
+  // MODULES 11-18: Building efficiently with essential content
+  
+  // ==================== MODULE 11: PYTHAGORAS IN 3D ====================
+  {
+    moduleNumber: 11,
+    title: 'Pythagoras in 3D & Volume',
+    duration: '70 minutes',
+    introduction: 'Apply Pythagoras to 3D shapes! Find space diagonals, distances between points, and solve 3D problems. Grade 7-8 skill.',
+    keyPoints: ['3D Pythagoras: do it twice (2D then add third dimension)', 'Cuboid diagonal: √(l²+w²+h²)', 'Mark right angles clearly', 'Draw 2D "flat" diagrams to help'],
+    explanation: '3D Pythagoras applies theorem twice: first find base diagonal, then use that with height.',
+    examples: [
+      {question: 'Cuboid 3×4×12, find space diagonal', workingOut: 'Base: √(3²+4²)=5, Then: √(5²+12²)=√169=13', answer: '13', explanation: 'Do Pythagoras twice'},
+      {question: 'Cuboid 5×12×9, find space diagonal', workingOut: 'Base diagonal: √(5²+12²)=√169=13\nSpace diagonal: √(13²+9²)=√(169+81)=√250=15.8', answer: '15.8', explanation: 'Apply Pythagoras twice: base then height'},
+      {question: 'Find distance from (0,0,0) to (3,4,5)', workingOut: 'd = √(3²+4²+5²) = √(9+16+25) = √50 = 7.1', answer: '7.1', explanation: '3D distance formula: √(x²+y²+z²)'},
+      {question: 'Pyramid height 8, base 6×6. Find slant edge', workingOut: 'Base center to corner: √(3²+3²)=3√2=4.24\nSlant edge: √(8²+4.24²)=√(64+18)=√82=9.1', answer: '9.1', explanation: 'Find base diagonal half, then use with height'},
+      {question: 'Cone: height 12cm, base radius 5cm. Find slant height', workingOut: 'l = √(h²+r²) = √(12²+5²) = √(144+25) = √169 = 13cm', answer: '13cm', explanation: 'Cone slant height uses Pythagoras: h, r, l'},
+      {question: 'Cuboid 10×15×20. Find longest rod that fits', workingOut: 'Space diagonal = √(10²+15²+20²) = √(100+225+400) = √725 = 26.9cm', answer: '26.9cm', explanation: 'Longest = space diagonal through center'},
+      {question: 'Right pyramid on 8×8 base, height 6. Volume?', workingOut: 'V = (1/3)×base area×height = (1/3)×64×6 = 128cm³', answer: '128cm³', explanation: 'Pyramid volume: (1/3)×base×height'},
+      {question: 'Sphere fits in cube edge 10. Sphere volume?', workingOut: 'Radius = 5 (half edge)\nV = (4/3)πr³ = (4/3)π(5³) = 523.6cm³', answer: '523.6cm³', explanation: 'Sphere diameter = cube edge'}
+    ],
+    practiceQuestions: [{question: 'Cuboid 5×12×?, diagonal 13?', options: ['0', '5', '12', '13'], answer: '0', explanation: 'Already 5-12-13 triangle!', difficulty: 'hard'}],
+    tips: ['⭐ Apply Pythagoras TWICE in 3D', '⭐ Draw clear 2D projection', '⭐ Mark all right angles'],
+    commonMistakes: ['❌ Only using Pythagoras once', '❌ Adding all three dimensions wrong', '❌ Not drawing helper diagram'],
+    examStrategy: 'Break into 2D problems. Apply Pythagoras twice. Grade 7-8 topic.'
+  },
+
+  // ==================== MODULE 12: SIMILARITY & CONGRUENCE ====================
+  {
+    moduleNumber: 12,
+    title: 'Similarity & Congruence',
+    duration: '75 minutes',
+    introduction: 'Similar shapes (same shape, different size) and congruent shapes (identical). Essential for Grade 7-8. Scale factors and proofs!',
+    keyPoints: ['Similar: same shape, angles equal, sides in proportion', 'Congruent: identical (SSS, SAS, ASA, RHS)', 'Scale factor: linear×k, area×k², volume×k³', 'For similar: find scale factor, apply to unknown'],
+    explanation: 'Similar shapes have equal angles and proportional sides. Congruent shapes are identical.',
+    examples: [
+      {question: 'Similar triangles, scale factor 3. Area×?', workingOut: 'Linear ×3, Area ×3²=×9', answer: '×9', explanation: 'Area scales by square of linear factor'},
+      {question: 'Similar shapes: small area 20cm², large area 180cm². Scale factor?', workingOut: 'Area ratio = 180/20 = 9 = k²\nk = √9 = 3', answer: '3', explanation: 'Find ratio, square root for linear scale factor'},
+      {question: 'Prove triangles congruent: AB=DE, AC=DF, angle A=angle D', workingOut: 'Two sides and included angle equal\nSAS condition satisfied\n∴Triangles congruent', answer: 'SAS congruent', explanation: 'SAS: Side-Angle-Side proves congruence'},
+      {question: 'Similar cylinders: small radius 2cm, large radius 6cm. Volume scale?', workingOut: 'k = 6/2 = 3\nVolume ×k³ = ×3³ = ×27', answer: '×27', explanation: 'Volume scales by cube: k³'},
+      {question: 'Triangles: all angles equal. Are they congruent?', workingOut: 'Equal angles → similar NOT congruent\nNeed equal sides too for congruent', answer: 'Similar only', explanation: 'AAA gives similar; need SSS/SAS/ASA/RHS for congruent'},
+      {question: 'Model car 1:50 scale. Real length 4m. Model length?', workingOut: '4m = 400cm\nModel = 400/50 = 8cm', answer: '8cm', explanation: 'Divide by scale factor for model size'},
+      {question: 'Map 1:25000. Real distance 2km. Map distance?', workingOut: '2km = 2000m = 200000cm\nMap = 200000/25000 = 8cm', answer: '8cm', explanation: 'Divide real by scale for map distance'},
+      {question: 'Similar prisms: k=2. Small volume 50cm³. Large volume?', workingOut: 'Large = 50×2³ = 50×8 = 400cm³', answer: '400cm³', explanation: 'Multiply by k³ for volume'}
+    ],
+    practiceQuestions: [{question: 'Scale factor 2, volume ×?', options: ['8', '4', '2', '16'], answer: '8', explanation: 'Volume ×2³=8', difficulty: 'medium'}],
+    tips: ['⭐ Linear ×k, Area ×k², Volume ×k³', '⭐ Check angles equal for similar', '⭐ Learn 4 congruence conditions'],
+    commonMistakes: ['❌ Confusing similar with congruent', '❌ Wrong power for area/volume', '❌ Not finding scale factor first'],
+    examStrategy: 'Find scale factor. Apply correct power (1,2,3). Grade 7-8 essential.'
+  },
+
+  // ==================== MODULE 13: PROBABILITY (VENN & CONDITIONAL) ====================
+  {
+    moduleNumber: 13,
+    title: 'Probability (Venn Diagrams & Conditional)',
+    duration: '80 minutes',
+    introduction: 'Advanced probability with Venn diagrams, tree diagrams, and conditional probability. Grade 7-9 essential!',
+    keyPoints: ['Venn: draw circles, fill in intersection first', 'P(A∪B) = P(A) + P(B) - P(A∩B)', 'Conditional: P(A|B) = P(A∩B)/P(B)', 'Tree diagrams: multiply along, add across'],
+    explanation: 'Venn diagrams show overlapping sets. Conditional probability is "given that".',
+    examples: [
+      {question: 'P(A)=0.6, P(B)=0.5, P(A∩B)=0.3. Find P(A∪B)', workingOut: '0.6+0.5-0.3=0.8', answer: '0.8', explanation: 'Add then subtract intersection'},
+      {question: 'Venn: Total=100, A only=30, B only=25, both=15. Find neither', workingOut: 'In A or B = 30+15+25=70\nNeither = 100-70=30', answer: '30', explanation: 'Fill intersection first, then subtract from total'},
+      {question: 'P(A|B) means what?', workingOut: 'Probability of A GIVEN B has happened\nFormula: P(A|B) = P(A∩B)/P(B)', answer: 'A given B', explanation: 'Conditional probability: event A given event B'},
+      {question: 'Tree: P(rain Mon)=0.3, P(rain Tue|rain Mon)=0.7. P(rain both)?', workingOut: 'Multiply along branch: 0.3×0.7 = 0.21', answer: '0.21', explanation: 'Tree diagram: multiply along branches for AND'},
+      {question: 'P(A)=0.4, P(B|A)=0.6. Find P(A∩B)', workingOut: 'P(A∩B) = P(A)×P(B|A) = 0.4×0.6 = 0.24', answer: '0.24', explanation: 'Rearrange conditional formula'},
+      {question: 'Independent events: P(A)=0.5, P(B)=0.4. P(A∩B)?', workingOut: 'Independent → multiply\n0.5×0.4 = 0.2', answer: '0.2', explanation: 'Independent: P(A∩B) = P(A)×P(B)'},
+      {question: 'Venn: 50 total, A=20, B=15, neither=25. Find both', workingOut: 'A∪B = 50-25=25\nBoth = 20+15-25 = 10', answer: '10', explanation: 'Use formula: |A∪B| = |A|+|B|-|A∩B|'},
+      {question: 'Tree: 2 draws, P(red)=3/7, WITH replacement. P(2 red)?', workingOut: '(3/7)×(3/7) = 9/49', answer: '9/49', explanation: 'With replacement: probabilities stay same'}
+    ],
+    practiceQuestions: [{question: 'P(A∩B) means?', options: ['A AND B', 'A OR B', 'NOT A', 'A given B'], answer: 'A AND B', explanation: '∩ means intersection (AND)', difficulty: 'easy'}],
+    tips: ['⭐ Venn: fill intersection first', '⭐ Conditional uses "given that"', '⭐ Tree: multiply along branches'],
+    commonMistakes: ['❌ Not subtracting intersection', '❌ Forgetting to fill Venn systematically', '❌ Wrong conditional formula'],
+    examStrategy: 'Venn and tree diagrams worth 6-10 marks. Grade 7-9 essential!'
+  },
+
+  // ==================== MODULE 14: STATISTICS (CUMULATIVE FREQUENCY & BOX PLOTS) ====================
+  {
+    moduleNumber: 14,
+    title: 'Statistics (Cumulative Frequency & Box Plots)',
+    duration: '85 minutes',
+    introduction: 'Advanced statistics for Grade 7-9. Cumulative frequency graphs, box plots, quartiles, and interquartile range!',
+    keyPoints: ['Cumulative frequency: running total', 'Median at n/2, Q1 at n/4, Q3 at 3n/4', 'IQR = Q3 - Q1 (middle 50%)', 'Box plot: shows median, quartiles, range'],
+    explanation: 'Cumulative frequency shows running totals. Box plots display 5-number summary.',
+    examples: [
+      {question: 'n=40. Median position?', workingOut: '40/2 = 20th value', answer: '20th', explanation: 'Median at n/2'},
+      {question: 'n=60. Find Q1, Q2, Q3 positions', workingOut: 'Q1 at 60/4 = 15th\nQ2 at 60/2 = 30th (median)\nQ3 at 3×60/4 = 45th', answer: '15th, 30th, 45th', explanation: 'Quartiles at n/4, n/2, 3n/4'},
+      {question: 'Cumulative frequency table: 0-10(5), 0-20(12), 0-30(25). Frequency 20-30?', workingOut: 'CF 0-30 minus CF 0-20\n25-12 = 13', answer: '13', explanation: 'Subtract cumulative frequencies to find interval frequency'},
+      {question: 'Q1=20, Q3=35. Find IQR', workingOut: 'IQR = Q3-Q1 = 35-20 = 15', answer: '15', explanation: 'Interquartile range = Q3-Q1 (middle 50%)'},
+      {question: 'Box plot: min=10, Q1=15, Q2=20, Q3=28, max=40. Find range', workingOut: 'Range = max-min = 40-10 = 30', answer: '30', explanation: 'Range is maximum minus minimum'},
+      {question: 'CF graph: n=80. Estimate median', workingOut: 'Go to CF=40 (half of 80)\nRead across to curve, down to x-axis', answer: 'Read from graph', explanation: 'Median at n/2 on CF axis'},
+      {question: 'Why plot CF at UPPER boundary?', workingOut: 'CF shows "up to and including"\nUpper boundary includes all values in class', answer: 'Shows cumulative up to that value', explanation: 'Cumulative up to upper boundary of interval'},
+      {question: 'IQR=12, Range=40. Which more spread?', workingOut: 'Range bigger relative to IQR\nBut IQR better (not affected by outliers)', answer: 'IQR more reliable', explanation: 'IQR unaffected by extreme values'}
+    ],
+    practiceQuestions: [{question: 'IQR =?', options: ['Q3-Q1', 'Q3+Q1', 'Max-Min', 'Q2-Q1'], answer: 'Q3-Q1', explanation: 'Interquartile range', difficulty: 'easy'}],
+    tips: ['⭐ Cumulative = running total', '⭐ Plot at upper boundary', '⭐ Read quartiles from graph'],
+    commonMistakes: ['❌ Wrong quartile positions', '❌ Not using cumulative frequency', '❌ Box plot wrong width'],
+    examStrategy: 'Cumulative frequency worth 6-8 marks. Box plots 3-4 marks. Grade 7-9!'
+  },
+
+  // ==================== MODULE 15: FUNCTIONS & TRANSFORMATIONS ====================
+  {
+    moduleNumber: 15,
+    title: 'Functions & Graph Transformations',
+    duration: '75 minutes',
+    introduction: 'Functions notation and graph transformations. Grade 8-9 topic. f(x), composite functions, inverse functions!',
+    keyPoints: ['f(x): function notation', 'f(g(x)): composite (do g first!)', 'f⁻¹(x): inverse function', 'y=f(x)+a: shift up a', 'y=f(x-a): shift right a'],
+    explanation: 'Functions are input-output rules. Transformations shift/stretch graphs.',
+    examples: [
+      {question: 'f(x)=2x+1, find f(3)', workingOut: '2(3)+1=7', answer: '7', explanation: 'Substitute x=3'},
+      {question: 'f(x)=x²-2, g(x)=3x. Find fg(2)', workingOut: 'g(2) = 3(2) = 6\nf(6) = 6²-2 = 34', answer: '34', explanation: 'Composite: do inner (g) first, then outer (f)'},
+      {question: 'f(x)=4x-3. Find f⁻¹(x)', workingOut: 'y=4x-3, swap: x=4y-3\nx+3=4y, y=(x+3)/4\nf⁻¹(x)=(x+3)/4', answer: '(x+3)/4', explanation: 'Inverse: swap x and y, rearrange for y'},
+      {question: 'y=f(x)+3: transformation?', workingOut: 'Adding outside → vertical shift\nUp by 3 units', answer: 'Shift up 3', explanation: '+a outside: shift up a'},
+      {question: 'y=f(x-2): transformation?', workingOut: 'Inside bracket, subtract → shift RIGHT\n(opposite direction!)', answer: 'Shift right 2', explanation: 'f(x-a): shift right a (opposite!)'},
+      {question: 'gf(x)=g(f(x)). Which function first?', workingOut: 'Read right to left: f first\nThen g applied to result', answer: 'f first', explanation: 'gf means do f first, then g'},
+      {question: 'f(x)=2x, g(x)=x+5. Find fg(x)', workingOut: 'fg(x) = f(x+5) = 2(x+5) = 2x+10', answer: '2x+10', explanation: 'Composite: substitute g into f'},
+      {question: 'y=-f(x): transformation?', workingOut: 'Negative outside → reflection\nIn x-axis (flip upside down)', answer: 'Reflect in x-axis', explanation: '-f(x): reflect in x-axis'}
+    ],
+    practiceQuestions: [{question: 'f(g(x)), do which first?', options: ['g', 'f', 'Either', 'Neither'], answer: 'g', explanation: 'Do inner function first', difficulty: 'medium'}],
+    tips: ['⭐ Composite: inner first', '⭐ Inverse: swap x and y', '⭐ Transformations: sign matters'],
+    commonMistakes: ['❌ Wrong order for composite', '❌ Inverse calculation errors', '❌ Transformation direction wrong'],
+    examStrategy: 'Functions worth 4-6 marks. Grade 8-9 topic!'
+  },
+
+  // ==================== MODULE 16: BOUNDS & ERROR INTERVALS ====================
+  {
+    moduleNumber: 16,
+    title: 'Bounds & Error Intervals',
+    duration: '70 minutes',
+    introduction: 'Upper and lower bounds, error intervals, calculations with bounds. Grade 7-9 essential!',
+    keyPoints: ['Lower bound = value - 0.5×accuracy', 'Upper bound = value + 0.5×accuracy', 'For calculations: use appropriate bounds', 'Maximum = max numerator / min denominator'],
+    explanation: 'Measurements have limits of accuracy. Bounds show maximum error possible.',
+    examples: [
+      {question: '50cm to nearest 10. Bounds?', workingOut: 'LB: 45cm, UB: 55cm', answer: '45-55cm', explanation: '±5cm either side'},
+      {question: '7.3kg to 1 d.p. Find upper and lower bounds', workingOut: 'Accuracy = 0.1kg, so ±0.05kg\nLB = 7.25kg\nUB = 7.35kg', answer: '7.25kg ≤ mass < 7.35kg', explanation: 'Bounds: value ± half the accuracy'},
+      {question: 'a=20 (nearest 10), b=5 (nearest 1). Maximum a/b?', workingOut: 'Max = max a / min b\na: 15-25, b: 4.5-5.5\nMax = 25/4.5 = 5.56', answer: '5.56', explanation: 'Maximum quotient: max numerator, min denominator'},
+      {question: 'l=8m (nearest m), w=6m (nearest m). Min area?', workingOut: 'Min = min l × min w\nl: 7.5-8.5, w: 5.5-6.5\nMin = 7.5×5.5 = 41.25m²', answer: '41.25m²', explanation: 'Min area: multiply minimum dimensions'},
+      {question: '150 (nearest 10) ÷ 20 (nearest 10). Upper bound result?', workingOut: 'Max = max÷min = 155÷15 = 10.33', answer: '10.33', explanation: 'Upper bound division: max top, min bottom'},
+      {question: 'Why use appropriate bound?', workingOut: 'For max result: maximize top, minimize bottom\nFor min result: minimize top, maximize bottom', answer: 'Gives extreme values', explanation: 'Appropriate bounds give maximum range'},
+      {question: '4.5cm to 1 d.p. True value range?', workingOut: '4.45 ≤ x < 4.55\nLower inclusive, upper exclusive', answer: '4.45 ≤ x < 4.55', explanation: 'Lower bound included, upper bound not'},
+      {question: 'Speed=80mph (nearest 10), time=3hr (nearest hr). Max distance?', workingOut: 'Max d = max speed × max time\n= 85 × 3.5 = 297.5 miles', answer: '297.5 miles', explanation: 'Max product: max both values'}
+    ],
+    practiceQuestions: [{question: '8m to nearest meter. LB?', options: ['7.5m', '8m', '7m', '8.5m'], answer: '7.5m', explanation: 'Subtract 0.5', difficulty: 'easy'}],
+    tips: ['⭐ Bounds ± 0.5 of accuracy', '⭐ Max uses max top / min bottom', '⭐ Show both bounds'],
+    commonMistakes: ['❌ Wrong bound calculation', '❌ Not using appropriate bound', '❌ Forgetting units'],
+    examStrategy: 'Bounds worth 3-5 marks. Grade 7-9. Show both bounds!'
+  },
+
+  // ==================== MODULE 17: PROBLEM SOLVING & PROOF ====================
+  {
+    moduleNumber: 17,
+    title: 'Problem Solving & Proof',
+    duration: '80 minutes',
+    introduction: 'Advanced problem-solving strategies and algebraic proof. Grade 8-9 essential for top marks!',
+    keyPoints: ['Show/prove questions: work from given to required', 'Use algebra not examples', 'Break complex problems into steps', 'Check answer makes sense'],
+    explanation: 'Proof requires logical steps from given information to conclusion.',
+    examples: [
+      {question: 'Prove sum of 3 consecutive even nos divisible by 6', workingOut: 'Let nos: 2n, 2n+2, 2n+4\nSum: 6n+6 = 6(n+1)\n∴divisible by 6', answer: 'Proven', explanation: 'Factorize to show 6 as factor'},
+      {question: 'Prove sum of 2 consecutive odd numbers is always even', workingOut: 'Let first: 2n+1, second: 2n+3\nSum = (2n+1)+(2n+3) = 4n+4 = 2(2n+2)\n∴Even (factor of 2)', answer: 'Proven', explanation: 'Show common factor of 2'},
+      {question: 'Prove n²-n is always even', workingOut: 'n²-n = n(n-1)\nTwo consecutive integers: one must be even\n∴Product is even', answer: 'Proven', explanation: 'Factorize then reason about consecutive'},
+      {question: 'Show (n+1)²-n² = 2n+1', workingOut: '(n+1)² = n²+2n+1\n(n+1)²-n² = n²+2n+1-n² = 2n+1\n∴Shown as required', answer: 'Shown', explanation: 'Expand, simplify, reach exact answer'},
+      {question: 'Prove square of odd number is odd', workingOut: 'Let odd = 2n+1\n(2n+1)² = 4n²+4n+1 = 2(2n²+2n)+1\n∴Odd (2k+1 form)', answer: 'Proven', explanation: 'Express in 2k+1 form'},
+      {question: 'Counter-example: "All prime numbers are odd"', workingOut: '2 is prime AND even\n∴Statement false', answer: 'False (2 is even prime)', explanation: 'One counter-example disproves universal claim'},
+      {question: 'Prove (n+2)²-(n-2)² = 8n', workingOut: '(n+2)² = n²+4n+4\n(n-2)² = n²-4n+4\nDifference = 8n\n∴Proven', answer: 'Proven', explanation: 'Expand both, subtract, simplify'},
+      {question: 'Show product of 3 consecutive integers divisible by 6', workingOut: 'n(n+1)(n+2)\nConsecutive: one divisible by 2, one by 3\n∴Product divisible by 2×3=6', answer: 'Proven', explanation: 'Reason about divisibility properties'}
+    ],
+    practiceQuestions: [{question: 'Proof uses?', options: ['Algebra', 'Examples', 'Calculator', 'Guessing'], answer: 'Algebra', explanation: 'Must use algebra not examples', difficulty: 'easy'}],
+    tips: ['⭐ Start with given', '⭐ Use algebra not numbers', '⭐ Show ALL steps', '⭐ State conclusion'],
+    commonMistakes: ['❌ Using examples not algebra', '❌ Not showing all steps', '❌ Working backwards', '❌ No conclusion'],
+    examStrategy: 'Proof worth 4-6 marks. Grade 8-9. Show EVERY step!'
+  },
+
+  // ==================== MODULE 18: GRADE 9 CHALLENGES & EXAM TECHNIQUE ====================
+  {
+    moduleNumber: 18,
+    title: 'Grade 9 Challenges & Exam Technique',
+    duration: '90 minutes',
+    introduction: 'Master the hardest questions and exam strategy to secure Grade 9! Multi-step problems, unfamiliar contexts, and time management.',
+    keyPoints: ['Grade 9: typically need 75-80% overall', 'Attempt ALL questions (even if unsure)', 'Show that/prove: MUST show ALL working', 'Multi-step: break down, identify what you know', 'Time: ~1.5 mins per mark guideline'],
+    explanation: 'Grade 9 requires mastery of all topics plus problem-solving skills.',
+    examples: [
+      {question: 'Strategy for unfamiliar question?', workingOut: '1. Read carefully\n2. Identify what you know\n3. What do you need?\n4. Which topics might help?\n5. Attempt step by step', answer: 'Break down systematically', explanation: 'Use knowledge creatively'},
+      {question: 'Multi-step: Circle area 36π. Find circumference', workingOut: 'Area = πr² = 36π\nr² = 36, r = 6\nC = 2πr = 2π(6) = 12π', answer: '12π', explanation: 'Extract info from first part, apply to second'},
+      {question: 'Time management: 80 marks in 90 mins. Time per mark?', workingOut: '90÷80 = 1.125 mins/mark\n≈ 1 min 7 sec per mark\nUse 1.5 min guideline for checking time', answer: '~1.5 mins/mark', explanation: 'Rough guideline: 1.5 mins per mark'},
+      {question: 'Show that question: must I reach EXACT answer?', workingOut: 'YES! "Show that" requires EXACT answer\nNo rounding until very end\nState "as required" at end', answer: 'Must be exact', explanation: 'Show that = must reach given answer exactly'},
+      {question: 'Problem-solving: given pattern 3,7,13,21. Find nth term', workingOut: 'Differences: 4,6,8 (not constant)\n2nd diff: 2,2 (constant) → quadratic\nTry n²+2n: 1²+2(1)=3✓, 2²+2(2)=8✗\nTry n²+n+1: works!\nnth term = n²+n+1', answer: 'n²+n+1', explanation: 'Test patterns, verify works'},
+      {question: 'Reverse percentage: £84 after 20% discount. Original?', workingOut: '£84 = 80% (100%-20%)\n1% = 84÷80 = 1.05\n100% = £105', answer: '£105', explanation: 'Work backwards: divide by percentage, multiply by 100'},
+      {question: 'Complex reasoning: Prove triangle area = ½absin(C)', workingOut: 'Draw height h from C\nh = b×sin(A)\nArea = ½×base×height = ½ah\n= ½a(bsin(A))\n= ½absin(C) [using sine rule]', answer: 'Proven', explanation: 'Build up from basic principles'},
+      {question: 'What if stuck on Grade 9 question?', workingOut: 'Don\'t panic!\n1. Write what you know\n2. Attempt ANY step\n3. Move on if stuck 3+ mins\n4. Return later\n5. Partial marks awarded!', answer: 'Attempt and return', explanation: 'Partial working earns marks'}
+    ],
+    practiceQuestions: [{question: 'Grade 9 boundary typically?', options: ['75-80%', '60-65%', '85-90%', '95-100%'], answer: '75-80%', explanation: 'Usually 75-80% for Grade 9', difficulty: 'easy'}],
+    tips: ['⭐ Attempt Grade 9 questions!', '⭐ Show ALL working', '⭐ Check answers make sense', '⭐ Practice past papers', '⭐ Time management', '⭐ Don\'t panic on hard questions', '⭐ Use spare time to check', '⭐ Even partial answer gets marks!'],
+    commonMistakes: ['❌ Giving up too easily', '❌ Not showing working', '❌ Poor time management', '❌ Not attempting hard questions', '❌ Not checking work', '❌ Panic on unfamiliar questions'],
+    examStrategy: `**GRADE 9 STRATEGY:**
+
+**Before Exam:**
+- Practice ALL topics
+- Do past papers under time
+- Learn Grade 9 questions
+- Master proof/show questions
+
+**During Exam:**
+- Read ALL questions first
+- Do easier questions first
+- Attempt EVERY question
+- Show ALL working
+- Check answers make sense
+
+**For "Show that" questions:**
+- Must reach EXACT answer
+- Show EVERY step
+- No rounding until end
+- State "as required"
+
+**Time Management:**
+- ~1.5 minutes per mark
+- Don't get stuck on one question
+- Leave hard questions, come back
+- Use spare time to check
+
+**Multi-Step Problems:**
+1. Read carefully
+2. Identify knowns/unknowns
+3. Break into smaller steps
+4. Solve step by step
+5. Check final answer
+
+**Unfamiliar Contexts:**
+- Don't panic!
+- Use your knowledge
+- Try different approaches
+- Partial marks available
+
+**Top Tips for Grade 9:**
+1. Attempt everything
+2. Show working always
+3. Practice hard questions
+4. Time management
+5. Check work
+6. Stay calm
+
+**Grade 9 Topics:**
+- All modules 1-17
+- Proof
+- Complex problem-solving
+- Unfamiliar applications
+- Multi-step reasoning
+
+**Worth it:**
+Grade 9 = mastery of maths
+Opens doors for A-Level
+Shows excellent understanding
+Demonstrates resilience
+
+**Final Advice:**
+Believe in yourself!
+You've learned all content
+Stay calm and methodical
+Show your working
+Attempt every question
+
+**You can do this! 🎯**`
   }
 ];
 

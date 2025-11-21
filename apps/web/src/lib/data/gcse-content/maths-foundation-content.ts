@@ -205,6 +205,110 @@ Step 3: Now do the division
 24 ÷ 4 = 6`,
         answer: '6',
         explanation: 'Brackets always come first in BIDMAS! You must calculate what\'s inside the brackets (3 + 1 = 4) before doing the division. If you did 24 ÷ 3 first, you\'d get 8 + 1 = 9, which is wrong. Always: Brackets → then other operations.'
+      },
+      {
+        question: 'Calculate: (5 + 3)² - 4 × 3',
+        workingOut: `This is a complex BIDMAS question testing multiple skills!
+
+Step 1: Identify what to do first
+B = Brackets: (5 + 3)
+I = Indices: The ² (square)
+D/M = 4 × 3
+A/S = The subtraction
+
+Step 2: Do BRACKETS first
+5 + 3 = 8
+Now we have: 8² - 4 × 3
+
+Step 3: Do INDICES next
+8² = 8 × 8 = 64
+Now we have: 64 - 4 × 3
+
+Step 4: Do MULTIPLICATION before subtraction
+4 × 3 = 12
+Now we have: 64 - 12
+
+Step 5: Finally do SUBTRACTION
+64 - 12 = 52`,
+        answer: '52',
+        explanation: 'This question has THREE operations from BIDMAS: Brackets (first!), Indices (second!), then Multiplication (before subtraction). Common mistake: Doing 64 - 4 = 60, then 60 × 3 = 180 (wrong!). Always multiply BEFORE you subtract. The working should be: (5+3)=8 → 8²=64 → 4×3=12 → 64-12=52'
+      },
+      {
+        question: 'Temperature problem: The temperature at midnight was -6°C. By midday it had risen by 11°C. What was the midday temperature?',
+        workingOut: `This is a real-world negative number problem.
+
+Step 1: Identify what we know
+Starting temperature: -6°C
+Temperature RISES by: +11°C (rise means add)
+
+Step 2: Write the calculation
+-6 + 11 = ?
+
+Step 3: Method 1 - Number line
+Start at -6 on the number line
+Move 11 places to the RIGHT (because adding)
+-6 → -5 → -4 → -3 → -2 → -1 → 0 → 1 → 2 → 3 → 4 → 5
+
+Step 4: Method 2 - Think about it
+From -6 to 0 is 6 degrees
+From 0 to the answer is 11 - 6 = 5 degrees
+So answer is +5°C
+
+Step 5: Check
+-6 + 11 = 5 ✓`,
+        answer: '5°C',
+        explanation: 'Temperature questions are common in GCSE! When temperature RISES, you add. When it FALLS, you subtract. Starting at -6°C and rising 11°C gives 5°C. Think of it like this: it needs to rise 6°C just to get to 0°C, then it has 5°C more to go, ending at 5°C. Always use a number line if you find negative numbers tricky!'
+      },
+      {
+        question: 'Round 45,682 to: (a) the nearest thousand, (b) 2 significant figures, (c) 1 decimal place if expressed as 45.682',
+        workingOut: `This multi-part rounding question tests different types of rounding.
+
+PART (a): Round to nearest THOUSAND
+
+Step 1: Identify the thousands digit
+45,682 → The 5 represents 5 thousands
+
+Step 2: Look at the next digit
+The next digit is 6 (the hundreds)
+
+Step 3: Apply rule
+6 is ≥5, so round UP
+5 thousands becomes 6 thousands
+
+Step 4: Complete the answer
+46,000 (replace everything after with zeros)
+
+PART (b): Round to 2 SIGNIFICANT FIGURES
+
+Step 1: Find the first 2 significant figures
+45,682 → First two digits are 4 and 5
+
+Step 2: Look at the next digit
+The next digit is 6
+
+Step 3: Apply rule
+6 is ≥5, so round UP
+45 becomes 46
+
+Step 4: Keep the place value correct
+46,000 (need the thousands, so add 3 zeros)
+
+PART (c): Round 45.682 to 1 DECIMAL PLACE
+
+Step 1: Identify 1st decimal place
+45.682 → The 6 is the first decimal place
+
+Step 2: Look at next digit
+The next digit is 8
+
+Step 3: Apply rule
+8 is ≥5, so round UP
+6 becomes 7
+
+Step 4: Write answer
+45.7`,
+        answer: '(a) 46,000  (b) 46,000  (c) 45.7',
+        explanation: 'Notice that (a) and (b) have the same answer (46,000) even though they ask for different things! This is a coincidence with this particular number. Make sure you write the right number of zeros - both need 46,000, not 46 or 460. Part (c) is completely different because we\'re treating it as a decimal. Always read carefully: "nearest thousand" vs "2 sig figs" vs "1 decimal place" are THREE different instructions!'
       }
     ],
     
@@ -537,6 +641,117 @@ Factors of 20: 1, 2, 4, 5, 10, 20
 Only common factor is 1 ✓`,
         answer: '7/20',
         explanation: 'Any percentage can be written as a fraction over 100. Then simplify! 35% = 35/100. Both 35 and 100 divide by 5, giving 7/20. This is fully simplified because 7 and 20 share no common factors except 1. Remember: the question asks for "simplest form" - you must simplify!'
+      },
+      {
+        question: 'Shopping problem: A jacket costs £85. The shop has a "20% off" sale. How much do you pay?',
+        workingOut: `This is a percentage DECREASE problem - very common in GCSE!
+
+METHOD 1: Find the discount, then subtract
+
+Step 1: Find 20% of £85 (the discount amount)
+Using the 10% method:
+10% of £85 = £85 ÷ 10 = £8.50
+20% = 2 × 10% = 2 × £8.50 = £17
+
+Step 2: Subtract the discount from original price
+£85 - £17 = £68
+
+You pay £68 ✓
+
+METHOD 2: Multiplier method (faster!)
+
+Step 1: Work out what percentage you pay
+100% - 20% = 80%
+(If there's 20% OFF, you pay 80%)
+
+Step 2: Convert to decimal multiplier
+80% = 0.8
+
+Step 3: Multiply original by the multiplier
+£85 × 0.8 = £68
+
+You pay £68 ✓
+
+CHECK: Does this make sense?
+20% off means roughly ⅕ off
+⅕ of £85 ≈ £17
+£85 - £17 = £68 ✓ Makes sense!`,
+        answer: '£68',
+        explanation: 'Sale problems are everywhere in GCSE! "20% off" means you pay 80% of the original price. Two methods work: (1) Find 20% and subtract it, or (2) multiply by 0.8 (which represents 80%). Method 2 is faster once you understand it. The key is recognizing that "20% off" means "pay 80%". Common mistake: Finding 20% = £17 and thinking that\'s the answer - NO! £17 is the DISCOUNT, but the question asks how much you PAY, which is £85 - £17 = £68.'
+      },
+      {
+        question: 'Real-world mixed problem: In a class of 30 students, ⅗ are girls. Of the girls, 40% wear glasses. How many girls wear glasses?',
+        workingOut: `This is a multi-step problem combining fractions and percentages.
+
+Step 1: Find how many girls there are
+Need to find ⅗ of 30
+
+Method: Divide by denominator, multiply by numerator
+30 ÷ 5 = 6 (this is ⅕)
+6 × 3 = 18 (this is ⅗)
+
+There are 18 girls ✓
+
+Step 2: Find 40% of the girls
+Need to find 40% of 18
+
+Using 10% method:
+10% of 18 = 18 ÷ 10 = 1.8
+40% = 4 × 1.8 = 7.2
+
+But WAIT - you can't have 0.2 of a person!
+
+Step 3: Check the question
+"How many girls wear glasses?"
+Must be a whole number
+
+Step 4: Round appropriately
+7.2 girls → 7 girls
+(In real context, round down to 7)
+
+Alternative check:
+40% is close to ½
+Half of 18 = 9
+So 7 is reasonable (bit less than half) ✓`,
+        answer: '7 girls',
+        explanation: 'Multi-step problems test whether you can combine different topics. First: ⅗ of 30 = 18 girls. Second: 40% of 18 = 7.2 ≈ 7 girls. Key point: You can\'t have 0.2 of a person, so round to 7. Always think about context - does your answer make sense? If the question was about money, £7.20 would be fine, but people must be whole numbers!'
+      },
+      {
+        question: 'Compare fractions WITHOUT a calculator: Put these in order from smallest to largest: ⅗, ⁷⁄₁₀, ½',
+        workingOut: `When you can't use a calculator, you need a smart method!
+
+METHOD 1: Convert to equivalent fractions with same denominator
+
+Step 1: Find a common denominator
+Denominators are: 5, 10, 2
+Lowest common multiple (LCM) of 5, 10, 2 = 10
+
+Step 2: Convert each fraction to tenths
+⅗ = ?/10
+Multiply top and bottom by 2: (3×2)/(5×2) = 6/10
+
+⁷⁄₁₀ = ⁷⁄₁₀ (already in tenths!)
+
+½ = ?/10
+Multiply top and bottom by 5: (1×5)/(2×5) = 5/10
+
+Step 3: Now compare (same denominator!)
+6/10, ⁷⁄₁₀, 5/10
+
+Step 4: Put in order from smallest to largest
+5/10 < 6/10 < ⁷⁄₁₀
+½ < ⅗ < ⁷⁄₁₀
+
+METHOD 2: Convert to percentages (if you know them!)
+
+⅗ = 60% (6 parts out of 10)
+⁷⁄₁₀ = 70% (7 parts out of 10)
+½ = 50% (standard conversion)
+
+Order: 50% < 60% < 70%
+So: ½ < ⅗ < ⁷⁄₁₀`,
+        answer: '½, ⅗, ⁷⁄₁₀',
+        explanation: 'Without a calculator, convert to a common denominator (usually the LCM of the denominators). Here, 10 works perfectly: ½=5/10, ⅗=6/10, ⁷⁄₁₀ stays as 7/10. Now it\'s easy to see 5<6<7, so ½<⅗<⁷⁄₁₀. Common mistake: Saying ⅗ is bigger than ⁷⁄₁₀ because "3 is less than 7" - you can\'t compare numerators when denominators are different! Always find common denominator first.'
       }
     ],
     
@@ -889,6 +1104,115 @@ Step 5: Write answer
 1:4`,
         answer: '1:4',
         explanation: 'CRITICAL: Always convert to same units BEFORE simplifying! Here, convert 2 hours to 120 minutes. Now we have 30:120, which simplifies to 1:4. If you tried to simplify 30:2 without converting, you\'d get 15:1 which is completely wrong! Same units → then simplify.'
+      },
+      {
+        question: 'Three-way ratio: Tom, Sarah, and Jake share £240 in the ratio 2:3:5. How much does each person get?',
+        workingOut: `Three-way ratios work the same as two-way - just more parts!
+
+Step 1: Add ALL ratio parts
+2 + 3 + 5 = 10 parts total
+
+Step 2: Find the value of ONE part
+£240 ÷ 10 = £24 per part
+
+Step 3: Calculate each person's share
+Tom gets 2 parts: 2 × £24 = £48
+Sarah gets 3 parts: 3 × £24 = £72
+Jake gets 5 parts: 5 × £24 = £120
+
+Step 4: CHECK your answer (essential!)
+£48 + £72 + £120 = £240 ✓
+The shares add up to the total - answer is correct!
+
+Understanding who gets what:
+Jake gets the most (5 parts = £120)
+Sarah gets middle amount (3 parts = £72)
+Tom gets the least (2 parts = £48)
+Ratio 2:3:5 means Jake gets more than double Tom's amount`,
+        answer: 'Tom: £48, Sarah: £72, Jake: £120',
+        explanation: 'Three-way ratios appear in Foundation tier! The method is EXACTLY the same: (1) Add all parts (2+3+5=10), (2) Divide total by parts (£240÷10=£24), (3) Multiply each ratio number by this value (2×£24, 3×£24, 5×£24). ALWAYS check your shares add back to the original total - if they don\'t, you\'ve made an error! Common mistake: Only dividing £240 by 2 or 3, forgetting there are 10 parts total.'
+      },
+      {
+        question: 'Recipe proportion problem: A recipe for 8 people needs 600g chicken, 400ml cream, and 2 onions. Adjust for 6 people.',
+        workingOut: `Real-world proportion - very common in GCSE!
+
+Key principle: Everything scales proportionally
+
+Step 1: Find the scaling factor
+Going from 8 people to 6 people
+6 ÷ 8 = 0.75 (or ¾)
+We need 0.75 times (three-quarters) of each ingredient
+
+METHOD 1: Using 0.75 multiplier
+
+CHICKEN:
+600g × 0.75 = 450g
+
+CREAM:
+400ml × 0.75 = 300ml
+
+ONIONS:
+2 × 0.75 = 1.5 onions
+Since we can't have half an onion easily, round to 1 or 2
+(Use 1 onion if you want less onion flavor, 2 if you like more)
+
+METHOD 2: Find "per person" then multiply
+
+CHICKEN:
+Per person = 600g ÷ 8 = 75g per person
+For 6 people = 75g × 6 = 450g ✓
+
+CREAM:
+Per person = 400ml ÷ 8 = 50ml per person
+For 6 people = 50ml × 6 = 300ml ✓
+
+ONIONS:
+Per person = 2 ÷ 8 = 0.25 per person
+For 6 people = 0.25 × 6 = 1.5 onions ✓
+
+Both methods give same answer!`,
+        answer: '450g chicken, 300ml cream, 1-2 onions',
+        explanation: 'Recipe problems test proportion. Method 1: Find the scaling factor (6÷8=0.75), then multiply all ingredients by 0.75. Method 2: Find "per person" amounts (divide by 8), then multiply by 6. Both work! For ingredients you can\'t split (like onions), round sensibly - 1.5 onions rounds to 1 or 2. Exam tip: If the question says "adjust recipe," show your working for at least one ingredient clearly - you get marks for method even if you make a calculation error!'
+      },
+      {
+        question: 'Best buy with unit conversion: Pack A is 1.5kg for £6.75. Pack B is 800g for £3.20. Which is better value?',
+        workingOut: `Best buy questions need SAME UNITS and SAME AMOUNT to compare!
+
+Problem: Different weights (kg vs g) AND different prices
+
+Step 1: Convert EVERYTHING to same units
+Choose grams (smaller unit is easier)
+Pack A: 1.5kg = 1500g for £6.75
+Pack B: 800g for £3.20
+
+Step 2: Calculate price per 100g for BOTH
+(Using 100g makes it easy to compare)
+
+PACK A:
+Price per gram = £6.75 ÷ 1500 = £0.0045 per gram
+Price per 100g = £0.0045 × 100 = £0.45 = 45p per 100g
+
+PACK B:
+Price per gram = £3.20 ÷ 800 = £0.004 per gram
+Price per 100g = £0.004 × 100 = £0.40 = 40p per 100g
+
+Step 3: Compare
+Pack A: 45p per 100g
+Pack B: 40p per 100g
+Pack B is cheaper per 100g
+
+Step 4: State conclusion
+Pack B is better value (40p per 100g vs 45p per 100g)
+
+Alternative method (per 1kg):
+Pack A: 1.5kg = £6.75, so 1kg = £6.75 ÷ 1.5 = £4.50 per kg
+Pack B: 800g = £3.20, so 1000g = £3.20 × (1000/800) = £3.20 × 1.25 = £4.00 per kg
+Pack B cheaper: £4.00/kg vs £4.50/kg ✓
+
+CHECK: Does this make sense?
+Pack B costs less per weight, so it's better value ✓`,
+        answer: 'Pack B is better value (40p per 100g)',
+        explanation: 'Best buy questions ALWAYS need you to: (1) Convert to SAME UNITS first (kg to g or g to kg), (2) Calculate price per SAME AMOUNT (usually per 100g or per kg), (3) Compare the unit prices, (4) State which is better value. Common mistakes: Forgetting to convert units, or just comparing total prices without considering weights. Remember: You can\'t compare £6.75 for 1.5kg with £3.20 for 800g directly - you must find price per 100g (or per kg) for both!'
       }
     ],
     
@@ -1270,6 +1594,124 @@ Original: 3(0+2) + 2(0+1) = 3(2) + 2(1) = 6 + 2 = 8
 Our answer: 5(0) + 8 = 8 ✓`,
         answer: '5x + 8',
         explanation: 'Two-step process: (1) Expand BOTH brackets, (2) Collect like terms. First: 3(x+2)=3x+6 and 2(x+1)=2x+2. Then collect: 3x+2x=5x and 6+2=8, giving 5x+8. This "expand and simplify" type question is very common - worth 3-4 marks!'
+      },
+      {
+        question: 'Simplify: 5a² + 3a - 2a² + 7a - 1',
+        workingOut: `This has THREE different types of terms - be careful!
+
+Step 1: Identify the DIFFERENT types of terms
+- a² terms (a squared): 5a², -2a²
+- a terms (just a): 3a, 7a  
+- Constant terms (numbers): -1
+
+Step 2: Collect a² terms
+5a² - 2a² = 3a²
+(Think: 5 subtract 2 = 3, keep the a²)
+
+Step 3: Collect a terms  
+3a + 7a = 10a
+(Think: 3 + 7 = 10, keep the a)
+
+Step 4: Write constant terms
+-1 (nothing to combine with)
+
+Step 5: Write final answer in standard form
+3a² + 10a - 1
+(Highest power first, then descending order)
+
+CHECK: Count terms
+Original: 5 terms total
+Answer: 3 terms total ✓
+We've correctly combined like terms!
+
+IMPORTANT: a² and a are COMPLETELY DIFFERENT
+Think of it like: a²= apples squared, a = apples
+You can't combine them!`,
+        answer: '3a² + 10a - 1',
+        explanation: 'When you have different powers (a² vs a), they are DIFFERENT types of terms and cannot be combined! Only collect a² with a², and a with a. Here: collect 5a² and -2a² to get 3a²; collect 3a and 7a to get 10a; constant -1 stays as is. Final answer in descending powers: 3a² + 10a - 1. This type of question tests whether you truly understand "like terms". Common mistake: thinking 3a² + 10a = 13a² (WRONG! Different powers cannot combine).'
+      },
+      {
+        question: 'Expand: 4(2x - 3)',
+        workingOut: `Expanding brackets with SUBTRACTION - watch the signs!
+
+Step 1: Understand what expanding means
+4(2x - 3) means multiply everything inside the bracket by 4
+
+Step 2: Multiply FIRST term by 4
+4 × 2x = 8x
+
+Step 3: Multiply SECOND term by 4
+4 × (-3) = -12
+IMPORTANT: Keep the minus sign!
+
+Step 4: Write expanded form
+8x - 12
+
+Visual method (rectangle):
+     2x    -3
+   ┌────┬────┐
+ 4 │8x  │-12 │
+   └────┴────┘
+
+CHECK: Substitute a value to verify
+Let x = 0:
+Original: 4(2×0 - 3) = 4(0 - 3) = 4(-3) = -12
+Our answer: 8(0) - 12 = 0 - 12 = -12 ✓ Correct!
+
+Common mistakes:
+❌ 4 × (-3) = +12 (wrong sign!)
+❌ 8x + 12 (changed minus to plus)
+✓ 8x - 12 (correct!)`,
+        answer: '8x - 12',
+        explanation: 'When expanding brackets, multiply EVERYTHING inside by the number outside. Pay special attention to negative signs! 4(2x - 3) means: (4 × 2x) and (4 × -3) = 8x - 12. The minus sign stays! Think of it as 4 × (+2x) + 4 × (-3) = 8x + (-12) = 8x - 12. This is a Foundation tier essential skill worth 2-3 marks.'
+      },
+      {
+        question: 'Real-world problem: I think of a number, multiply it by 3, then add 5. The answer is 20. Write an expression and find the number.',
+        workingOut: `This combines algebra with problem-solving!
+
+PART 1: Writing the expression
+
+Step 1: Choose a letter for unknown number
+Let the number be n
+
+Step 2: "multiply it by 3"
+3n
+
+Step 3: "then add 5"
+3n + 5
+
+Step 4: "The answer is 20"
+3n + 5 = 20
+
+This is our expression/equation!
+
+PART 2: Solving the equation
+
+Step 1: Write equation
+3n + 5 = 20
+
+Step 2: Subtract 5 from both sides
+3n + 5 - 5 = 20 - 5
+3n = 15
+
+Step 3: Divide both sides by 3
+3n ÷ 3 = 15 ÷ 3
+n = 5
+
+The number is 5
+
+CHECK: Does it work?
+"multiply by 3": 5 × 3 = 15
+"then add 5": 15 + 5 = 20 ✓
+Answer is 20 ✓ Correct!
+
+Step-by-step translation:
+Think of a number → n
+Multiply by 3 → 3n  
+Add 5 → 3n + 5
+Answer is 20 → 3n + 5 = 20`,
+        answer: 'n = 5',
+        explanation: 'Word problems need you to translate English into algebra! "Think of a number" = n (or x, any letter). "Multiply by 3" = 3n. "Add 5" = 3n + 5. "Answer is 20" = 3n + 5 = 20. Then solve: subtract 5 gives 3n = 15, divide by 3 gives n = 5. ALWAYS check your answer works in the original problem! These "I think of a number" questions are VERY common in Foundation tier - practice them!'
       }
     ],
     
@@ -1691,6 +2133,117 @@ Divide both sides by 4 first
 Then: x = 8`,
         answer: 'x = 8',
         explanation: 'Brackets in equation! Easiest method: expand brackets first (4×x and 4×-3), then solve normally. This gives 4x - 12 = 20. Add 12 to get 4x = 32, then divide by 4 to get x = 8. Check with the bracketed version: 4(8-3) = 4×5 = 20 ✓'
+      },
+      {
+        question: 'Solve: 5x - 2 = 3x + 8 (x appears on both sides!)',
+        workingOut: `When x appears on BOTH sides, we need to get all x terms on ONE side.
+
+Step 1: Write the equation
+5x - 2 = 3x + 8
+
+Step 2: Get all x terms on one side (choose the side with more x)
+Subtract 3x from both sides
+5x - 3x - 2 = 3x - 3x + 8
+2x - 2 = 8
+
+Step 3: Now solve normally - add 2 to both sides
+2x - 2 + 2 = 8 + 2
+2x = 10
+
+Step 4: Divide both sides by 2
+2x ÷ 2 = 10 ÷ 2
+x = 5
+
+Step 5: CHECK with ORIGINAL equation
+Left side: 5(5) - 2 = 25 - 2 = 23
+Right side: 3(5) + 8 = 15 + 8 = 23
+23 = 23 ✓ Correct!
+
+Alternative visualization:
+5x - 2 = 3x + 8
+Move 3x to left: 5x - 3x = 2x
+Move -2 to right: 8 + 2 = 10
+Result: 2x = 10
+Therefore: x = 5`,
+        answer: 'x = 5',
+        explanation: 'x on BOTH sides! Key strategy: (1) Get all x terms on ONE side (subtract 3x from both sides), (2) Get all numbers on the OTHER side (add 2 to both sides), (3) Then solve as normal (divide by 2). This gives 5x-3x = 2x on left, and 8+2 = 10 on right, so 2x = 10, therefore x = 5. ALWAYS check both sides equal when you substitute your answer! This type is worth 3-4 marks and is Grade 4-5 level.'
+      },
+      {
+        question: 'Solve: (x+3)/2 = 5 (Fraction equations!)',
+        workingOut: `Fractions in equations - clear the denominator first!
+
+Step 1: Write the equation
+(x + 3)/2 = 5
+
+Step 2: Multiply BOTH sides by 2 (clears the fraction)
+(x + 3)/2 × 2 = 5 × 2
+x + 3 = 10
+
+Step 3: Now solve the simple equation
+Subtract 3 from both sides
+x + 3 - 3 = 10 - 3
+x = 7
+
+Step 4: CHECK with ORIGINAL equation
+(7 + 3)/2 = 10/2 = 5 ✓ Correct!
+
+Why multiply by 2 first?
+• (x+3)/2 means (x+3) ÷ 2
+• To undo ÷2, we ×2
+• Doing this to both sides keeps it balanced
+• Result: the fraction disappears!
+
+Visual check:
+If x = 7:
+x + 3 = 7 + 3 = 10
+10 ÷ 2 = 5 ✓`,
+        answer: 'x = 7',
+        explanation: 'Fraction equations: multiply BOTH sides by the denominator to clear the fraction! Here, multiply both sides by 2: the left side becomes just (x+3), the right becomes 10. Then solve: x+3=10, so x=7. Check: (7+3)/2 = 10/2 = 5 ✓. This method works for ANY fraction equation - multiply by denominator first, then solve normally. Worth 3 marks!'
+      },
+      {
+        question: 'Real-world problem: The perimeter of a rectangle is 30cm. The length is 2cm more than the width. Find the width.',
+        workingOut: `This combines equations with geometry - very common in GCSE!
+
+Step 1: Define variables
+Let width = w cm
+Length is "2cm more than width" = (w + 2) cm
+
+Step 2: Write formula for perimeter
+Perimeter of rectangle = 2 × length + 2 × width
+P = 2l + 2w
+
+Step 3: Substitute what we know
+Perimeter = 30 cm
+Length = (w + 2) cm
+Width = w cm
+
+30 = 2(w + 2) + 2w
+
+Step 4: Expand brackets
+30 = 2w + 4 + 2w
+
+Step 5: Collect like terms
+30 = 4w + 4
+
+Step 6: Subtract 4 from both sides
+30 - 4 = 4w + 4 - 4
+26 = 4w
+
+Step 7: Divide both sides by 4
+26 ÷ 4 = 4w ÷ 4
+6.5 = w
+
+Width = 6.5 cm
+
+Step 8: CHECK the answer
+Width = 6.5 cm
+Length = 6.5 + 2 = 8.5 cm
+Perimeter = 2(8.5) + 2(6.5) = 17 + 13 = 30 cm ✓
+
+Make sense? 
+Yes! Length (8.5cm) is 2cm more than width (6.5cm) ✓`,
+        answer: 'Width = 6.5 cm',
+        explanation: 'Word problems need you to SET UP the equation first! Let width = w, then length = w+2 (2cm more). Perimeter formula: 2l + 2w = 30. Substitute: 2(w+2) + 2w = 30. Expand: 2w+4+2w = 30. Simplify: 4w+4 = 30. Solve: 4w = 26, so w = 6.5cm. MUST check: if width is 6.5, length is 8.5, perimeter is 2(8.5)+2(6.5) = 30 ✓. These "form and solve" questions are worth 4-5 marks - show ALL working!'
       }
     ],
     
@@ -2126,6 +2679,141 @@ Step 3: Verify the pattern
 Answer: Next two terms are 22 and 15`,
         answer: '22, 15',
         explanation: 'Decreasing sequence! The common difference is negative: -7. Each term is 7 less than the previous term. Continue: 29-7=22, 22-7=15. Don\'t be confused by negative differences - treat them the same way, just subtract instead of add.'
+      },
+      {
+        question: 'Find the nth term of the sequence: 1, 6, 11, 16, 21, ...',
+        workingOut: `Complete method for finding nth term - step by step!
+
+Step 1: Find the common difference
+6 - 1 = 5
+11 - 6 = 5
+16 - 11 = 5
+21 - 16 = 5
+Common difference = 5
+
+Step 2: Start with the times table that matches the difference
+Since difference is 5, we use the 5 times table: 5n
+5 times table gives: 5, 10, 15, 20, 25, ...
+
+Step 3: Compare actual sequence with 5n
+| Position (n) | 5n | Actual Term | Difference |
+|--------------|-----|-------------|------------|
+|      1       |  5  |      1      |    -4      |
+|      2       | 10  |      6      |    -4      |
+|      3       | 15  |     11      |    -4      |
+|      4       | 20  |     16      |    -4      |
+
+Step 4: See what we need to add/subtract
+5n gives values that are 4 MORE than we want
+So we need to SUBTRACT 4
+
+Step 5: Write nth term formula
+nth term = 5n - 4
+
+Step 6: CHECK (essential!)
+n = 1: 5(1) - 4 = 5 - 4 = 1 ✓
+n = 2: 5(2) - 4 = 10 - 4 = 6 ✓
+n = 3: 5(3) - 4 = 15 - 4 = 11 ✓
+n = 4: 5(4) - 4 = 20 - 4 = 16 ✓
+
+Perfect!
+
+Bonus: Find the 50th term
+n = 50: 5(50) - 4 = 250 - 4 = 246`,
+        answer: 'nth term = 5n - 4',
+        explanation: 'Finding nth term method: (1) Common difference = 5, so use 5n, (2) Compare: 5n gives 5,10,15,20... but we want 1,6,11,16..., (3) 5n is always 4 too big, so subtract 4, (4) Formula: 5n - 4. Always check by substituting n=1,2,3! This is worth 3-4 marks and is essential for Grade 5. The common difference tells you which times table to use (5→5n, 3→3n, 7→7n etc).'
+      },
+      {
+        question: 'The nth term is 4n + 3. Is 50 a term in this sequence?',
+        workingOut: `This tests whether a number belongs to a sequence!
+
+Method: Set 4n + 3 = 50 and see if n is a whole number
+
+Step 1: Write the equation
+4n + 3 = 50
+
+Step 2: Solve for n
+4n + 3 = 50
+4n = 50 - 3
+4n = 47
+n = 47 ÷ 4
+n = 11.75
+
+Step 3: Interpret the result
+n = 11.75 is NOT a whole number
+Position numbers must be 1, 2, 3, 4, ... (whole numbers)
+n = 11.75 doesn't make sense as a position
+
+Step 4: Conclusion
+50 is NOT a term in this sequence
+
+Step 5: CHECK nearby terms
+n = 11: 4(11) + 3 = 44 + 3 = 47
+n = 12: 4(12) + 3 = 48 + 3 = 51
+Sequence goes: ..., 47, 51, ...
+50 falls between terms, so it's not in the sequence
+
+Alternative check:
+All terms follow pattern: 4n + 3
+This means: 3, 7, 11, 15, 19, 23, 27, 31, ...
+Every term = 4×(whole number) + 3
+50 = 4×(11.75) + 3 ✗ (not a whole number)
+47 = 4×(11) + 3 ✓ (whole number)
+51 = 4×(12) + 3 ✓ (whole number)`,
+        answer: 'No, 50 is not a term in the sequence',
+        explanation: 'To check if a number is in a sequence: set nth term = that number and solve for n. If n is a whole number, yes it\'s in the sequence. If n is decimal/fraction, no it\'s not. Here: 4n+3=50 gives n=11.75 (decimal), so 50 is NOT a term. The sequence goes ..., 47, 51, ... skipping 50. This question type is worth 2-3 marks and tests true understanding!'
+      },
+      {
+        question: 'Pattern with diagrams: A pattern uses squares. Pattern 1 uses 5 squares, Pattern 2 uses 9 squares, Pattern 3 uses 13 squares. How many squares in Pattern 10?',
+        workingOut: `Visual sequence problem - very common in GCSE!
+
+Step 1: Write the sequence
+Pattern 1: 5 squares
+Pattern 2: 9 squares
+Pattern 3: 13 squares
+Sequence: 5, 9, 13, ...
+
+Step 2: Find the common difference
+9 - 5 = 4
+13 - 9 = 4
+Common difference = +4
+
+Step 3: METHOD 1 - Continue the pattern
+Pattern 1: 5
+Pattern 2: 9 (= 5 + 4)
+Pattern 3: 13 (= 9 + 4)
+Pattern 4: 17 (= 13 + 4)
+Pattern 5: 21 (= 17 + 4)
+Pattern 6: 25 (= 21 + 4)
+Pattern 7: 29 (= 25 + 4)
+Pattern 8: 33 (= 29 + 4)
+Pattern 9: 37 (= 33 + 4)
+Pattern 10: 41 (= 37 + 4)
+
+METHOD 2 - Find nth term, then substitute
+Common difference = 4, so use 4n
+
+Compare with 4n:
+| Pattern | 4n  | Actual | Difference |
+|---------|-----|--------|------------|
+|    1    |  4  |   5    |    +1      |
+|    2    |  8  |   9    |    +1      |
+|    3    | 12  |  13    |    +1      |
+
+Always add 1, so nth term = 4n + 1
+
+Pattern 10 (n = 10):
+4(10) + 1 = 40 + 1 = 41
+
+Both methods give: 41 squares
+
+Step 4: CHECK
+Does pattern make sense?
+Starting with 5, adding 4 each time
+After 9 patterns (1 to 10), we add 4 nine times
+5 + (9 × 4) = 5 + 36 = 41 ✓`,
+        answer: 'Pattern 10 uses 41 squares',
+        explanation: 'Visual pattern questions work exactly like number sequences! The "patterns" are just positions (1st, 2nd, 3rd...), and the squares are the terms. Find the common difference (+4), then either continue the pattern or find nth term (4n+1) and substitute n=10. Both give 41 squares. In exams, draw the patterns if it helps you see the +4 pattern! These are worth 3-4 marks.'
       }
     ],
     
@@ -2574,6 +3262,158 @@ When x = 0: y = 3(0) + 4 = 4 ✓
 Line passes through (0, 4) ✓`,
         answer: 'y = 3x + 4',
         explanation: 'Equation of straight line: y = mx + c. We know m (gradient) = 3 and the line passes through (0, 4), which is the y-intercept, so c = 4. Therefore equation is y = 3x + 4. Any point (0, y) is the y-intercept!'
+      },
+      {
+        question: 'Plot the points A(2, 3), B(-1, 3), C(-1, -2) and D(2, -2). What shape do they form?',
+        workingOut: `Need to plot all 4 points accurately, then identify the shape.
+
+Step 1: Plot point A(2, 3)
+Start at origin
+Move 2 right (x = 2)
+Move 3 up (y = 3)
+Mark point A
+
+Step 2: Plot point B(-1, 3)
+Start at origin
+Move 1 left (x = -1, negative means left)
+Move 3 up (y = 3)
+Mark point B
+Notice: Same y-coordinate as A!
+
+Step 3: Plot point C(-1, -2)
+Start at origin
+Move 1 left (x = -1)
+Move 2 down (y = -2, negative means down)
+Mark point C
+Notice: Same x-coordinate as B!
+
+Step 4: Plot point D(2, -2)
+Start at origin
+Move 2 right (x = 2)
+Move 2 down (y = -2)
+Mark point D
+Notice: Same x-coordinate as A, same y-coordinate as C!
+
+Step 5: Join the points in order
+A → B → C → D → back to A
+
+Step 6: Analyze the shape
+- All 4 sides are straight lines
+- Opposite sides are parallel:
+  AB parallel to DC (both horizontal, y = 3 and y = -2)
+  BC parallel to AD (both vertical, x = -1 and x = 2)
+- AB = 3 units (from x = -1 to x = 2)
+- DC = 3 units
+- BC = 5 units (from y = 3 to y = -2)
+- AD = 5 units
+- All corners are right angles (one horizontal, one vertical meet)
+
+Answer: RECTANGLE`,
+        answer: 'Rectangle',
+        explanation: 'Plot each point carefully using (x, y). A(2,3) is 2 right, 3 up. B(-1,3) is 1 left, 3 up. C(-1,-2) is 1 left, 2 down. D(2,-2) is 2 right, 2 down. When joined, opposite sides are equal and parallel, all angles are 90°, so it\'s a rectangle. Coordinate geometry questions like this are worth 3-4 marks - accuracy in plotting is essential!'
+      },
+      {
+        question: 'Distance-time graph: A car travels from home. In the first 2 hours it travels 100 miles. It then stops for 1 hour. Then it travels another 50 miles in the next hour. Draw and interpret the graph.',
+        workingOut: `Distance-time graphs are VERY common in GCSE!
+
+Step 1: Set up axes
+Horizontal axis = Time (hours)
+Vertical axis = Distance from home (miles)
+Scale: Time 0-4 hours, Distance 0-150 miles
+
+Step 2: Plot segment 1 (First 2 hours)
+Start: (0, 0) - at home, time = 0
+End: (2, 100) - after 2 hours, 100 miles from home
+Draw straight line connecting these points
+This represents constant speed travel
+
+Step 3: Plot segment 2 (Stop for 1 hour)
+Start: (2, 100) - stopped at 100 miles
+End: (3, 100) - still at 100 miles after 1 hour
+Draw horizontal line
+Horizontal line = NO movement (distance stays same)
+
+Step 4: Plot segment 3 (Next hour travels 50 miles)
+Start: (3, 100) - restarting journey
+End: (4, 150) - after 1 more hour, now 150 miles from home
+Draw straight line
+
+INTERPRETATION:
+
+Gradient = Speed
+
+Segment 1 gradient:
+Rise = 100 miles
+Run = 2 hours
+Speed = 100 ÷ 2 = 50 mph
+
+Segment 2 gradient:
+Rise = 0 miles (no change in distance)
+Gradient = 0
+Speed = 0 mph (STOPPED)
+
+Segment 3 gradient:
+Rise = 50 miles
+Run = 1 hour
+Speed = 50 ÷ 1 = 50 mph
+
+SUMMARY:
+- Travels at 50 mph for 2 hours
+- Stops (rest/refuel) for 1 hour
+- Continues at 50 mph for 1 hour
+- Total distance: 150 miles
+- Total time: 4 hours`,
+        answer: 'Graph with 3 segments: sloping up, horizontal, sloping up',
+        explanation: 'Distance-time graphs: gradient = speed! Sloping line = moving, horizontal line = stopped, steeper gradient = faster speed. Here: travels 100 miles in 2 hours (50mph), stops for 1 hour (horizontal line at 100 miles), then travels 50 miles in 1 hour (50mph again). These real-world graph questions are worth 4-6 marks - show clear understanding of what each section represents!'
+      },
+      {
+        question: 'Find the equation of the line with gradient -2 passing through point (3, 5)',
+        workingOut: `Finding equation when given gradient and a point (NOT y-intercept).
+
+Method: Use y = mx + c, substitute point to find c
+
+Step 1: Write what we know
+Gradient m = -2
+Line passes through (3, 5)
+So when x = 3, y = 5
+
+Step 2: Start with y = mx + c
+y = -2x + c
+
+Step 3: Substitute the point (3, 5)
+5 = -2(3) + c
+5 = -6 + c
+
+Step 4: Solve for c
+5 = -6 + c
+5 + 6 = c
+c = 11
+
+Step 5: Write final equation
+y = -2x + 11
+
+Step 6: CHECK with the point
+When x = 3:
+y = -2(3) + 11
+y = -6 + 11
+y = 5 ✓
+Line passes through (3, 5) ✓
+
+Step 7: CHECK gradient makes sense
+Negative gradient (-2) means line slopes downward \\
+Let's verify: try x = 0
+y = -2(0) + 11 = 11 → point (0, 11)
+Try x = 1
+y = -2(1) + 11 = 9 → point (1, 9)
+From (0,11) to (1,9): down 2, across 1 = gradient -2 ✓
+
+Alternative method (for Grade 5):
+Use formula: y - y₁ = m(x - x₁)
+y - 5 = -2(x - 3)
+y - 5 = -2x + 6
+y = -2x + 11 ✓`,
+        answer: 'y = -2x + 11',
+        explanation: 'When given gradient and a point (not y-intercept), use y=mx+c with the point to find c. Here: y=-2x+c, substitute (3,5): 5=-2(3)+c, so 5=-6+c, therefore c=11. Equation: y=-2x+11. Always check your answer by substituting the point back! This is Grade 4-5 level and worth 3-4 marks.'
       }
     ],
     
@@ -3058,6 +3898,161 @@ Triangle is half, so 24 cm² ✓
 Answer: 24 cm²`,
         answer: '24 cm²',
         explanation: 'Triangle area = ½ × base × height. Multiply base × height first (8 × 6 = 48), then halve it (48 ÷ 2 = 24). Answer in cm² (squared!). Quick check: triangle is half of rectangle, so triangle area should be half of (8×6=48) which is 24 ✓'
+      },
+      {
+        question: 'Compound shape: L-shape with dimensions - large rectangle 12cm × 8cm with small rectangle 4cm × 3cm cut from corner. Find area.',
+        workingOut: `Compound shapes need breaking into simpler shapes!
+
+METHOD 1: Subtract the cut-out
+
+Step 1: Find area of LARGE rectangle
+Area = length × width
+= 12 × 8
+= 96 cm²
+
+Step 2: Find area of CUT-OUT small rectangle
+Area = 4 × 3
+= 12 cm²
+
+Step 3: Subtract cut-out from large
+96 - 12 = 84 cm²
+
+METHOD 2: Split into two rectangles (no cut-out)
+
+If the L-shape is:
+- Horizontal part: 12cm × 5cm (8-3=5cm height)
+- Vertical part: 8cm × 3cm (12-4=8cm width)
+
+Step 1: Area of horizontal part
+12 × 5 = 60 cm²
+
+Step 2: Area of vertical part
+8 × 3 = 24 cm²
+
+Step 3: Add both areas
+60 + 24 = 84 cm²
+
+Both methods give 84 cm² ✓
+
+CHECK: Does answer make sense?
+Large rectangle = 96 cm²
+Our answer (84 cm²) is less than 96 ✓
+We removed 12 cm², so 96-12=84 ✓
+
+EXAM TIP:
+Draw lines to show how you split the shape
+Label all dimensions clearly`,
+        answer: '84 cm²',
+        explanation: 'Compound shapes: either (1) SUBTRACT - find whole area, subtract cut-out, or (2) ADD - split into rectangles and add. Both work! Here: large rectangle (12×8=96) minus cut-out (4×3=12) equals 84 cm². Always show your method clearly - compound shape questions worth 4-5 marks! Draw lines showing how you split/subtract.'
+      },
+      {
+        question: 'Parallel lines and angles: Two parallel lines cut by a transversal. One angle is 65°. Find all other angles.',
+        workingOut: `Parallel lines create special angle relationships!
+
+Given: Parallel lines with one angle = 65°
+
+ANGLE FACTS FOR PARALLEL LINES:
+
+1. CORRESPONDING ANGLES (F-shape)
+   - Equal to each other
+   - If one is 65°, corresponding angle = 65°
+
+2. ALTERNATE ANGLES (Z-shape)
+   - Equal to each other  
+   - If one is 65°, alternate angle = 65°
+
+3. CO-INTERIOR ANGLES (C-shape or U-shape)
+   - Add up to 180°
+   - If one is 65°, co-interior = 180° - 65° = 115°
+
+4. VERTICALLY OPPOSITE ANGLES
+   - Equal to each other
+   - If one is 65°, opposite = 65°
+
+So around the transversal we have:
+- Four angles of 65°
+- Four angles of 115°
+
+Step-by-step for all 8 angles:
+
+At top intersection:
+Angle a = 65° (given)
+Angle b = 115° (angles on straight line: 180-65)
+Angle c = 65° (vertically opposite to a)
+Angle d = 115° (vertically opposite to b)
+
+At bottom intersection:
+Angle e = 65° (corresponding to a)
+Angle f = 115° (corresponding to b)
+Angle g = 65° (corresponding to c, or alternate to a)
+Angle h = 115° (corresponding to d, or alternate to b)
+
+CHECK:
+All acute angles = 65° ✓
+All obtuse angles = 115° ✓
+65° + 115° = 180° ✓`,
+        answer: 'Four angles of 65°, four angles of 115°',
+        explanation: 'Parallel lines cut by transversal create predictable angle patterns! Given 65°: corresponding angles=65° (F-shape), alternate angles=65° (Z-shape), co-interior angles=115° (add to 180°, C/U-shape), angles on line with 65°=115° (180-65). These parallel line questions worth 3-4 marks - ALWAYS state which angle rule (alternate/corresponding/co-interior)!'
+      },
+      {
+        question: 'Circle problem: Circle has diameter 14cm. Find (a) radius, (b) circumference, (c) area. Use π = 3.14.',
+        workingOut: `Circle calculations - essential geometry!
+
+Given: Diameter = 14 cm, π = 3.14
+
+PART (a): Find RADIUS
+
+Formula: radius = diameter ÷ 2
+
+Step 1: Calculate
+radius = 14 ÷ 2
+radius = 7 cm
+
+PART (b): Find CIRCUMFERENCE
+
+Formula: C = π × diameter
+Or: C = 2 × π × radius
+
+Method 1 (using diameter):
+C = π × d
+C = 3.14 × 14
+C = 43.96 cm
+
+Method 2 (using radius):
+C = 2 × π × r
+C = 2 × 3.14 × 7
+C = 6.28 × 7
+C = 43.96 cm ✓ Same answer!
+
+PART (c): Find AREA
+
+Formula: A = π × r²
+
+Step 1: Square the radius FIRST
+r² = 7²
+r² = 49
+
+Step 2: Multiply by π
+A = 3.14 × 49
+A = 153.86 cm²
+
+SUMMARY:
+(a) Radius = 7 cm
+(b) Circumference = 43.96 cm (or 44 cm)
+(c) Area = 153.86 cm² (or 154 cm²)
+
+COMMON MISTAKES TO AVOID:
+❌ Confusing diameter and radius
+❌ For area: 2πr instead of πr² (wrong formula!)
+❌ For area: π × 2r instead of π × r²
+✓ For area: SQUARE radius first, then × π
+
+UNITS CHECK:
+Radius: cm (length)
+Circumference: cm (length around)
+Area: cm² (MUST be squared!)`,
+        answer: '(a) 7cm (b) 43.96cm (c) 153.86cm²',
+        explanation: 'Circle formulas: radius=diameter÷2, circumference=πd or 2πr, area=πr². Here: (a) r=14÷2=7cm, (b) C=3.14×14=43.96cm, (c) A=3.14×7²=3.14×49=153.86cm². Remember: SQUARE radius FIRST for area, then multiply by π! Units: radius & circumference in cm, area in cm². Circle questions worth 4-6 marks total.'
       }
     ],
     
@@ -3597,6 +4592,149 @@ Yes! 3-4-5 triple
 Answer: 4 m up the wall`,
         answer: '4 m',
         explanation: 'Real-world problem! The ladder (5m) is the hypotenuse, base is 3m from wall, finding height. Use c² - a²: 5² - 3² = 25 - 9 = 16, so height = √16 = 4m. This is the classic 3-4-5 Pythagorean triple - very common in exams! Always sketch the problem to identify which side is which.'
+      },
+      {
+        question: 'Find diagonal of rectangle: length 20cm, width 15cm (answer to 1 d.p.)',
+        workingOut: `Rectangle diagonal creates two right-angled triangles!
+
+Step 1: Sketch the rectangle
+Label: length = 20 cm, width = 15 cm
+Draw diagonal - this splits rectangle into 2 right triangles
+
+Step 2: Identify the right triangle
+The diagonal is the HYPOTENUSE
+Length and width are the two shorter sides
+
+Step 3: Label for Pythagoras
+a = 20 cm (length)
+b = 15 cm (width)
+c = diagonal (hypotenuse - finding this)
+
+Step 4: Apply Pythagoras
+c² = a² + b²
+c² = 20² + 15²
+
+Step 5: Calculate squares
+c² = 400 + 225
+c² = 625
+
+Step 6: Square root
+c = √625
+c = 25 cm
+
+Step 7: Round to 1 d.p.
+c = 25.0 cm (already exact)
+
+Step 8: Check
+Is 25 longer than 20 and 15? Yes ✓
+Is this a Pythagorean triple?
+20 = 4 × 5, 15 = 3 × 5, 25 = 5 × 5
+This is 3-4-5 times 5! (15-20-25) ✓
+
+Answer: 25.0 cm`,
+        answer: '25.0 cm',
+        explanation: 'Rectangle diagonals make right triangles! The diagonal is hypotenuse, length and width are shorter sides. Here: 20² + 15² = 400 + 225 = 625, so diagonal = √625 = 25cm. This is the 3-4-5 triple multiplied by 5 (15-20-25). Rectangle diagonal problems are very common - always draw a diagram! Worth 3-4 marks.'
+      },
+      {
+        question: 'Find x to 2 d.p.: Right triangle with sides 7cm and 11cm, where 11cm is hypotenuse',
+        workingOut: `Finding shorter side when answer isn't a whole number!
+
+Step 1: Identify problem type
+Hypotenuse = 11 cm (longest, given)
+One side = 7 cm (given)
+Other side = x (finding this)
+
+Step 2: Label
+c = 11 cm (hypotenuse)
+a = 7 cm (known side)
+b = x (finding)
+
+Step 3: Use Pythagoras rearranged
+a² + b² = c²
+b² = c² - a²
+
+Step 4: Substitute
+x² = 11² - 7²
+x² = 121 - 49
+x² = 72
+
+Step 5: Square root
+x = √72
+x = 8.485... (calculator shows more decimals)
+
+Step 6: Round to 2 d.p.
+Look at 3rd decimal: 8.485...
+Third decimal is 5, so round UP
+x = 8.49 cm (to 2 d.p.)
+
+Step 7: CHECK - does it make sense?
+7² + 8.49² ≈ 49 + 72.08 ≈ 121 ≈ 11² ✓
+x (8.49) is less than hypotenuse (11) ✓
+x is more than other side (7) ✓
+
+Step 8: Calculator check
+√72 = 8.485281374...
+Rounded to 2 d.p. = 8.49 ✓
+
+Important notes:
+- √72 cannot be simplified to whole number
+- MUST use calculator
+- Follow rounding instruction carefully
+- Keep more decimals in working, round at end`,
+        answer: 'x = 8.49 cm',
+        explanation: 'Not all Pythagoras answers are neat! Use c² - a²: 11² - 7² = 121 - 49 = 72, so x = √72 = 8.485... = 8.49cm (2 d.p.). Always use calculator for √72, keep extra decimals while working, round only at the end. Check: 7² + 8.49² ≈ 121 ≈ 11² ✓. Non-integer answers worth 3-4 marks - rounding correctly is essential!'
+      },
+      {
+        question: 'Isosceles triangle: Two equal sides are 10cm each, base is 12cm. Find the height (perpendicular from apex to base).',
+        workingOut: `Isosceles triangle height creates TWO right triangles!
+
+Step 1: Sketch the isosceles triangle
+Two equal sides = 10 cm each
+Base = 12 cm
+Height splits base in HALF
+
+Step 2: Understand the geometry
+Height from apex to base creates right angle
+Height splits base: 12 ÷ 2 = 6 cm each side
+This creates TWO identical right triangles
+
+Step 3: Focus on ONE right triangle
+Hypotenuse = 10 cm (slant side)
+Base = 6 cm (half of 12 cm)
+Height = h (what we're finding)
+
+Step 4: Apply Pythagoras
+h² + 6² = 10²
+h² + 36 = 100
+
+Step 5: Rearrange
+h² = 100 - 36
+h² = 64
+
+Step 6: Square root
+h = √64
+h = 8 cm
+
+Step 7: Verify
+6² + 8² = 36 + 64 = 100 = 10² ✓
+This is 3-4-5 doubled (6-8-10)!
+
+Step 8: Does answer make sense?
+Height (8 cm) is less than slant side (10 cm) ✓
+Creates realistic triangle shape ✓
+
+DIAGRAM:
+       /\\
+      /  \\  10cm
+   10/    \\
+    /  h   \\
+   /________\\
+      12cm
+   |← 6 →|← 6 →|
+
+Height h = 8 cm`,
+        answer: 'Height = 8 cm',
+        explanation: 'Isosceles triangle: height to base creates 2 right triangles! Height splits 12cm base into two 6cm parts. Now use Pythagoras: 10² - 6² = 100 - 36 = 64, so h = √64 = 8cm. This is the 3-4-5 triple doubled (6-8-10)! Isosceles+Pythagoras questions are Grade 5 level, worth 4-5 marks. Always draw the height line to see the right triangles!'
       }
     ],
     
@@ -4163,6 +5301,65 @@ a (12.3) < hypotenuse (15) ✓
 Answer: a = 12.3 cm`,
         answer: 'a = 12.3 cm',
         explanation: 'Need adjacent (a), have hypotenuse (15) and angle (35°) → use CAH (cos = A/H). Write: cos(35°) = a/15. Rearrange: a = 15 × cos(35°) = 12.3 cm. CAH is for when you have Adjacent and Hypotenuse!'
+      },
+      {
+        question: 'Find angle x when opposite=7cm, adjacent=9cm',
+        workingOut: `Finding angle using inverse trig - essential Grade 5 skill!
+
+Step 1: Which ratio to use?
+Have: Opposite and Adjacent
+Use: TOA (tan = O/A)
+
+Step 2: Write equation
+tan(x) = O/A = 7/9
+
+Step 3: Calculate the fraction
+tan(x) = 0.7778
+
+Step 4: Use inverse tan to find angle
+x = tan⁻¹(0.7778)
+(Press SHIFT then TAN, then enter 0.7778)
+
+Step 5: Calculate
+x = 37.9° (to 1 d.p.)
+
+Answer: x = 37.9°`,
+        answer: 'x = 37.9°',
+        explanation: 'Finding angle: use inverse! O/A → tan⁻¹(7/9) = 37.9°. Remember: SHIFT+TAN for tan⁻¹!'
+      },
+      {
+        question: 'Real-world: Tree casts 12m shadow, angle of elevation to sun is 42°. Find tree height.',
+        workingOut: `Step 1: Draw diagram - right triangle
+Shadow = adjacent = 12m
+Height = opposite = h
+Angle = 42°
+
+Step 2: Use TOA
+tan(42°) = h/12
+
+Step 3: Solve
+h = 12 × tan(42°) = 10.8m
+
+Answer: 10.8m`,
+        answer: '10.8m',
+        explanation: 'Shadow problems use tan! Height/shadow = tan(angle). h = 12×tan(42°) = 10.8m.'
+      },
+      {
+        question: 'Ladder problem: 8m ladder at 65° to ground. How high up wall?',
+        workingOut: `Step 1: Identify triangle parts
+Ladder = hypotenuse = 8m
+Height = opposite = h
+Angle = 65°
+
+Step 2: Use SOH
+sin(65°) = h/8
+
+Step 3: Solve
+h = 8 × sin(65°) = 7.25m
+
+Answer: 7.25m`,
+        answer: '7.25m',
+        explanation: 'Ladder = hypotenuse, height = opposite → SOH! h = 8×sin(65°) = 7.25m.'
       }
     ],
     
@@ -4707,6 +5904,40 @@ Or: "Reflection in the line y = 0"
 Both acceptable!`,
         answer: 'x-axis (or line y = 0)',
         explanation: 'Points (4,2) and (4,-2) are same distance above and below y=0 (the x-axis). The x-axis is the mirror line. Same x-coordinate (4) but opposite y-values (2 and -2) confirms this. Both "x-axis" and "y = 0" are correct names for this line.'
+      },
+      {
+        question: 'Rotation 90° clockwise, center (0,0): Point (2,5) moves to where?',
+        workingOut: `90° clockwise rotation rule: (x,y) → (y,-x)
+
+Step 1: Apply rule
+(2,5) → (5,-2)
+
+Answer: (5,-2)`,
+        answer: '(5,-2)',
+        explanation: '90° clockwise about origin: (x,y)→(y,-x). So (2,5)→(5,-2).'
+      },
+      {
+        question: 'Combined transformation: Translate (3,1) then reflect in y-axis. Point (4,2) moves to?',
+        workingOut: `Step 1: Translation (3,1)
+(4,2) + (3,1) = (7,3)
+
+Step 2: Reflect in y-axis
+(7,3) → (-7,3)
+
+Answer: (-7,3)`,
+        answer: '(-7,3)',
+        explanation: 'Do transformations in order! First translate: (4,2)+(3,1)=(7,3). Then reflect in y-axis: x changes sign → (-7,3).'
+      },
+      {
+        question: 'Enlargement SF -2, center (0,0): Point (3,1) moves to?',
+        workingOut: `Negative scale factor means: enlarge AND reflect in center
+
+Step 1: Apply SF -2
+(3×-2, 1×-2) = (-6,-2)
+
+Answer: (-6,-2)`,
+        answer: '(-6,-2)',
+        explanation: 'Negative SF: enlarge by magnitude (2) and rotate 180° about center. (3,1)×(-2) = (-6,-2).'
       }
     ],
     
@@ -5203,6 +6434,45 @@ Alternative: P(at least one H) = 1 - P(TT)
 Answer: 3/4 or 0.75`,
         answer: 'P(at least one head) = 3/4 or 0.75',
         explanation: 'Tree diagram shows all outcomes. Multiply along branches (HH: 0.5×0.5=0.25). "At least one head" means HH, HT, or TH - add these paths: 0.25+0.25+0.25=0.75. Or use P(at least one) = 1 - P(none) = 1 - 0.25 = 0.75. Remember: multiply along, add across!'
+      },
+      {
+        question: 'Bag has 3 red, 5 blue, 2 green balls. P(red or green)?',
+        workingOut: `Step 1: Find P(red)
+P(red) = 3/10
+
+Step 2: Find P(green)
+P(green) = 2/10
+
+Step 3: Add (OR means add)
+P(red OR green) = 3/10 + 2/10 = 5/10 = 1/2
+
+Answer: 1/2 or 0.5`,
+        answer: '1/2',
+        explanation: 'OR means ADD probabilities! P(red)=3/10, P(green)=2/10, so P(red OR green)=5/10=1/2.'
+      },
+      {
+        question: 'Two independent events: P(A)=0.3, P(B)=0.4. Find P(A AND B).',
+        workingOut: `Independent means one doesn't affect the other
+
+AND means MULTIPLY:
+P(A AND B) = P(A) × P(B)
+= 0.3 × 0.4
+= 0.12
+
+Answer: 0.12`,
+        answer: '0.12',
+        explanation: 'Independent events AND together: MULTIPLY! P(A AND B) = 0.3 × 0.4 = 0.12.'
+      },
+      {
+        question: 'Relative frequency: Coin flipped 50 times, lands heads 32 times. Estimate P(heads).',
+        workingOut: `Relative frequency = number of successes / total trials
+
+P(heads) ≈ 32/50
+= 0.64
+
+Answer: 0.64`,
+        answer: '0.64',
+        explanation: 'Relative frequency estimates probability from experiments: successes/trials = 32/50 = 0.64.'
       },
       {
         question: 'A dice is rolled 120 times. How many times would you expect to roll a number greater than 4?',
@@ -5859,6 +7129,52 @@ Check: Most values are 2 (freq 5)
 Mean of 1.9 makes sense ✓`,
         answer: 'Mean = 1.9',
         explanation: 'For frequency tables: multiply each value by its frequency, add these products, then divide by total frequency. Sum = (1×3)+(2×5)+(3×2) = 3+10+6 = 19. Total frequency = 3+5+2 = 10. Mean = 19÷10 = 1.9. Don\'t just average the scores (1,2,3) - must weight by frequency!'
+      },
+      {
+        question: 'Find median from frequency table: Score 1(freq 4), 2(freq 6), 3(freq 5)',
+        workingOut: `Step 1: Find total frequency
+4+6+5=15 values
+
+Step 2: Find middle position
+(15+1)÷2 = 8th value
+
+Step 3: Count cumulative frequency
+1: 4 values (positions 1-4)
+2: 6 values (positions 5-10)
+3: 5 values (positions 11-15)
+
+8th value is in the "2" group
+
+Answer: Median = 2`,
+        answer: 'Median = 2',
+        explanation: 'For grouped data: find middle position (8th of 15), count cumulative frequency to locate which group contains it. Median = 2.'
+      },
+      {
+        question: 'Compare two datasets: Set A mean=50, range=20. Set B mean=45, range=35. Which is more consistent?',
+        workingOut: `Smaller range = more consistent
+
+Set A: range 20 (more consistent)
+Set B: range 35 (less consistent)
+
+Answer: Set A`,
+        answer: 'Set A (smaller range)',
+        explanation: 'Range measures spread. Smaller range = data closer together = more consistent. Set A (range 20) is more consistent than Set B (range 35).'
+      },
+      {
+        question: 'Outlier: Data set 12,15,13,14,45,16. Identify outlier and explain effect on mean.',
+        workingOut: `45 is outlier (much larger than others)
+
+Mean WITH outlier:
+(12+15+13+14+45+16)÷6 = 115÷6 = 19.2
+
+Mean WITHOUT outlier:
+(12+15+13+14+16)÷5 = 70÷5 = 14
+
+Effect: Outlier increases mean significantly
+
+Answer: 45 is outlier; increases mean from 14 to 19.2`,
+        answer: '45 is outlier, raises mean',
+        explanation: 'Outliers are extreme values. 45 is much larger than others (12-16 range). It pulls the mean UP from 14 to 19.2. Median less affected by outliers.'
       }
     ],
     
@@ -6505,6 +7821,38 @@ Or in terms of π:
 V = π × 25 × 8 = 200π cm³`,
         answer: '628cm³ (or 200π cm³)',
         explanation: 'Cylinder volume = πr²h = (area of circle) × height. With r=5, h=8: V = π×5²×8 = π×25×8 = 200π. Using π=3.14: 200×3.14 = 628cm³. Remember: square radius first (5²=25), then multiply by π and height. Cubed units for volume!'
+      },
+      {
+        question: 'Trapezium area: parallel sides 8cm and 12cm, height 5cm',
+        workingOut: `Formula: A = ½(a+b)h
+
+Step 1: a=8, b=12, h=5
+Step 2: A = ½(8+12)×5 = ½×20×5 = 50cm²
+
+Answer: 50cm²`,
+        answer: '50cm²',
+        explanation: 'Trapezium: A=½(a+b)h where a,b are parallel sides. A=½(8+12)×5=½×20×5=50cm².'
+      },
+      {
+        question: 'Sphere volume: radius 3cm, use π=3.14',
+        workingOut: `Formula: V = 4/3πr³
+
+Step 1: r³ = 3³ = 27
+Step 2: V = 4/3×3.14×27 = 113.04cm³
+
+Answer: 113cm³`,
+        answer: '113cm³',
+        explanation: 'Sphere: V=4/3πr³. With r=3: V=4/3×π×27≈113cm³. Cube radius first!'
+      },
+      {
+        question: 'Compound shape: Rectangle 10×6 with semicircle (diameter 6) on top',
+        workingOut: `Step 1: Rectangle area = 10×6 = 60cm²
+Step 2: Semicircle area = ½πr² = ½π×3² = 14.13cm²
+Step 3: Total = 60+14.13 = 74.13cm²
+
+Answer: 74cm²`,
+        answer: '74cm²',
+        explanation: 'Compound: split into rectangle + semicircle. Rectangle=60, semicircle≈14, total≈74cm².'
       }
     ],
     
@@ -7215,6 +8563,43 @@ Common mistake: 3x² ≠ (3x)²
 (3x)² would mean 3x × 3x = 9x²`,
         answer: '43',
         explanation: 'Substitution: replace x with 4. Calculate 3x² - 5 = 3×(4²) - 5 = 3×16 - 5 = 48 - 5 = 43. Remember BIDMAS: powers before multiply! x² means x×x, not 2×x. Show each step. Common error: calculating (3×4)² = 144 instead of 3×(4²) = 48.'
+      },
+      {
+        question: 'Rearrange v=u+at to make t the subject',
+        workingOut: `Step 1: v = u + at
+Step 2: Subtract u: v - u = at
+Step 3: Divide by a: (v-u)/a = t
+Step 4: Write: t = (v-u)/a
+
+Answer: t = (v-u)/a`,
+        answer: 't = (v-u)/a',
+        explanation: 'Rearranging: isolate t by inverse operations. Subtract u, then divide by a. Answer: t=(v-u)/a.'
+      },
+      {
+        question: 'Nth term of 7,12,17,22...',
+        workingOut: `Difference = +5
+Pattern: 5n
+Compare: 5n gives 5,10,15,20...
+Actual: 7,12,17,22... (always 2 more)
+nth term = 5n + 2
+
+Answer: 5n + 2`,
+        answer: '5n + 2',
+        explanation: 'Common difference 5 → use 5n. But 5n gives 5,10,15... and we want 7,12,17... (2 more each time). So: 5n+2.'
+      },
+      {
+        question: 'Solve by trial and improvement: x³=50 (answer to 1 d.p.)',
+        workingOut: `Try x=3: 3³=27 (too small)
+Try x=4: 4³=64 (too big)
+Try x=3.5: 3.5³=42.875 (too small)
+Try x=3.7: 3.7³=50.653 (too big)
+Try x=3.6: 3.6³=46.656 (too small)
+Try x=3.65: 3.6 5³=48.627 (too small)
+Try x=3.68: 3.68³=49.836 (close!)
+
+Answer: x ≈ 3.7`,
+        answer: 'x ≈ 3.7',
+        explanation: 'Trial & improvement: test values, narrow down. x³=50 → x≈3.7 (to 1 d.p.). Show all trials for method marks!'
       }
     ],
     
