@@ -33,7 +33,9 @@ export function SuccessStories() {
         setStories(activeStories);
       } catch (error) {
         console.error('Error loading success stories:', error);
+        console.error('Full error details:', error);
       } finally {
+        console.log('Success stories loading finished. Stories found:', stories.length);
         setLoading(false);
       }
     }

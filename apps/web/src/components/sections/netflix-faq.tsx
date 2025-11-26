@@ -9,7 +9,7 @@ export function NetflixFAQ() {
   const faqs = [
     {
       question: "What's included in each subscription plan?",
-      answer: "Basic (£9.99/month) includes all courses and webinars. Premium (£19.99/month) adds AI tools and premium content. Pro (£39.99/month) includes everything plus 1 paid addon monthly and personal tutoring."
+      answer: "Our single subscription plan at £29.99/month (approximately 98p per day) gives you unlimited access to all GCSE and A-Level courses, life skills modules, progress tracking, and our comprehensive learning platform. No hidden fees or tiered restrictions."
     },
     {
       question: "Can I cancel my subscription anytime?",
@@ -20,25 +20,25 @@ export function NetflixFAQ() {
       answer: "Gen Elevate is designed for students from Year 6 (age 10-11) through A-Level (age 18). Our content is carefully curated and age-appropriate for each educational level."
     },
     {
-      question: "Do you offer certificates upon completion?",
-      answer: "Yes! All subscribers receive verified certificates of completion for all courses. These certificates are recognized by educational institutions and can be shared on LinkedIn and other professional platforms."
-    },
-    {
-      question: "How does the AI tutoring work?",
-      answer: "Our AI tutor (available with Premium and Pro plans) analyzes your learning patterns, identifies knowledge gaps, and provides personalized recommendations. It's available 24/7 to answer questions, explain concepts, and suggest practice exercises tailored to your needs."
+      question: "How does the learning platform work?",
+      answer: "Our platform provides structured learning modules with comprehensive content, examples, and exercises. You can track your progress through each module, with sequential unlocking to ensure proper learning progression. The platform includes both academic subjects and essential life skills."
     },
     {
       question: "Can I access content offline?",
-      answer: "All subscribers can download course videos and materials for offline access through our mobile app. This is perfect for studying during commutes or in areas with limited internet connectivity."
+      answer: "Currently, our platform is web-based and requires an internet connection to access content. We're working on offline capabilities for future updates to enhance your learning experience."
     },
     {
       question: "What subjects do you cover?",
-      answer: "We cover all major subjects including Mathematics, Sciences (Physics, Chemistry, Biology), English, History, Geography, Computer Science, Economics, Business Studies, and more. New subjects are added regularly."
+      answer: "We offer comprehensive GCSE courses in Mathematics, Physics, Chemistry, Biology, English Language & Literature, History, Geography, and Computer Science. We also provide essential life skills modules covering entrepreneurship, communication, mental health, and professional development."
     },
     {
-      question: "How do live webinars work?",
-      answer: "Live webinars are interactive sessions with expert educators. You can ask questions in real-time, participate in polls, and engage with other students. All sessions are recorded and available for later viewing."
-    }
+      question: "How is progress tracked?",
+      answer: "Your learning progress is automatically tracked as you complete lessons and modules. The platform uses a sequential unlock system where completing one module unlocks the next, ensuring a structured learning path that builds knowledge progressively."
+    },
+    {
+      question: "What makes Gen Elevate different from other learning platforms?",
+      answer: "Gen Elevate combines comprehensive GCSE academic content with essential life skills that aren't taught in traditional education. Our unique approach prepares students not just for exams, but for real-world success with modules on entrepreneurship, communication, and professional development."
+    },
   ];
 
   const toggleFAQ = (index: number) => {

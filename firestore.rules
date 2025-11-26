@@ -664,6 +664,24 @@ service cloud.firestore {
       allow create, update, delete: if isGlobalAdmin();
     }
 
+    // Experts collection - Public read access for homepage display
+    match /experts/{expertId} {
+      // Anyone can read expert profiles (for homepage display)
+      allow read: if true;
+      
+      // Only admins can create, update, or delete expert profiles
+      allow create, update, delete: if isGlobalAdmin();
+    }
+
+    // Success Stories collection - Public read access for homepage display
+    match /successStories/{storyId} {
+      // Anyone can read success stories (for homepage display)
+      allow read: if true;
+      
+      // Only admins can create, update, or delete success stories
+      allow create, update, delete: if isGlobalAdmin();
+    }
+
     // Default deny all other documents
     match /{document=**} {
       allow read, write: if false;
