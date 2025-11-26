@@ -178,7 +178,6 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       items: [
         { name: 'Gen Elevate AI', href: '/ai', icon: Sparkles },
         { name: 'My DNA', href: '/dna', icon: Zap },
-        { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
       ]
     },
     {
@@ -186,6 +185,13 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       name: 'Rewards',
       icon: Award,
       href: '/rewards',
+      type: 'single' as const
+    },
+    {
+      id: 'addons',
+      name: 'Add-Ons',
+      icon: ShoppingBag,
+      href: '/addons',
       type: 'single' as const
     },
     {
@@ -288,11 +294,9 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       name: 'AI & Tools',
       icon: Sparkles,
       type: 'dropdown' as const,
-      highlight: true,
       items: [
         { name: 'AI Assistant', href: '/ai', icon: Sparkles },
         { name: 'DNA Tracking', href: '/dna', icon: Zap },
-        { name: 'Add-Ons', href: '/addons', icon: ShoppingBag },
       ]
     },
     {
@@ -301,6 +305,14 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
       href: '/rewards',
       icon: Award,
       type: 'single' as const
+    },
+    {
+      id: 'addons',
+      name: 'Add-Ons',
+      href: '/addons',
+      icon: ShoppingBag,
+      type: 'single' as const,
+      highlight: true
     },
   ];
 

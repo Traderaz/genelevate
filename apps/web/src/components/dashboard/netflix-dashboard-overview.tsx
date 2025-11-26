@@ -91,8 +91,7 @@ export function NetflixDashboardOverview() {
         gradient: 'from-purple-500/20 to-purple-600/10',
         items: [
           { name: 'AI Assistant', href: '/ai', icon: Sparkles, description: 'Get personalized help', premium: true },
-          { name: 'DNA Tracking', href: '/dna', icon: Zap, description: 'Track your learning DNA', premium: true },
-          { name: 'Add-Ons', href: '/addons', icon: ShoppingBag, description: 'Premium features and tools', premium: false }
+          { name: 'DNA Tracking', href: '/dna', icon: Zap, description: 'Track your learning DNA', premium: true }
         ]
       },
       {
