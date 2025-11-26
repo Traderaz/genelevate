@@ -102,31 +102,16 @@ export function NetflixRegisterForm() {
         const response = await fetch('/api/auth/validate-parent-signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ childEmail: formData.childEmail }),
+          body: JSON.stringify({ 
+            childEmail: formData.childEmail,
+            parentEmail: formData.email 
+          }),
         });
 
         const result = await response.json();
         
-        if (!response.ok) {
+        if (!response.ok || !result.valid) {
           setError(result.error || 'Unable to validate child account.');
-          setIsLoading(false);
-          return;
-        }
-
-        if (!result.childExists) {
-          setError('No account found with that email address. Please check and try again.');
-          setIsLoading(false);
-          return;
-        }
-
-        if (!result.hasActiveSubscription) {
-          setError('Your child must have an active paid subscription before you can create a parent account.');
-          setIsLoading(false);
-          return;
-        }
-
-        if (result.parentCount >= 2) {
-          setError('Maximum of 2 parent accounts per child has been reached.');
           setIsLoading(false);
           return;
         }

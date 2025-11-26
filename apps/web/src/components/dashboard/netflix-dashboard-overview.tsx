@@ -344,55 +344,7 @@ export function NetflixDashboardOverview() {
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <Zap className="w-5 h-5 text-yellow-500" />
-              <span>Quick Actions</span>
-            </CardTitle>
-            <CardDescription>
-              Jump into your most used features
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <Button variant="outline" size="sm" asChild className="h-auto p-4 flex-col space-y-2">
-                <Link href="/courses">
-                  <BookOpen className="w-5 h-5" />
-                  <span className="text-xs">Browse Courses</span>
-                </Link>
-              </Button>
-              <Button variant="outline" size="sm" asChild className="h-auto p-4 flex-col space-y-2">
-                <Link href="/webinars">
-                  <Video className="w-5 h-5" />
-                  <span className="text-xs">Live Webinars</span>
-                </Link>
-              </Button>
-              {(userProfile?.role === 'student' || userProfile?.role === 'admin') && (
-                <Button variant="outline" size="sm" asChild className="h-auto p-4 flex-col space-y-2">
-                  <Link href="/ai">
-                    <Sparkles className="w-5 h-5" />
-                    <span className="text-xs">AI Assistant</span>
-                  </Link>
-                </Button>
-              )}
-              <Button variant="outline" size="sm" asChild className="h-auto p-4 flex-col space-y-2">
-                <Link href="/dashboard/progress">
-                  <TrendingUp className="w-5 h-5" />
-                  <span className="text-xs">My Progress</span>
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Widgets */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <WellbeingWidget />
-          <RewardsWidget />
-          <AddOnsWidget />
-        </div>
       </div>
   );
 }
