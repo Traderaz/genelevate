@@ -50,17 +50,17 @@ export function LifeSkillsProgress() {
         return (
           <div
             key={index}
-            className={`p-6 rounded-xl border ${stat.borderColor} ${stat.bgColor} hover:scale-105 transition-transform`}
+            className={`p-6 rounded-xl bg-white dark:bg-gray-800 border-2 ${stat.borderColor} shadow-lg hover:scale-105 hover:shadow-xl transition-all`}
           >
             <div className="flex items-center gap-4">
-              <div className={`p-3 rounded-lg ${stat.bgColor} border ${stat.borderColor}`}>
+              <div className={`p-3 rounded-lg ${stat.bgColor} border ${stat.borderColor} shadow-sm`}>
                 <Icon className={`w-6 h-6 ${stat.color}`} />
               </div>
               <div>
-                <p className="text-sm !text-white/80">{stat.label}</p>
-                <p className="text-2xl font-bold !text-white">
+                <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">{stat.label}</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {stat.value}
-                  <span className="text-sm !text-white/70 ml-1">
+                  <span className="text-sm text-gray-600 dark:text-gray-400 ml-1 font-normal">
                     {typeof stat.total === 'string' && !stat.total.includes('/') ? stat.total : `/ ${stat.total}`}
                   </span>
                 </p>

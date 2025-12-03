@@ -482,10 +482,10 @@ export function LifeSkillsModules() {
       </div>
 
       {/* Info Banner */}
-      <div className="teal-card p-4 flex items-start gap-3">
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-4 flex items-start gap-3 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md">
         <Calendar className="w-5 h-5 text-teal-primary flex-shrink-0 mt-0.5" />
-        <div className="text-sm text-teal-card-text-muted">
-          <strong className="text-teal-card-text">Sequential Learning:</strong> Complete modules in order. 
+        <div className="text-sm text-gray-700 dark:text-gray-300">
+          <strong className="text-gray-900 dark:text-white">Sequential Learning:</strong> Complete modules in order. 
           New modules unlock 7 days after completing the previous one.
         </div>
       </div>
@@ -499,7 +499,7 @@ export function LifeSkillsModules() {
             className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all flex items-center gap-2 ${
               selectedCategory === category.id
                 ? 'bg-gradient-to-r from-teal-blue-medium to-teal-primary text-white shadow-lg'
-                : 'teal-card text-teal-card-text-muted hover:bg-gray-100 hover:text-teal-card-text border border-gray-300'
+                : 'bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border border-gray-300 dark:border-gray-600 shadow-sm'
             }`}
           >
             {category.icon && <category.icon className="w-4 h-4" />}
@@ -514,14 +514,14 @@ export function LifeSkillsModules() {
           <Link
             key={module.id}
             href={module.locked ? '#' : `/wellbeing/module/${module.id}`}
-            className={`teal-card border-2 border-transparent rounded-xl p-6 hover:border-teal-gold hover:shadow-xl transition-all group ${
+            className={`bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:border-teal-gold hover:shadow-xl transition-all group shadow-md ${
               module.locked ? 'opacity-60 cursor-not-allowed' : ''
             }`}
           >
             <div className="space-y-4">
               {/* Header */}
               <div className="flex items-start justify-between">
-                <div className={`w-12 h-12 ${module.bgColor} rounded-lg flex items-center justify-center`}>
+                <div className={`w-12 h-12 ${module.bgColor} rounded-lg flex items-center justify-center shadow-sm`}>
                   <module.icon className={`w-6 h-6 ${module.color}`} />
                 </div>
                 {getStatusBadge(module)}
@@ -529,16 +529,16 @@ export function LifeSkillsModules() {
 
               {/* Content */}
               <div>
-                <h3 className="font-semibold text-teal-card-text mb-2 group-hover:text-teal-primary transition-colors">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-teal-primary transition-colors">
                   {module.title}
                 </h3>
-                <p className="text-sm text-teal-card-text-muted leading-relaxed">
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                   {module.description}
                 </p>
               </div>
 
               {/* Meta */}
-              <div className="flex items-center gap-4 text-sm text-teal-card-text-muted">
+              <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
                   {module.duration}
@@ -550,12 +550,12 @@ export function LifeSkillsModules() {
               {!module.locked ? (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-teal-card-text-muted">Progress</span>
-                    <span className="font-semibold text-teal-card-text">
+                    <span className="text-gray-600 dark:text-gray-400">Progress</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">
                       {module.completed}/{module.lessons}
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div
                       className={`h-2 rounded-full transition-all ${
                         module.completed === module.lessons
@@ -567,8 +567,8 @@ export function LifeSkillsModules() {
                   </div>
                 </div>
               ) : (
-                <div className="space-y-2 p-3 bg-gray-500/5 rounded-lg border border-gray-500/10">
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                <div className="space-y-2 p-3 bg-gray-100 dark:bg-gray-700/50 rounded-lg border border-gray-300 dark:border-gray-600">
+                  <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                     <Lock className="w-4 h-4" />
                     <span className="font-medium">
                       {module.unlockInfo?.daysUntilUnlock 
@@ -579,7 +579,7 @@ export function LifeSkillsModules() {
                     </span>
                   </div>
                   {module.unlockInfo?.previousCompletedAt && module.unlockInfo?.daysUntilUnlock && (
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
                       Available: {new Date(module.unlockInfo.previousCompletedAt.getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}
                     </div>
                   )}
