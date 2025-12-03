@@ -101,6 +101,10 @@ export function SubscriptionGuard({
     hasAccess = false;
     accessReason = 'Please log in to access this content';
   }
+  // Admin and content creators bypass subscription checks
+  else if (userProfile?.role === 'admin' || userProfile?.role === 'content-creator') {
+    hasAccess = true; // Admins and content creators always have full access
+  }
   // Parent accounts get free read-only access (they're linked to paid students)
   else if (userProfile?.role === 'parent') {
     hasAccess = true; // Parents always have access (read-only)

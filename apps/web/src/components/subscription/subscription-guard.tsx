@@ -6,6 +6,7 @@
 'use client';
 
 import React from 'react';
+import { useAuth } from '@/contexts/auth-context';
 import { useSubscription } from '@/hooks/useSubscription';
 import { SubscriptionPlan } from '@/lib/subscription-system';
 import { Crown, Zap, Star, Lock, TrendingUp } from 'lucide-react';
@@ -39,6 +40,7 @@ export function SubscriptionGuard({
   showUpgradePrompt = true,
   className = ''
 }: SubscriptionGuardProps) {
+  const { userProfile } = useAuth();
   const {
     effectivePlan,
     canAccessFeature,
@@ -46,6 +48,11 @@ export function SubscriptionGuard({
     upgradeSuggestions,
     formattedSubscription
   } = useSubscription();
+
+  // Admin and content creators bypass all subscription checks
+  if (userProfile?.role === 'admin' || userProfile?.role === 'content-creator') {
+    return <>{children}</>;
+  }
 
   // Check access based on required plan or feature
   let hasAccess = true;
