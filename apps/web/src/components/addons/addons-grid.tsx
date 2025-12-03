@@ -184,8 +184,8 @@ export function AddOnsGrid() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Premium Add-Ons</h2>
-          <p className="text-muted-foreground mt-1">Choose the services that fit your needs</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Premium Add-Ons</h2>
+          <p className="text-gray-700 dark:text-gray-300 mt-1">Choose the services that fit your needs</p>
         </div>
       </div>
 
@@ -194,8 +194,8 @@ export function AddOnsGrid() {
         {addOns.map((addOn) => (
           <div
             key={addOn.id}
-            className={`bg-card border rounded-xl p-6 netflix-card relative ${
-              addOn.popular ? 'border-primary' : 'border-border'
+            className={`bg-white dark:bg-gray-800 border rounded-xl p-6 netflix-card relative shadow-lg ${
+              addOn.popular ? 'border-teal-primary ring-2 ring-teal-primary/20' : 'border-gray-200 dark:border-gray-700'
             }`}
           >
             {addOn.popular && (
@@ -212,16 +212,16 @@ export function AddOnsGrid() {
             </div>
 
             {/* Title & Description */}
-            <h3 className="text-xl font-bold text-foreground mb-2">{addOn.title}</h3>
-            <p className="text-sm text-muted-foreground mb-4">{addOn.description}</p>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{addOn.title}</h3>
+            <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">{addOn.description}</p>
 
             {/* Price */}
             <div className="mb-6">
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-foreground">
+                <span className="text-3xl font-bold text-gray-900 dark:text-white">
                   £{addOn.price.toFixed(2)}
                 </span>
-                <span className="text-sm text-muted-foreground">{addOn.priceLabel}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{addOn.priceLabel}</span>
               </div>
             </div>
 
@@ -230,7 +230,7 @@ export function AddOnsGrid() {
               {addOn.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-2 text-sm">
                   <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground">{feature}</span>
+                  <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                 </li>
               ))}
             </ul>
@@ -239,10 +239,10 @@ export function AddOnsGrid() {
             <button
               onClick={() => handlePurchase(addOn)}
               disabled={isProcessing === addOn.id}
-              className={`w-full px-6 py-3 rounded-lg font-semibold netflix-button flex items-center justify-center gap-2 ${
+              className={`w-full px-6 py-3 rounded-lg font-semibold netflix-button flex items-center justify-center gap-2 transition-all ${
                 addOn.popular
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-secondary text-secondary-foreground hover:bg-accent'
+                  ? 'bg-gradient-to-r from-teal-primary to-teal-blue-medium text-white hover:shadow-xl'
+                  : 'bg-teal-primary text-white hover:bg-teal-blue-medium hover:shadow-lg'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {isProcessing === addOn.id ? (
@@ -263,8 +263,8 @@ export function AddOnsGrid() {
 
       {/* Info Box */}
       <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6">
-        <h3 className="font-semibold text-foreground mb-2">Secure Payment with Stripe</h3>
-        <p className="text-sm text-muted-foreground">
+        <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Secure Payment with Stripe</h3>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
           All payments are processed securely through Stripe. We never store your payment information. 
           You'll receive instant access to your purchased services, and email confirmation with next steps.
         </p>

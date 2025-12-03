@@ -494,11 +494,11 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                   />
                   
                   {/* Dropdown */}
-                  <div className="absolute right-0 top-full mt-2 w-64 bg-card/95 backdrop-blur-xl border border-border rounded-xl shadow-lg z-50 py-2">
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-gray-900 backdrop-blur-xl border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl z-50 py-2">
                     {/* User Info */}
-                    <div className="px-4 py-3 border-b border-border">
+                    <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-800">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                        <div className="w-10 h-10 bg-gradient-to-br from-teal-primary to-teal-blue-medium rounded-full flex items-center justify-center shadow-lg ring-2 ring-white dark:ring-gray-700">
                           {userProfile?.photoURL ? (
                             <img 
                               src={userProfile.photoURL} 
@@ -506,21 +506,21 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                               className="w-10 h-10 rounded-full object-cover"
                             />
                           ) : (
-                            <User className="w-5 h-5 text-primary-foreground" />
+                            <User className="w-5 h-5 text-white" />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-foreground truncate">
+                          <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
                             {userProfile?.displayName || 'User'}
                           </p>
-                          <p className="text-xs text-muted-foreground truncate">
+                          <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
                             {userProfile?.email}
                           </p>
-                          <div className="flex items-center space-x-2 mt-1">
-                            <Badge variant="secondary" className="text-xs capitalize">
+                          <div className="flex items-center gap-2 mt-1.5">
+                            <Badge variant="secondary" className="text-xs capitalize font-medium bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300">
                               {userProfile?.role}
                             </Badge>
-                            <Badge variant={userProfile?.subscription?.plan === 'free' ? 'outline' : 'netflix'} className="text-xs">
+                            <Badge variant={userProfile?.subscription?.plan === 'free' ? 'outline' : 'default'} className="text-xs font-medium bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0">
                               {userProfile?.subscription?.plan || 'Free'}
                             </Badge>
                           </div>
@@ -532,7 +532,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                     <div className="py-1">
                       <Link
                         href="/dashboard/profile"
-                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-teal-card-text hover:bg-white/40 hover:text-teal-primary transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-gray-800 hover:text-teal-primary transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <UserCircle className="w-4 h-4" />
@@ -541,7 +541,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                       
                       <Link
                         href="/dashboard/settings"
-                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-teal-card-text hover:bg-white/40 hover:text-teal-primary transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-gray-800 hover:text-teal-primary transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <Settings className="w-4 h-4" />
@@ -558,7 +558,7 @@ export function NetflixDashboardLayout({ children }: NetflixDashboardLayoutProps
                             console.error('Logout failed:', error);
                           }
                         }}
-                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors w-full text-left"
+                        className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors w-full text-left border-t border-gray-200 dark:border-gray-700 mt-1"
                       >
                         <LogOut className="w-4 h-4" />
                         Sign Out
